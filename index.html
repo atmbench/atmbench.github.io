@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+
+  <!-- Meta tags for social media banners -->
+  <meta name="description"
+    content="ATM-Bench: Long-Term Personalized Referential Memory QA — a benchmark for multimodal, multi-source personal memory question answering over long time horizons.">
+  <meta property="og:title" content="ATM-Bench" />
+  <meta property="og:description" content="According to Me: Long-Term Personalized Referential Memory QA (ATM-Bench)" />
+  <meta property="og:url" content="https://atmbench.github.io/" />
+  <!-- Optional: add og:image after you have a teaser figure -->
+  <!-- <meta property="og:image" content="static/images/atmbench_teaser.png" /> -->
+
+  <meta name="twitter:title" content="ATM-Bench">
+  <meta name="twitter:description" content="According to Me: Long-Term Personalized Referential Memory QA (ATM-Bench)">
+  <!-- <meta name="twitter:image" content="static/images/atmbench_teaser.png"> -->
+  <meta name="twitter:card" content="summary_large_image">
+
+  <meta name="keywords"
+    content="ATM-Bench, personalized memory, long-term memory, multimodal, retrieval, RAG, question answering, benchmark, evaluation">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>ATM-Bench: Long-Term Personalized Referential Memory QA</title>
+
+  <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script src="static/js/bulma-carousel.min.js"></script>
+  <script src="static/js/bulma-slider.min.js"></script>
+  <script src="static/js/index.js"></script>
+
+  <style>
+    .sticky-nav {
+      position: sticky;
+      top: 0;
+      background: white;
+      z-index: 30;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      padding: 0.75rem 0;
+      margin-bottom: 2rem;
+    }
+
+    .sticky-nav .container {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .sticky-nav a {
+      color: #363636;
+      font-weight: 500;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      transition: background-color 0.2s;
+    }
+
+    .sticky-nav a:hover {
+      background-color: #f5f5f5;
+      text-decoration: none;
+    }
+
+    @media screen and (max-width: 768px) {
+      .sticky-nav {
+        display: none;
+      }
+    }
+
+    .placeholder-box {
+      border: 1px dashed #dbdbdb;
+      border-radius: 6px;
+      padding: 1.25rem;
+      color: #7a7a7a;
+      background: #fafafa;
+    }
+
+    .bibtex-container {
+      position: relative;
+    }
+
+    .copy-button {
+      position: absolute;
+      top: 0.5rem;
+      right: 0.5rem;
+      padding: 0.5rem 1rem;
+      background-color: #3273dc;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: background-color 0.2s;
+      z-index: 10;
+    }
+
+    .copy-button:hover {
+      background-color: #2366d1;
+    }
+
+    .copy-button.copied {
+      background-color: #48c774;
+    }
+
+    .bibtex-container pre {
+      margin-top: 0;
+      padding-top: 3rem;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">ATM-Bench</h1>
+            <h2 class="subtitle is-3 publication-subtitle">According to Me: Long-Term Personalized Referential Memory QA
+            </h2>
+            <p class="subtitle is-5" style="margin-top: 1rem;">Multimodal, multi-source personal memory question
+              answering over long time horizons</p>
+
+            <!-- Update author list after publication (this draft PDF is anonymized) -->
+            <div class="is-size-5 publication-authors" style="margin-top: 2rem;">
+              <span class="author-block">Anonymous Authors</span>
+            </div>
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">Affiliations (to be added)</span>
+            </div>
+
+            <div class="column has-text-centered" style="margin-top: 1.5rem;">
+              <div class="publication-links">
+                <span class="link-block">
+                  <a href="paper/atmbench.pdf" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon"><i class="fas fa-file-pdf"></i></span>
+                    <span>Paper (PDF)</span>
+                  </a>
+                </span>
+
+                <span class="link-block">
+                  <a href="https://arxiv.org/abs/XXXX.XXXXX" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon"><i class="ai ai-arxiv"></i></span>
+                    <span>arXiv</span>
+                  </a>
+                </span>
+
+                <span class="link-block">
+                  <a href="https://github.com/atmbench/ATMBench" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon"><i class="fab fa-github"></i></span>
+                    <span>Code</span>
+                  </a>
+                </span>
+
+                <span class="link-block">
+                  <a href="https://huggingface.co/datasets/atmbench/atm-bench" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon"><i class="fas fa-database"></i></span>
+                    <span>Dataset</span>
+                  </a>
+                </span>
+
+                <span class="link-block">
+                  <a href="#citation" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon"><i class="fas fa-quote-right"></i></span>
+                    <span>BibTeX</span>
+                  </a>
+                </span>
+              </div>
+            </div>
+
+            <p style="margin-top: 1rem; color: #7a7a7a;">
+              Links to code and data will go live upon publication.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sticky Navigation -->
+  <div class="sticky-nav">
+    <div class="container">
+      <a href="#overview">Overview</a>
+      <a href="#benchmark">Benchmark</a>
+      <a href="#data">Data</a>
+      <a href="#code">Code</a>
+      <a href="#evaluation">Evaluation</a>
+      <a href="#citation">Citation</a>
+    </div>
+  </div>
+
+  <!-- Overview -->
+  <section class="section" id="overview">
+    <div class="container is-max-desktop">
+      <div class="content has-text-justified">
+        <h2 class="title is-3 has-text-centered">Overview</h2>
+
+        <p>
+          Personalized AI assistants must recall and reason over long-term user memory, which naturally spans multiple
+          modalities and sources such as images, videos, and emails. However, existing long-term memory benchmarks focus
+          primarily on dialogue history, failing to capture realistic personalized references grounded in lived
+          experience. We introduce <strong>ATM-Bench</strong>, a benchmark for multimodal, multi-source personalized
+          referential memory QA with ground-truth memory evidence.
+        </p>
+
+        <div class="columns" style="margin-top: 1.5rem;">
+          <div class="column">
+            <div class="box">
+              <h3 class="title is-5">Key Ideas</h3>
+              <ul>
+                <li>Multimodal + multi-source memory (images, videos, emails, ...)</li>
+                <li>Evidence-grounded QA with ground-truth memory evidence</li>
+                <li>Schema-Guided Memory (SGM) representation across sources</li>
+              </ul>
+            </div>
+          </div>
+          <div class="column">
+            <div class="box">
+              <h3 class="title is-5">What’s Released</h3>
+              <ul>
+                <li>Benchmark data (Hugging Face): <code>atmbench/atm-bench</code> (coming soon)</li>
+                <li>Reference implementation + baselines (GitHub): <code>atmbench/ATMBench</code> (coming soon)</li>
+                <li>Evaluation scripts + metrics</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="placeholder-box">
+          <strong>Teaser figure (TODO):</strong> add a figure under <code>static/images/</code> and embed it here.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Benchmark -->
+  <section class="section" id="benchmark">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3 has-text-centered">Benchmark</h2>
+
+      <div class="columns">
+        <div class="column">
+          <div class="box">
+            <h3 class="title is-5">Task</h3>
+            <p>
+              Given a question about a user’s personal history, the system retrieves a bounded set of supporting memory
+              items (evidence) and generates an evidence-grounded answer.
+            </p>
+          </div>
+        </div>
+
+        <div class="column">
+          <div class="box">
+            <h3 class="title is-5">Evidence Budget</h3>
+            <p>
+              Systems must operate under a fixed evidence budget, encouraging retrieval precision and multi-evidence
+              reasoning.
+            </p>
+          </div>
+        </div>
+
+        <div class="column">
+          <div class="box">
+            <h3 class="title is-5">Memory Schema (SGM)</h3>
+            <p>
+              Schema-Guided Memory (SGM) structures heterogeneous memory items from different sources into a unified
+              representation for ingestion and retrieval.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Data -->
+  <section class="section" id="data" style="background-color: #fafafa;">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3 has-text-centered">Data</h2>
+
+      <div class="content has-text-justified">
+        <p>
+          ATM-Bench contains privacy-preserving personal memory data and human-annotated question–answer pairs with
+          ground-truth memory evidence, including questions that require resolving personal references, multi-evidence
+          reasoning across sources, and handling conflicting evidence.
+        </p>
+
+        <div class="box">
+          <h3 class="title is-5">Release Status</h3>
+          <ul>
+            <li>Dataset (HF): <code>https://huggingface.co/datasets/atmbench/atm-bench</code> (coming soon)</li>
+            <li>Data card: <code>TODO</code> (license, privacy statement, intended use)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Code -->
+  <section class="section" id="code">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3 has-text-centered">Code</h2>
+
+      <div class="content has-text-justified">
+        <p>
+          The open-source repository will include memory ingestion utilities, retrieval modules, QA baselines (e.g.,
+          ATM-RAG/MMRag and Oracle), and evaluation scripts.
+        </p>
+
+        <div class="box">
+          <h3 class="title is-5">Quickstart (Placeholder)</h3>
+          <pre><code>conda create -n atmbench python=3.11 -y
+conda activate atmbench
+pip install -r requirements.txt
+pip install -e .</code></pre>
+          <p style="color: #7a7a7a; margin-top: 0.75rem;">
+            Update this block once the public repo is finalized (dependencies, install commands, and entrypoints).
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Evaluation -->
+  <section class="section" id="evaluation" style="background-color: #fafafa;">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3 has-text-centered">Evaluation</h2>
+
+      <div class="content has-text-justified">
+        <p>
+          ATM-Bench evaluates both answer quality and retrieval quality. The reference implementation reports metrics
+          such as <strong>QS</strong> (question-type score) and <strong>Recall@k</strong>, and a diagnostic
+          <strong>Joint@k = QS × Recall@k</strong>.
+        </p>
+
+        <div class="columns">
+          <div class="column">
+            <div class="box">
+              <h3 class="title is-5">Answering</h3>
+              <ul>
+                <li><code>number</code>: exact match (normalized)</li>
+                <li><code>list_recall</code>: Jaccard similarity</li>
+                <li><code>open_end</code>: LLM judge</li>
+              </ul>
+            </div>
+          </div>
+          <div class="column">
+            <div class="box">
+              <h3 class="title is-5">Retrieval</h3>
+              <ul>
+                <li>Recall@k / Recall@kGT</li>
+                <li>Joint@k for retrieval dependence diagnostics</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Citation -->
+  <section class="section" id="citation">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3 has-text-centered">Citation</h2>
+
+      <div class="content">
+        <p>Replace this placeholder BibTeX with the final entry after publication.</p>
+        <div class="bibtex-container">
+          <button class="copy-button" onclick="copyBibtex('atmbench-bibtex')">
+            <i class="fas fa-copy"></i> Copy BibTeX
+          </button>
+          <pre><code id="atmbench-bibtex">@misc{ATMBench2026,
+  title        = {According to Me: Long-Term Personalized Referential Memory QA},
+  author       = {Anonymous Authors},
+  year         = {2026},
+  howpublished = {Preprint},
+  note         = {Update with arXiv / venue info upon publication},
+  url          = {https://atmbench.github.io/}
+}</code></pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Acknowledgement -->
+  <section class="section">
+    <div class="container is-max-desktop content">
+      <h2 class="title">Acknowledgement</h2>
+      <p>This page was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page,
+        licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
+          Commons Attribution-ShareAlike 4.0 International License</a>. Many thanks to the <a
+          href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page
+          Template</a>.</p>
+    </div>
+  </section>
+
+  <script>
+    function copyBibtex(codeId) {
+      const codeElement = document.getElementById(codeId);
+      const button = event.currentTarget;
+
+      // Create temporary textarea
+      const textarea = document.createElement('textarea');
+      textarea.value = codeElement.textContent;
+      textarea.style.position = 'fixed';
+      textarea.style.opacity = '0';
+      document.body.appendChild(textarea);
+
+      // Select and copy
+      textarea.select();
+      document.execCommand('copy');
+
+      // Remove temporary element
+      document.body.removeChild(textarea);
+
+      // Update button state
+      const originalHTML = button.innerHTML;
+      button.innerHTML = '<i class="fas fa-check"></i> Copied!';
+      button.classList.add('copied');
+
+      // Reset button after 2 seconds
+      setTimeout(() => {
+        button.innerHTML = originalHTML;
+        button.classList.remove('copied');
+      }, 2000);
+    }
+  </script>
+
+</body>
+
+</html>

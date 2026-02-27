@@ -4,10 +4,10 @@ This is a practical checklist to go from the current working/dev repo to a clean
 
 ## 0) Decide public identities
 
-- [ ] Decide GitHub **org/user** name (e.g., `atmbench`, `atm-bench`, or an existing lab/org).
+- [ ] Decide GitHub **org** name for the project page (e.g., `atmbench`).
 - [ ] Decide canonical naming:
   - Paper/benchmark name: `ATM-Bench`
-  - Code repo: `ATMBench`
+  - Code repo (personal): `JingbiaoMei/ATMBench`
   - Project page repo: `atmbench/atmbench.github.io` (preferred)
   - HF dataset repo: `atmbench/atm-bench` (or similar)
 
@@ -55,7 +55,7 @@ Checklist:
 - [ ] Update placeholders in `index.html`:
   - [ ] `https://atmbench.github.io/`
   - [ ] arXiv / venue URL
-  - [ ] GitHub repo URL (`https://github.com/atmbench/ATMBench`)
+  - [ ] GitHub repo URL (`https://github.com/JingbiaoMei/ATMBench`)
   - [ ] HF dataset URL (`https://huggingface.co/datasets/atmbench/atm-bench`)
   - [ ] Authors + affiliations
   - [ ] Final BibTeX

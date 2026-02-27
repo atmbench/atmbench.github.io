@@ -10,7 +10,7 @@
   <meta property="og:title" content="ATM-Bench" />
   <meta property="og:description" content="According to Me: Long-Term Personalized Referential Memory QA (ATM-Bench)" />
   <meta property="og:url" content="https://atmbench.github.io/" />
-  <!-- Optional: add og:image after you have a teaser figure -->
+  <!-- Optional: add og:image after you have a PNG teaser (social platforms often don't render SVG) -->
   <!-- <meta property="og:image" content="static/images/atmbench_teaser.png" /> -->
 
   <meta name="twitter:title" content="ATM-Bench">
@@ -24,7 +24,7 @@
 
   <title>ATM-Bench: Long-Term Personalized Referential Memory QA</title>
 
-  <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
+  <link rel="icon" type="image/svg+xml" href="static/images/favicon.svg">
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="static/css/bulma.min.css">
@@ -161,7 +161,7 @@
                 </span>
 
                 <span class="link-block">
-                  <a href="https://github.com/atmbench/ATMBench" target="_blank"
+                  <a href="https://github.com/JingbiaoMei/ATMBench" target="_blank"
                     class="external-link button is-normal is-rounded is-dark">
                     <span class="icon"><i class="fab fa-github"></i></span>
                     <span>Code</span>
@@ -236,16 +236,20 @@
               <h3 class="title is-5">What’s Released</h3>
               <ul>
                 <li>Benchmark data (Hugging Face): <code>atmbench/atm-bench</code> (coming soon)</li>
-                <li>Reference implementation + baselines (GitHub): <code>atmbench/ATMBench</code> (coming soon)</li>
+                <li>Reference implementation + baselines (GitHub): <code>JingbiaoMei/ATMBench</code> (coming soon)</li>
                 <li>Evaluation scripts + metrics</li>
               </ul>
             </div>
           </div>
         </div>
 
-        <div class="placeholder-box">
-          <strong>Teaser figure (TODO):</strong> add a figure under <code>static/images/</code> and embed it here.
-        </div>
+        <figure style="margin-top: 1.5rem;">
+          <img src="static/images/atmbench_teaser.svg" alt="ATM-Bench overview diagram"
+            style="width: 100%; max-width: 980px; display: block; margin: 0 auto;" />
+          <figcaption style="margin-top: 0.75rem; text-align: center; color: #7a7a7a;">
+            Overview (placeholder schematic): memory sources → SGM ingestion → evidence-budget retrieval → grounded QA.
+          </figcaption>
+        </figure>
       </div>
     </div>
   </section>

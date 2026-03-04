@@ -10,12 +10,11 @@
   <meta property="og:title" content="ATM-Bench" />
   <meta property="og:description" content="According to Me: Long-Term Personalized Referential Memory QA (ATM-Bench)" />
   <meta property="og:url" content="https://atmbench.github.io/" />
-  <!-- Optional: add og:image after you have a PNG teaser (social platforms often don't render SVG) -->
-  <!-- <meta property="og:image" content="static/images/atmbench_teaser.png" /> -->
+  <meta property="og:image" content="https://atmbench.github.io/static/images/ATM-Bench-Demo.png" />
 
   <meta name="twitter:title" content="ATM-Bench">
   <meta name="twitter:description" content="According to Me: Long-Term Personalized Referential Memory QA (ATM-Bench)">
-  <!-- <meta name="twitter:image" content="static/images/atmbench_teaser.png"> -->
+  <meta name="twitter:image" content="https://atmbench.github.io/static/images/ATM-Bench-Demo.png">
   <meta name="twitter:card" content="summary_large_image">
 
   <meta name="keywords"
@@ -134,26 +133,23 @@
             <p class="subtitle is-5" style="margin-top: 1rem;">Multimodal, multi-source personal memory question
               answering over long time horizons</p>
 
-            <!-- Update author list after publication (this draft PDF is anonymized) -->
             <div class="is-size-5 publication-authors" style="margin-top: 2rem;">
-              <span class="author-block">Anonymous Authors</span>
+              <span class="author-block">Jingbiao Mei</span>,
+              <span class="author-block">Jinghong Chen</span>,
+              <span class="author-block">Guangyu Yang</span>,
+              <span class="author-block">Xinyu Hou</span>,
+              <span class="author-block">Margaret Li</span>,
+              <span class="author-block">Bill Byrne</span>
             </div>
 
             <div class="is-size-5 publication-authors">
-              <span class="author-block">Affiliations (to be added)</span>
+              <span class="author-block">University of Cambridge</span>
             </div>
 
             <div class="column has-text-centered" style="margin-top: 1.5rem;">
               <div class="publication-links">
                 <span class="link-block">
-                  <a href="paper/atmbench.pdf" target="_blank" class="external-link button is-normal is-rounded is-dark">
-                    <span class="icon"><i class="fas fa-file-pdf"></i></span>
-                    <span>Paper (PDF)</span>
-                  </a>
-                </span>
-
-                <span class="link-block">
-                  <a href="https://arxiv.org/abs/XXXX.XXXXX" target="_blank"
+                  <a href="https://arxiv.org/abs/2603.01990" target="_blank"
                     class="external-link button is-normal is-rounded is-dark">
                     <span class="icon"><i class="ai ai-arxiv"></i></span>
                     <span>arXiv</span>
@@ -161,7 +157,7 @@
                 </span>
 
                 <span class="link-block">
-                  <a href="https://github.com/JingbiaoMei/ATMBench" target="_blank"
+                  <a href="https://github.com/JingbiaoMei/ATM-Bench" target="_blank"
                     class="external-link button is-normal is-rounded is-dark">
                     <span class="icon"><i class="fab fa-github"></i></span>
                     <span>Code</span>
@@ -169,10 +165,9 @@
                 </span>
 
                 <span class="link-block">
-                  <a href="https://huggingface.co/datasets/atmbench/atm-bench" target="_blank"
-                    class="external-link button is-normal is-rounded is-dark">
+                  <a href="https://huggingface.co/datasets/atmbench/atm-bench" target="_blank" class="external-link button is-normal is-rounded is-dark">
                     <span class="icon"><i class="fas fa-database"></i></span>
-                    <span>Dataset</span>
+                    <span>Dataset (Coming Soon)</span>
                   </a>
                 </span>
 
@@ -185,9 +180,6 @@
               </div>
             </div>
 
-            <p style="margin-top: 1rem; color: #7a7a7a;">
-              Links to code and data will go live upon publication.
-            </p>
           </div>
         </div>
       </div>
@@ -199,9 +191,7 @@
     <div class="container">
       <a href="#overview">Overview</a>
       <a href="#benchmark">Benchmark</a>
-      <a href="#data">Data</a>
-      <a href="#code">Code</a>
-      <a href="#evaluation">Evaluation</a>
+      <a href="#methods">Methods</a>
       <a href="#citation">Citation</a>
     </div>
   </div>
@@ -220,34 +210,11 @@
           referential memory QA with ground-truth memory evidence.
         </p>
 
-        <div class="columns" style="margin-top: 1.5rem;">
-          <div class="column">
-            <div class="box">
-              <h3 class="title is-5">Key Ideas</h3>
-              <ul>
-                <li>Multimodal + multi-source memory (images, videos, emails, ...)</li>
-                <li>Evidence-grounded QA with ground-truth memory evidence</li>
-                <li>Schema-Guided Memory (SGM) representation across sources</li>
-              </ul>
-            </div>
-          </div>
-          <div class="column">
-            <div class="box">
-              <h3 class="title is-5">What’s Released</h3>
-              <ul>
-                <li>Benchmark data (Hugging Face): <code>atmbench/atm-bench</code> (coming soon)</li>
-                <li>Reference implementation + baselines (GitHub): <code>JingbiaoMei/ATMBench</code> (coming soon)</li>
-                <li>Evaluation scripts + metrics</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
         <figure style="margin-top: 1.5rem;">
-          <img src="static/images/atmbench_teaser.svg" alt="ATM-Bench overview diagram"
+          <img src="static/images/ATM-Bench-Demo.png" alt="ATM-Bench overview diagram"
             style="width: 100%; max-width: 980px; display: block; margin: 0 auto;" />
           <figcaption style="margin-top: 0.75rem; text-align: center; color: #7a7a7a;">
-            Overview (placeholder schematic): memory sources → SGM ingestion → evidence-budget retrieval → grounded QA.
+            ATM-Bench overview and representative reasoning challenges.
           </figcaption>
         </figure>
       </div>
@@ -259,122 +226,76 @@
     <div class="container is-max-desktop">
       <h2 class="title is-3 has-text-centered">Benchmark</h2>
 
-      <div class="columns">
-        <div class="column">
-          <div class="box">
-            <h3 class="title is-5">Task</h3>
-            <p>
-              Given a question about a user’s personal history, the system retrieves a bounded set of supporting memory
-              items (evidence) and generates an evidence-grounded answer.
-            </p>
-          </div>
-        </div>
-
-        <div class="column">
-          <div class="box">
-            <h3 class="title is-5">Evidence Budget</h3>
-            <p>
-              Systems must operate under a fixed evidence budget, encouraging retrieval precision and multi-evidence
-              reasoning.
-            </p>
-          </div>
-        </div>
-
-        <div class="column">
-          <div class="box">
-            <h3 class="title is-5">Memory Schema (SGM)</h3>
-            <p>
-              Schema-Guided Memory (SGM) structures heterogeneous memory items from different sources into a unified
-              representation for ingestion and retrieval.
-            </p>
-          </div>
-        </div>
+      <div class="content has-text-justified">
+        <p>
+          Compared with prior memory and long-context QA benchmarks (e.g., MemoryBank, PerLTQA, LoCoMo,
+          DialSim, LongMemEval, and Memory-QA), <strong>ATM-Bench</strong> is designed for long-term
+          <strong>multimodal, multi-source personal memory QA</strong> with human-annotated evidence.
+        </p>
       </div>
+
+      <div class="table-container" style="margin-top: 1rem;">
+        <table class="table is-fullwidth is-striped is-hoverable">
+          <thead>
+            <tr>
+              <th>Aspect</th>
+              <th>Prior Benchmarks</th>
+              <th>ATM-Bench</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Memory modality and source</td>
+              <td>Mostly dialogue-only or single-modality settings</td>
+              <td>Images + videos + emails in one benchmark</td>
+            </tr>
+            <tr>
+              <td>Data origin</td>
+              <td>Primarily synthetic or hybrid data</td>
+              <td>Human-curated personal memory QA with evidence labels</td>
+            </tr>
+            <tr>
+              <td>Core memory abilities</td>
+              <td>Partial coverage</td>
+              <td>Jointly covers personalized referential reasoning, location awareness, memory updates over time, multi-evidence composition, and abstention</td>
+            </tr>
+            <tr>
+              <td>Scale and horizon</td>
+              <td>Typically smaller or narrower settings</td>
+              <td>~12k memory items, ~1.1k QA, years-long horizon, 2.25M-token context</td>
+            </tr>
+            <tr>
+              <td>Multi-evidence burden</td>
+              <td>Lower multi-evidence proportion in common settings</td>
+              <td>~30% of questions require multi-evidence composition</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
     </div>
   </section>
 
-  <!-- Data -->
-  <section class="section" id="data" style="background-color: #fafafa;">
+  <!-- Methods -->
+  <section class="section" id="methods">
     <div class="container is-max-desktop">
-      <h2 class="title is-3 has-text-centered">Data</h2>
+      <h2 class="title is-3 has-text-centered">Methods</h2>
 
       <div class="content has-text-justified">
         <p>
-          ATM-Bench contains privacy-preserving personal memory data and human-annotated question–answer pairs with
-          ground-truth memory evidence, including questions that require resolving personal references, multi-evidence
-          reasoning across sources, and handling conflicting evidence.
+          ATM models a personal memory assistant in three stages: <strong>memory ingestion</strong>
+          (preprocessing + organization), <strong>retrieval</strong> under an evidence budget,
+          and <strong>evidence-grounded answer generation</strong>.
         </p>
-
-        <div class="box">
-          <h3 class="title is-5">Release Status</h3>
-          <ul>
-            <li>Dataset (HF): <code>https://huggingface.co/datasets/atmbench/atm-bench</code> (coming soon)</li>
-            <li>Data card: <code>TODO</code> (license, privacy statement, intended use)</li>
-          </ul>
-        </div>
       </div>
-    </div>
-  </section>
 
-  <!-- Code -->
-  <section class="section" id="code">
-    <div class="container is-max-desktop">
-      <h2 class="title is-3 has-text-centered">Code</h2>
-
-      <div class="content has-text-justified">
-        <p>
-          The open-source repository will include memory ingestion utilities, retrieval modules, QA baselines (e.g.,
-          ATM-RAG/MMRag and Oracle), and evaluation scripts.
-        </p>
-
-        <div class="box">
-          <h3 class="title is-5">Quickstart (Placeholder)</h3>
-          <pre><code>conda create -n atmbench python=3.11 -y
-conda activate atmbench
-pip install -r requirements.txt
-pip install -e .</code></pre>
-          <p style="color: #7a7a7a; margin-top: 0.75rem;">
-            Update this block once the public repo is finalized (dependencies, install commands, and entrypoints).
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Evaluation -->
-  <section class="section" id="evaluation" style="background-color: #fafafa;">
-    <div class="container is-max-desktop">
-      <h2 class="title is-3 has-text-centered">Evaluation</h2>
-
-      <div class="content has-text-justified">
-        <p>
-          ATM-Bench evaluates both answer quality and retrieval quality. The reference implementation reports metrics
-          such as <strong>QS</strong> (question-type score) and <strong>Recall@k</strong>, and a diagnostic
-          <strong>Joint@k = QS × Recall@k</strong>.
-        </p>
-
-        <div class="columns">
-          <div class="column">
-            <div class="box">
-              <h3 class="title is-5">Answering</h3>
-              <ul>
-                <li><code>number</code>: exact match (normalized)</li>
-                <li><code>list_recall</code>: Jaccard similarity</li>
-                <li><code>open_end</code>: LLM judge</li>
-              </ul>
-            </div>
-          </div>
-          <div class="column">
-            <div class="box">
-              <h3 class="title is-5">Retrieval</h3>
-              <ul>
-                <li>Recall@k / Recall@kGT</li>
-                <li>Joint@k for retrieval dependence diagnostics</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
+      <figure style="margin-top: 1.5rem;">
+        <img src="static/images/ATM-Method.png" alt="ATM Method diagram"
+          style="width: 50%; max-width: 980px; display: block; margin: 0 auto;" />
+        <figcaption style="margin-top: 0.75rem; text-align: center; color: #7a7a7a;">
+          ATM method: memory ingestion, organization, retrieval, and answer generation.
+        </figcaption>
+      </figure>
     </div>
   </section>
 
@@ -384,18 +305,18 @@ pip install -e .</code></pre>
       <h2 class="title is-3 has-text-centered">Citation</h2>
 
       <div class="content">
-        <p>Replace this placeholder BibTeX with the final entry after publication.</p>
+        <p>If you use ATM-Bench in your research, please cite:</p>
         <div class="bibtex-container">
           <button class="copy-button" onclick="copyBibtex('atmbench-bibtex')">
             <i class="fas fa-copy"></i> Copy BibTeX
           </button>
-          <pre><code id="atmbench-bibtex">@misc{ATMBench2026,
-  title        = {According to Me: Long-Term Personalized Referential Memory QA},
-  author       = {Anonymous Authors},
-  year         = {2026},
-  howpublished = {Preprint},
-  note         = {Update with arXiv / venue info upon publication},
-  url          = {https://atmbench.github.io/}
+          <pre><code id="atmbench-bibtex">@article{mei2026atm,
+  title={According to Me: Long-Term Personalized Referential Memory QA},
+  author={Mei, Jingbiao and Chen, Jinghong and Yang, Guangyu and Hou, Xinyu and Li, Margaret and Byrne, Bill},
+  journal={arXiv preprint arXiv:2603.01990},
+  year={2026},
+  url={https://arxiv.org/abs/2603.01990},
+  doi={10.48550/arXiv.2603.01990}
 }</code></pre>
         </div>
       </div>

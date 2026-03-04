@@ -21,6 +21,17 @@
     content="ATM-Bench, personalized memory, long-term memory, multimodal, retrieval, RAG, question answering, benchmark, evaluation">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5YTZ6DJQHM"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-5YTZ6DJQHM');
+  </script>
+
   <title>ATM-Bench: Long-Term Personalized Referential Memory QA</title>
 
   <link rel="icon" type="image/svg+xml" href="static/images/favicon.svg">
@@ -40,10 +51,95 @@
   <script src="static/js/index.js"></script>
 
   <style>
+    :root {
+      --hero-bg: linear-gradient(180deg, #f7f7f7 0%, #ffffff 100%);
+      --overview-bg: linear-gradient(180deg, #fbfbfb 0%, #ffffff 100%);
+      --benchmark-bg: linear-gradient(180deg, #f5f5f5 0%, #fcfcfc 100%);
+      --methods-bg: linear-gradient(180deg, #fafafa 0%, #ffffff 100%);
+      --citation-bg: linear-gradient(180deg, #f6f6f6 0%, #fdfdfd 100%);
+      --ack-bg: linear-gradient(180deg, #f3f3f3 0%, #fafafa 100%);
+      --panel-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+      --panel-radius: 18px;
+    }
+
+    body {
+      background: #ffffff;
+    }
+
+    .section-hero {
+      background: var(--hero-bg);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    }
+
+    .section-overview,
+    .section-benchmark,
+    .section-methods,
+    .section-citation,
+    .section-acknowledgement {
+      padding-top: 3.5rem;
+      padding-bottom: 3.5rem;
+    }
+
+    .section-overview {
+      background: var(--overview-bg);
+    }
+
+    .section-benchmark {
+      background: var(--benchmark-bg);
+    }
+
+    .section-methods {
+      background: var(--methods-bg);
+    }
+
+    .section-citation {
+      background: var(--citation-bg);
+    }
+
+    .section-acknowledgement {
+      background: var(--ack-bg);
+    }
+
+    .section-overview .container.is-max-desktop,
+    .section-benchmark .container.is-max-desktop,
+    .section-methods .container.is-max-desktop,
+    .section-citation .container.is-max-desktop,
+    .section-acknowledgement .container.is-max-desktop {
+      background: rgba(255, 255, 255, 0.96);
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      border-radius: var(--panel-radius);
+      box-shadow: var(--panel-shadow);
+      padding: 2rem 2.25rem;
+    }
+
+    .section-benchmark .table {
+      background: rgba(255, 255, 255, 0.96);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .section-benchmark .table th {
+      background: #ededed;
+      color: #2f2f2f;
+    }
+
+    .section-methods img,
+    .section-overview img {
+      border-radius: 0;
+      box-shadow: none;
+    }
+
+    .section-citation pre {
+      border-radius: 12px;
+      background: #f3f3f3;
+      border: 1px solid #e0e0e0;
+    }
+
     .sticky-nav {
       position: sticky;
       top: 0;
-      background: white;
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(8px);
       z-index: 30;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
       padding: 0.75rem 0;
@@ -66,13 +162,21 @@
     }
 
     .sticky-nav a:hover {
-      background-color: #f5f5f5;
+      background-color: #efefef;
       text-decoration: none;
     }
 
     @media screen and (max-width: 768px) {
       .sticky-nav {
         display: none;
+      }
+
+      .section-overview .container.is-max-desktop,
+      .section-benchmark .container.is-max-desktop,
+      .section-methods .container.is-max-desktop,
+      .section-citation .container.is-max-desktop,
+      .section-acknowledgement .container.is-max-desktop {
+        padding: 1.25rem;
       }
     }
 
@@ -122,7 +226,7 @@
 <body>
 
   <!-- Hero Section -->
-  <section class="hero">
+  <section class="hero section-hero">
     <div class="hero-body">
       <div class="container is-max-desktop">
         <div class="columns is-centered">
@@ -197,7 +301,7 @@
   </div>
 
   <!-- Overview -->
-  <section class="section" id="overview">
+  <section class="section section-overview" id="overview">
     <div class="container is-max-desktop">
       <div class="content has-text-justified">
         <h2 class="title is-3 has-text-centered">Overview</h2>
@@ -222,7 +326,7 @@
   </section>
 
   <!-- Benchmark -->
-  <section class="section" id="benchmark">
+  <section class="section section-benchmark" id="benchmark">
     <div class="container is-max-desktop">
       <h2 class="title is-3 has-text-centered">Benchmark</h2>
 
@@ -277,7 +381,7 @@
   </section>
 
   <!-- Methods -->
-  <section class="section" id="methods">
+  <section class="section section-methods" id="methods">
     <div class="container is-max-desktop">
       <h2 class="title is-3 has-text-centered">Methods</h2>
 
@@ -300,7 +404,7 @@
   </section>
 
   <!-- Citation -->
-  <section class="section" id="citation">
+  <section class="section section-citation" id="citation">
     <div class="container is-max-desktop">
       <h2 class="title is-3 has-text-centered">Citation</h2>
 
@@ -324,7 +428,7 @@
   </section>
 
   <!-- Acknowledgement -->
-  <section class="section">
+  <section class="section section-acknowledgement">
     <div class="container is-max-desktop content">
       <h2 class="title">Acknowledgement</h2>
       <p>This page was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page,

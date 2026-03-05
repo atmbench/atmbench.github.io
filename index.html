@@ -52,26 +52,45 @@
 
   <style>
     :root {
-      --hero-bg: linear-gradient(180deg, #f7f7f7 0%, #ffffff 100%);
-      --overview-bg: linear-gradient(180deg, #fbfbfb 0%, #ffffff 100%);
-      --benchmark-bg: linear-gradient(180deg, #f5f5f5 0%, #fcfcfc 100%);
-      --methods-bg: linear-gradient(180deg, #fafafa 0%, #ffffff 100%);
-      --citation-bg: linear-gradient(180deg, #f6f6f6 0%, #fdfdfd 100%);
-      --ack-bg: linear-gradient(180deg, #f3f3f3 0%, #fafafa 100%);
-      --panel-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
-      --panel-radius: 18px;
+      --page-bg: #f5efe6;
+      --ink: #1f2430;
+      --muted: #5b6472;
+      --line: rgba(31, 36, 48, 0.10);
+      --hero-bg:
+        radial-gradient(circle at top left, rgba(190, 92, 31, 0.18), transparent 32%),
+        radial-gradient(circle at top right, rgba(52, 95, 140, 0.18), transparent 30%),
+        linear-gradient(180deg, #f6efe2 0%, #faf7f1 100%);
+      --overview-bg: linear-gradient(180deg, #faf6ef 0%, #fffdfa 100%);
+      --demos-bg: linear-gradient(180deg, #f6f0e7 0%, #fffaf4 100%);
+      --benchmark-bg: linear-gradient(180deg, #f4eee5 0%, #fcf8f2 100%);
+      --methods-bg: linear-gradient(180deg, #f8f2ea 0%, #fffdf8 100%);
+      --citation-bg: linear-gradient(180deg, #f3eee6 0%, #f9f6f1 100%);
+      --ack-bg: linear-gradient(180deg, #f1ebe3 0%, #f7f3ee 100%);
+      --panel-shadow: 0 14px 40px rgba(58, 42, 28, 0.08);
+      --panel-radius: 24px;
+      --accent-rust: #b14d1e;
+      --accent-blue: #355e8d;
+      --accent-green: #5a7a3f;
+      --accent-gold: #d69018;
+      --accent-plum: #7a4c72;
+    }
+
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
-      background: #ffffff;
+      background: var(--page-bg);
+      color: var(--ink);
     }
 
     .section-hero {
       background: var(--hero-bg);
-      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+      border-bottom: 1px solid var(--line);
     }
 
     .section-overview,
+    .section-demos,
     .section-benchmark,
     .section-methods,
     .section-citation,
@@ -82,6 +101,10 @@
 
     .section-overview {
       background: var(--overview-bg);
+    }
+
+    .section-demos {
+      background: var(--demos-bg);
     }
 
     .section-benchmark {
@@ -101,12 +124,13 @@
     }
 
     .section-overview .container.is-max-desktop,
+    .section-demos .container.is-max-desktop,
     .section-benchmark .container.is-max-desktop,
     .section-methods .container.is-max-desktop,
     .section-citation .container.is-max-desktop,
     .section-acknowledgement .container.is-max-desktop {
       background: rgba(255, 255, 255, 0.96);
-      border: 1px solid rgba(0, 0, 0, 0.08);
+      border: 1px solid var(--line);
       border-radius: var(--panel-radius);
       box-shadow: var(--panel-shadow);
       padding: 2rem 2.25rem;
@@ -119,29 +143,30 @@
     }
 
     .section-benchmark .table th {
-      background: #ededed;
-      color: #2f2f2f;
+      background: #ece4d7;
+      color: var(--ink);
     }
 
     .section-methods img,
-    .section-overview img {
-      border-radius: 0;
-      box-shadow: none;
+    .section-overview img,
+    .section-demos img {
+      border-radius: 20px;
+      box-shadow: 0 16px 36px rgba(58, 42, 28, 0.10);
     }
 
     .section-citation pre {
       border-radius: 12px;
-      background: #f3f3f3;
-      border: 1px solid #e0e0e0;
+      background: #f4ede4;
+      border: 1px solid rgba(31, 36, 48, 0.10);
     }
 
     .sticky-nav {
       position: sticky;
       top: 0;
-      background: rgba(255, 255, 255, 0.96);
+      background: rgba(250, 246, 239, 0.92);
       backdrop-filter: blur(8px);
       z-index: 30;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 6px 18px rgba(58, 42, 28, 0.08);
       padding: 0.75rem 0;
       margin-bottom: 2rem;
     }
@@ -154,16 +179,344 @@
     }
 
     .sticky-nav a {
-      color: #363636;
-      font-weight: 500;
+      color: var(--ink);
+      font-weight: 600;
       padding: 0.5rem 1rem;
-      border-radius: 4px;
-      transition: background-color 0.2s;
+      border-radius: 999px;
+      transition: background-color 0.2s, color 0.2s;
     }
 
     .sticky-nav a:hover {
-      background-color: #efefef;
+      background-color: rgba(177, 77, 30, 0.10);
+      color: var(--accent-rust);
       text-decoration: none;
+    }
+
+    .publication-title,
+    .section-title-display {
+      font-family: 'Castoro', serif;
+      letter-spacing: -0.03em;
+    }
+
+    .publication-subtitle {
+      max-width: none;
+      margin: 0.6rem auto 0;
+      line-height: 1.1;
+      white-space: nowrap;
+    }
+
+    .hero-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.45rem 0.9rem;
+      border-radius: 999px;
+      background: rgba(177, 77, 30, 0.10);
+      color: var(--accent-rust);
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .hero-kicker::before {
+      content: "";
+      width: 0.55rem;
+      height: 0.55rem;
+      border-radius: 999px;
+      background: currentColor;
+    }
+
+    .hero-summary {
+      max-width: 44rem;
+      margin: 1.2rem auto 0;
+      color: var(--muted);
+      font-size: 1.08rem;
+      line-height: 1.7;
+    }
+
+    .hero-stat-strip {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .stat-card {
+      text-align: left;
+      background: rgba(255, 255, 255, 0.88);
+      border: 1px solid rgba(31, 36, 48, 0.10);
+      border-radius: 20px;
+      padding: 1rem 1.1rem 1.05rem;
+      min-height: 122px;
+      box-shadow: 0 12px 24px rgba(58, 42, 28, 0.08);
+    }
+
+    .stat-value {
+      display: block;
+      font-family: 'Castoro', serif;
+      font-size: 2rem;
+      line-height: 1;
+      color: var(--ink);
+    }
+
+    .stat-label {
+      display: block;
+      margin-top: 0.55rem;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .stat-detail {
+      display: block;
+      margin-top: 0.3rem;
+      color: var(--muted);
+      font-size: 0.88rem;
+      line-height: 1.45;
+    }
+
+    .section-intro {
+      max-width: 48rem;
+      margin: 0 auto 1rem;
+      color: var(--muted);
+      text-align: center;
+      line-height: 1.75;
+    }
+
+    .overview-copy {
+      max-width: 52rem;
+      margin: 0 auto 1.5rem;
+      color: var(--muted);
+      font-size: 1.02rem;
+      line-height: 1.75;
+    }
+
+    .demo-grid,
+    .ability-grid {
+      display: grid;
+      gap: 1.2rem;
+    }
+
+    .demo-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      margin-top: 2rem;
+    }
+
+    .demo-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 22px;
+      border: 1px solid rgba(31, 36, 48, 0.10);
+      background: #fffdfa;
+      padding: 1.4rem;
+      box-shadow: 0 14px 28px rgba(58, 42, 28, 0.08);
+    }
+
+    .demo-card::before {
+      content: "";
+      position: absolute;
+      inset: 0 auto auto 0;
+      width: 100%;
+      height: 6px;
+      background: var(--demo-accent, var(--accent-rust));
+    }
+
+    .demo-card.reference {
+      --demo-accent: var(--accent-blue);
+    }
+
+    .demo-card.update {
+      --demo-accent: var(--accent-rust);
+    }
+
+    .demo-card.location {
+      --demo-accent: var(--accent-green);
+    }
+
+    .demo-card.abstain {
+      --demo-accent: var(--accent-plum);
+    }
+
+    .demo-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.35rem 0.7rem;
+      border-radius: 999px;
+      background: rgba(31, 36, 48, 0.06);
+      color: var(--muted);
+      font-size: 0.74rem;
+      font-weight: 700;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+    }
+
+    .demo-title {
+      margin-top: 0.85rem;
+      margin-bottom: 0.5rem;
+      font-family: 'Castoro', serif;
+      font-size: 1.55rem;
+      line-height: 1.15;
+      color: var(--ink);
+    }
+
+    .demo-question {
+      margin: 0.95rem 0 1rem;
+      padding: 1rem 1.05rem;
+      border-radius: 18px;
+      background: rgba(255, 241, 199, 0.88);
+      border: 1px solid rgba(214, 144, 24, 0.30);
+      color: #503915;
+      font-weight: 700;
+      line-height: 1.55;
+    }
+
+    .demo-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .demo-tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.35rem 0.65rem;
+      border-radius: 999px;
+      background: rgba(53, 94, 141, 0.08);
+      color: var(--accent-blue);
+      font-size: 0.82rem;
+      font-weight: 700;
+    }
+
+    .demo-point {
+      margin: 0.55rem 0;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .demo-point strong {
+      color: var(--ink);
+    }
+
+    .demo-answer,
+    .demo-mistake {
+      margin-top: 1rem;
+      padding: 0.85rem 0.95rem;
+      border-radius: 16px;
+      line-height: 1.65;
+    }
+
+    .demo-answer {
+      background: rgba(90, 122, 63, 0.10);
+      border: 1px solid rgba(90, 122, 63, 0.20);
+      color: #2f4f1c;
+    }
+
+    .demo-mistake {
+      background: rgba(177, 77, 30, 0.08);
+      border: 1px solid rgba(177, 77, 30, 0.18);
+      color: #8b3e18;
+    }
+
+    .figure-note {
+      margin-top: 1.5rem;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .ability-grid {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      margin-top: 1.75rem;
+    }
+
+    .ability-card {
+      height: 100%;
+      border-radius: 20px;
+      padding: 1.15rem 1rem;
+      background: #fffcf8;
+      border: 1px solid rgba(31, 36, 48, 0.10);
+      box-shadow: 0 12px 24px rgba(58, 42, 28, 0.06);
+    }
+
+    .ability-code {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 999px;
+      font-weight: 800;
+      font-size: 0.85rem;
+      background: rgba(177, 77, 30, 0.10);
+      color: var(--accent-rust);
+    }
+
+    .ability-title {
+      margin-top: 0.85rem;
+      margin-bottom: 0.45rem;
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--ink);
+    }
+
+    .ability-text {
+      color: var(--muted);
+      font-size: 0.94rem;
+      line-height: 1.65;
+    }
+
+    .comparison-panel {
+      margin-top: 1.75rem;
+      border: 1px solid rgba(31, 36, 48, 0.10);
+      border-radius: 20px;
+      background: rgba(255, 252, 248, 0.88);
+      overflow: hidden;
+    }
+
+    .comparison-panel summary {
+      cursor: pointer;
+      list-style: none;
+      padding: 1rem 1.2rem;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .comparison-panel summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .comparison-panel summary::after {
+      content: "+";
+      float: right;
+      color: var(--accent-rust);
+      font-size: 1.25rem;
+      line-height: 1;
+    }
+
+    .comparison-panel[open] summary::after {
+      content: "-";
+    }
+
+    .comparison-panel .table-container {
+      padding: 0 1.2rem 1.2rem;
+    }
+
+    @media screen and (max-width: 1023px) and (min-width: 769px) {
+      .hero-stat-strip {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .ability-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    @media screen and (max-width: 900px) and (min-width: 769px) {
+      .demo-grid {
+        grid-template-columns: 1fr;
+      }
     }
 
     @media screen and (max-width: 768px) {
@@ -172,11 +525,23 @@
       }
 
       .section-overview .container.is-max-desktop,
+      .section-demos .container.is-max-desktop,
       .section-benchmark .container.is-max-desktop,
       .section-methods .container.is-max-desktop,
       .section-citation .container.is-max-desktop,
       .section-acknowledgement .container.is-max-desktop {
         padding: 1.25rem;
+      }
+
+      .hero-stat-strip,
+      .demo-grid,
+      .ability-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .publication-subtitle {
+        max-width: none;
+        white-space: normal;
       }
     }
 
@@ -231,11 +596,17 @@
       <div class="container is-max-desktop">
         <div class="columns is-centered">
           <div class="column has-text-centered">
+            <span class="hero-kicker">Multimodal Memory Puzzles</span>
             <h1 class="title is-1 publication-title">ATM-Bench</h1>
             <h2 class="subtitle is-3 publication-subtitle">According to Me: Long-Term Personalized Referential Memory QA
             </h2>
             <p class="subtitle is-5" style="margin-top: 1rem;">Multimodal, multi-source personal memory question
               answering over long time horizons</p>
+            <p class="hero-summary">
+              ATM-Bench is built for the kind of memory questions that sound casual to humans but break systems in
+              practice: outdated receipts, weak location clues, ambiguous references, and moments where the right
+              answer is to abstain.
+            </p>
 
             <div class="is-size-5 publication-authors" style="margin-top: 2rem;">
               <span class="author-block">Jingbiao Mei</span>,
@@ -284,6 +655,34 @@
               </div>
             </div>
 
+            <div class="hero-stat-strip">
+              <article class="stat-card">
+                <span class="stat-value">~4 years</span>
+                <span class="stat-label">personal memory horizon</span>
+                <span class="stat-detail">Long-range references across years, not short chat windows.</span>
+              </article>
+              <article class="stat-card">
+                <span class="stat-value">3 sources</span>
+                <span class="stat-label">images + videos + emails</span>
+                <span class="stat-detail">The answer often lives across multiple modalities at once.</span>
+              </article>
+              <article class="stat-card">
+                <span class="stat-value">2.25M</span>
+                <span class="stat-label">token context</span>
+                <span class="stat-detail">A realistic haystack for retrieval, grounding, and reasoning.</span>
+              </article>
+              <article class="stat-card">
+                <span class="stat-value">~30%</span>
+                <span class="stat-label">multi-evidence questions</span>
+                <span class="stat-detail">Single-pass lookup is often not enough to answer correctly.</span>
+              </article>
+              <article class="stat-card">
+                <span class="stat-value">&lt;20%</span>
+                <span class="stat-label">accuracy on Hard</span>
+                <span class="stat-detail">The hardest split still exposes large gaps in current systems.</span>
+              </article>
+            </div>
+
           </div>
         </div>
       </div>
@@ -294,6 +693,7 @@
   <div class="sticky-nav">
     <div class="container">
       <a href="#overview">Overview</a>
+      <a href="#puzzles">Memory Puzzles</a>
       <a href="#benchmark">Benchmark</a>
       <a href="#methods">Methods</a>
       <a href="#citation">Citation</a>
@@ -303,24 +703,125 @@
   <!-- Overview -->
   <section class="section section-overview" id="overview">
     <div class="container is-max-desktop">
-      <div class="content has-text-justified">
-        <h2 class="title is-3 has-text-centered">Overview</h2>
+      <h2 class="title is-3 has-text-centered section-title-display">Overview</h2>
+      <p class="overview-copy">
+        Personalized assistants should remember lived experience, not just chat logs. ATM-Bench targets the harder
+        regime: multimodal, multi-source personal memory QA grounded in real evidence from images, videos, and emails.
+        The challenge is not merely finding one matching memory item. It is deciding which pieces still hold, which ones
+        conflict, and when the evidence is not strong enough to answer at all.
+      </p>
 
-        <p>
-          Personalized AI assistants must recall and reason over long-term user memory, which naturally spans multiple
-          modalities and sources such as images, videos, and emails. However, existing long-term memory benchmarks focus
-          primarily on dialogue history, failing to capture realistic personalized references grounded in lived
-          experience. We introduce <strong>ATM-Bench</strong>, a benchmark for multimodal, multi-source personalized
-          referential memory QA with ground-truth memory evidence.
-        </p>
+      <figure style="margin-top: 1.5rem;">
+        <img src="static/images/ATM-Bench-Demo.png" alt="ATM-Bench overview diagram"
+          style="width: 100%; max-width: 1100px; display: block; margin: 0 auto;" />
+        <figcaption style="margin-top: 0.9rem; text-align: center; color: #7a7a7a;">
+          The benchmark teaser figure. The cards below unpack these cases into clearer, demo-friendly stories.
+        </figcaption>
+      </figure>
+    </div>
+  </section>
 
-        <figure style="margin-top: 1.5rem;">
-          <img src="static/images/ATM-Bench-Demo.png" alt="ATM-Bench overview diagram"
-            style="width: 100%; max-width: 980px; display: block; margin: 0 auto;" />
-          <figcaption style="margin-top: 0.75rem; text-align: center; color: #7a7a7a;">
-            ATM-Bench overview and representative reasoning challenges.
-          </figcaption>
-        </figure>
+  <!-- Memory Puzzles -->
+  <section class="section section-demos" id="puzzles">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3 has-text-centered section-title-display">Four Memory Puzzles</h2>
+      <p class="section-intro">
+        These are the kinds of examples that make ATM-Bench memorable. Each one looks natural at the surface and then
+        turns into a retrieval, grounding, and reasoning trap.
+      </p>
+
+      <div class="demo-grid">
+        <article class="demo-card reference">
+          <span class="demo-eyebrow">Case 01</span>
+          <h3 class="demo-title">Personal Reference Resolution</h3>
+          <p class="demo-question">"Show me the moments where Grace was trying to be sneaky."</p>
+          <div class="demo-tags">
+            <span class="demo-tag">images</span>
+            <span class="demo-tag">videos</span>
+            <span class="demo-tag">entity grounding</span>
+          </div>
+          <p class="demo-point">
+            <strong>Why it is tricky.</strong> The assistant must resolve who "Grace" is, reject visually similar but
+            wrong moments, and distinguish "trying to hide" from merely appearing in frame.
+          </p>
+          <p class="demo-point">
+            <strong>What weak systems do.</strong> They anchor on the wrong pet attributes or retrieve frames that look
+            close but do not support the sneaky state.
+          </p>
+          <div class="demo-answer">
+            <strong>Correct behavior.</strong> Ground the entity first, then retrieve only the evidence that truly
+            supports the hidden or peeking action.
+          </div>
+        </article>
+
+        <article class="demo-card update">
+          <span class="demo-eyebrow">Case 02</span>
+          <h3 class="demo-title">Conflicting Evidence Over Time</h3>
+          <p class="demo-question">"How much did I pay for my hotel during my recent trip to Portugal?"</p>
+          <div class="demo-tags">
+            <span class="demo-tag">emails</span>
+            <span class="demo-tag">receipts</span>
+            <span class="demo-tag">temporal update</span>
+          </div>
+          <p class="demo-point">
+            <strong>Why it is tricky.</strong> A reservation email and a later invoice disagree, and the final answer
+            requires composing evidence across two stays.
+          </p>
+          <div class="demo-mistake">
+            <strong>Typical model mistake.</strong> Trust the earlier booking estimate, ignore the superseding invoice,
+            and miss the conflicting-evidence update.
+          </div>
+          <div class="demo-answer">
+            <strong>Correct behavior.</strong> Prefer the final invoice over stale booking evidence, then aggregate both
+            hotels to reach the grounded total of EUR 842.97.
+          </div>
+        </article>
+
+        <article class="demo-card location">
+          <span class="demo-eyebrow">Case 03</span>
+          <h3 class="demo-title">The Invisible Link</h3>
+          <p class="demo-question">"I remember a good experience at Fancett. What did I order at Fancett?"</p>
+          <div class="demo-tags">
+            <span class="demo-tag">emails</span>
+            <span class="demo-tag">photos</span>
+            <span class="demo-tag">location inference</span>
+          </div>
+          <p class="demo-point">
+            <strong>Why it is tricky.</strong> "Fancett" appears in text-only confirmation evidence, while the dishes
+            appear only in photos. The system has to infer the event window, venue, and then connect the right images.
+          </p>
+          <p class="demo-point">
+            <strong>Failure mode.</strong> Retrieve nearby meal photos from the same day without grounding them to the
+            correct place and time.
+          </p>
+          <div class="demo-answer">
+            <strong>Correct behavior.</strong> Infer the restaurant visit from the confirmation, narrow the time window,
+            and only then read the dishes from the linked visual evidence.
+          </div>
+        </article>
+
+        <article class="demo-card abstain">
+          <span class="demo-eyebrow">Case 04</span>
+          <h3 class="demo-title">When the Right Answer Is "I Don't Know"</h3>
+          <p class="demo-question">"Which wine did I order at Fancett that night?"</p>
+          <div class="demo-tags">
+            <span class="demo-tag">abstention</span>
+            <span class="demo-tag">evidence sufficiency</span>
+            <span class="demo-tag">hallucination control</span>
+          </div>
+          <p class="demo-point">
+            <strong>Why it is tricky.</strong> The assistant may recover the restaurant and the meal, yet still lack any
+            grounded evidence about the drink order.
+          </p>
+          <p class="demo-point">
+            <strong>What weak systems do.</strong> Fill the gap with a plausible but unsupported guess once some nearby
+            memories have been found.
+          </p>
+          <div class="demo-answer">
+            <strong>Correct behavior.</strong> Return an abstention because the retrieved memories support the dishes,
+            not the wine.
+          </div>
+        </article>
       </div>
     </div>
   </section>
@@ -328,54 +829,81 @@
   <!-- Benchmark -->
   <section class="section section-benchmark" id="benchmark">
     <div class="container is-max-desktop">
-      <h2 class="title is-3 has-text-centered">Benchmark</h2>
+      <h2 class="title is-3 has-text-centered section-title-display">What ATM-Bench Measures</h2>
+      <p class="section-intro">
+        The benchmark is not just larger. It is structured around failure modes that matter for real personal-memory
+        assistants: weak references, stale evidence, cross-source composition, and calibrated abstention.
+      </p>
 
-      <div class="content has-text-justified">
-        <p>
-          Compared with prior memory and long-context QA benchmarks (e.g., MemoryBank, PerLTQA, LoCoMo,
-          DialSim, LongMemEval, and Memory-QA), <strong>ATM-Bench</strong> is designed for long-term
-          <strong>multimodal, multi-source personal memory QA</strong> with human-annotated evidence.
-        </p>
+      <div class="ability-grid">
+        <article class="ability-card">
+          <div class="ability-code">PR</div>
+          <h3 class="ability-title">Personalized references</h3>
+          <p class="ability-text">Resolve names, nicknames, and indirect descriptions against personal multimodal memories.</p>
+        </article>
+        <article class="ability-card">
+          <div class="ability-code">LA</div>
+          <h3 class="ability-title">Location awareness</h3>
+          <p class="ability-text">Infer where an event happened even when the place appears only in sparse, indirect evidence.</p>
+        </article>
+        <article class="ability-card">
+          <div class="ability-code">MUT</div>
+          <h3 class="ability-title">Memory updates over time</h3>
+          <p class="ability-text">Prefer later and more authoritative evidence when bookings, plans, and outcomes conflict.</p>
+        </article>
+        <article class="ability-card">
+          <div class="ability-code">ME</div>
+          <h3 class="ability-title">Multi-evidence composition</h3>
+          <p class="ability-text">Compose several partial clues before answering, instead of trusting the first matching item.</p>
+        </article>
+        <article class="ability-card">
+          <div class="ability-code">ABS</div>
+          <h3 class="ability-title">Abstention</h3>
+          <p class="ability-text">Decline to answer when the evidence is insufficient, even if a plausible guess is tempting.</p>
+        </article>
       </div>
 
-      <div class="table-container" style="margin-top: 1rem;">
-        <table class="table is-fullwidth is-striped is-hoverable">
-          <thead>
-            <tr>
-              <th>Aspect</th>
-              <th>Prior Benchmarks</th>
-              <th>ATM-Bench</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Memory modality and source</td>
-              <td>Mostly dialogue-only or single-modality settings</td>
-              <td>Images + videos + emails in one benchmark</td>
-            </tr>
-            <tr>
-              <td>Data origin</td>
-              <td>Primarily synthetic or hybrid data</td>
-              <td>Human-curated personal memory QA with evidence labels</td>
-            </tr>
-            <tr>
-              <td>Core memory abilities</td>
-              <td>Partial coverage</td>
-              <td>Jointly covers personalized referential reasoning, location awareness, memory updates over time, multi-evidence composition, and abstention</td>
-            </tr>
-            <tr>
-              <td>Scale and horizon</td>
-              <td>Typically smaller or narrower settings</td>
-              <td>~12k memory items, ~1.1k QA, years-long horizon, 2.25M-token context</td>
-            </tr>
-            <tr>
-              <td>Multi-evidence burden</td>
-              <td>Lower multi-evidence proportion in common settings</td>
-              <td>~30% of questions require multi-evidence composition</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      <details class="comparison-panel">
+        <summary>Compare ATM-Bench against prior memory benchmarks</summary>
+        <div class="table-container">
+          <table class="table is-fullwidth is-striped is-hoverable">
+            <thead>
+              <tr>
+                <th>Aspect</th>
+                <th>Prior Benchmarks</th>
+                <th>ATM-Bench</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Memory modality and source</td>
+                <td>Mostly dialogue-only or single-modality settings</td>
+                <td>Images + videos + emails in one benchmark</td>
+              </tr>
+              <tr>
+                <td>Data origin</td>
+                <td>Primarily synthetic or hybrid data</td>
+                <td>Human-curated personal memory QA with evidence labels</td>
+              </tr>
+              <tr>
+                <td>Core memory abilities</td>
+                <td>Partial coverage</td>
+                <td>Personalized referential reasoning, location awareness, memory updates, multi-evidence composition, and abstention</td>
+              </tr>
+              <tr>
+                <td>Scale and horizon</td>
+                <td>Typically smaller or narrower settings</td>
+                <td>~12k memory items, ~1.1k QA, years-long horizon, 2.25M-token context</td>
+              </tr>
+              <tr>
+                <td>Multi-evidence burden</td>
+                <td>Lower multi-evidence proportion in common settings</td>
+                <td>~30% of questions require multi-evidence composition</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
 
     </div>
   </section>
@@ -383,19 +911,16 @@
   <!-- Methods -->
   <section class="section section-methods" id="methods">
     <div class="container is-max-desktop">
-      <h2 class="title is-3 has-text-centered">Methods</h2>
+      <h2 class="title is-3 has-text-centered section-title-display">Methods</h2>
 
-      <div class="content has-text-justified">
-        <p>
-          ATM models a personal memory assistant in three stages: <strong>memory ingestion</strong>
-          (preprocessing + organization), <strong>retrieval</strong> under an evidence budget,
-          and <strong>evidence-grounded answer generation</strong>.
-        </p>
-      </div>
+      <p class="section-intro">
+        ATM models the assistant as a staged memory pipeline: ingest multimodal artifacts, organize them into memory
+        structures, retrieve evidence under budget, and only answer when the supporting memories are grounded.
+      </p>
 
       <figure style="margin-top: 1.5rem;">
         <img src="static/images/ATM-Method.png" alt="ATM Method diagram"
-          style="width: 50%; max-width: 980px; display: block; margin: 0 auto;" />
+          style="width: 100%; max-width: 720px; display: block; margin: 0 auto;" />
         <figcaption style="margin-top: 0.75rem; text-align: center; color: #7a7a7a;">
           ATM method: memory ingestion, organization, retrieval, and answer generation.
         </figcaption>
@@ -406,7 +931,7 @@
   <!-- Citation -->
   <section class="section section-citation" id="citation">
     <div class="container is-max-desktop">
-      <h2 class="title is-3 has-text-centered">Citation</h2>
+      <h2 class="title is-3 has-text-centered section-title-display">Citation</h2>
 
       <div class="content">
         <p>If you use ATM-Bench in your research, please cite:</p>

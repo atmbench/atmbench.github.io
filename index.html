@@ -174,6 +174,7 @@
     .sticky-nav .container {
       display: flex;
       justify-content: center;
+      align-items: center;
       gap: 1.5rem;
       flex-wrap: wrap;
     }
@@ -190,6 +191,43 @@
       background-color: rgba(177, 77, 30, 0.10);
       color: var(--accent-rust);
       text-decoration: none;
+    }
+
+    .lang-toggle {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      z-index: 50;
+      display: inline-flex;
+      align-items: center;
+      gap: 0;
+      border: 1.5px solid var(--line);
+      border-radius: 999px;
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 4px 12px rgba(58, 42, 28, 0.10);
+    }
+
+    .lang-toggle button {
+      border: none;
+      background: transparent;
+      padding: 0.35rem 0.7rem;
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      color: var(--muted);
+      transition: background-color 0.2s, color 0.2s;
+    }
+
+    .lang-toggle button.active {
+      background: var(--accent-rust);
+      color: #fff;
+    }
+
+    .lang-toggle button:not(.active):hover {
+      background: rgba(177, 77, 30, 0.08);
+      color: var(--accent-rust);
     }
 
     .publication-title,
@@ -590,19 +628,25 @@
 
 <body>
 
+  <!-- Language Toggle (fixed top-right) -->
+  <div class="lang-toggle">
+    <button onclick="setLanguage('en')" id="lang-btn-en">EN</button>
+    <button onclick="setLanguage('zh')" id="lang-btn-zh">中文</button>
+  </div>
+
   <!-- Hero Section -->
   <section class="hero section-hero">
     <div class="hero-body">
       <div class="container is-max-desktop">
         <div class="columns is-centered">
           <div class="column has-text-centered">
-            <span class="hero-kicker">Multimodal Memory Puzzles</span>
+            <span class="hero-kicker" data-i18n="hero_kicker">Multimodal Memory Puzzles</span>
             <h1 class="title is-1 publication-title">ATM-Bench</h1>
-            <h2 class="subtitle is-3 publication-subtitle">According to Me: Long-Term Personalized Referential Memory QA
+            <h2 class="subtitle is-3 publication-subtitle" data-i18n="hero_subtitle">According to Me: Long-Term Personalized Referential Memory QA
             </h2>
-            <p class="subtitle is-5" style="margin-top: 1rem;">Multimodal, multi-source personal memory question
+            <p class="subtitle is-5" style="margin-top: 1rem;" data-i18n="hero_tagline">Multimodal, multi-source personal memory question
               answering over long time horizons</p>
-            <p class="hero-summary">
+            <p class="hero-summary" data-i18n="hero_summary">
               ATM-Bench is built for the kind of memory questions that sound casual to humans but break systems in
               practice: outdated receipts, weak location clues, ambiguous references, and moments where the right
               answer is to abstain.
@@ -618,7 +662,7 @@
             </div>
 
             <div class="is-size-5 publication-authors">
-              <span class="author-block">University of Cambridge</span>
+              <span class="author-block" data-i18n="hero_affiliation">University of Cambridge</span>
             </div>
 
             <div class="column has-text-centered" style="margin-top: 1.5rem;">
@@ -635,14 +679,14 @@
                   <a href="https://github.com/JingbiaoMei/ATM-Bench" target="_blank"
                     class="external-link button is-normal is-rounded is-dark">
                     <span class="icon"><i class="fab fa-github"></i></span>
-                    <span>Code</span>
+                    <span data-i18n="btn_code">Code</span>
                   </a>
                 </span>
 
                 <span class="link-block">
                   <a href="https://huggingface.co/datasets/Jingbiao/ATM-Bench" target="_blank" class="external-link button is-normal is-rounded is-dark">
                     <span class="icon"><i class="fas fa-database"></i></span>
-                    <span>Dataset</span>
+                    <span data-i18n="btn_dataset">Dataset</span>
                   </a>
                 </span>
 
@@ -657,38 +701,38 @@
 
             <div class="hero-stat-strip">
               <article class="stat-card">
-                <span class="stat-value">~4 years</span>
-                <span class="stat-label">personal memory horizon</span>
-                <span class="stat-detail">Long-range references across years, not short chat windows.</span>
+                <span class="stat-value" data-i18n="stat1_value">~4 years</span>
+                <span class="stat-label" data-i18n="stat1_label">personal memory horizon</span>
+                <span class="stat-detail" data-i18n="stat1_detail">Long-range references across years, not short chat windows.</span>
               </article>
               <article class="stat-card">
-                <span class="stat-value">3 sources</span>
-                <span class="stat-label">images + videos + emails</span>
-                <span class="stat-detail">The answer often lives across multiple modalities at once.</span>
+                <span class="stat-value" data-i18n="stat2_value">3 sources</span>
+                <span class="stat-label" data-i18n="stat2_label">images + videos + emails</span>
+                <span class="stat-detail" data-i18n="stat2_detail">The answer often lives across multiple modalities at once.</span>
               </article>
               <article class="stat-card">
                 <span class="stat-value">2.25M</span>
-                <span class="stat-label">token context</span>
-                <span class="stat-detail">A realistic haystack for retrieval, grounding, and reasoning.</span>
+                <span class="stat-label" data-i18n="stat3_label">token context</span>
+                <span class="stat-detail" data-i18n="stat3_detail">A realistic haystack for retrieval, grounding, and reasoning.</span>
               </article>
               <article class="stat-card">
                 <span class="stat-value">~30%</span>
-                <span class="stat-label">multi-evidence questions</span>
-                <span class="stat-detail">Single-pass lookup is often not enough to answer correctly.</span>
+                <span class="stat-label" data-i18n="stat4_label">multi-evidence questions</span>
+                <span class="stat-detail" data-i18n="stat4_detail">Single-pass lookup is often not enough to answer correctly.</span>
               </article>
               <article class="stat-card">
                 <span class="stat-value">&lt;20%</span>
-                <span class="stat-label">accuracy on Hard</span>
-                <span class="stat-detail">The hardest split still exposes large gaps in current systems.</span>
+                <span class="stat-label" data-i18n="stat5_label">accuracy on Hard</span>
+                <span class="stat-detail" data-i18n="stat5_detail">The hardest split still exposes large gaps in current systems.</span>
               </article>
             </div>
             <figure style="margin-top: 2rem;">
-              <video controls autoplay muted loop playsinline
+              <video id="demo-video" controls autoplay muted loop playsinline
                 style="width: 100%; max-width: 1100px; display: block; margin: 0 auto; border-radius: 20px; box-shadow: 0 16px 36px rgba(58, 42, 28, 0.10);">
-                <source src="static/videos/ATM-Bench-demo.mp4" type="video/mp4">
+                <source id="demo-video-source" src="static/videos/ATM-Bench-demo.mp4" type="video/mp4">
                 Your browser does not support the video tag.
               </video>
-              <figcaption style="margin-top: 0.9rem; text-align: center; color: #7a7a7a;">
+              <figcaption style="margin-top: 0.9rem; text-align: center; color: #7a7a7a;" data-i18n="demo_video_caption">
                 ATM-Bench demo: multimodal personal memory QA in action.
               </figcaption>
             </figure>
@@ -702,19 +746,19 @@
   <!-- Sticky Navigation -->
   <div class="sticky-nav">
     <div class="container">
-      <a href="#overview">Overview</a>
-      <a href="#puzzles">Memory Puzzles</a>
-      <a href="#benchmark">Benchmark</a>
-      <a href="#methods">Methods</a>
-      <a href="#citation">Citation</a>
+      <a href="#overview" data-i18n="nav_overview">Overview</a>
+      <a href="#puzzles" data-i18n="nav_puzzles">Memory Puzzles</a>
+      <a href="#benchmark" data-i18n="nav_benchmark">Benchmark</a>
+      <a href="#methods" data-i18n="nav_methods">Methods</a>
+      <a href="#citation" data-i18n="nav_citation">Citation</a>
     </div>
   </div>
 
   <!-- Overview -->
   <section class="section section-overview" id="overview">
     <div class="container is-max-desktop">
-      <h2 class="title is-3 has-text-centered section-title-display">Overview</h2>
-      <p class="overview-copy">
+      <h2 class="title is-3 has-text-centered section-title-display" data-i18n="overview_title">Overview</h2>
+      <p class="overview-copy" data-i18n="overview_copy">
         Personalized assistants should remember lived experience, not just chat logs. ATM-Bench targets the harder
         regime: multimodal, multi-source personal memory QA grounded in real evidence from images, videos, and emails.
         The challenge is not merely finding one matching memory item. It is deciding which pieces still hold, which ones
@@ -727,7 +771,7 @@
       <figure style="margin-top: 1.5rem;">
         <img src="static/images/ATM-Bench-Demo.png" alt="ATM-Bench overview diagram"
           style="width: 100%; max-width: 1100px; display: block; margin: 0 auto;" />
-        <figcaption style="margin-top: 0.9rem; text-align: center; color: #7a7a7a;">
+        <figcaption style="margin-top: 0.9rem; text-align: center; color: #7a7a7a;" data-i18n="overview_figcaption">
           The benchmark teaser figure. The cards below unpack these cases into clearer, demo-friendly stories.
         </figcaption>
       </figure>
@@ -739,100 +783,100 @@
   <!-- Memory Puzzles -->
   <section class="section section-demos" id="puzzles">
     <div class="container is-max-desktop">
-      <h2 class="title is-3 has-text-centered section-title-display">Four Memory Puzzles</h2>
-      <p class="section-intro">
+      <h2 class="title is-3 has-text-centered section-title-display" data-i18n="puzzles_title">Four Memory Puzzles</h2>
+      <p class="section-intro" data-i18n="puzzles_intro">
         These are the kinds of examples that make ATM-Bench memorable. Each one looks natural at the surface and then
         turns into a retrieval, grounding, and reasoning trap.
       </p>
 
       <div class="demo-grid">
         <article class="demo-card reference">
-          <span class="demo-eyebrow">Case 01</span>
-          <h3 class="demo-title">Personal Reference Resolution</h3>
-          <p class="demo-question">"Show me the moments where Grace was trying to be sneaky."</p>
+          <span class="demo-eyebrow" data-i18n="case01_eyebrow">Case 01</span>
+          <h3 class="demo-title" data-i18n="case01_title">Personal Reference Resolution</h3>
+          <p class="demo-question" data-i18n="case01_question">"Show me the moments where Grace was trying to be sneaky."</p>
           <div class="demo-tags">
-            <span class="demo-tag">images</span>
-            <span class="demo-tag">videos</span>
-            <span class="demo-tag">entity grounding</span>
+            <span class="demo-tag" data-i18n="tag_images">images</span>
+            <span class="demo-tag" data-i18n="tag_videos">videos</span>
+            <span class="demo-tag" data-i18n="tag_entity_grounding">entity grounding</span>
           </div>
-          <p class="demo-point">
+          <p class="demo-point" data-i18n-html="case01_tricky">
             <strong>Why it is tricky.</strong> The assistant must resolve who "Grace" is, reject visually similar but
             wrong moments, and distinguish "trying to hide" from merely appearing in frame.
           </p>
-          <p class="demo-point">
+          <p class="demo-point" data-i18n-html="case01_weak">
             <strong>What weak systems do.</strong> They anchor on the wrong pet attributes or retrieve frames that look
             close but do not support the sneaky state.
           </p>
-          <div class="demo-answer">
+          <div class="demo-answer" data-i18n-html="case01_correct">
             <strong>Correct behavior.</strong> Ground the entity first, then retrieve only the evidence that truly
             supports the hidden or peeking action.
           </div>
         </article>
 
         <article class="demo-card update">
-          <span class="demo-eyebrow">Case 02</span>
-          <h3 class="demo-title">Conflicting Evidence Over Time</h3>
-          <p class="demo-question">"How much did I pay for my hotel during my recent trip to Portugal?"</p>
+          <span class="demo-eyebrow" data-i18n="case02_eyebrow">Case 02</span>
+          <h3 class="demo-title" data-i18n="case02_title">Conflicting Evidence Over Time</h3>
+          <p class="demo-question" data-i18n="case02_question">"How much did I pay for my hotel during my recent trip to Portugal?"</p>
           <div class="demo-tags">
-            <span class="demo-tag">emails</span>
-            <span class="demo-tag">receipts</span>
-            <span class="demo-tag">temporal update</span>
+            <span class="demo-tag" data-i18n="tag_emails">emails</span>
+            <span class="demo-tag" data-i18n="tag_receipts">receipts</span>
+            <span class="demo-tag" data-i18n="tag_temporal">temporal update</span>
           </div>
-          <p class="demo-point">
+          <p class="demo-point" data-i18n-html="case02_tricky">
             <strong>Why it is tricky.</strong> A reservation email and a later invoice disagree, and the final answer
             requires composing evidence across two stays.
           </p>
-          <div class="demo-mistake">
+          <div class="demo-mistake" data-i18n-html="case02_mistake">
             <strong>Typical model mistake.</strong> Trust the earlier booking estimate, ignore the superseding invoice,
             and miss the conflicting-evidence update.
           </div>
-          <div class="demo-answer">
+          <div class="demo-answer" data-i18n-html="case02_correct">
             <strong>Correct behavior.</strong> Prefer the final invoice over stale booking evidence, then aggregate both
             hotels to reach the grounded total of EUR 842.97.
           </div>
         </article>
 
         <article class="demo-card location">
-          <span class="demo-eyebrow">Case 03</span>
-          <h3 class="demo-title">The Invisible Link</h3>
-          <p class="demo-question">"I remember a good experience at Fancett. What did I order at Fancett?"</p>
+          <span class="demo-eyebrow" data-i18n="case03_eyebrow">Case 03</span>
+          <h3 class="demo-title" data-i18n="case03_title">The Invisible Link</h3>
+          <p class="demo-question" data-i18n="case03_question">"I remember a good experience at Fancett. What did I order at Fancett?"</p>
           <div class="demo-tags">
-            <span class="demo-tag">emails</span>
-            <span class="demo-tag">photos</span>
-            <span class="demo-tag">location inference</span>
+            <span class="demo-tag" data-i18n="tag_emails">emails</span>
+            <span class="demo-tag" data-i18n="tag_photos">photos</span>
+            <span class="demo-tag" data-i18n="tag_location">location inference</span>
           </div>
-          <p class="demo-point">
+          <p class="demo-point" data-i18n-html="case03_tricky">
             <strong>Why it is tricky.</strong> "Fancett" appears in text-only confirmation evidence, while the dishes
             appear only in photos. The system has to infer the event window, venue, and then connect the right images.
           </p>
-          <p class="demo-point">
+          <p class="demo-point" data-i18n-html="case03_failure">
             <strong>Failure mode.</strong> Retrieve nearby meal photos from the same day without grounding them to the
             correct place and time.
           </p>
-          <div class="demo-answer">
+          <div class="demo-answer" data-i18n-html="case03_correct">
             <strong>Correct behavior.</strong> Infer the restaurant visit from the confirmation, narrow the time window,
             and only then read the dishes from the linked visual evidence.
           </div>
         </article>
 
         <article class="demo-card abstain">
-          <span class="demo-eyebrow">Case 04</span>
-          <h3 class="demo-title">When the Right Answer Is "I Don't Know"</h3>
-          <p class="demo-question">"Which wine did I order at Fancett that night?"</p>
+          <span class="demo-eyebrow" data-i18n="case04_eyebrow">Case 04</span>
+          <h3 class="demo-title" data-i18n="case04_title">When the Right Answer Is "I Don't Know"</h3>
+          <p class="demo-question" data-i18n="case04_question">"Which wine did I order at Fancett that night?"</p>
           <div class="demo-tags">
-            <span class="demo-tag">abstention</span>
-            <span class="demo-tag">evidence sufficiency</span>
-            <span class="demo-tag">hallucination control</span>
+            <span class="demo-tag" data-i18n="tag_abstention">abstention</span>
+            <span class="demo-tag" data-i18n="tag_evidence">evidence sufficiency</span>
+            <span class="demo-tag" data-i18n="tag_hallucination">hallucination control</span>
           </div>
-          <p class="demo-point">
+          <p class="demo-point" data-i18n-html="case04_tricky">
             <strong>Why it is tricky.</strong> The assistant may recover the restaurant and the meal, yet still lack any
             grounded evidence about the drink order.
           </p>
-          <p class="demo-point">
+          <p class="demo-point" data-i18n-html="case04_weak">
             <strong>What weak systems do.</strong> Fill the gap with a plausible but unsupported guess once some nearby
             memories have been found.
           </p>
-          <div class="demo-answer">
+          <div class="demo-answer" data-i18n-html="case04_correct">
             <strong>Correct behavior.</strong> Return an abstention because the retrieved memories support the dishes,
             not the wine.
           </div>
@@ -844,8 +888,8 @@
   <!-- Benchmark -->
   <section class="section section-benchmark" id="benchmark">
     <div class="container is-max-desktop">
-      <h2 class="title is-3 has-text-centered section-title-display">What ATM-Bench Measures</h2>
-      <p class="section-intro">
+      <h2 class="title is-3 has-text-centered section-title-display" data-i18n="benchmark_title">What ATM-Bench Measures</h2>
+      <p class="section-intro" data-i18n="benchmark_intro">
         The benchmark is not just larger. It is structured around failure modes that matter for real personal-memory
         assistants: weak references, stale evidence, cross-source composition, and calibrated abstention.
       </p>
@@ -853,67 +897,67 @@
       <div class="ability-grid">
         <article class="ability-card">
           <div class="ability-code">PR</div>
-          <h3 class="ability-title">Personalized references</h3>
-          <p class="ability-text">Resolve names, nicknames, and indirect descriptions against personal multimodal memories.</p>
+          <h3 class="ability-title" data-i18n="ability_pr_title">Personalized references</h3>
+          <p class="ability-text" data-i18n="ability_pr_text">Resolve names, nicknames, and indirect descriptions against personal multimodal memories.</p>
         </article>
         <article class="ability-card">
           <div class="ability-code">LA</div>
-          <h3 class="ability-title">Location awareness</h3>
-          <p class="ability-text">Infer where an event happened even when the place appears only in sparse, indirect evidence.</p>
+          <h3 class="ability-title" data-i18n="ability_la_title">Location awareness</h3>
+          <p class="ability-text" data-i18n="ability_la_text">Infer where an event happened even when the place appears only in sparse, indirect evidence.</p>
         </article>
         <article class="ability-card">
           <div class="ability-code">MUT</div>
-          <h3 class="ability-title">Memory updates over time</h3>
-          <p class="ability-text">Prefer later and more authoritative evidence when bookings, plans, and outcomes conflict.</p>
+          <h3 class="ability-title" data-i18n="ability_mut_title">Memory updates over time</h3>
+          <p class="ability-text" data-i18n="ability_mut_text">Prefer later and more authoritative evidence when bookings, plans, and outcomes conflict.</p>
         </article>
         <article class="ability-card">
           <div class="ability-code">ME</div>
-          <h3 class="ability-title">Multi-evidence composition</h3>
-          <p class="ability-text">Compose several partial clues before answering, instead of trusting the first matching item.</p>
+          <h3 class="ability-title" data-i18n="ability_me_title">Multi-evidence composition</h3>
+          <p class="ability-text" data-i18n="ability_me_text">Compose several partial clues before answering, instead of trusting the first matching item.</p>
         </article>
         <article class="ability-card">
           <div class="ability-code">ABS</div>
-          <h3 class="ability-title">Abstention</h3>
-          <p class="ability-text">Decline to answer when the evidence is insufficient, even if a plausible guess is tempting.</p>
+          <h3 class="ability-title" data-i18n="ability_abs_title">Abstention</h3>
+          <p class="ability-text" data-i18n="ability_abs_text">Decline to answer when the evidence is insufficient, even if a plausible guess is tempting.</p>
         </article>
       </div>
 
       <details class="comparison-panel">
-        <summary>Compare ATM-Bench against prior memory benchmarks</summary>
+        <summary data-i18n="comparison_summary">Compare ATM-Bench against prior memory benchmarks</summary>
         <div class="table-container">
           <table class="table is-fullwidth is-striped is-hoverable">
             <thead>
               <tr>
-                <th>Aspect</th>
-                <th>Prior Benchmarks</th>
+                <th data-i18n="table_aspect">Aspect</th>
+                <th data-i18n="table_prior">Prior Benchmarks</th>
                 <th>ATM-Bench</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td>Memory modality and source</td>
-                <td>Mostly dialogue-only or single-modality settings</td>
-                <td>Images + videos + emails in one benchmark</td>
+                <td data-i18n="table_r1c1">Memory modality and source</td>
+                <td data-i18n="table_r1c2">Mostly dialogue-only or single-modality settings</td>
+                <td data-i18n="table_r1c3">Images + videos + emails in one benchmark</td>
               </tr>
               <tr>
-                <td>Data origin</td>
-                <td>Primarily synthetic or hybrid data</td>
-                <td>Human-curated personal memory QA with evidence labels</td>
+                <td data-i18n="table_r2c1">Data origin</td>
+                <td data-i18n="table_r2c2">Primarily synthetic or hybrid data</td>
+                <td data-i18n="table_r2c3">Human-curated personal memory QA with evidence labels</td>
               </tr>
               <tr>
-                <td>Core memory abilities</td>
-                <td>Partial coverage</td>
-                <td>Personalized referential reasoning, location awareness, memory updates, multi-evidence composition, and abstention</td>
+                <td data-i18n="table_r3c1">Core memory abilities</td>
+                <td data-i18n="table_r3c2">Partial coverage</td>
+                <td data-i18n="table_r3c3">Personalized referential reasoning, location awareness, memory updates, multi-evidence composition, and abstention</td>
               </tr>
               <tr>
-                <td>Scale and horizon</td>
-                <td>Typically smaller or narrower settings</td>
-                <td>~12k memory items, ~1.1k QA, years-long horizon, 2.25M-token context</td>
+                <td data-i18n="table_r4c1">Scale and horizon</td>
+                <td data-i18n="table_r4c2">Typically smaller or narrower settings</td>
+                <td data-i18n="table_r4c3">~12k memory items, ~1.1k QA, years-long horizon, 2.25M-token context</td>
               </tr>
               <tr>
-                <td>Multi-evidence burden</td>
-                <td>Lower multi-evidence proportion in common settings</td>
-                <td>~30% of questions require multi-evidence composition</td>
+                <td data-i18n="table_r5c1">Multi-evidence burden</td>
+                <td data-i18n="table_r5c2">Lower multi-evidence proportion in common settings</td>
+                <td data-i18n="table_r5c3">~30% of questions require multi-evidence composition</td>
               </tr>
             </tbody>
           </table>
@@ -926,9 +970,9 @@
   <!-- Methods -->
   <section class="section section-methods" id="methods">
     <div class="container is-max-desktop">
-      <h2 class="title is-3 has-text-centered section-title-display">Methods</h2>
+      <h2 class="title is-3 has-text-centered section-title-display" data-i18n="methods_title">Methods</h2>
 
-      <p class="section-intro">
+      <p class="section-intro" data-i18n="methods_intro">
         ATM models the assistant as a staged memory pipeline: ingest multimodal artifacts, organize them into memory
         structures, retrieve evidence under budget, and only answer when the supporting memories are grounded.
       </p>
@@ -936,7 +980,7 @@
       <figure style="margin-top: 1.5rem;">
         <img src="static/images/ATM-Method.png" alt="ATM Method diagram"
           style="width: 100%; max-width: 720px; display: block; margin: 0 auto;" />
-        <figcaption style="margin-top: 0.75rem; text-align: center; color: #7a7a7a;">
+        <figcaption style="margin-top: 0.75rem; text-align: center; color: #7a7a7a;" data-i18n="methods_figcaption">
           ATM method: memory ingestion, organization, retrieval, and answer generation.
         </figcaption>
       </figure>
@@ -946,12 +990,12 @@
   <!-- Citation -->
   <section class="section section-citation" id="citation">
     <div class="container is-max-desktop">
-      <h2 class="title is-3 has-text-centered section-title-display">Citation</h2>
+      <h2 class="title is-3 has-text-centered section-title-display" data-i18n="citation_title">Citation</h2>
 
       <div class="content">
-        <p>If you use ATM-Bench in your research, please cite:</p>
+        <p data-i18n="citation_text">If you use ATM-Bench in your research, please cite:</p>
         <div class="bibtex-container">
-          <button class="copy-button" onclick="copyBibtex('atmbench-bibtex')">
+          <button class="copy-button" onclick="copyBibtex('atmbench-bibtex')" data-i18n-html="btn_copy_bibtex">
             <i class="fas fa-copy"></i> Copy BibTeX
           </button>
           <pre><code id="atmbench-bibtex">@article{mei2026atm,
@@ -970,8 +1014,8 @@
   <!-- Acknowledgement -->
   <section class="section section-acknowledgement">
     <div class="container is-max-desktop content">
-      <h2 class="title">Acknowledgement</h2>
-      <p>This page was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page,
+      <h2 class="title" data-i18n="ack_title">Acknowledgement</h2>
+      <p data-i18n-html="ack_text">This page was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page,
         licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
           Commons Attribution-ShareAlike 4.0 International License</a>. Many thanks to the <a
           href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page
@@ -980,12 +1024,277 @@
   </section>
 
   <script>
+    var translations = {
+      en: {
+        hero_kicker: "Multimodal Memory Puzzles",
+        hero_subtitle: "According to Me: Long-Term Personalized Referential Memory QA",
+        hero_tagline: "Multimodal, multi-source personal memory question answering over long time horizons",
+        hero_summary: "ATM-Bench is built for the kind of memory questions that sound casual to humans but break systems in practice: outdated receipts, weak location clues, ambiguous references, and moments where the right answer is to abstain.",
+        hero_affiliation: "University of Cambridge",
+        btn_code: "Code",
+        btn_dataset: "Dataset",
+        stat1_value: "~4 years",
+        stat1_label: "personal memory horizon",
+        stat1_detail: "Long-range references across years, not short chat windows.",
+        stat2_value: "3 sources",
+        stat2_label: "images + videos + emails",
+        stat2_detail: "The answer often lives across multiple modalities at once.",
+        stat3_label: "token context",
+        stat3_detail: "A realistic haystack for retrieval, grounding, and reasoning.",
+        stat4_label: "multi-evidence questions",
+        stat4_detail: "Single-pass lookup is often not enough to answer correctly.",
+        stat5_label: "accuracy on Hard",
+        stat5_detail: "The hardest split still exposes large gaps in current systems.",
+        demo_video_caption: "ATM-Bench demo: multimodal personal memory QA in action.",
+        nav_overview: "Overview",
+        nav_puzzles: "Memory Puzzles",
+        nav_benchmark: "Benchmark",
+        nav_methods: "Methods",
+        nav_citation: "Citation",
+        overview_title: "Overview",
+        overview_copy: "Personalized assistants should remember lived experience, not just chat logs. ATM-Bench targets the harder regime: multimodal, multi-source personal memory QA grounded in real evidence from images, videos, and emails. The challenge is not merely finding one matching memory item. It is deciding which pieces still hold, which ones conflict, and when the evidence is not strong enough to answer at all.",
+        overview_figcaption: "The benchmark teaser figure. The cards below unpack these cases into clearer, demo-friendly stories.",
+        puzzles_title: "Four Memory Puzzles",
+        puzzles_intro: "These are the kinds of examples that make ATM-Bench memorable. Each one looks natural at the surface and then turns into a retrieval, grounding, and reasoning trap.",
+        case01_eyebrow: "Case 01",
+        case01_title: "Personal Reference Resolution",
+        case01_question: "\"Show me the moments where Grace was trying to be sneaky.\"",
+        tag_images: "images",
+        tag_videos: "videos",
+        tag_entity_grounding: "entity grounding",
+        case01_tricky: "<strong>Why it is tricky.</strong> The assistant must resolve who \"Grace\" is, reject visually similar but wrong moments, and distinguish \"trying to hide\" from merely appearing in frame.",
+        case01_weak: "<strong>What weak systems do.</strong> They anchor on the wrong pet attributes or retrieve frames that look close but do not support the sneaky state.",
+        case01_correct: "<strong>Correct behavior.</strong> Ground the entity first, then retrieve only the evidence that truly supports the hidden or peeking action.",
+        case02_eyebrow: "Case 02",
+        case02_title: "Conflicting Evidence Over Time",
+        case02_question: "\"How much did I pay for my hotel during my recent trip to Portugal?\"",
+        tag_emails: "emails",
+        tag_receipts: "receipts",
+        tag_temporal: "temporal update",
+        case02_tricky: "<strong>Why it is tricky.</strong> A reservation email and a later invoice disagree, and the final answer requires composing evidence across two stays.",
+        case02_mistake: "<strong>Typical model mistake.</strong> Trust the earlier booking estimate, ignore the superseding invoice, and miss the conflicting-evidence update.",
+        case02_correct: "<strong>Correct behavior.</strong> Prefer the final invoice over stale booking evidence, then aggregate both hotels to reach the grounded total of EUR 842.97.",
+        case03_eyebrow: "Case 03",
+        case03_title: "The Invisible Link",
+        case03_question: "\"I remember a good experience at Fancett. What did I order at Fancett?\"",
+        tag_photos: "photos",
+        tag_location: "location inference",
+        case03_tricky: "<strong>Why it is tricky.</strong> \"Fancett\" appears in text-only confirmation evidence, while the dishes appear only in photos. The system has to infer the event window, venue, and then connect the right images.",
+        case03_failure: "<strong>Failure mode.</strong> Retrieve nearby meal photos from the same day without grounding them to the correct place and time.",
+        case03_correct: "<strong>Correct behavior.</strong> Infer the restaurant visit from the confirmation, narrow the time window, and only then read the dishes from the linked visual evidence.",
+        case04_eyebrow: "Case 04",
+        case04_title: "When the Right Answer Is \"I Don't Know\"",
+        case04_question: "\"Which wine did I order at Fancett that night?\"",
+        tag_abstention: "abstention",
+        tag_evidence: "evidence sufficiency",
+        tag_hallucination: "hallucination control",
+        case04_tricky: "<strong>Why it is tricky.</strong> The assistant may recover the restaurant and the meal, yet still lack any grounded evidence about the drink order.",
+        case04_weak: "<strong>What weak systems do.</strong> Fill the gap with a plausible but unsupported guess once some nearby memories have been found.",
+        case04_correct: "<strong>Correct behavior.</strong> Return an abstention because the retrieved memories support the dishes, not the wine.",
+        benchmark_title: "What ATM-Bench Measures",
+        benchmark_intro: "The benchmark is not just larger. It is structured around failure modes that matter for real personal-memory assistants: weak references, stale evidence, cross-source composition, and calibrated abstention.",
+        ability_pr_title: "Personalized references",
+        ability_pr_text: "Resolve names, nicknames, and indirect descriptions against personal multimodal memories.",
+        ability_la_title: "Location awareness",
+        ability_la_text: "Infer where an event happened even when the place appears only in sparse, indirect evidence.",
+        ability_mut_title: "Memory updates over time",
+        ability_mut_text: "Prefer later and more authoritative evidence when bookings, plans, and outcomes conflict.",
+        ability_me_title: "Multi-evidence composition",
+        ability_me_text: "Compose several partial clues before answering, instead of trusting the first matching item.",
+        ability_abs_title: "Abstention",
+        ability_abs_text: "Decline to answer when the evidence is insufficient, even if a plausible guess is tempting.",
+        comparison_summary: "Compare ATM-Bench against prior memory benchmarks",
+        table_aspect: "Aspect",
+        table_prior: "Prior Benchmarks",
+        table_r1c1: "Memory modality and source",
+        table_r1c2: "Mostly dialogue-only or single-modality settings",
+        table_r1c3: "Images + videos + emails in one benchmark",
+        table_r2c1: "Data origin",
+        table_r2c2: "Primarily synthetic or hybrid data",
+        table_r2c3: "Human-curated personal memory QA with evidence labels",
+        table_r3c1: "Core memory abilities",
+        table_r3c2: "Partial coverage",
+        table_r3c3: "Personalized referential reasoning, location awareness, memory updates, multi-evidence composition, and abstention",
+        table_r4c1: "Scale and horizon",
+        table_r4c2: "Typically smaller or narrower settings",
+        table_r4c3: "~12k memory items, ~1.1k QA, years-long horizon, 2.25M-token context",
+        table_r5c1: "Multi-evidence burden",
+        table_r5c2: "Lower multi-evidence proportion in common settings",
+        table_r5c3: "~30% of questions require multi-evidence composition",
+        methods_title: "Methods",
+        methods_intro: "ATM models the assistant as a staged memory pipeline: ingest multimodal artifacts, organize them into memory structures, retrieve evidence under budget, and only answer when the supporting memories are grounded.",
+        methods_figcaption: "ATM method: memory ingestion, organization, retrieval, and answer generation.",
+        citation_title: "Citation",
+        citation_text: "If you use ATM-Bench in your research, please cite:",
+        btn_copy_bibtex: '<i class="fas fa-copy"></i> Copy BibTeX',
+        ack_title: "Acknowledgement",
+        ack_text: 'This page was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page, licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative Commons Attribution-ShareAlike 4.0 International License</a>. Many thanks to the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a>.'
+      },
+      zh: {
+        hero_kicker: "多模态记忆难题",
+        hero_subtitle: "According to Me: 长期个性化参照记忆问答",
+        hero_tagline: "跨越长时间跨度的多模态、多来源个人记忆问答",
+        hero_summary: "ATM-Bench 专为那些对人类来说很随意、却能让系统崩溃的记忆问题而设计：过期的收据、微弱的地点线索、模糊的指代，以及需要选择放弃回答的时刻。",
+        hero_affiliation: "剑桥大学",
+        btn_code: "代码",
+        btn_dataset: "数据集",
+        stat1_value: "约 4 年",
+        stat1_label: "个人记忆时间跨度",
+        stat1_detail: "跨越数年的长程引用，而非短聊天窗口。",
+        stat2_value: "3 种来源",
+        stat2_label: "图片 + 视频 + 邮件",
+        stat2_detail: "答案往往同时存在于多种模态中。",
+        stat3_label: "token 上下文",
+        stat3_detail: "用于检索、定位和推理的真实大规模上下文。",
+        stat4_label: "多证据问题",
+        stat4_detail: "单次检索往往不足以正确回答。",
+        stat5_label: "Hard 难度准确率",
+        stat5_detail: "最难的拆分仍然暴露出当前系统的巨大差距。",
+        demo_video_caption: "ATM-Bench 演示：多模态个人记忆问答实战。",
+        nav_overview: "概述",
+        nav_puzzles: "记忆难题",
+        nav_benchmark: "基准测试",
+        nav_methods: "方法",
+        nav_citation: "引用",
+        overview_title: "概述",
+        overview_copy: "个性化助手应当记住亲身经历，而不仅仅是聊天记录。ATM-Bench 针对更难的场景：基于图片、视频和邮件中真实证据的多模态、多来源个人记忆问答。挑战不仅在于找到一条匹配的记忆，更在于判断哪些信息仍然有效、哪些相互矛盾，以及何时证据不足以作答。",
+        overview_figcaption: "基准测试概览图。下方卡片将这些案例拆解为更清晰的演示故事。",
+        puzzles_title: "四个记忆难题",
+        puzzles_intro: "这些是 ATM-Bench 最令人印象深刻的示例。每个问题表面上看起来很自然，实际上却是检索、定位和推理的陷阱。",
+        case01_eyebrow: "案例 01",
+        case01_title: "个人指代消解",
+        case01_question: "\"给我看 Grace 偷偷摸摸的那些时刻。\"",
+        tag_images: "图片",
+        tag_videos: "视频",
+        tag_entity_grounding: "实体定位",
+        case01_tricky: "<strong>为什么棘手。</strong>助手必须确定 \"Grace\" 是谁，排除视觉上相似但错误的时刻，并区分 \"试图躲藏\" 和仅仅出现在画面中。",
+        case01_weak: "<strong>弱系统的表现。</strong>它们会锁定错误的宠物特征，或检索到看起来接近但不支持偷偷摸摸状态的帧。",
+        case01_correct: "<strong>正确行为。</strong>首先确定实体身份，然后仅检索真正支持躲藏或偷看动作的证据。",
+        case02_eyebrow: "案例 02",
+        case02_title: "时间线上的矛盾证据",
+        case02_question: "\"我最近去葡萄牙旅行时酒店花了多少钱？\"",
+        tag_emails: "邮件",
+        tag_receipts: "收据",
+        tag_temporal: "时间更新",
+        case02_tricky: "<strong>为什么棘手。</strong>预订邮件和后来的发票数额不一致，最终答案需要综合两次住宿的证据。",
+        case02_mistake: "<strong>典型模型错误。</strong>信任较早的预订估价，忽略后续发票的更新，错过矛盾证据的时间更新。",
+        case02_correct: "<strong>正确行为。</strong>优先采用最终发票而非过时的预订证据，然后汇总两家酒店得出 842.97 欧元的有据总额。",
+        case03_eyebrow: "案例 03",
+        case03_title: "无形的关联",
+        case03_question: "\"我记得在 Fancett 有一次很好的体验。我在 Fancett 点了什么？\"",
+        tag_photos: "照片",
+        tag_location: "地点推理",
+        case03_tricky: "<strong>为什么棘手。</strong>\"Fancett\" 只出现在纯文本的确认证据中，而菜品仅出现在照片中。系统需要推断事件时间窗口和场所，然后关联正确的图片。",
+        case03_failure: "<strong>失败模式。</strong>检索到同一天附近的餐食照片，但未将它们与正确的地点和时间关联起来。",
+        case03_correct: "<strong>正确行为。</strong>从确认信息推断餐厅访问，缩小时间窗口，然后从关联的视觉证据中识别菜品。",
+        case04_eyebrow: "案例 04",
+        case04_title: "正确答案是\"我不知道\"",
+        case04_question: "\"那晚我在 Fancett 点了什么酒？\"",
+        tag_abstention: "放弃回答",
+        tag_evidence: "证据充分性",
+        tag_hallucination: "幻觉控制",
+        case04_tricky: "<strong>为什么棘手。</strong>助手可能找到餐厅和餐食，但仍然缺乏关于饮品订单的任何有据证据。",
+        case04_weak: "<strong>弱系统的表现。</strong>一旦找到一些相近的记忆，就用看似合理但无依据的猜测来填补空白。",
+        case04_correct: "<strong>正确行为。</strong>返回放弃回答，因为检索到的记忆支持菜品信息，而非酒品信息。",
+        benchmark_title: "ATM-Bench 测量什么",
+        benchmark_intro: "该基准测试不仅规模更大，更围绕对真实个人记忆助手至关重要的失败模式构建：弱引用、过时证据、跨来源组合和校准的放弃回答。",
+        ability_pr_title: "个性化指代",
+        ability_pr_text: "根据个人多模态记忆消解名字、昵称和间接描述。",
+        ability_la_title: "地点感知",
+        ability_la_text: "即使地点仅出现在稀疏的间接证据中，也能推断事件发生地。",
+        ability_mut_title: "记忆随时间更新",
+        ability_mut_text: "当预订、计划和结果相互矛盾时，优先采用更新的权威证据。",
+        ability_me_title: "多证据组合",
+        ability_me_text: "在回答之前组合多条部分线索，而非信任第一条匹配项。",
+        ability_abs_title: "放弃回答",
+        ability_abs_text: "当证据不足时拒绝回答，即使一个看似合理的猜测很诱人。",
+        comparison_summary: "将 ATM-Bench 与先前的记忆基准测试进行比较",
+        table_aspect: "维度",
+        table_prior: "先前基准测试",
+        table_r1c1: "记忆模态和来源",
+        table_r1c2: "大多为纯对话或单模态设置",
+        table_r1c3: "图片 + 视频 + 邮件集于一个基准测试",
+        table_r2c1: "数据来源",
+        table_r2c2: "主要为合成或混合数据",
+        table_r2c3: "人工策划的个人记忆问答，附带证据标注",
+        table_r3c1: "核心记忆能力",
+        table_r3c2: "覆盖不完整",
+        table_r3c3: "个性化参照推理、地点感知、记忆更新、多证据组合和放弃回答",
+        table_r4c1: "规模和时间跨度",
+        table_r4c2: "通常更小或更窄的设置",
+        table_r4c3: "约 12k 记忆项、约 1.1k 问答、数年跨度、225 万 token 上下文",
+        table_r5c1: "多证据负担",
+        table_r5c2: "常见设置中多证据比例较低",
+        table_r5c3: "约 30% 的问题需要多证据组合",
+        methods_title: "方法",
+        methods_intro: "ATM 将助手建模为分阶段的记忆流水线：摄入多模态素材，组织为记忆结构，在预算内检索证据，并仅在支撑记忆有据可查时才作答。",
+        methods_figcaption: "ATM 方法：记忆摄入、组织、检索和答案生成。",
+        citation_title: "引用",
+        citation_text: "如果您在研究中使用了 ATM-Bench，请引用：",
+        btn_copy_bibtex: '<i class="fas fa-copy"></i> 复制 BibTeX',
+        ack_title: "致谢",
+        ack_text: '本页面改编自 <a href="https://nerfies.github.io" target="_blank">Nerfies</a> 项目页面，采用 <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">知识共享署名-相同方式共享 4.0 国际许可协议</a> 授权。感谢 <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">学术项目页面模板</a>。'
+      }
+    };
+
+    var videoSources = {
+      en: "static/videos/ATM-Bench-demo.mp4",
+      zh: "static/videos/ATM-Bench-demo-CN.mp4"
+    };
+
+    var currentLang = "en";
+
+    function setLanguage(lang) {
+      currentLang = lang;
+
+      // Update text content
+      document.querySelectorAll("[data-i18n]").forEach(function(el) {
+        var key = el.getAttribute("data-i18n");
+        if (translations[lang] && translations[lang][key]) {
+          el.textContent = translations[lang][key];
+        }
+      });
+
+      // Update innerHTML content (elements with rich markup)
+      document.querySelectorAll("[data-i18n-html]").forEach(function(el) {
+        var key = el.getAttribute("data-i18n-html");
+        if (translations[lang] && translations[lang][key]) {
+          el.innerHTML = translations[lang][key];
+        }
+      });
+
+      // Swap video source
+      var videoSource = document.getElementById("demo-video-source");
+      var video = document.getElementById("demo-video");
+      if (videoSource && video) {
+        var currentTime = video.currentTime;
+        videoSource.setAttribute("src", videoSources[lang]);
+        video.load();
+        video.currentTime = currentTime;
+        video.play();
+      }
+
+      // Update toggle button states
+      document.getElementById("lang-btn-en").classList.toggle("active", lang === "en");
+      document.getElementById("lang-btn-zh").classList.toggle("active", lang === "zh");
+
+      // Update html lang attribute
+      document.documentElement.setAttribute("lang", lang === "zh" ? "zh-CN" : "en");
+    }
+
+    // Auto-detect browser language on load
+    (function() {
+      var userLang = navigator.language || navigator.userLanguage || "en";
+      var detectedLang = userLang.toLowerCase().startsWith("zh") ? "zh" : "en";
+      setLanguage(detectedLang);
+    })();
+
     function copyBibtex(codeId) {
-      const codeElement = document.getElementById(codeId);
-      const button = event.currentTarget;
+      var codeElement = document.getElementById(codeId);
+      var button = event.currentTarget;
 
       // Create temporary textarea
-      const textarea = document.createElement('textarea');
+      var textarea = document.createElement('textarea');
       textarea.value = codeElement.textContent;
       textarea.style.position = 'fixed';
       textarea.style.opacity = '0';
@@ -999,12 +1308,14 @@
       document.body.removeChild(textarea);
 
       // Update button state
-      const originalHTML = button.innerHTML;
-      button.innerHTML = '<i class="fas fa-check"></i> Copied!';
+      var originalHTML = button.innerHTML;
+      button.innerHTML = currentLang === 'zh'
+        ? '<i class="fas fa-check"></i> 已复制!'
+        : '<i class="fas fa-check"></i> Copied!';
       button.classList.add('copied');
 
       // Reset button after 2 seconds
-      setTimeout(() => {
+      setTimeout(function() {
         button.innerHTML = originalHTML;
         button.classList.remove('copied');
       }, 2000);

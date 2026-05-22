@@ -431,7 +431,6 @@
     .lb-rank.is-medal-3 { color: #a06234; }
 
     .lb-best {
-      background: rgba(214, 144, 24, 0.14);
       font-weight: 800;
     }
 
@@ -709,8 +708,7 @@
         <div class="lb-filter-bar" id="filter-atm-bench-hard"></div>
         <div class="lb-table-wrap"><div id="table-atm-bench-hard"></div></div>
         <p class="lb-legend" data-i18n-html="legend_atm_bench_hard">
-          <code>-</code> indicates the field has not been reported (oracle and memory rows rarely surface a single
-          end-to-end token cost). GPT-5.4 results are marked with an asterisk because the Codex service was unstable during that run.
+          <code>-</code> indicates the field has not been reported.
         </p>
       </div>
 
@@ -864,7 +862,7 @@
           // --- Agent (project README; no recall reported by the harness) ---
           { type: 'Agent',  harness: 'Claude Code', model: 'Claude Opus 4.6',     qs: 33.80, recall: null, total_tokens: 4.93,  link: 'https://github.com/anthropics/claude-code' },
           { type: 'Agent',  harness: 'Codex',       model: 'GPT-5.2',             qs: 39.70, recall: null, total_tokens: 15.46, link: 'https://github.com/openai/codex' },
-          { type: 'Agent',  harness: 'Codex',       model: 'GPT-5.4*',            qs: 29.60, recall: null, total_tokens: 14.29, link: 'https://github.com/openai/codex' },
+          { type: 'Agent',  harness: 'Codex',       model: 'GPT-5.4',             qs: 29.60, recall: null, total_tokens: 14.29, link: 'https://github.com/openai/codex' },
           { type: 'Agent',  harness: 'OpenCode',    model: 'GLM-5',               qs: 27.00, recall: null, total_tokens: 16.89, link: 'https://github.com/sst/opencode' },
           { type: 'Agent',  harness: 'OpenCode',    model: 'Qwen3.5-397B-A17B',   qs: 24.50, recall: null, total_tokens: 12.06, link: 'https://github.com/sst/opencode' },
           { type: 'Agent',  harness: 'OpenCode',    model: 'Kimi K2.5',           qs: 30.30, recall: null, total_tokens: 8.46,  link: 'https://github.com/sst/opencode' },
@@ -1241,7 +1239,7 @@
         panel_atm_bench_title: "ATM-Bench",
         legend_atm_bench: '<code>-</code> indicates the field has not been reported by the submitter. <strong>Memory Model</strong> is the LLM used to construct the memory store; <strong>Retriever</strong> is the embedding model used at query time. Click any column header to sort; click a filter chip to narrow by system type.',
         panel_atm_bench_hard_title: "ATM-Bench-Hard",
-        legend_atm_bench_hard: '<code>-</code> indicates the field has not been reported (oracle and memory rows rarely surface a single end-to-end token cost). GPT-5.4 results are marked with an asterisk because the Codex service was unstable during that run.',
+        legend_atm_bench_hard: '<code>-</code> indicates the field has not been reported.',
         panel_niah_title: "ATM-Bench-Hard-NIAH-100",
         panel_niah_intro: "Long-context stress test on ATM-Bench-Hard with a 100-item distractor pool.",
         niah_status: "Preview · More submissions welcome",
@@ -1278,7 +1276,7 @@
         panel_atm_bench_title: "ATM-Bench",
         legend_atm_bench: '<code>-</code> 表示该字段未被提交者填写。<strong>Memory Model</strong> 是用于构建记忆存储的 LLM；<strong>Retriever</strong> 是查询时使用的嵌入模型。点击任意列标题可排序，点击筛选条可按系统类型筛选。',
         panel_atm_bench_hard_title: "ATM-Bench-Hard",
-        legend_atm_bench_hard: '<code>-</code> 表示该字段未被填写（例如 Oracle 与记忆系统通常不提供单一的端到端 Token 成本）。GPT-5.4 的结果以星号标注，因为 Codex 服务在该轮运行期间不稳定。',
+        legend_atm_bench_hard: '<code>-</code> 表示该字段未被填写。',
         panel_niah_title: "ATM-Bench-Hard-NIAH-100",
         panel_niah_intro: "ATM-Bench-Hard 上的长上下文压力测试，配 100 项干扰池。",
         niah_status: "预览 · 欢迎更多提交",

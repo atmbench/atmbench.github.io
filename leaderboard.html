@@ -693,11 +693,6 @@
       <!-- Panel: ATM-Bench -->
       <div class="lb-tab-panel" id="panel-atm-bench">
         <h2 class="title is-3 lb-panel-title section-title-display" data-i18n="panel_atm_bench_title">ATM-Bench</h2>
-        <p class="section-intro" data-i18n="panel_atm_bench_intro">
-          The full benchmark. Oracle entries report the upper bound under gold context;
-          memory and RAG systems are evaluated end-to-end. QS is question score (accuracy);
-          Recall@10 measures retrieval quality on the supporting evidence.
-        </p>
         <div class="lb-filter-bar" id="filter-atm-bench"></div>
         <div class="lb-table-wrap"><div id="table-atm-bench"></div></div>
         <p class="lb-legend" data-i18n-html="legend_atm_bench">
@@ -711,10 +706,6 @@
       <!-- Panel: ATM-Bench-Hard -->
       <div class="lb-tab-panel" id="panel-atm-bench-hard" hidden>
         <h2 class="title is-3 lb-panel-title section-title-display" data-i18n="panel_atm_bench_hard_title">ATM-Bench-Hard</h2>
-        <p class="section-intro" data-i18n="panel_atm_bench_hard_intro">
-          The hard split: multi-evidence, ambiguous references, and abstention-heavy questions.
-          Oracle, agent, memory, and RAG systems share the same table; use the chips to compare any subset.
-        </p>
         <div class="lb-filter-bar" id="filter-atm-bench-hard"></div>
         <div class="lb-table-wrap"><div id="table-atm-bench-hard"></div></div>
         <p class="lb-legend" data-i18n-html="legend_atm_bench_hard">
@@ -732,7 +723,6 @@
         </div>
         <p class="section-intro" data-i18n="panel_niah_intro">
           Long-context stress test on ATM-Bench-Hard with a 100-item distractor pool.
-          Only one system has been benchmarked so far — additional submissions will be added as they arrive.
         </p>
         <div class="lb-table-wrap"><div id="table-niah"></div></div>
         <p class="lb-legend" data-i18n-html="legend_niah">
@@ -1249,13 +1239,11 @@
         filter_all: "All",
         empty_filter: "No rows match the current filter.",
         panel_atm_bench_title: "ATM-Bench",
-        panel_atm_bench_intro: "The full benchmark. Oracle entries report the upper bound under gold context; memory and RAG systems are evaluated end-to-end. QS is question score (accuracy); Recall@10 measures retrieval quality on the supporting evidence.",
         legend_atm_bench: '<code>-</code> indicates the field has not been reported by the submitter. <strong>Memory Model</strong> is the LLM used to construct the memory store; <strong>Retriever</strong> is the embedding model used at query time. Click any column header to sort; click a filter chip to narrow by system type.',
         panel_atm_bench_hard_title: "ATM-Bench-Hard",
-        panel_atm_bench_hard_intro: "The hard split: multi-evidence, ambiguous references, and abstention-heavy questions. Oracle, agent, memory, and RAG systems share the same table; use the chips to compare any subset.",
         legend_atm_bench_hard: '<code>-</code> indicates the field has not been reported (oracle and memory rows rarely surface a single end-to-end token cost). GPT-5.4 results are marked with an asterisk because the Codex service was unstable during that run.',
         panel_niah_title: "ATM-Bench-Hard-NIAH-100",
-        panel_niah_intro: "Long-context stress test on ATM-Bench-Hard with a 100-item distractor pool. Only one system has been benchmarked so far — additional submissions will be added as they arrive.",
+        panel_niah_intro: "Long-context stress test on ATM-Bench-Hard with a 100-item distractor pool.",
         niah_status: "Preview · More submissions welcome",
         legend_niah: 'This board is a placeholder while more NIAH-100 submissions are collected. Submit yours below.',
         submit_title: "Submit Your Result",
@@ -1288,13 +1276,11 @@
         filter_all: "全部",
         empty_filter: "当前筛选条件下没有匹配的行。",
         panel_atm_bench_title: "ATM-Bench",
-        panel_atm_bench_intro: "完整基准。Oracle 条目报告 gold 上下文下的上界；记忆与 RAG 系统在端到端模式下评测。QS 为问答得分（准确率）；Recall@10 衡量支撑证据的检索质量。",
         legend_atm_bench: '<code>-</code> 表示该字段未被提交者填写。<strong>Memory Model</strong> 是用于构建记忆存储的 LLM；<strong>Retriever</strong> 是查询时使用的嵌入模型。点击任意列标题可排序，点击筛选条可按系统类型筛选。',
         panel_atm_bench_hard_title: "ATM-Bench-Hard",
-        panel_atm_bench_hard_intro: "Hard 划分：多证据、模糊指代、放弃回答密集的问题。Oracle、智能体、记忆和 RAG 系统在同一张表中；使用筛选条比较任意子集。",
         legend_atm_bench_hard: '<code>-</code> 表示该字段未被填写（例如 Oracle 与记忆系统通常不提供单一的端到端 Token 成本）。GPT-5.4 的结果以星号标注，因为 Codex 服务在该轮运行期间不稳定。',
         panel_niah_title: "ATM-Bench-Hard-NIAH-100",
-        panel_niah_intro: "ATM-Bench-Hard 上的长上下文压力测试，配 100 项干扰池。目前只有一个系统提交了结果——更多结果将在收到时陆续添加。",
+        panel_niah_intro: "ATM-Bench-Hard 上的长上下文压力测试，配 100 项干扰池。",
         niah_status: "预览 · 欢迎更多提交",
         legend_niah: '本榜单为占位，等待更多 NIAH-100 提交。欢迎在下方提交您的结果。',
         submit_title: "提交您的结果",

@@ -1,0 +1,1345 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+
+  <meta name="description"
+    content="ATM-Bench Leaderboard — submitted results for the ATM-Bench long-term personalized referential memory QA benchmark.">
+  <meta property="og:title" content="ATM-Bench Leaderboard" />
+  <meta property="og:description" content="Submitted results on ATM-Bench, ATM-Bench-Hard, and the NIAH-100 stress test." />
+  <meta property="og:url" content="https://atmbench.github.io/leaderboard.html" />
+  <meta property="og:image" content="https://atmbench.github.io/static/images/ATM-Bench-Demo.png" />
+
+  <meta name="twitter:title" content="ATM-Bench Leaderboard">
+  <meta name="twitter:description" content="Submitted results on ATM-Bench, ATM-Bench-Hard, and the NIAH-100 stress test.">
+  <meta name="twitter:image" content="https://atmbench.github.io/static/images/ATM-Bench-Demo.png">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <meta name="keywords"
+    content="ATM-Bench leaderboard, personalized memory, long-term memory, multimodal, retrieval, RAG, benchmark, evaluation">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5YTZ6DJQHM"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-5YTZ6DJQHM');
+  </script>
+
+  <title>ATM-Bench Leaderboard</title>
+
+  <link rel="icon" type="image/svg+xml" href="static/images/favicon.svg">
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+
+  <style>
+    :root {
+      --page-bg: #f5efe6;
+      --ink: #1f2430;
+      --muted: #5b6472;
+      --line: rgba(31, 36, 48, 0.10);
+      --hero-bg:
+        radial-gradient(circle at top left, rgba(190, 92, 31, 0.18), transparent 32%),
+        radial-gradient(circle at top right, rgba(52, 95, 140, 0.18), transparent 30%),
+        linear-gradient(180deg, #f6efe2 0%, #faf7f1 100%);
+      --benchmark-bg: linear-gradient(180deg, #f4eee5 0%, #fcf8f2 100%);
+      --submit-bg: linear-gradient(180deg, #f3eee6 0%, #f9f6f1 100%);
+      --ack-bg: linear-gradient(180deg, #f1ebe3 0%, #f7f3ee 100%);
+      --panel-shadow: 0 14px 40px rgba(58, 42, 28, 0.08);
+      --panel-radius: 24px;
+      --accent-rust: #b14d1e;
+      --accent-blue: #355e8d;
+      --accent-green: #5a7a3f;
+      --accent-gold: #d69018;
+      --accent-plum: #7a4c72;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { background: var(--page-bg); color: var(--ink); }
+
+    .section-hero {
+      background: var(--hero-bg);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .section-board,
+    .section-submit,
+    .section-acknowledgement {
+      padding-top: 3.5rem;
+      padding-bottom: 3.5rem;
+    }
+
+    .section-board { background: var(--benchmark-bg); }
+    .section-submit { background: var(--submit-bg); }
+    .section-acknowledgement { background: var(--ack-bg); }
+
+    .section-board .container.is-max-desktop,
+    .section-submit .container.is-max-desktop,
+    .section-acknowledgement .container.is-max-desktop {
+      background: rgba(255, 255, 255, 0.96);
+      border: 1px solid var(--line);
+      border-radius: var(--panel-radius);
+      box-shadow: var(--panel-shadow);
+      padding: 2rem 2.25rem;
+    }
+
+    .sticky-nav {
+      position: sticky;
+      top: 0;
+      background: rgba(250, 246, 239, 0.92);
+      backdrop-filter: blur(8px);
+      z-index: 30;
+      box-shadow: 0 6px 18px rgba(58, 42, 28, 0.08);
+      padding: 0.75rem 0;
+      margin-bottom: 2rem;
+    }
+
+    .sticky-nav .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .sticky-nav a {
+      color: var(--ink);
+      font-weight: 600;
+      padding: 0.5rem 1rem;
+      border-radius: 999px;
+      transition: background-color 0.2s, color 0.2s;
+    }
+
+    .sticky-nav a:hover {
+      background-color: rgba(177, 77, 30, 0.10);
+      color: var(--accent-rust);
+      text-decoration: none;
+    }
+
+    .sticky-nav a.is-home {
+      background-color: rgba(31, 36, 48, 0.06);
+    }
+
+    .lang-toggle {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      z-index: 50;
+      display: inline-flex;
+      align-items: center;
+      gap: 0;
+      border: 1.5px solid var(--line);
+      border-radius: 999px;
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 4px 12px rgba(58, 42, 28, 0.10);
+    }
+
+    .lang-toggle button {
+      border: none;
+      background: transparent;
+      padding: 0.35rem 0.7rem;
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      color: var(--muted);
+      transition: background-color 0.2s, color 0.2s;
+    }
+
+    .lang-toggle button.active {
+      background: var(--accent-rust);
+      color: #fff;
+    }
+
+    .lang-toggle button:not(.active):hover {
+      background: rgba(177, 77, 30, 0.08);
+      color: var(--accent-rust);
+    }
+
+    .publication-title,
+    .section-title-display {
+      font-family: 'Castoro', serif;
+      letter-spacing: -0.03em;
+    }
+
+    .hero-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.45rem 0.9rem;
+      border-radius: 999px;
+      background: rgba(177, 77, 30, 0.10);
+      color: var(--accent-rust);
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .hero-kicker::before {
+      content: "";
+      width: 0.55rem;
+      height: 0.55rem;
+      border-radius: 999px;
+      background: currentColor;
+    }
+
+    .hero-summary {
+      max-width: 44rem;
+      margin: 1.2rem auto 0;
+      color: var(--muted);
+      font-size: 1.08rem;
+      line-height: 1.7;
+    }
+
+    .last-updated {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 1.75rem;
+      padding: 0.4rem 0.85rem;
+      border-radius: 999px;
+      background: rgba(31, 36, 48, 0.06);
+      color: var(--muted);
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    .last-updated::before {
+      content: "";
+      width: 0.45rem;
+      height: 0.45rem;
+      border-radius: 999px;
+      background: var(--accent-green);
+    }
+
+    .section-intro {
+      max-width: 52rem;
+      margin: 0 auto 1.5rem;
+      color: var(--muted);
+      text-align: center;
+      line-height: 1.75;
+    }
+
+    /* Tabs */
+    .lb-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 0.6rem;
+      margin: 0 auto 2rem;
+      flex-wrap: wrap;
+    }
+
+    .lb-tabs button {
+      background: rgba(255, 255, 255, 0.9);
+      border: 1.5px solid var(--line);
+      border-radius: 999px;
+      padding: 0.65rem 1.4rem;
+      font-family: 'Castoro', serif;
+      font-size: 1.02rem;
+      letter-spacing: -0.02em;
+      font-weight: 700;
+      cursor: pointer;
+      color: var(--muted);
+      transition: background-color 0.18s, color 0.18s, border-color 0.18s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .lb-tabs button:hover {
+      background: rgba(177, 77, 30, 0.06);
+      color: var(--accent-rust);
+      border-color: rgba(177, 77, 30, 0.30);
+    }
+
+    .lb-tabs button.is-active {
+      background: var(--accent-rust);
+      color: #fff;
+      border-color: var(--accent-rust);
+    }
+
+    .tab-todo {
+      display: inline-flex;
+      padding: 0.1rem 0.5rem;
+      border-radius: 999px;
+      background: rgba(214, 144, 24, 0.30);
+      color: #8a5a0c;
+      font-family: 'Noto Sans', system-ui, sans-serif;
+      font-size: 0.62em;
+      font-weight: 900;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+    }
+
+    .lb-tabs button.is-active .tab-todo {
+      background: rgba(255, 255, 255, 0.28);
+      color: #fff;
+    }
+
+    .lb-tab-panel[hidden] { display: none; }
+
+    .lb-panel-title {
+      text-align: center;
+      margin-bottom: 0.75rem;
+    }
+
+    /* Filter bar */
+    .lb-filter-bar {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+      padding: 0.75rem 0.9rem;
+      background: rgba(255, 252, 248, 0.85);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+    }
+
+    .lb-filter-label {
+      font-weight: 700;
+      font-size: 0.78rem;
+      color: var(--muted);
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      margin-right: 0.35rem;
+    }
+
+    .lb-filter-chip {
+      cursor: pointer;
+      user-select: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.3rem 0.8rem;
+      border-radius: 999px;
+      border: 1.5px solid var(--line);
+      background: #fff;
+      color: var(--muted);
+      font-size: 0.82rem;
+      font-weight: 700;
+      transition: all 0.15s;
+    }
+
+    .lb-filter-chip .count {
+      font-size: 0.74rem;
+      opacity: 0.7;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .lb-filter-chip:hover {
+      border-color: rgba(177, 77, 30, 0.30);
+      color: var(--accent-rust);
+    }
+
+    .lb-filter-chip.is-active { color: #fff; }
+    .lb-filter-chip.is-active .count { opacity: 0.85; }
+    .lb-filter-chip.is-active.fc-oracle { background: var(--accent-green); border-color: var(--accent-green); }
+    .lb-filter-chip.is-active.fc-agent  { background: var(--accent-blue);  border-color: var(--accent-blue); }
+    .lb-filter-chip.is-active.fc-memory { background: var(--accent-rust);  border-color: var(--accent-rust); }
+    .lb-filter-chip.is-active.fc-rag    { background: var(--accent-plum);  border-color: var(--accent-plum); }
+
+    .lb-filter-chip.fc-all.is-active {
+      background: var(--ink);
+      border-color: var(--ink);
+      color: #fff;
+    }
+
+    /* Tables */
+    .lb-table-wrap {
+      overflow-x: auto;
+      border-radius: 14px;
+      border: 1px solid rgba(31, 36, 48, 0.10);
+      background: rgba(255, 255, 255, 0.96);
+    }
+
+    .lb-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .lb-table th {
+      background: #ece4d7;
+      color: var(--ink);
+      font-weight: 700;
+      text-align: left;
+      padding: 0.7rem 0.9rem;
+      font-size: 0.88rem;
+      border-bottom: 1px solid var(--line);
+      white-space: nowrap;
+    }
+
+    .lb-table th.lb-num { text-align: right; }
+
+    .lb-table th.lb-sortable {
+      cursor: pointer;
+      user-select: none;
+      transition: background-color 0.15s;
+    }
+
+    .lb-table th.lb-sortable:hover { background: #e2d8c4; }
+
+    .lb-table th .lb-arrow {
+      display: inline-block;
+      margin-left: 0.25rem;
+      color: var(--muted);
+      font-size: 0.85em;
+      opacity: 0.55;
+    }
+
+    .lb-table th.lb-sorted .lb-arrow {
+      color: var(--accent-rust);
+      opacity: 1;
+    }
+
+    .lb-table td {
+      padding: 0.6rem 0.9rem;
+      border-bottom: 1px solid rgba(31, 36, 48, 0.06);
+      color: var(--ink);
+      font-size: 0.93rem;
+    }
+
+    .lb-table td.lb-num { text-align: right; }
+
+    .lb-table tbody tr:last-child td { border-bottom: none; }
+
+    .lb-table tbody tr:hover { background: rgba(177, 77, 30, 0.04); }
+
+    .lb-rank {
+      width: 2.5rem;
+      text-align: center;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .lb-rank.is-medal-1 { color: #b8860b; }
+    .lb-rank.is-medal-2 { color: #7a7a7a; }
+    .lb-rank.is-medal-3 { color: #a06234; }
+
+    .lb-best {
+      background: rgba(214, 144, 24, 0.14);
+      font-weight: 800;
+    }
+
+    .lb-empty {
+      color: rgba(31, 36, 48, 0.32);
+      font-weight: 500;
+    }
+
+    .lb-model { font-weight: 600; }
+
+    .lb-type {
+      display: inline-block;
+      padding: 0.12rem 0.6rem;
+      border-radius: 999px;
+      font-size: 0.74rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .lb-type-oracle { background: rgba(90, 122, 63, 0.14); color: var(--accent-green); }
+    .lb-type-agent  { background: rgba(53, 94, 141, 0.12); color: var(--accent-blue); }
+    .lb-type-memory { background: rgba(177, 77, 30, 0.12); color: var(--accent-rust); }
+    .lb-type-rag    { background: rgba(122, 76, 114, 0.14); color: var(--accent-plum); }
+    .lb-type-niah   { background: rgba(214, 144, 24, 0.16); color: #8a5a0c; }
+
+    .lb-harness {
+      display: inline-block;
+      padding: 0.1rem 0.5rem;
+      border-radius: 8px;
+      background: rgba(31, 36, 48, 0.05);
+      color: var(--ink);
+      font-weight: 600;
+      font-size: 0.86rem;
+      white-space: nowrap;
+    }
+
+    .lb-harness a.lb-harness-link {
+      color: var(--accent-rust);
+      text-decoration: none;
+      border-bottom: 1px dotted rgba(177, 77, 30, 0.45);
+      transition: color 0.15s, border-color 0.15s;
+    }
+
+    .lb-harness a.lb-harness-link:hover {
+      color: var(--accent-blue);
+      border-bottom-color: var(--accent-blue);
+      text-decoration: none;
+    }
+
+    .lb-harness a.lb-harness-link::after {
+      content: " \2197";
+      font-size: 0.75em;
+      opacity: 0.65;
+    }
+
+    .lb-empty-row {
+      text-align: center;
+      color: var(--muted);
+      font-style: italic;
+      padding: 1.5rem !important;
+    }
+
+    .lb-legend {
+      margin-top: 0.85rem;
+      color: var(--muted);
+      font-size: 0.85rem;
+      font-style: italic;
+    }
+
+    .lb-legend code {
+      background: rgba(31, 36, 48, 0.06);
+      padding: 0.05rem 0.35rem;
+      border-radius: 4px;
+      font-style: normal;
+    }
+
+    /* NIAH panel header */
+    .lb-niah-header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      margin-bottom: 0.6rem;
+      flex-wrap: wrap;
+    }
+
+    .lb-status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.3rem 0.75rem;
+      border-radius: 999px;
+      background: rgba(214, 144, 24, 0.14);
+      color: #8a5a0c;
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .lb-status-badge::before {
+      content: "";
+      width: 0.45rem;
+      height: 0.45rem;
+      border-radius: 999px;
+      background: var(--accent-gold);
+    }
+
+    /* Submit */
+    .submit-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.2rem;
+      margin-top: 1.5rem;
+    }
+
+    .submit-card {
+      border: 1px solid rgba(31, 36, 48, 0.10);
+      border-radius: 18px;
+      padding: 1.4rem 1.5rem;
+      background: #fffdfa;
+      box-shadow: 0 12px 24px rgba(58, 42, 28, 0.06);
+    }
+
+    .submit-card h3 {
+      font-family: 'Castoro', serif;
+      font-size: 1.25rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .submit-card p {
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 1rem;
+    }
+
+    .submit-card .button { border-radius: 999px; }
+
+    @media screen and (max-width: 768px) {
+      .sticky-nav { display: none; }
+      .submit-grid { grid-template-columns: 1fr; }
+      .section-board .container.is-max-desktop,
+      .section-submit .container.is-max-desktop,
+      .section-acknowledgement .container.is-max-desktop {
+        padding: 1.25rem;
+      }
+      .lb-tabs button {
+        font-size: 0.92rem;
+        padding: 0.5rem 1rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Language Toggle -->
+  <div class="lang-toggle">
+    <button onclick="setLanguage('en')" id="lang-btn-en">EN</button>
+    <button onclick="setLanguage('zh')" id="lang-btn-zh">中文</button>
+  </div>
+
+  <!-- Hero -->
+  <section class="hero section-hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <span class="hero-kicker" data-i18n="hero_kicker">Leaderboard</span>
+            <h1 class="title is-1 publication-title">ATM-Bench Leaderboard</h1>
+            <h2 class="subtitle is-3 publication-subtitle" data-i18n="hero_subtitle" style="margin-top: 0.6rem;">
+              Unified results across oracle, agent, memory, and RAG systems
+            </h2>
+            <p class="hero-summary" data-i18n="hero_summary">
+              Submitted results on ATM-Bench, ATM-Bench-Hard, and the NIAH-100 long-context stress test.
+              Use the tabs to switch boards, the chips to filter by system type, and click any column header to sort.
+            </p>
+
+            <div class="column has-text-centered" style="margin-top: 1.5rem;">
+              <div class="publication-links">
+                <span class="link-block">
+                  <a href="index.html" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon"><i class="fas fa-arrow-left"></i></span>
+                    <span data-i18n="btn_project">Project Page</span>
+                  </a>
+                </span>
+
+                <span class="link-block">
+                  <a href="https://arxiv.org/abs/2603.01990" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon"><i class="ai ai-arxiv"></i></span>
+                    <span>arXiv</span>
+                  </a>
+                </span>
+
+                <span class="link-block">
+                  <a href="https://github.com/JingbiaoMei/ATM-Bench" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon"><i class="fab fa-github"></i></span>
+                    <span data-i18n="btn_code">Code</span>
+                  </a>
+                </span>
+
+                <span class="link-block">
+                  <a href="https://huggingface.co/datasets/Jingbiao/ATM-Bench" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon"><i class="fas fa-database"></i></span>
+                    <span data-i18n="btn_dataset">Dataset</span>
+                  </a>
+                </span>
+
+                <span class="link-block">
+                  <a href="#submit" class="external-link button is-normal is-rounded is-link">
+                    <span class="icon"><i class="fas fa-plus"></i></span>
+                    <span data-i18n="btn_submit">Submit Result</span>
+                  </a>
+                </span>
+              </div>
+            </div>
+
+            <div>
+              <span class="last-updated">
+                <span data-i18n="last_updated_label">Last updated</span>:&nbsp;<span id="last-updated-date">2026-05-22</span>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sticky Nav -->
+  <div class="sticky-nav">
+    <div class="container">
+      <a href="index.html" class="is-home" data-i18n="nav_home">← ATM-Bench</a>
+      <a href="#leaderboard" onclick="showTab('atm-bench')" data-i18n="nav_atm_bench">ATM-Bench</a>
+      <a href="#leaderboard" onclick="showTab('atm-bench-hard')" data-i18n="nav_atm_bench_hard">ATM-Bench-Hard</a>
+      <a href="#leaderboard" onclick="showTab('niah')" data-i18n="nav_niah">NIAH-100</a>
+      <a href="#submit" data-i18n="nav_submit">Submit</a>
+    </div>
+  </div>
+
+  <!-- Leaderboard -->
+  <section class="section section-board" id="leaderboard">
+    <div class="container is-max-desktop">
+
+      <!-- Tabs -->
+      <div class="lb-tabs">
+        <button type="button" id="tab-btn-atm-bench" class="is-active" onclick="showTab('atm-bench')">ATM-Bench</button>
+        <button type="button" id="tab-btn-atm-bench-hard" onclick="showTab('atm-bench-hard')">ATM-Bench-Hard</button>
+        <button type="button" id="tab-btn-niah" onclick="showTab('niah')">
+          ATM-Bench-Hard-NIAH-100
+          <span class="tab-todo" data-i18n="tab_preview">Preview</span>
+        </button>
+      </div>
+
+      <!-- Panel: ATM-Bench -->
+      <div class="lb-tab-panel" id="panel-atm-bench">
+        <h2 class="title is-3 lb-panel-title section-title-display" data-i18n="panel_atm_bench_title">ATM-Bench</h2>
+        <p class="section-intro" data-i18n="panel_atm_bench_intro">
+          The full benchmark. Oracle entries report the upper bound under gold context;
+          memory and RAG systems are evaluated end-to-end. QS is question score (accuracy);
+          Recall@10 measures retrieval quality on the supporting evidence.
+        </p>
+        <div class="lb-filter-bar" id="filter-atm-bench"></div>
+        <div class="lb-table-wrap"><div id="table-atm-bench"></div></div>
+        <p class="lb-legend" data-i18n-html="legend_atm_bench">
+          <code>-</code> indicates the field has not been reported by the submitter.
+          <strong>Memory Model</strong> is the LLM used to construct the memory store;
+          <strong>Retriever</strong> is the embedding model used at query time.
+          Click any column header to sort; click a filter chip to narrow by system type.
+        </p>
+      </div>
+
+      <!-- Panel: ATM-Bench-Hard -->
+      <div class="lb-tab-panel" id="panel-atm-bench-hard" hidden>
+        <h2 class="title is-3 lb-panel-title section-title-display" data-i18n="panel_atm_bench_hard_title">ATM-Bench-Hard</h2>
+        <p class="section-intro" data-i18n="panel_atm_bench_hard_intro">
+          The hard split: multi-evidence, ambiguous references, and abstention-heavy questions.
+          Oracle, agent, memory, and RAG systems share the same table; use the chips to compare any subset.
+        </p>
+        <div class="lb-filter-bar" id="filter-atm-bench-hard"></div>
+        <div class="lb-table-wrap"><div id="table-atm-bench-hard"></div></div>
+        <p class="lb-legend" data-i18n-html="legend_atm_bench_hard">
+          <code>-</code> indicates the field has not been reported (oracle and memory rows rarely surface a single
+          end-to-end token cost). GPT-5.4 results are marked with an asterisk because the Codex service was unstable during that run.
+        </p>
+      </div>
+
+      <!-- Panel: NIAH-100 -->
+      <div class="lb-tab-panel" id="panel-niah" hidden>
+        <div class="lb-niah-header">
+          <h2 class="title is-3 lb-panel-title section-title-display" style="margin-bottom: 0;"
+            data-i18n="panel_niah_title">ATM-Bench-Hard-NIAH-100</h2>
+          <span class="lb-status-badge" data-i18n="niah_status">Preview · More submissions welcome</span>
+        </div>
+        <p class="section-intro" data-i18n="panel_niah_intro">
+          Long-context stress test on ATM-Bench-Hard with a 100-item distractor pool.
+          Only one system has been benchmarked so far — additional submissions will be added as they arrive.
+        </p>
+        <div class="lb-table-wrap"><div id="table-niah"></div></div>
+        <p class="lb-legend" data-i18n-html="legend_niah">
+          This board is a placeholder while more NIAH-100 submissions are collected. Submit yours below.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Submit -->
+  <section class="section section-submit" id="submit">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3 has-text-centered section-title-display" data-i18n="submit_title">Submit Your Result</h2>
+      <p class="section-intro" data-i18n="submit_intro">
+        We welcome new submissions across all three boards. To keep the leaderboard credible, please include
+        reproduction details (system type, harness, model + version, code or commit, total token cost when applicable).
+      </p>
+
+      <div class="submit-grid">
+        <article class="submit-card">
+          <h3 data-i18n="submit_pr_title">Send a Pull Request</h3>
+          <p data-i18n="submit_pr_text">
+            Fastest path: open a PR adding a row to the <code>TRACKS</code> array at the bottom of
+            <code>leaderboard.html</code>. Include a short description of the setup and a link to your run logs
+            or code in the PR body.
+          </p>
+          <a class="button is-rounded is-dark"
+            href="https://github.com/atmbench/atmbench.github.io/edit/main/leaderboard.html"
+            target="_blank">
+            <span class="icon"><i class="fab fa-github"></i></span>
+            <span data-i18n="submit_pr_btn">Edit leaderboard.html on GitHub</span>
+          </a>
+        </article>
+
+        <article class="submit-card">
+          <h3 data-i18n="submit_issue_title">Open an Issue</h3>
+          <p data-i18n="submit_issue_text">
+            Prefer not to send a PR? File an issue with your system type, harness, scores, and a reproduction
+            pointer. We will add the row on your behalf.
+          </p>
+          <a class="button is-rounded is-dark"
+            href="https://github.com/atmbench/atmbench.github.io/issues/new?title=Leaderboard+submission%3A+%3Csystem%3E&labels=leaderboard"
+            target="_blank">
+            <span class="icon"><i class="fas fa-plus"></i></span>
+            <span data-i18n="submit_issue_btn">Open submission issue</span>
+          </a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Acknowledgement -->
+  <section class="section section-acknowledgement">
+    <div class="container is-max-desktop content">
+      <h2 class="title" data-i18n="ack_title">Acknowledgement</h2>
+      <p data-i18n-html="ack_text">This page was adopted from the
+        <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page, licensed under a
+        <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
+        Commons Attribution-ShareAlike 4.0 International License</a>. Many thanks to the
+        <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic
+        Project Page Template</a>.</p>
+    </div>
+  </section>
+
+  <!-- ============================================================== -->
+  <!-- LEADERBOARD DATA                                                -->
+  <!--                                                                  -->
+  <!-- ATM-Bench / ATM-Bench-Hard rows are drawn from Mei et al.,       -->
+  <!-- "According to Me" (arXiv:2603.01990), Tables 3, 4 and 5.         -->
+  <!-- Agent rows + MemoryOS + MemPalace are from the project README.   -->
+  <!--                                                                  -->
+  <!-- To add a row: append an object to the relevant `rows` array.     -->
+  <!-- Use `null` for unreported fields — they render as "-" and never  -->
+  <!-- claim a "best" highlight.                                         -->
+  <!-- ============================================================== -->
+  <script>
+    const TRACKS = [
+      {
+        id: 'atm-bench',
+        target: 'table-atm-bench',
+        filterTarget: 'filter-atm-bench',
+        columns: [
+          { key: 'type',         label: { en: 'Type',         zh: '类型' },     fmt: 'type' },
+          { key: 'harness',      label: { en: 'Harness',      zh: 'Harness' },  fmt: 'harness' },
+          { key: 'index_time',   label: { en: 'Index Time ↓', zh: '索引耗时 ↓' }, fmt: 'hours',   goal: 'low' },
+          { key: 'answer_model', label: { en: 'Answer Model', zh: '回答模型' }, fmt: 'model' },
+          { key: 'memory_model', label: { en: 'Memory Model', zh: '记忆模型' }, fmt: 'plain' },
+          { key: 'retriever',    label: { en: 'Retriever',    zh: '检索器' },   fmt: 'plain' },
+          { key: 'qs',           label: { en: 'QS ↑',         zh: '问答得分 ↑' }, fmt: 'percent', goal: 'high', primary: true },
+          { key: 'recall',       label: { en: 'Recall@10 ↑',  zh: 'Recall@10 ↑' }, fmt: 'percent', goal: 'high' }
+        ],
+        rows: [
+          // --- Oracle (paper Table 4 — SGM variant, one row per answer model) ---
+          { type: 'Oracle', harness: '-', index_time: null, answer_model: 'Qwen3-VL-2B-Instruct', memory_model: null, retriever: null, qs: 34.80, recall: null },
+          { type: 'Oracle', harness: '-', index_time: null, answer_model: 'Qwen3-VL-8B-Instruct', memory_model: null, retriever: null, qs: 77.80, recall: null },
+          { type: 'Oracle', harness: '-', index_time: null, answer_model: 'Gemini 2.5 Flash',     memory_model: null, retriever: null, qs: 76.90, recall: null },
+          { type: 'Oracle', harness: '-', index_time: null, answer_model: 'Gemini 2.5 Pro',       memory_model: null, retriever: null, qs: 78.60, recall: null },
+          { type: 'Oracle', harness: '-', index_time: null, answer_model: 'Claude Sonnet 4.5',    memory_model: null, retriever: null, qs: 83.30, recall: null },
+          { type: 'Oracle', harness: '-', index_time: null, answer_model: 'Claude Opus 4.5',      memory_model: null, retriever: null, qs: 86.00, recall: null },
+          { type: 'Oracle', harness: '-', index_time: null, answer_model: 'GPT-5',                memory_model: null, retriever: null, qs: 85.30, recall: null },
+
+          // --- Memory (one row per system; values from project README where available) ---
+          { type: 'Memory', harness: 'ScrapMem (No-Forget)', index_time: null, answer_model: 'Qwen3-VL-8B-Instruct', memory_model: 'Qwen3-VL-2B-Instruct', retriever: 'MiniLM-L6', qs: 52.50, recall: 70.30, link: 'https://arxiv.org/abs/2605.03804' },
+          { type: 'Memory', harness: 'ScrapMem',             index_time: null, answer_model: 'Qwen3-VL-8B-Instruct', memory_model: 'Qwen3-VL-2B-Instruct', retriever: 'MiniLM-L6', qs: 48.40, recall: 66.10, link: 'https://arxiv.org/abs/2605.03804' },
+          { type: 'Memory', harness: 'A-Mem',                index_time: 12.6, answer_model: 'Qwen3-VL-8B-Instruct', memory_model: 'Qwen3-VL-2B-Instruct', retriever: 'MiniLM-L6', qs: 44.80, recall: 66.40, link: 'https://github.com/WujiangXu/A-mem' },
+          { type: 'Memory', harness: 'Mem0',                 index_time: 16.7, answer_model: 'Qwen3-VL-8B-Instruct', memory_model: 'Qwen3-VL-2B-Instruct', retriever: 'MiniLM-L6', qs: 43.50, recall: 61.90, link: 'https://github.com/mem0ai/mem0' },
+          { type: 'Memory', harness: 'MemoryOS',             index_time: 36.6, answer_model: 'Qwen3-VL-8B-Instruct', memory_model: 'Qwen3-VL-2B-Instruct', retriever: 'MiniLM-L6', qs: 47.20, recall: 59.20, link: 'https://github.com/BAI-LAB/MemoryOS' },
+          { type: 'Memory', harness: 'MemPalace',            index_time:  0.5, answer_model: 'Qwen3-VL-8B-Instruct', memory_model: 'Qwen3-VL-2B-Instruct', retriever: 'MiniLM-L6', qs: 56.80, recall: 76.40, link: 'https://github.com/MemPalace/mempalace' },
+
+          // --- RAG (one row per system; default setup with MiniLM-L6) ---
+          { type: 'RAG', harness: 'HippoRAG2', index_time: 1.5, answer_model: 'Qwen3-VL-8B-Instruct', memory_model: 'Qwen3-VL-2B-Instruct', retriever: 'MiniLM-L6', qs: 42.90, recall: 66.40, link: 'https://github.com/OSU-NLP-Group/HippoRAG' },
+          { type: 'RAG', harness: 'Self-RAG',  index_time: 0.5, answer_model: 'Qwen3-VL-8B-Instruct', memory_model: 'Qwen3-VL-2B-Instruct', retriever: 'MiniLM-L6', qs: 50.30, recall: 68.70, link: 'https://github.com/AkariAsai/self-rag' },
+          { type: 'RAG', harness: 'ATM-RAG',   index_time: 0.5, answer_model: 'Qwen3-VL-8B-Instruct', memory_model: 'Qwen3-VL-2B-Instruct', retriever: 'MiniLM-L6', qs: 51.00, recall: 68.70, link: 'https://github.com/JingbiaoMei/ATM-Bench' }
+        ]
+      },
+      {
+        id: 'atm-bench-hard',
+        target: 'table-atm-bench-hard',
+        filterTarget: 'filter-atm-bench-hard',
+        columns: [
+          { key: 'type',         label: { en: 'Type',           zh: '类型' },     fmt: 'type' },
+          { key: 'harness',      label: { en: 'Harness',        zh: 'Harness' },  fmt: 'harness' },
+          { key: 'model',        label: { en: 'Model',          zh: '模型' },     fmt: 'model' },
+          { key: 'qs',           label: { en: 'QS ↑',           zh: '问答得分 ↑' }, fmt: 'percent', goal: 'high', primary: true },
+          { key: 'recall',       label: { en: 'Recall@10 ↑',    zh: 'Recall@10 ↑' }, fmt: 'percent', goal: 'high' },
+          { key: 'total_tokens', label: { en: 'Total Tokens ↓', zh: '总 Token ↓' }, fmt: 'tokens_m', goal: 'low' }
+        ],
+        rows: [
+          // --- Oracle (paper Table 4, Hard column — one row per answer model, harness "-") ---
+          { type: 'Oracle', harness: '-', model: 'Qwen3-VL-2B-Instruct', qs: 34.10, recall: null, total_tokens: null },
+          { type: 'Oracle', harness: '-', model: 'Qwen3-VL-8B-Instruct', qs: 47.30, recall: null, total_tokens: null },
+          { type: 'Oracle', harness: '-', model: 'Gemini 2.5 Flash',     qs: 55.60, recall: null, total_tokens: null },
+          { type: 'Oracle', harness: '-', model: 'Gemini 2.5 Pro',       qs: 64.30, recall: null, total_tokens: null },
+          { type: 'Oracle', harness: '-', model: 'Claude Sonnet 4.5',    qs: 61.90, recall: null, total_tokens: null },
+          { type: 'Oracle', harness: '-', model: 'Claude Opus 4.5',      qs: 62.70, recall: null, total_tokens: null },
+          { type: 'Oracle', harness: '-', model: 'GPT-5',                qs: 74.70, recall: null, total_tokens: null },
+
+          // --- Agent (project README; no recall reported by the harness) ---
+          { type: 'Agent',  harness: 'Claude Code', model: 'Claude Opus 4.6',     qs: 33.80, recall: null, total_tokens: 4.93,  link: 'https://github.com/anthropics/claude-code' },
+          { type: 'Agent',  harness: 'Codex',       model: 'GPT-5.2',             qs: 39.70, recall: null, total_tokens: 15.46, link: 'https://github.com/openai/codex' },
+          { type: 'Agent',  harness: 'Codex',       model: 'GPT-5.4*',            qs: 29.60, recall: null, total_tokens: 14.29, link: 'https://github.com/openai/codex' },
+          { type: 'Agent',  harness: 'OpenCode',    model: 'GLM-5',               qs: 27.00, recall: null, total_tokens: 16.89, link: 'https://github.com/sst/opencode' },
+          { type: 'Agent',  harness: 'OpenCode',    model: 'Qwen3.5-397B-A17B',   qs: 24.50, recall: null, total_tokens: 12.06, link: 'https://github.com/sst/opencode' },
+          { type: 'Agent',  harness: 'OpenCode',    model: 'Kimi K2.5',           qs: 30.30, recall: null, total_tokens: 8.46,  link: 'https://github.com/sst/opencode' },
+          { type: 'Agent',  harness: 'OpenCode',    model: 'MiniMax M2.5',        qs: 22.90, recall: null, total_tokens: 14.5,  link: 'https://github.com/sst/opencode' },
+          { type: 'Agent',  harness: 'OpenCode',    model: 'MiniMax M2.7',        qs: 27.80, recall: null, total_tokens: 13.48, link: 'https://github.com/sst/opencode' },
+          { type: 'Agent',  harness: 'OpenClaw 🦞', model: 'Kimi K2.5',           qs: 25.40, recall: null, total_tokens: 9.63 },
+
+          // --- Memory (one row per system; values from latest project README) ---
+          { type: 'Memory', harness: 'A-Mem',     model: 'Qwen3-VL-8B-Instruct', qs:  9.90, recall: 31.70, total_tokens: null, link: 'https://github.com/WujiangXu/A-mem' },
+          { type: 'Memory', harness: 'Mem0',      model: 'Qwen3-VL-8B-Instruct', qs:  9.20, recall: 23.70, total_tokens: null, link: 'https://github.com/mem0ai/mem0' },
+          { type: 'Memory', harness: 'MemoryOS',  model: 'Qwen3-VL-8B-Instruct', qs: 13.70, recall: 32.70, total_tokens: null, link: 'https://github.com/BAI-LAB/MemoryOS' },
+          { type: 'Memory', harness: 'MemPalace', model: 'Qwen3-VL-8B-Instruct', qs:  9.70, recall: 28.30, total_tokens: null, link: 'https://github.com/MemPalace/mempalace' },
+
+          // --- RAG (one row per system) ---
+          { type: 'RAG', harness: 'HippoRAG2', model: 'Qwen3-VL-8B-Instruct', qs:  9.40, recall: 31.90, total_tokens: null, link: 'https://github.com/OSU-NLP-Group/HippoRAG' },
+          { type: 'RAG', harness: 'ATM-RAG',   model: 'Qwen3-VL-8B-Instruct', qs: 13.80, recall: 30.40, total_tokens: null, link: 'https://github.com/JingbiaoMei/ATM-Bench' }
+        ]
+      },
+      {
+        id: 'niah',
+        target: 'table-niah',
+        columns: [
+          { key: 'type',    label: { en: 'Type',    zh: '类型' },     fmt: 'type' },
+          { key: 'harness', label: { en: 'Setting', zh: '设置' },     fmt: 'harness' },
+          { key: 'model',   label: { en: 'Model',   zh: '模型' },     fmt: 'model' },
+          { key: 'qs',      label: { en: 'QS ↑',    zh: '问答得分 ↑' }, fmt: 'percent', goal: 'high', primary: true },
+          { key: 'ctx',     label: { en: 'Avg. Context Tokens', zh: '平均上下文 Token' }, fmt: 'ctx_k', goal: 'low' }
+        ],
+        rows: [
+          { type: 'NIAH', harness: 'Raw', model: 'Qwen3-VL-8B-Instruct', qs: 10.90, ctx: 56.0 },
+          { type: 'NIAH', harness: 'SGM', model: 'Qwen3-VL-8B-Instruct', qs: 12.66, ctx: 45.8 }
+        ]
+      }
+    ];
+
+    /* --------------------------------------------------------------- */
+    /* Formatting                                                       */
+    /* --------------------------------------------------------------- */
+
+    function isMissing(v) { return v === null || v === undefined || v === '-'; }
+
+    function fmtCell(type, v) {
+      if (isMissing(v)) return '-';
+      if (type === 'percent') return v.toFixed(2) + '%';
+      if (type === 'tokens_m') {
+        if (v >= 1) {
+          let s = v.toFixed(2);
+          if (s.endsWith('0')) s = s.slice(0, -1);
+          if (s.endsWith('.')) s = s.slice(0, -1);
+          return s + 'M';
+        }
+        return v.toFixed(3) + 'M';
+      }
+      if (type === 'hours') return v.toFixed(1) + ' hr';
+      if (type === 'ctx_k') return v.toFixed(1) + 'k';
+      return String(v);
+    }
+
+    function isNumericCol(col) {
+      return ['percent', 'tokens_m', 'hours', 'ctx_k', 'number'].includes(col.fmt);
+    }
+
+    function getLabel(col) {
+      if (typeof col.label === 'object') return col.label[currentLang] || col.label.en;
+      return col.label;
+    }
+
+    function bestValue(rows, colKey, goal) {
+      const vals = rows.map(r => r[colKey]).filter(v => typeof v === 'number');
+      if (vals.length === 0) return null;
+      return goal === 'high' ? Math.max(...vals) : Math.min(...vals);
+    }
+
+    /* --------------------------------------------------------------- */
+    /* Filter chips                                                     */
+    /* --------------------------------------------------------------- */
+
+    const TYPE_ORDER = ['Oracle', 'Agent', 'Memory', 'RAG'];
+
+    function distinctTypes(track) {
+      const seen = new Set();
+      const order = [];
+      TYPE_ORDER.forEach(t => {
+        if (track.rows.some(r => r.type === t)) {
+          seen.add(t);
+          order.push(t);
+        }
+      });
+      // Append any other types not in the canonical order
+      track.rows.forEach(r => {
+        if (!seen.has(r.type)) {
+          seen.add(r.type);
+          order.push(r.type);
+        }
+      });
+      return order;
+    }
+
+    function renderFilter(track) {
+      if (!track.filterTarget) return;
+      const host = document.getElementById(track.filterTarget);
+      if (!host) return;
+      const types = distinctTypes(track);
+      if (types.length <= 1) {
+        host.style.display = 'none';
+        return;
+      }
+      host.style.display = '';
+      host.innerHTML = '';
+
+      const label = document.createElement('span');
+      label.className = 'lb-filter-label';
+      label.setAttribute('data-i18n', 'filter_label');
+      label.textContent = translations[currentLang].filter_label;
+      host.appendChild(label);
+
+      if (!track._filter) {
+        // Default: every type EXCEPT Oracle (it's the unfair upper-bound row).
+        track._filter = new Set(types.filter(function(t) { return t !== 'Oracle'; }));
+        if (track._filter.size === 0) track._filter = new Set(types);
+      }
+
+      const allChip = document.createElement('span');
+      allChip.className = 'lb-filter-chip fc-all';
+      if (track._filter.size === types.length) allChip.classList.add('is-active');
+      allChip.innerHTML = '<span>' + translations[currentLang].filter_all + '</span><span class="count">' + track.rows.length + '</span>';
+      allChip.addEventListener('click', () => {
+        track._filter = new Set(types);
+        renderTrack(track);
+        renderFilter(track);
+      });
+      host.appendChild(allChip);
+
+      types.forEach(t => {
+        const count = track.rows.filter(r => r.type === t).length;
+        const chip = document.createElement('span');
+        chip.className = 'lb-filter-chip fc-' + t.toLowerCase();
+        if (track._filter.has(t)) chip.classList.add('is-active');
+        chip.innerHTML = '<span>' + t + '</span><span class="count">' + count + '</span>';
+        chip.addEventListener('click', () => {
+          if (track._filter.has(t)) track._filter.delete(t);
+          else track._filter.add(t);
+          // Never allow empty selection — reset to all if it would be empty.
+          if (track._filter.size === 0) track._filter = new Set(types);
+          renderTrack(track);
+          renderFilter(track);
+        });
+        host.appendChild(chip);
+      });
+    }
+
+    /* --------------------------------------------------------------- */
+    /* Table rendering                                                  */
+    /* --------------------------------------------------------------- */
+
+    function renderTrack(track) {
+      const container = document.getElementById(track.target);
+      if (!container) return;
+
+      // Initial sort state
+      if (!track._sortKey) {
+        const primary = track.columns.find(c => c.primary) || track.columns.find(isNumericCol);
+        track._sortKey = primary ? primary.key : track.columns[0].key;
+        track._sortDir = primary && primary.goal === 'low' ? 'asc' : 'desc';
+      }
+
+      // Apply filter
+      const allTypes = distinctTypes(track);
+      const filter = track._filter || new Set(allTypes);
+      const visibleRows = track.rows.filter(r => filter.has(r.type));
+
+      // Best values relative to visible rows
+      const bests = {};
+      track.columns.forEach(col => {
+        if (isNumericCol(col)) bests[col.key] = bestValue(visibleRows, col.key, col.goal);
+      });
+
+      // Sort. Nulls always sink to the bottom.
+      const rows = [...visibleRows].sort((a, b) => {
+        const va = a[track._sortKey], vb = b[track._sortKey];
+        const aMissing = isMissing(va), bMissing = isMissing(vb);
+        if (aMissing && bMissing) return 0;
+        if (aMissing) return 1;
+        if (bMissing) return -1;
+        let cmp;
+        if (typeof va === 'number' && typeof vb === 'number') cmp = va - vb;
+        else cmp = String(va).localeCompare(String(vb));
+        return track._sortDir === 'desc' ? -cmp : cmp;
+      });
+
+      // Build table
+      const table = document.createElement('table');
+      table.className = 'lb-table';
+
+      // Header
+      const thead = document.createElement('thead');
+      const headRow = document.createElement('tr');
+      const rankTh = document.createElement('th');
+      rankTh.textContent = '#';
+      rankTh.className = 'lb-rank';
+      headRow.appendChild(rankTh);
+
+      track.columns.forEach(col => {
+        const th = document.createElement('th');
+        const numeric = isNumericCol(col);
+        if (numeric) th.classList.add('lb-num');
+        th.classList.add('lb-sortable');
+        if (col.key === track._sortKey) th.classList.add('lb-sorted');
+
+        const labelSpan = document.createElement('span');
+        labelSpan.textContent = getLabel(col);
+        th.appendChild(labelSpan);
+
+        const arrow = document.createElement('span');
+        arrow.className = 'lb-arrow';
+        if (col.key === track._sortKey) {
+          arrow.textContent = track._sortDir === 'desc' ? '▼' : '▲';
+        } else {
+          arrow.textContent = '↕';
+        }
+        th.appendChild(arrow);
+
+        th.addEventListener('click', () => {
+          if (track._sortKey === col.key) {
+            track._sortDir = track._sortDir === 'desc' ? 'asc' : 'desc';
+          } else {
+            track._sortKey = col.key;
+            track._sortDir = col.goal === 'low' ? 'asc' : (col.goal === 'high' ? 'desc' : 'asc');
+          }
+          renderTrack(track);
+        });
+
+        headRow.appendChild(th);
+      });
+      thead.appendChild(headRow);
+      table.appendChild(thead);
+
+      // Body
+      const tbody = document.createElement('tbody');
+      const primary = track.columns.find(c => c.primary);
+      const sortedByPrimary = primary && track._sortKey === primary.key &&
+        track._sortDir === (primary.goal === 'low' ? 'asc' : 'desc');
+
+      if (rows.length === 0) {
+        const tr = document.createElement('tr');
+        const td = document.createElement('td');
+        td.colSpan = track.columns.length + 1;
+        td.className = 'lb-empty-row';
+        td.textContent = translations[currentLang].empty_filter;
+        tr.appendChild(td);
+        tbody.appendChild(tr);
+      }
+
+      rows.forEach((row, idx) => {
+        const tr = document.createElement('tr');
+
+        const rankTd = document.createElement('td');
+        rankTd.className = 'lb-rank';
+        rankTd.textContent = idx + 1;
+        if (sortedByPrimary) {
+          if (idx === 0) rankTd.classList.add('is-medal-1');
+          else if (idx === 1) rankTd.classList.add('is-medal-2');
+          else if (idx === 2) rankTd.classList.add('is-medal-3');
+        }
+        tr.appendChild(rankTd);
+
+        track.columns.forEach(col => {
+          const td = document.createElement('td');
+          const val = row[col.key];
+          const numeric = isNumericCol(col);
+          if (numeric) td.classList.add('lb-num');
+
+          if (isMissing(val)) {
+            td.classList.add('lb-empty');
+            td.textContent = '-';
+            tr.appendChild(td);
+            return;
+          }
+
+          if (col.fmt === 'type') {
+            const span = document.createElement('span');
+            span.className = 'lb-type lb-type-' + String(val).toLowerCase();
+            span.textContent = val;
+            td.appendChild(span);
+          } else if (col.fmt === 'harness') {
+            const span = document.createElement('span');
+            span.className = 'lb-harness';
+            if (row.link) {
+              const a = document.createElement('a');
+              a.href = row.link;
+              a.target = '_blank';
+              a.rel = 'noopener noreferrer';
+              a.className = 'lb-harness-link';
+              a.textContent = val;
+              span.appendChild(a);
+            } else {
+              span.textContent = val;
+            }
+            td.appendChild(span);
+          } else if (col.fmt === 'model') {
+            td.classList.add('lb-model');
+            td.textContent = val;
+          } else if (col.fmt === 'plain') {
+            td.textContent = val;
+          } else {
+            td.textContent = fmtCell(col.fmt, val);
+            if (numeric && typeof val === 'number' && bests[col.key] !== null
+              && Math.abs(val - bests[col.key]) < 1e-9) {
+              td.classList.add('lb-best');
+            }
+          }
+          tr.appendChild(td);
+        });
+
+        tbody.appendChild(tr);
+      });
+      table.appendChild(tbody);
+
+      container.innerHTML = '';
+      container.appendChild(table);
+    }
+
+    function renderAll() {
+      TRACKS.forEach(t => {
+        renderFilter(t);
+        renderTrack(t);
+      });
+    }
+
+    /* --------------------------------------------------------------- */
+    /* Tab switching                                                    */
+    /* --------------------------------------------------------------- */
+
+    const TABS = ['atm-bench', 'atm-bench-hard', 'niah'];
+
+    function showTab(id) {
+      TABS.forEach(t => {
+        const panel = document.getElementById('panel-' + t);
+        const btn = document.getElementById('tab-btn-' + t);
+        if (!panel || !btn) return;
+        if (t === id) {
+          panel.hidden = false;
+          btn.classList.add('is-active');
+        } else {
+          panel.hidden = true;
+          btn.classList.remove('is-active');
+        }
+      });
+    }
+
+    /* --------------------------------------------------------------- */
+    /* i18n                                                             */
+    /* --------------------------------------------------------------- */
+
+    var translations = {
+      en: {
+        hero_kicker: "Leaderboard",
+        hero_subtitle: "Unified results across oracle, agent, memory, and RAG systems",
+        hero_summary: "Submitted results on ATM-Bench, ATM-Bench-Hard, and the NIAH-100 long-context stress test. Use the tabs to switch boards, the chips to filter by system type, and click any column header to sort.",
+        btn_project: "Project Page",
+        btn_code: "Code",
+        btn_dataset: "Dataset",
+        btn_submit: "Submit Result",
+        last_updated_label: "Last updated",
+        nav_home: "← ATM-Bench",
+        nav_atm_bench: "ATM-Bench",
+        nav_atm_bench_hard: "ATM-Bench-Hard",
+        nav_niah: "NIAH-100",
+        nav_submit: "Submit",
+        tab_preview: "Preview",
+        filter_label: "Filter",
+        filter_all: "All",
+        empty_filter: "No rows match the current filter.",
+        panel_atm_bench_title: "ATM-Bench",
+        panel_atm_bench_intro: "The full benchmark. Oracle entries report the upper bound under gold context; memory and RAG systems are evaluated end-to-end. QS is question score (accuracy); Recall@10 measures retrieval quality on the supporting evidence.",
+        legend_atm_bench: '<code>-</code> indicates the field has not been reported by the submitter. <strong>Memory Model</strong> is the LLM used to construct the memory store; <strong>Retriever</strong> is the embedding model used at query time. Click any column header to sort; click a filter chip to narrow by system type.',
+        panel_atm_bench_hard_title: "ATM-Bench-Hard",
+        panel_atm_bench_hard_intro: "The hard split: multi-evidence, ambiguous references, and abstention-heavy questions. Oracle, agent, memory, and RAG systems share the same table; use the chips to compare any subset.",
+        legend_atm_bench_hard: '<code>-</code> indicates the field has not been reported (oracle and memory rows rarely surface a single end-to-end token cost). GPT-5.4 results are marked with an asterisk because the Codex service was unstable during that run.',
+        panel_niah_title: "ATM-Bench-Hard-NIAH-100",
+        panel_niah_intro: "Long-context stress test on ATM-Bench-Hard with a 100-item distractor pool. Only one system has been benchmarked so far — additional submissions will be added as they arrive.",
+        niah_status: "Preview · More submissions welcome",
+        legend_niah: 'This board is a placeholder while more NIAH-100 submissions are collected. Submit yours below.',
+        submit_title: "Submit Your Result",
+        submit_intro: "We welcome new submissions across all three boards. To keep the leaderboard credible, please include reproduction details (system type, harness, model + version, code or commit, total token cost when applicable).",
+        submit_pr_title: "Send a Pull Request",
+        submit_pr_text: "Fastest path: open a PR adding a row to the <code>TRACKS</code> array at the bottom of <code>leaderboard.html</code>. Include a short description of the setup and a link to your run logs or code in the PR body.",
+        submit_pr_btn: "Edit leaderboard.html on GitHub",
+        submit_issue_title: "Open an Issue",
+        submit_issue_text: "Prefer not to send a PR? File an issue with your system type, harness, scores, and a reproduction pointer. We will add the row on your behalf.",
+        submit_issue_btn: "Open submission issue",
+        ack_title: "Acknowledgement",
+        ack_text: 'This page was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page, licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative Commons Attribution-ShareAlike 4.0 International License</a>. Many thanks to the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a>.'
+      },
+      zh: {
+        hero_kicker: "排行榜",
+        hero_subtitle: "Oracle、智能体、记忆与 RAG 系统的统一结果",
+        hero_summary: "在 ATM-Bench、ATM-Bench-Hard 以及 NIAH-100 长上下文压力测试上提交的结果。使用标签切换榜单，使用筛选条按系统类型筛选，点击任意列标题进行排序。",
+        btn_project: "项目主页",
+        btn_code: "代码",
+        btn_dataset: "数据集",
+        btn_submit: "提交结果",
+        last_updated_label: "最后更新",
+        nav_home: "← ATM-Bench",
+        nav_atm_bench: "ATM-Bench",
+        nav_atm_bench_hard: "ATM-Bench-Hard",
+        nav_niah: "NIAH-100",
+        nav_submit: "提交",
+        tab_preview: "预览",
+        filter_label: "筛选",
+        filter_all: "全部",
+        empty_filter: "当前筛选条件下没有匹配的行。",
+        panel_atm_bench_title: "ATM-Bench",
+        panel_atm_bench_intro: "完整基准。Oracle 条目报告 gold 上下文下的上界；记忆与 RAG 系统在端到端模式下评测。QS 为问答得分（准确率）；Recall@10 衡量支撑证据的检索质量。",
+        legend_atm_bench: '<code>-</code> 表示该字段未被提交者填写。<strong>Memory Model</strong> 是用于构建记忆存储的 LLM；<strong>Retriever</strong> 是查询时使用的嵌入模型。点击任意列标题可排序，点击筛选条可按系统类型筛选。',
+        panel_atm_bench_hard_title: "ATM-Bench-Hard",
+        panel_atm_bench_hard_intro: "Hard 划分：多证据、模糊指代、放弃回答密集的问题。Oracle、智能体、记忆和 RAG 系统在同一张表中；使用筛选条比较任意子集。",
+        legend_atm_bench_hard: '<code>-</code> 表示该字段未被填写（例如 Oracle 与记忆系统通常不提供单一的端到端 Token 成本）。GPT-5.4 的结果以星号标注，因为 Codex 服务在该轮运行期间不稳定。',
+        panel_niah_title: "ATM-Bench-Hard-NIAH-100",
+        panel_niah_intro: "ATM-Bench-Hard 上的长上下文压力测试，配 100 项干扰池。目前只有一个系统提交了结果——更多结果将在收到时陆续添加。",
+        niah_status: "预览 · 欢迎更多提交",
+        legend_niah: '本榜单为占位，等待更多 NIAH-100 提交。欢迎在下方提交您的结果。',
+        submit_title: "提交您的结果",
+        submit_intro: "欢迎向三个榜单提交新结果。为保持排行榜的可信度，请附上复现细节（系统类型、harness、模型+版本、代码或 commit，必要时附 Token 总成本）。",
+        submit_pr_title: "发送 Pull Request",
+        submit_pr_text: "最快的方式：开一个 PR，在 <code>leaderboard.html</code> 底部的 <code>TRACKS</code> 数组中加入一行。请在 PR 描述中简要说明设置，并附上运行日志或代码链接。",
+        submit_pr_btn: "在 GitHub 上编辑 leaderboard.html",
+        submit_issue_title: "提交 Issue",
+        submit_issue_text: "不想发 PR？可提交一个 Issue，附上系统类型、harness、分数与复现指引，我们将代为添加。",
+        submit_issue_btn: "打开提交 Issue",
+        ack_title: "致谢",
+        ack_text: '本页面改编自 <a href="https://nerfies.github.io" target="_blank">Nerfies</a> 项目页面，采用 <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">知识共享署名-相同方式共享 4.0 国际许可协议</a> 授权。感谢 <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">学术项目页面模板</a>。'
+      }
+    };
+
+    var currentLang = "en";
+
+    function setLanguage(lang) {
+      currentLang = lang;
+      document.querySelectorAll("[data-i18n]").forEach(function(el) {
+        var key = el.getAttribute("data-i18n");
+        if (translations[lang] && translations[lang][key]) {
+          el.textContent = translations[lang][key];
+        }
+      });
+      document.querySelectorAll("[data-i18n-html]").forEach(function(el) {
+        var key = el.getAttribute("data-i18n-html");
+        if (translations[lang] && translations[lang][key]) {
+          el.innerHTML = translations[lang][key];
+        }
+      });
+      document.getElementById("lang-btn-en").classList.toggle("active", lang === "en");
+      document.getElementById("lang-btn-zh").classList.toggle("active", lang === "zh");
+      document.documentElement.setAttribute("lang", lang === "zh" ? "zh-CN" : "en");
+      renderAll();
+    }
+
+    (function() {
+      var userLang = navigator.language || navigator.userLanguage || "en";
+      var detectedLang = userLang.toLowerCase().startsWith("zh") ? "zh" : "en";
+      setLanguage(detectedLang);
+      renderAll();
+    })();
+  </script>
+
+</body>
+
+</html>

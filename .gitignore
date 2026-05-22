@@ -1,0 +1,11 @@
+# Agent context — never commit
+AGENTS.md
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+*.swp
+*~
+
+# Large media drops the team stages locally
+static/videos/*.zip

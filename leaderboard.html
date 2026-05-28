@@ -655,7 +655,7 @@
 
             <div>
               <span class="last-updated">
-                <span data-i18n="last_updated_label">Last updated</span>:&nbsp;<span id="last-updated-date">2026-05-22</span>
+                <span data-i18n="last_updated_label">Last updated</span>:&nbsp;<span id="last-updated-date">2026-05-28</span>
               </span>
             </div>
           </div>
@@ -709,6 +709,8 @@
         <div class="lb-table-wrap"><div id="table-atm-bench-hard"></div></div>
         <p class="lb-legend" data-i18n-html="legend_atm_bench_hard">
           <code>-</code> indicates the field has not been reported.
+          All coding agents use their default configuration, including the reasoning effort.
+          Results use our proposed <strong>SGM</strong> (symbolic graph memory) unless marked <code>(w/o SGM)</code>.
         </p>
       </div>
 
@@ -830,6 +832,7 @@
           { type: 'Memory', harness: 'Mem0',                 index_time: 16.7, answer_model: 'Qwen3-VL-8B-Instruct', memory_model: 'Qwen3-VL-2B-Instruct', retriever: 'MiniLM-L6', qs: 43.50, recall: 61.90, link: 'https://github.com/mem0ai/mem0' },
           { type: 'Memory', harness: 'MemoryOS',             index_time: 36.6, answer_model: 'Qwen3-VL-8B-Instruct', memory_model: 'Qwen3-VL-2B-Instruct', retriever: 'MiniLM-L6', qs: 47.20, recall: 59.20, link: 'https://github.com/BAI-LAB/MemoryOS' },
           { type: 'Memory', harness: 'MemPalace',            index_time:  0.5, answer_model: 'Qwen3-VL-8B-Instruct', memory_model: 'Qwen3-VL-2B-Instruct', retriever: 'MiniLM-L6', qs: 56.80, recall: 76.40, link: 'https://github.com/MemPalace/mempalace' },
+          { type: 'Memory', harness: 'SimpleMem',            index_time: 16.0, answer_model: 'Qwen3-VL-8B-Instruct', memory_model: 'Qwen3-VL-2B-Instruct', retriever: 'MiniLM-L6', qs: 27.30, recall: 23.30, link: 'https://github.com/aiming-lab/SimpleMem' },
 
           // --- RAG (one row per system; default setup with MiniLM-L6) ---
           { type: 'RAG', harness: 'HippoRAG2', index_time: 1.5, answer_model: 'Qwen3-VL-8B-Instruct', memory_model: 'Qwen3-VL-2B-Instruct', retriever: 'MiniLM-L6', qs: 42.90, recall: 66.40, link: 'https://github.com/OSU-NLP-Group/HippoRAG' },
@@ -860,12 +863,20 @@
           { type: 'Oracle', harness: '-', model: 'GPT-5',                qs: 74.70, recall: null, total_tokens: null },
 
           // --- Agent (project README; no recall reported by the harness) ---
+          { type: 'Agent',  harness: 'Claude Code', model: 'Claude Opus 4.7',     qs: 39.50, recall: null, total_tokens: 5.03,  link: 'https://github.com/anthropics/claude-code' },
           { type: 'Agent',  harness: 'Claude Code', model: 'Claude Opus 4.6',     qs: 33.80, recall: null, total_tokens: 4.93,  link: 'https://github.com/anthropics/claude-code' },
+          { type: 'Agent',  harness: 'Codex',       model: 'GPT-5.5',             qs: 41.40, recall: null, total_tokens: 16.14, link: 'https://github.com/openai/codex' },
           { type: 'Agent',  harness: 'Codex',       model: 'GPT-5.2',             qs: 39.70, recall: null, total_tokens: 15.46, link: 'https://github.com/openai/codex' },
           { type: 'Agent',  harness: 'Codex',       model: 'GPT-5.4',             qs: 29.60, recall: null, total_tokens: 14.29, link: 'https://github.com/openai/codex' },
+          { type: 'Agent',  harness: 'Codex',       model: 'GPT-5.2 (w/o SGM)',   qs: 16.30, recall: null, total_tokens: 22.23, link: 'https://github.com/openai/codex' },
+          { type: 'Agent',  harness: 'Pi',          model: 'GLM-5.1',             qs: 38.80, recall: null, total_tokens: 8.17,  link: 'https://github.com/earendil-works/pi' },
+          { type: 'Agent',  harness: 'Pi',          model: 'Kimi K2.5',           qs: 37.80, recall: null, total_tokens: 9.92,  link: 'https://github.com/earendil-works/pi' },
+          { type: 'Agent',  harness: 'Pi',          model: 'MiMo V2.5',           qs: 36.10, recall: null, total_tokens: 18.23, link: 'https://github.com/earendil-works/pi' },
+          { type: 'Agent',  harness: 'Pi',          model: 'MiMo V2.5 (w/o SGM)', qs: 18.60, recall: null, total_tokens: 60.46, link: 'https://github.com/earendil-works/pi' },
           { type: 'Agent',  harness: 'OpenCode',    model: 'GLM-5',               qs: 27.00, recall: null, total_tokens: 16.89, link: 'https://github.com/sst/opencode' },
           { type: 'Agent',  harness: 'OpenCode',    model: 'Qwen3.5-397B-A17B',   qs: 24.50, recall: null, total_tokens: 12.06, link: 'https://github.com/sst/opencode' },
           { type: 'Agent',  harness: 'OpenCode',    model: 'Kimi K2.5',           qs: 30.30, recall: null, total_tokens: 8.46,  link: 'https://github.com/sst/opencode' },
+          { type: 'Agent',  harness: 'OpenCode',    model: 'Kimi K2.5 (w/o SGM)', qs:  6.50, recall: null, total_tokens: 21.40, link: 'https://github.com/sst/opencode' },
           { type: 'Agent',  harness: 'OpenCode',    model: 'MiniMax M2.5',        qs: 22.90, recall: null, total_tokens: 14.5,  link: 'https://github.com/sst/opencode' },
           { type: 'Agent',  harness: 'OpenCode',    model: 'MiniMax M2.7',        qs: 27.80, recall: null, total_tokens: 13.48, link: 'https://github.com/sst/opencode' },
           { type: 'Agent',  harness: 'OpenClaw 🦞', model: 'Kimi K2.5',           qs: 25.40, recall: null, total_tokens: 9.63 },
@@ -875,6 +886,7 @@
           { type: 'Memory', harness: 'Mem0',      model: 'Qwen3-VL-8B-Instruct', qs:  9.20, recall: 23.70, total_tokens: null, link: 'https://github.com/mem0ai/mem0' },
           { type: 'Memory', harness: 'MemoryOS',  model: 'Qwen3-VL-8B-Instruct', qs: 13.70, recall: 32.70, total_tokens: null, link: 'https://github.com/BAI-LAB/MemoryOS' },
           { type: 'Memory', harness: 'MemPalace', model: 'Qwen3-VL-8B-Instruct', qs:  9.70, recall: 28.30, total_tokens: null, link: 'https://github.com/MemPalace/mempalace' },
+          { type: 'Memory', harness: 'SimpleMem', model: 'Qwen3-VL-8B-Instruct', qs:  3.20, recall:  7.00, total_tokens: null, link: 'https://github.com/aiming-lab/SimpleMem' },
 
           // --- RAG (one row per system) ---
           { type: 'RAG', harness: 'HippoRAG2', model: 'Qwen3-VL-8B-Instruct', qs:  9.40, recall: 31.90, total_tokens: null, link: 'https://github.com/OSU-NLP-Group/HippoRAG' },
@@ -1239,7 +1251,7 @@
         panel_atm_bench_title: "ATM-Bench",
         legend_atm_bench: '<code>-</code> indicates the field has not been reported by the submitter. <strong>Memory Model</strong> is the LLM used to construct the memory store; <strong>Retriever</strong> is the embedding model used at query time. Click any column header to sort; click a filter chip to narrow by system type.',
         panel_atm_bench_hard_title: "ATM-Bench-Hard",
-        legend_atm_bench_hard: '<code>-</code> indicates the field has not been reported.',
+        legend_atm_bench_hard: '<code>-</code> indicates the field has not been reported. All coding agents use their default configuration, including the reasoning effort. Results use our proposed <strong>SGM</strong> (symbolic graph memory) unless marked <code>(w/o SGM)</code>.',
         panel_niah_title: "ATM-Bench-Hard-NIAH-100",
         panel_niah_intro: "Long-context stress test on ATM-Bench-Hard with a 100-item distractor pool.",
         niah_status: "Preview · More submissions welcome",
@@ -1276,7 +1288,7 @@
         panel_atm_bench_title: "ATM-Bench",
         legend_atm_bench: '<code>-</code> 表示该字段未被提交者填写。<strong>Memory Model</strong> 是用于构建记忆存储的 LLM；<strong>Retriever</strong> 是查询时使用的嵌入模型。点击任意列标题可排序，点击筛选条可按系统类型筛选。',
         panel_atm_bench_hard_title: "ATM-Bench-Hard",
-        legend_atm_bench_hard: '<code>-</code> 表示该字段未被填写。',
+        legend_atm_bench_hard: '<code>-</code> 表示该字段未被填写。所有编码智能体均使用默认配置（包括推理强度）。除标注 <code>(w/o SGM)</code> 的结果外，其余均使用我们提出的 <strong>SGM</strong>（符号图记忆）。',
         panel_niah_title: "ATM-Bench-Hard-NIAH-100",
         panel_niah_intro: "ATM-Bench-Hard 上的长上下文压力测试，配 100 项干扰池。",
         niah_status: "预览 · 欢迎更多提交",

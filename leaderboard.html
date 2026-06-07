@@ -7,12 +7,12 @@
   <meta name="description"
     content="ATM-Bench Leaderboard — submitted results for the ATM-Bench long-term personalized referential memory QA benchmark.">
   <meta property="og:title" content="ATM-Bench Leaderboard" />
-  <meta property="og:description" content="Submitted results on ATM-Bench, ATM-Bench-Hard, and the NIAH-100 stress test." />
+  <meta property="og:description" content="Submitted results on ATM-Bench, ATM-Bench-Hard, and the NIAH stress test." />
   <meta property="og:url" content="https://atmbench.github.io/leaderboard.html" />
   <meta property="og:image" content="https://atmbench.github.io/static/images/ATM-Bench-Demo.png" />
 
   <meta name="twitter:title" content="ATM-Bench Leaderboard">
-  <meta name="twitter:description" content="Submitted results on ATM-Bench, ATM-Bench-Hard, and the NIAH-100 stress test.">
+  <meta name="twitter:description" content="Submitted results on ATM-Bench, ATM-Bench-Hard, and the NIAH stress test.">
   <meta name="twitter:image" content="https://atmbench.github.io/static/images/ATM-Bench-Demo.png">
   <meta name="twitter:card" content="summary_large_image">
 
@@ -607,7 +607,7 @@
               Unified results across oracle, agent, memory, and RAG systems
             </h2>
             <p class="hero-summary" data-i18n="hero_summary">
-              Submitted results on ATM-Bench, ATM-Bench-Hard, and the NIAH-100 long-context stress test.
+              Submitted results on ATM-Bench, ATM-Bench-Hard, and the NIAH long-context stress test.
               Use the tabs to switch boards, the chips to filter by system type, and click any column header to sort.
             </p>
 
@@ -670,7 +670,7 @@
       <a href="index.html" class="is-home" data-i18n="nav_home">← ATM-Bench</a>
       <a href="#leaderboard" onclick="showTab('atm-bench')" data-i18n="nav_atm_bench">ATM-Bench</a>
       <a href="#leaderboard" onclick="showTab('atm-bench-hard')" data-i18n="nav_atm_bench_hard">ATM-Bench-Hard</a>
-      <a href="#leaderboard" onclick="showTab('niah')" data-i18n="nav_niah">NIAH-100</a>
+      <a href="#leaderboard" onclick="showTab('niah')" data-i18n="nav_niah">NIAH</a>
       <a href="#submit" data-i18n="nav_submit">Submit</a>
     </div>
   </div>
@@ -684,7 +684,7 @@
         <button type="button" id="tab-btn-atm-bench" class="is-active" onclick="showTab('atm-bench')">ATM-Bench</button>
         <button type="button" id="tab-btn-atm-bench-hard" onclick="showTab('atm-bench-hard')">ATM-Bench-Hard</button>
         <button type="button" id="tab-btn-niah" onclick="showTab('niah')">
-          ATM-Bench-Hard-NIAH-100
+          ATM-Bench-Hard-NIAH
           <span class="tab-todo" data-i18n="tab_preview">Preview</span>
         </button>
       </div>
@@ -710,23 +710,26 @@
         <p class="lb-legend" data-i18n-html="legend_atm_bench_hard">
           <code>-</code> indicates the field has not been reported.
           All coding agents use their default configuration, including the reasoning effort.
-          Results use our proposed <strong>SGM</strong> (symbolic graph memory) unless marked <code>(w/o SGM)</code>.
+          Results use our proposed <strong>SGM</strong> (Schema-Guided Memory) unless marked <code>(w/o SGM)</code>.
         </p>
       </div>
 
-      <!-- Panel: NIAH-100 -->
+      <!-- Panel: NIAH -->
       <div class="lb-tab-panel" id="panel-niah" hidden>
         <div class="lb-niah-header">
           <h2 class="title is-3 lb-panel-title section-title-display" style="margin-bottom: 0;"
-            data-i18n="panel_niah_title">ATM-Bench-Hard-NIAH-100</h2>
+            data-i18n="panel_niah_title">ATM-Bench-Hard-NIAH</h2>
           <span class="lb-status-badge" data-i18n="niah_status">Preview · More submissions welcome</span>
         </div>
         <p class="section-intro" data-i18n="panel_niah_intro">
-          Long-context stress test on ATM-Bench-Hard with a 100-item distractor pool.
+          Needle-in-a-haystack sweep on ATM-Bench-Hard (31 questions): each question's gold evidence is hidden among k = 25 / 50 / 100 / 200 distractor memory items, under the SGM (Schema-Guided Memory) setting. Oracle = gold evidence only, no haystack; judge: gpt-5-mini. Approximate context depth is shown in each column header.
         </p>
+        <h3 class="lb-panel-title" data-i18n="niah_head_sgm" style="font-size:1.05rem;margin:1.25rem 0 .5rem;">SGM</h3>
         <div class="lb-table-wrap"><div id="table-niah"></div></div>
+        <h3 class="lb-panel-title" data-i18n="niah_head_raw" style="font-size:1.05rem;margin:1.5rem 0 .5rem;">Raw (real images/video)</h3>
+        <div class="lb-table-wrap"><div id="table-niah-raw"></div></div>
         <p class="lb-legend" data-i18n-html="legend_niah">
-          This board is a placeholder while more NIAH-100 submissions are collected. Submit yours below.
+          <strong>Why SGM, not raw?</strong> Raw (real images/video) edges out SGM at the Oracle ceiling. But that advantage collapses under realistic conditions: as the haystack fills with distractors, raw degrades and even fails (payload/context limits), and under agentic retrieval the gap is stark — every "w/o SGM" (raw) agent lands far below its SGM run. SGM is the representation that holds up once there is noise under realistic conditions.
         </p>
       </div>
 
@@ -818,12 +821,20 @@
         rows: [
           // --- Oracle (paper Table 4 — SGM variant, one row per answer model) ---
           { type: 'Oracle', harness: '-', index_time: null, answer_model: 'Qwen3-VL-2B-Instruct', memory_model: null, retriever: null, qs: 34.80, recall: null },
-          { type: 'Oracle', harness: '-', index_time: null, answer_model: 'Qwen3-VL-8B-Instruct', memory_model: null, retriever: null, qs: 77.80, recall: null },
+          { type: 'Oracle', harness: '-', index_time: null, answer_model: 'Qwen3-VL-8B-Instruct', memory_model: null, retriever: null, qs: 78.19, recall: null },
           { type: 'Oracle', harness: '-', index_time: null, answer_model: 'Gemini 2.5 Flash',     memory_model: null, retriever: null, qs: 76.90, recall: null },
           { type: 'Oracle', harness: '-', index_time: null, answer_model: 'Gemini 2.5 Pro',       memory_model: null, retriever: null, qs: 78.60, recall: null },
           { type: 'Oracle', harness: '-', index_time: null, answer_model: 'Claude Sonnet 4.5',    memory_model: null, retriever: null, qs: 83.30, recall: null },
           { type: 'Oracle', harness: '-', index_time: null, answer_model: 'Claude Opus 4.5',      memory_model: null, retriever: null, qs: 86.00, recall: null },
           { type: 'Oracle', harness: '-', index_time: null, answer_model: 'GPT-5',                memory_model: null, retriever: null, qs: 85.30, recall: null },
+          // GPT-5.2 / GPT-5.4 raw oracle (reasoning=medium; ATMBench repo, gpt-5-mini judge) — added 2026-06-06
+          { type: 'Oracle', harness: '-', index_time: null, answer_model: 'GPT-5.2',              memory_model: null, retriever: null, qs: 84.12, recall: null },
+          { type: 'Oracle', harness: '-', index_time: null, answer_model: 'GPT-5.4',              memory_model: null, retriever: null, qs: 85.10, recall: null },
+          // open-weight answerer oracle (bench-full, gpt-5-mini judge) — RAW for multimodal, SGM for text-only MiMo V2.5 Pro — added 2026-06-06
+          { type: 'Oracle', harness: '-', index_time: null, answer_model: 'MiniMax M3',           memory_model: null, retriever: null, qs: 83.60, recall: null },
+          { type: 'Oracle', harness: '-', index_time: null, answer_model: 'MiMo V2.5',            memory_model: null, retriever: null, qs: 82.60, recall: null },
+          { type: 'Oracle', harness: '-', index_time: null, answer_model: 'MiMo V2.5 Pro',        memory_model: null, retriever: null, qs: 71.70, recall: null },
+          { type: 'Oracle', harness: '-', index_time: null, answer_model: 'Qwen3.6-27B',          memory_model: null, retriever: null, qs: 84.50, recall: null },
 
           // --- Memory (one row per system; values from project README where available) ---
           { type: 'Memory', harness: 'ScrapMem (No-Forget)', index_time: null, answer_model: 'Qwen3-VL-8B-Instruct', memory_model: 'Qwen3-VL-2B-Instruct', retriever: 'MiniLM-L6', qs: 52.50, recall: 70.30, link: 'https://arxiv.org/abs/2605.03804' },
@@ -855,12 +866,26 @@
         rows: [
           // --- Oracle (paper Table 4, Hard column — one row per answer model, harness "-") ---
           { type: 'Oracle', harness: '-', model: 'Qwen3-VL-2B-Instruct', qs: 34.10, recall: null, total_tokens: null },
-          { type: 'Oracle', harness: '-', model: 'Qwen3-VL-8B-Instruct', qs: 47.30, recall: null, total_tokens: null },
+          { type: 'Oracle', harness: '-', model: 'Qwen3-VL-8B-Instruct', qs: 40.14, recall: null, total_tokens: null },
           { type: 'Oracle', harness: '-', model: 'Gemini 2.5 Flash',     qs: 55.60, recall: null, total_tokens: null },
           { type: 'Oracle', harness: '-', model: 'Gemini 2.5 Pro',       qs: 64.30, recall: null, total_tokens: null },
           { type: 'Oracle', harness: '-', model: 'Claude Sonnet 4.5',    qs: 61.90, recall: null, total_tokens: null },
           { type: 'Oracle', harness: '-', model: 'Claude Opus 4.5',      qs: 62.70, recall: null, total_tokens: null },
-          { type: 'Oracle', harness: '-', model: 'GPT-5',                qs: 74.70, recall: null, total_tokens: null },
+          { type: 'Oracle', harness: '-', model: 'GPT-5',                qs: 66.05, recall: null, total_tokens: null },
+          // GPT-5.2 / GPT-5.4 / GPT-5 all raw oracle, 31q hard, reasoning=medium (ATMBench repo) — added 2026-06-06
+          { type: 'Oracle', harness: '-', model: 'GPT-5.2',              qs: 50.41, recall: null, total_tokens: null },
+          { type: 'Oracle', harness: '-', model: 'GPT-5.4',              qs: 65.19, recall: null, total_tokens: null },
+          { type: 'Oracle', harness: '-', model: 'GPT-5.5',              qs: 71.49, recall: null, total_tokens: null },
+          // Gemini 3.x raw oracle, 31q hard (gpt-5-mini judge) — added 2026-06-06
+          { type: 'Oracle', harness: '-', model: 'Gemini 3 Flash',       qs: 60.10, recall: null, total_tokens: null },
+          { type: 'Oracle', harness: '-', model: 'Gemini 3 Pro',         qs: 52.10, recall: null, total_tokens: null },
+          { type: 'Oracle', harness: '-', model: 'Gemini 3.1 Pro',       qs: 55.40, recall: null, total_tokens: null },
+          { type: 'Oracle', harness: '-', model: 'Gemini 3.1 Flash Lite', qs: 45.70, recall: null, total_tokens: null },
+          // open-weight answerer oracle, 31q hard — RAW for multimodal, SGM for text-only MiMo V2.5 Pro — added 2026-06-06
+          { type: 'Oracle', harness: '-', model: 'MiniMax M3',           qs: 61.80, recall: null, total_tokens: null },
+          { type: 'Oracle', harness: '-', model: 'MiMo V2.5',            qs: 52.10, recall: null, total_tokens: null },
+          { type: 'Oracle', harness: '-', model: 'MiMo V2.5 Pro',        qs: 32.70, recall: null, total_tokens: null },
+          { type: 'Oracle', harness: '-', model: 'Qwen3.6-27B',          qs: 62.30, recall: null, total_tokens: null },
 
           // --- Agent (project README; no recall reported by the harness) ---
           { type: 'Agent',  harness: 'Claude Code', model: 'Claude Opus 4.8',           qs: 41.60, recall: null, total_tokens: 4.42,  link: 'https://github.com/anthropics/claude-code' },
@@ -875,6 +900,11 @@
           { type: 'Agent',  harness: 'Pi',          model: 'Kimi K2.5',           qs: 37.80, recall: null, total_tokens: 9.92,  link: 'https://github.com/earendil-works/pi' },
           { type: 'Agent',  harness: 'Pi',          model: 'MiMo V2.5',           qs: 36.10, recall: null, total_tokens: 18.23, link: 'https://github.com/earendil-works/pi' },
           { type: 'Agent',  harness: 'Pi',          model: 'MiMo V2.5 (w/o SGM)', qs: 18.60, recall: null, total_tokens: 60.46, link: 'https://github.com/earendil-works/pi' },
+          { type: 'Agent',  harness: 'Pi',          model: 'MiniMax M3',                qs: 43.23, recall: null, total_tokens: 15.60, link: 'https://github.com/earendil-works/pi' },
+          { type: 'Agent',  harness: 'Pi',          model: 'Qwen3.6-27B',               qs: 38.53, recall: null, total_tokens: 7.15,  link: 'https://github.com/earendil-works/pi' },
+          { type: 'Agent',  harness: 'Pi',          model: 'Qwen3.6-27B (w/o SGM)',     qs: 16.59, recall: null, total_tokens: 20.84, link: 'https://github.com/earendil-works/pi' },
+          { type: 'Agent',  harness: 'Pi',          model: 'MiMo V2.5 Pro',             qs: 31.95, recall: null, total_tokens: 14.57, link: 'https://github.com/earendil-works/pi' },
+          { type: 'Agent',  harness: 'Pi',          model: 'MiMo V2.5 Pro (w/o SGM)',   qs: 14.63, recall: null, total_tokens: 49.95, link: 'https://github.com/earendil-works/pi' },
           { type: 'Agent',  harness: 'OpenCode',    model: 'GLM-5',               qs: 27.00, recall: null, total_tokens: 16.89, link: 'https://github.com/sst/opencode' },
           { type: 'Agent',  harness: 'OpenCode',    model: 'Qwen3.5-397B-A17B',   qs: 24.50, recall: null, total_tokens: 12.06, link: 'https://github.com/sst/opencode' },
           { type: 'Agent',  harness: 'OpenCode',    model: 'Kimi K2.5',           qs: 30.30, recall: null, total_tokens: 8.46,  link: 'https://github.com/sst/opencode' },
@@ -898,16 +928,48 @@
       {
         id: 'niah',
         target: 'table-niah',
+        noBest: true,  // NIAH table: do not bold the per-column max
+        // Schema-Guided Memory (SGM) haystack sweep on ATM-Bench-Hard (31q), gpt-5-mini judge.
+        // Columns are the haystack size; the ≈token figure in each header is the avg context depth.
+        // Oracle = gold evidence only (no haystack). A parallel Raw table follows (the niah-raw track).
+        // MiMo V2.5 Pro removed 2026-06-07: text-only, and its noisy 31q oracle inverted below NIAH-25.
         columns: [
-          { key: 'type',    label: { en: 'Type',    zh: '类型' },     fmt: 'type' },
-          { key: 'harness', label: { en: 'Setting', zh: '设置' },     fmt: 'harness' },
-          { key: 'model',   label: { en: 'Model',   zh: '模型' },     fmt: 'model' },
-          { key: 'qs',      label: { en: 'QS ↑',    zh: '问答得分 ↑' }, fmt: 'percent', goal: 'high', primary: true },
-          { key: 'ctx',     label: { en: 'Avg. Context Tokens', zh: '平均上下文 Token' }, fmt: 'ctx_k', goal: 'low' }
+          { key: 'model',   label: { en: 'Model',           zh: '模型' },            fmt: 'model' },
+          { key: 'oracle',  label: { en: 'Oracle (≈4.5K)',  zh: 'Oracle (≈4.5K)' },  fmt: 'percent', goal: 'high' },
+          { key: 'niah25',  label: { en: 'NIAH-25 (≈12K)',  zh: 'NIAH-25 (≈12K)' },  fmt: 'percent', goal: 'high' },
+          { key: 'niah50',  label: { en: 'NIAH-50 (≈22K)',  zh: 'NIAH-50 (≈22K)' },  fmt: 'percent', goal: 'high' },
+          { key: 'niah100', label: { en: 'NIAH-100 (≈44K)', zh: 'NIAH-100 (≈44K)' }, fmt: 'percent', goal: 'high', primary: true },
+          { key: 'niah200', label: { en: 'NIAH-200 (≈85K)', zh: 'NIAH-200 (≈85K)' }, fmt: 'percent', goal: 'high' }
         ],
         rows: [
-          { type: 'NIAH', harness: 'Raw', model: 'Qwen3-VL-8B-Instruct', qs: 10.90, ctx: 56.0 },
-          { type: 'NIAH', harness: 'SGM', model: 'Qwen3-VL-8B-Instruct', qs: 12.66, ctx: 45.8 }
+          { type: 'NIAH', model: 'Qwen3-VL-8B-Instruct', oracle: 27.98, niah25: 16.33, niah50: 15.77, niah100: 12.66, niah200: null  },
+          { type: 'NIAH', model: 'MiniMax M3',           oracle: 60.50, niah25: 45.90, niah50: 55.10, niah100: 43.40, niah200: 50.60 },
+          { type: 'NIAH', model: 'MiMo V2.5',            oracle: 44.60, niah25: 39.10, niah50: 34.50, niah100: 31.80, niah200: 26.80 },
+          { type: 'NIAH', model: 'GLM-5.1',              oracle: 44.90, niah25: 43.20, niah50: 47.40, niah100: 39.10, niah200: 39.50 },
+          { type: 'NIAH', model: 'Kimi K2.5',            oracle: 44.50, niah25: 47.91, niah50: 39.60, niah100: 33.50, niah200: 37.70 },
+          { type: 'NIAH', model: 'Qwen3.6-27B',          oracle: 42.80, niah25: 39.20, niah50: 29.60, niah100: 27.40, niah200: 27.00 }
+        ]
+      },
+      {
+        id: 'niah-raw',
+        target: 'table-niah-raw',
+        noBest: true,  // NIAH table: do not bold the per-column max
+        // Raw (real images/video) haystack sweep — multimodal answerers only, ATM-Bench-Hard (31q), gpt-5-mini judge.
+        // "failed" = pool exceeded the model's image/video count or the API upload/payload limit (a serving limit, not a model result).
+        columns: [
+          { key: 'model',   label: { en: 'Model',            zh: '模型' },             fmt: 'model' },
+          { key: 'oracle',  label: { en: 'Oracle (≈6.5K)',   zh: 'Oracle (≈6.5K)' },   fmt: 'percent', goal: 'high', primary: true },
+          { key: 'niah25',  label: { en: 'NIAH-25 (≈18K)',   zh: 'NIAH-25 (≈18K)' },   fmt: 'percent', goal: 'high' },
+          { key: 'niah50',  label: { en: 'NIAH-50 (≈31K)',   zh: 'NIAH-50 (≈31K)' },   fmt: 'percent', goal: 'high' },
+          { key: 'niah100', label: { en: 'NIAH-100 (≈60K)',  zh: 'NIAH-100 (≈60K)' },  fmt: 'percent', goal: 'high' },
+          { key: 'niah200', label: { en: 'NIAH-200 (≈108K)', zh: 'NIAH-200 (≈108K)' }, fmt: 'percent', goal: 'high' }
+        ],
+        rows: [
+          { type: 'NIAH', model: 'Qwen3-VL-8B-Instruct', oracle: 40.14, niah25: 25.43, niah50: 24.87, niah100: 10.90, niah200: null     },
+          { type: 'NIAH', model: 'MiniMax M3',           oracle: 61.80, niah25: 41.80, niah50: 34.20, niah100: 35.20, niah200: 'failed' },
+          { type: 'NIAH', model: 'MiMo V2.5',            oracle: 52.10, niah25: 43.30, niah50: 33.10, niah100: 23.60, niah200: 41.30    },
+          { type: 'NIAH', model: 'Kimi K2.5',            oracle: 57.10, niah25: 45.40, niah50: 'failed', niah100: 'failed', niah200: 'failed' },
+          { type: 'NIAH', model: 'Qwen3.6-27B',          oracle: 62.30, niah25: 50.50, niah50: 'failed', niah100: 'failed', niah200: 'failed' }
         ]
       }
     ];
@@ -920,16 +982,9 @@
 
     function fmtCell(type, v) {
       if (isMissing(v)) return '-';
-      if (type === 'percent') return v.toFixed(2) + '%';
-      if (type === 'tokens_m') {
-        if (v >= 1) {
-          let s = v.toFixed(2);
-          if (s.endsWith('0')) s = s.slice(0, -1);
-          if (s.endsWith('.')) s = s.slice(0, -1);
-          return s + 'M';
-        }
-        return v.toFixed(3) + 'M';
-      }
+      if (typeof v === 'string') return v;
+      if (type === 'percent') return v.toFixed(1) + '%';
+      if (type === 'tokens_m') return v.toFixed(1) + 'M';
       if (type === 'hours') return v.toFixed(1) + ' hr';
       if (type === 'ctx_k') return v.toFixed(1) + 'k';
       return String(v);
@@ -1183,7 +1238,7 @@
             td.textContent = val;
           } else {
             td.textContent = fmtCell(col.fmt, val);
-            if (numeric && typeof val === 'number' && bests[col.key] !== null
+            if (!track.noBest && numeric && typeof val === 'number' && bests[col.key] !== null
               && Math.abs(val - bests[col.key]) < 1e-9) {
               td.classList.add('lb-best');
             }
@@ -1235,7 +1290,7 @@
       en: {
         hero_kicker: "Leaderboard",
         hero_subtitle: "Unified results across oracle, agent, memory, and RAG systems",
-        hero_summary: "Submitted results on ATM-Bench, ATM-Bench-Hard, and the NIAH-100 long-context stress test. Use the tabs to switch boards, the chips to filter by system type, and click any column header to sort.",
+        hero_summary: "Submitted results on ATM-Bench, ATM-Bench-Hard, and the NIAH long-context stress test. Use the tabs to switch boards, the chips to filter by system type, and click any column header to sort.",
         btn_project: "Project Page",
         btn_code: "Code",
         btn_dataset: "Dataset",
@@ -1244,7 +1299,7 @@
         nav_home: "← ATM-Bench",
         nav_atm_bench: "ATM-Bench",
         nav_atm_bench_hard: "ATM-Bench-Hard",
-        nav_niah: "NIAH-100",
+        nav_niah: "NIAH",
         nav_submit: "Submit",
         tab_preview: "Preview",
         filter_label: "Filter",
@@ -1253,11 +1308,13 @@
         panel_atm_bench_title: "ATM-Bench",
         legend_atm_bench: '<code>-</code> indicates the field has not been reported by the submitter. <strong>Memory Model</strong> is the LLM used to construct the memory store; <strong>Retriever</strong> is the embedding model used at query time. Click any column header to sort; click a filter chip to narrow by system type.',
         panel_atm_bench_hard_title: "ATM-Bench-Hard",
-        legend_atm_bench_hard: '<code>-</code> indicates the field has not been reported. All coding agents use their default configuration, including the reasoning effort. Results use our proposed <strong>SGM</strong> (symbolic graph memory) unless marked <code>(w/o SGM)</code>.',
-        panel_niah_title: "ATM-Bench-Hard-NIAH-100",
-        panel_niah_intro: "Long-context stress test on ATM-Bench-Hard with a 100-item distractor pool.",
+        legend_atm_bench_hard: '<code>-</code> indicates the field has not been reported. All coding agents use their default configuration, including the reasoning effort. Results use our proposed <strong>SGM</strong> (Schema-Guided Memory) unless marked <code>(w/o SGM)</code>.',
+        panel_niah_title: "ATM-Bench-Hard-NIAH",
+        panel_niah_intro: "Needle-in-a-haystack sweep on ATM-Bench-Hard (31 questions): each question's gold evidence is hidden among k = 25 / 50 / 100 / 200 distractor memory items, under the SGM (Schema-Guided Memory) setting. Oracle = gold evidence only, no haystack; judge: gpt-5-mini. Approximate context depth is shown in each column header.",
         niah_status: "Preview · More submissions welcome",
-        legend_niah: 'This board is a placeholder while more NIAH-100 submissions are collected. Submit yours below.',
+        legend_niah: '<strong>Why SGM, not raw?</strong> Raw (real images/video) edges out SGM at the Oracle ceiling. But that advantage collapses under realistic conditions: as the haystack fills with distractors, raw degrades and even fails (payload/context limits), and under agentic retrieval the gap is stark — every "w/o SGM" (raw) agent lands far below its SGM run. SGM is the representation that holds up once there is noise under realistic conditions.',
+        niah_head_sgm: "SGM",
+        niah_head_raw: "Raw (real images/video)",
         submit_title: "Submit Your Result",
         submit_intro: "We welcome new submissions across all three boards. To keep the leaderboard credible, please include reproduction details (system type, harness, model + version, code or commit, total token cost when applicable).",
         submit_pr_title: "Send a Pull Request",
@@ -1272,7 +1329,7 @@
       zh: {
         hero_kicker: "排行榜",
         hero_subtitle: "Oracle、智能体、记忆与 RAG 系统的统一结果",
-        hero_summary: "在 ATM-Bench、ATM-Bench-Hard 以及 NIAH-100 长上下文压力测试上提交的结果。使用标签切换榜单，使用筛选条按系统类型筛选，点击任意列标题进行排序。",
+        hero_summary: "在 ATM-Bench、ATM-Bench-Hard 以及 NIAH 长上下文压力测试上提交的结果。使用标签切换榜单，使用筛选条按系统类型筛选，点击任意列标题进行排序。",
         btn_project: "项目主页",
         btn_code: "代码",
         btn_dataset: "数据集",
@@ -1281,7 +1338,7 @@
         nav_home: "← ATM-Bench",
         nav_atm_bench: "ATM-Bench",
         nav_atm_bench_hard: "ATM-Bench-Hard",
-        nav_niah: "NIAH-100",
+        nav_niah: "NIAH",
         nav_submit: "提交",
         tab_preview: "预览",
         filter_label: "筛选",
@@ -1291,10 +1348,12 @@
         legend_atm_bench: '<code>-</code> 表示该字段未被提交者填写。<strong>Memory Model</strong> 是用于构建记忆存储的 LLM；<strong>Retriever</strong> 是查询时使用的嵌入模型。点击任意列标题可排序，点击筛选条可按系统类型筛选。',
         panel_atm_bench_hard_title: "ATM-Bench-Hard",
         legend_atm_bench_hard: '<code>-</code> 表示该字段未被填写。所有编码智能体均使用默认配置（包括推理强度）。除标注 <code>(w/o SGM)</code> 的结果外，其余均使用我们提出的 <strong>SGM</strong>（符号图记忆）。',
-        panel_niah_title: "ATM-Bench-Hard-NIAH-100",
-        panel_niah_intro: "ATM-Bench-Hard 上的长上下文压力测试，配 100 项干扰池。",
+        panel_niah_title: "ATM-Bench-Hard-NIAH",
+        panel_niah_intro: "在 ATM-Bench-Hard（31 题）上的大海捞针扫描：每题的标准证据被混入 k = 25 / 50 / 100 / 200 个干扰记忆项中（SGM，Schema-Guided Memory）。Oracle = 仅给标准证据、无干扰；评测：gpt-5-mini。各列表头括号内为近似上下文长度。",
         niah_status: "预览 · 欢迎更多提交",
-        legend_niah: '本榜单为占位，等待更多 NIAH-100 提交。欢迎在下方提交您的结果。',
+        legend_niah: '<strong>为什么用 SGM 而非 Raw？</strong> Raw（真实图像/视频）在 Oracle 上限略优，但在真实条件下这一优势随即消失：随着干扰项增多，Raw 会退化、甚至直接失败（载荷/上下文限制）；在智能体检索下差距更明显——每个 "w/o SGM"（Raw）智能体都远低于其 SGM 版本。在真实噪声条件下，SGM 才是稳健的表示。',
+        niah_head_sgm: "SGM",
+        niah_head_raw: "Raw（真实图像/视频）",
         submit_title: "提交您的结果",
         submit_intro: "欢迎向三个榜单提交新结果。为保持排行榜的可信度，请附上复现细节（系统类型、harness、模型+版本、代码或 commit，必要时附 Token 总成本）。",
         submit_pr_title: "发送 Pull Request",

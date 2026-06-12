@@ -861,7 +861,8 @@
           { key: 'model',        label: { en: 'Model',          zh: '模型' },     fmt: 'model' },
           { key: 'qs',           label: { en: 'QS ↑',           zh: '问答得分 ↑' }, fmt: 'percent', goal: 'high', primary: true },
           { key: 'recall',       label: { en: 'Recall@10 ↑',    zh: 'Recall@10 ↑' }, fmt: 'percent', goal: 'high' },
-          { key: 'total_tokens', label: { en: 'Total Tokens ↓', zh: '总 Token ↓' }, fmt: 'tokens_m', goal: 'low' }
+          { key: 'total_tokens', label: { en: 'Total Tokens ↓', zh: '总 Token ↓' }, fmt: 'tokens_m', goal: 'low' },
+          { key: 'cost_usd',     label: { en: 'Cost (USD) ↓',   zh: '成本 (USD) ↓' }, fmt: 'usd', goal: 'low' }
         ],
         rows: [
           // --- Oracle (paper Table 4, Hard column — one row per answer model, harness "-") ---
@@ -888,30 +889,30 @@
           { type: 'Oracle', harness: '-', model: 'Qwen3.6-27B',          qs: 62.30, recall: null, total_tokens: null },
 
           // --- Agent (project README; no recall reported by the harness) ---
-          { type: 'Agent',  harness: 'Claude Code', model: 'Claude Opus 4.8',           qs: 41.60, recall: null, total_tokens: 4.42,  link: 'https://github.com/anthropics/claude-code' },
-          { type: 'Agent',  harness: 'Claude Code', model: 'Claude Opus 4.7',           qs: 39.50, recall: null, total_tokens: 5.03,  link: 'https://github.com/anthropics/claude-code' },
-          { type: 'Agent',  harness: 'Claude Code', model: 'Claude Opus 4.6',           qs: 33.80, recall: null, total_tokens: 4.93,  link: 'https://github.com/anthropics/claude-code' },
-          { type: 'Agent',  harness: 'Claude Code', model: 'Claude Opus 4.7 (w/o SGM)', qs: 23.10, recall: null, total_tokens: 16.95, link: 'https://github.com/anthropics/claude-code' },
-          { type: 'Agent',  harness: 'Codex',       model: 'GPT-5.5',             qs: 41.40, recall: null, total_tokens: 16.14, link: 'https://github.com/openai/codex' },
-          { type: 'Agent',  harness: 'Codex',       model: 'GPT-5.2',             qs: 39.70, recall: null, total_tokens: 15.46, link: 'https://github.com/openai/codex' },
-          { type: 'Agent',  harness: 'Codex',       model: 'GPT-5.4',             qs: 29.60, recall: null, total_tokens: 14.29, link: 'https://github.com/openai/codex' },
-          { type: 'Agent',  harness: 'Codex',       model: 'GPT-5.2 (w/o SGM)',   qs: 16.30, recall: null, total_tokens: 22.23, link: 'https://github.com/openai/codex' },
-          { type: 'Agent',  harness: 'Pi',          model: 'GLM-5.1',             qs: 38.80, recall: null, total_tokens: 8.17,  link: 'https://github.com/earendil-works/pi' },
-          { type: 'Agent',  harness: 'Pi',          model: 'Kimi K2.5',           qs: 37.80, recall: null, total_tokens: 9.92,  link: 'https://github.com/earendil-works/pi' },
-          { type: 'Agent',  harness: 'Pi',          model: 'MiMo V2.5',           qs: 36.10, recall: null, total_tokens: 18.23, link: 'https://github.com/earendil-works/pi' },
-          { type: 'Agent',  harness: 'Pi',          model: 'MiMo V2.5 (w/o SGM)', qs: 18.60, recall: null, total_tokens: 60.46, link: 'https://github.com/earendil-works/pi' },
-          { type: 'Agent',  harness: 'Pi',          model: 'MiniMax M3',                qs: 43.23, recall: null, total_tokens: 15.60, link: 'https://github.com/earendil-works/pi' },
-          { type: 'Agent',  harness: 'Pi',          model: 'Qwen3.6-27B',               qs: 38.53, recall: null, total_tokens: 7.15,  link: 'https://github.com/earendil-works/pi' },
-          { type: 'Agent',  harness: 'Pi',          model: 'Qwen3.6-27B (w/o SGM)',     qs: 16.59, recall: null, total_tokens: 20.84, link: 'https://github.com/earendil-works/pi' },
-          { type: 'Agent',  harness: 'Pi',          model: 'MiMo V2.5 Pro',             qs: 31.95, recall: null, total_tokens: 14.57, link: 'https://github.com/earendil-works/pi' },
-          { type: 'Agent',  harness: 'Pi',          model: 'MiMo V2.5 Pro (w/o SGM)',   qs: 14.63, recall: null, total_tokens: 49.95, link: 'https://github.com/earendil-works/pi' },
-          { type: 'Agent',  harness: 'OpenCode',    model: 'GLM-5',               qs: 27.00, recall: null, total_tokens: 16.89, link: 'https://github.com/sst/opencode' },
-          { type: 'Agent',  harness: 'OpenCode',    model: 'Qwen3.5-397B-A17B',   qs: 24.50, recall: null, total_tokens: 12.06, link: 'https://github.com/sst/opencode' },
-          { type: 'Agent',  harness: 'OpenCode',    model: 'Kimi K2.5',           qs: 30.30, recall: null, total_tokens: 8.46,  link: 'https://github.com/sst/opencode' },
-          { type: 'Agent',  harness: 'OpenCode',    model: 'Kimi K2.5 (w/o SGM)', qs:  6.50, recall: null, total_tokens: 21.40, link: 'https://github.com/sst/opencode' },
-          { type: 'Agent',  harness: 'OpenCode',    model: 'MiniMax M2.5',        qs: 22.90, recall: null, total_tokens: 14.5,  link: 'https://github.com/sst/opencode' },
-          { type: 'Agent',  harness: 'OpenCode',    model: 'MiniMax M2.7',        qs: 27.80, recall: null, total_tokens: 13.48, link: 'https://github.com/sst/opencode' },
-          { type: 'Agent',  harness: 'OpenClaw 🦞', model: 'Kimi K2.5',           qs: 25.40, recall: null, total_tokens: 9.63 },
+          { type: 'Agent',  harness: 'Claude Code', model: 'Claude Opus 4.8',           qs: 41.60, recall: null, total_tokens: 4.42,  cost_usd:  7.49, link: 'https://github.com/anthropics/claude-code' },
+          { type: 'Agent',  harness: 'Claude Code', model: 'Claude Opus 4.7',           qs: 39.50, recall: null, total_tokens: 5.03,  cost_usd:  7.70, link: 'https://github.com/anthropics/claude-code' },
+          { type: 'Agent',  harness: 'Claude Code', model: 'Claude Opus 4.6',           qs: 33.80, recall: null, total_tokens: 4.93,  cost_usd:  8.01, link: 'https://github.com/anthropics/claude-code' },
+          { type: 'Agent',  harness: 'Claude Code', model: 'Claude Opus 4.7 (w/o SGM)', qs: 23.10, recall: null, total_tokens: 16.95, cost_usd: 19.84, link: 'https://github.com/anthropics/claude-code' },
+          { type: 'Agent',  harness: 'Codex',       model: 'GPT-5.5',             qs: 41.40, recall: null, total_tokens: 16.14, cost_usd: 27.17, link: 'https://github.com/openai/codex' },
+          { type: 'Agent',  harness: 'Codex',       model: 'GPT-5.2',             qs: 39.70, recall: null, total_tokens: 15.46, cost_usd: null,  link: 'https://github.com/openai/codex' },
+          { type: 'Agent',  harness: 'Codex',       model: 'GPT-5.4',             qs: 29.60, recall: null, total_tokens: 14.29, cost_usd:  9.33, link: 'https://github.com/openai/codex' },
+          { type: 'Agent',  harness: 'Codex',       model: 'GPT-5.2 (w/o SGM)',   qs: 16.30, recall: null, total_tokens: 22.23, cost_usd:  9.22, link: 'https://github.com/openai/codex' },
+          { type: 'Agent',  harness: 'Pi',          model: 'GLM-5.1',             qs: 38.80, recall: null, total_tokens: 8.17,  cost_usd:  4.33, link: 'https://github.com/earendil-works/pi' },
+          { type: 'Agent',  harness: 'Pi',          model: 'Kimi K2.5',           qs: 37.80, recall: null, total_tokens: 9.92,  cost_usd:  2.67, link: 'https://github.com/earendil-works/pi' },
+          { type: 'Agent',  harness: 'Pi',          model: 'MiMo V2.5',           qs: 36.10, recall: null, total_tokens: 18.23, cost_usd:  2.06, link: 'https://github.com/earendil-works/pi' },
+          { type: 'Agent',  harness: 'Pi',          model: 'MiMo V2.5 (w/o SGM)', qs: 18.60, recall: null, total_tokens: 60.46, cost_usd:  5.74, link: 'https://github.com/earendil-works/pi' },
+          { type: 'Agent',  harness: 'Pi',          model: 'MiniMax M3',                qs: 43.23, recall: null, total_tokens: 15.60, cost_usd:  3.39, link: 'https://github.com/earendil-works/pi' },
+          { type: 'Agent',  harness: 'Pi',          model: 'Qwen3.6-27B',               qs: 38.53, recall: null, total_tokens: 7.15,  cost_usd:  2.45, link: 'https://github.com/earendil-works/pi' },
+          { type: 'Agent',  harness: 'Pi',          model: 'Qwen3.6-27B (w/o SGM)',     qs: 16.59, recall: null, total_tokens: 20.84, cost_usd:  6.29, link: 'https://github.com/earendil-works/pi' },
+          { type: 'Agent',  harness: 'Pi',          model: 'MiMo V2.5 Pro',             qs: 31.95, recall: null, total_tokens: 14.57, cost_usd:  4.98, link: 'https://github.com/earendil-works/pi' },
+          { type: 'Agent',  harness: 'Pi',          model: 'MiMo V2.5 Pro (w/o SGM)',   qs: 14.63, recall: null, total_tokens: 49.95, cost_usd: 13.97, link: 'https://github.com/earendil-works/pi' },
+          { type: 'Agent',  harness: 'OpenCode',    model: 'GLM-5',               qs: 27.00, recall: null, total_tokens: 16.89, cost_usd: 14.92, link: 'https://github.com/sst/opencode' },
+          { type: 'Agent',  harness: 'OpenCode',    model: 'Qwen3.5-397B-A17B',   qs: 24.50, recall: null, total_tokens: 12.06, cost_usd:  4.93, link: 'https://github.com/sst/opencode' },
+          { type: 'Agent',  harness: 'OpenCode',    model: 'Kimi K2.5',           qs: 30.30, recall: null, total_tokens: 8.46,  cost_usd:  1.81, link: 'https://github.com/sst/opencode' },
+          { type: 'Agent',  harness: 'OpenCode',    model: 'Kimi K2.5 (w/o SGM)', qs:  6.50, recall: null, total_tokens: 21.40, cost_usd:  6.40, link: 'https://github.com/sst/opencode' },
+          { type: 'Agent',  harness: 'OpenCode',    model: 'MiniMax M2.5',        qs: 22.90, recall: null, total_tokens: 14.5,  cost_usd:  4.43, link: 'https://github.com/sst/opencode' },
+          { type: 'Agent',  harness: 'OpenCode',    model: 'MiniMax M2.7',        qs: 27.80, recall: null, total_tokens: 13.48, cost_usd:  1.36, link: 'https://github.com/sst/opencode' },
+          { type: 'Agent',  harness: 'OpenClaw 🦞', model: 'Kimi K2.5',           qs: 25.40, recall: null, total_tokens: 9.63,  cost_usd:  2.37 },
 
           // --- Memory (one row per system; values from latest project README) ---
           { type: 'Memory', harness: 'A-Mem',     model: 'Qwen3-VL-8B-Instruct', qs:  9.90, recall: 31.70, total_tokens: null, link: 'https://github.com/WujiangXu/A-mem' },
@@ -985,13 +986,14 @@
       if (typeof v === 'string') return v;
       if (type === 'percent') return v.toFixed(1) + '%';
       if (type === 'tokens_m') return v.toFixed(1) + 'M';
+      if (type === 'usd') return '$' + v.toFixed(2);
       if (type === 'hours') return v.toFixed(1) + ' hr';
       if (type === 'ctx_k') return v.toFixed(1) + 'k';
       return String(v);
     }
 
     function isNumericCol(col) {
-      return ['percent', 'tokens_m', 'hours', 'ctx_k', 'number'].includes(col.fmt);
+      return ['percent', 'tokens_m', 'hours', 'ctx_k', 'number', 'usd'].includes(col.fmt);
     }
 
     function getLabel(col) {

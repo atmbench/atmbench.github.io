@@ -923,9 +923,15 @@
           { type: 'Memory', harness: 'MemPalace', model: 'Qwen3-VL-8B-Instruct', qs:  9.70, recall: 28.30, total_tokens: null, link: 'https://github.com/MemPalace/mempalace' },
           { type: 'Memory', harness: 'SimpleMem', model: 'Qwen3-VL-8B-Instruct', qs:  3.20, recall:  7.00, total_tokens: null, link: 'https://github.com/aiming-lab/SimpleMem' },
 
+          // --- Memexa (community PR) + same-LLM (DeepSeek-V4-flash) re-runs of baselines ---
+          { type: 'Memory', harness: 'Memexa',    model: 'DeepSeek-V4-flash (mem+ans) · Qwen3.6-27B captions · 1-time index build 34M tok / $3.80', qs: 47.85, recall: 44.67, total_tokens: 0.40, cost_usd: 0.04, link: null },
+          { type: 'Memory', harness: 'A-Mem',     model: 'DeepSeek-V4-flash (re-run)', qs: 16.71, recall: 38.52, total_tokens: null, link: 'https://github.com/WujiangXu/A-mem' },
+          { type: 'Memory', harness: 'MemPalace', model: 'DeepSeek-V4-flash (re-run)', qs: 13.64, recall: 28.87, total_tokens: null, link: 'https://github.com/MemPalace/mempalace' },
+
           // --- RAG (one row per system) ---
           { type: 'RAG', harness: 'HippoRAG2', model: 'Qwen3-VL-8B-Instruct', qs:  9.40, recall: 31.90, total_tokens: null, link: 'https://github.com/OSU-NLP-Group/HippoRAG' },
-          { type: 'RAG', harness: 'ATM-RAG',   model: 'Qwen3-VL-8B-Instruct', qs: 13.80, recall: 30.40, total_tokens: null, link: 'https://github.com/JingbiaoMei/ATM-Bench' }
+          { type: 'RAG', harness: 'ATM-RAG',   model: 'Qwen3-VL-8B-Instruct', qs: 13.80, recall: 30.40, total_tokens: null, link: 'https://github.com/JingbiaoMei/ATM-Bench' },
+          { type: 'RAG', harness: 'HippoRAG2', model: 'DeepSeek-V4-flash (re-run)', qs: 12.27, recall: 32.16, total_tokens: null, link: 'https://github.com/OSU-NLP-Group/HippoRAG' }
         ]
       },
       {

@@ -434,6 +434,14 @@
       font-weight: 800;
     }
 
+    .lb-note {
+      color: #b15c2e;
+      font-weight: 800;
+      font-size: 0.72em;
+      margin-left: 1px;
+      line-height: 0;
+    }
+
     .lb-empty {
       color: rgba(31, 36, 48, 0.32);
       font-weight: 500;
@@ -699,6 +707,7 @@
           <strong>Memory Model</strong> is the LLM used to construct the memory store;
           <strong>Retriever</strong> is the embedding model used at query time.
           Click any column header to sort; click a filter chip to narrow by system type.
+          <strong>*</strong> Memexa's QS is measured with a DeepSeek-V4-flash judge (its own answer model), not the gpt-5-mini judge used for every other row, so it is shown for reference and is not directly comparable; Recall is judge-independent and like-for-like.
         </p>
       </div>
 
@@ -711,6 +720,9 @@
           <code>-</code> indicates the field has not been reported.
           All coding agents use their default configuration, including the reasoning effort.
           Results use our proposed <strong>SGM</strong> (Schema-Guided Memory) unless marked <code>(w/o SGM)</code>.
+          <strong>*</strong> QS on the Memexa and <code>(re-run)</code> rows is measured with a DeepSeek-V4-flash judge (the system's own model), not the gpt-5-mini judge used for the other rows — shown for reference, not directly comparable.
+          <strong>†</strong> Memexa's Recall is reported on the fixed Qwen3-VL-2B captions (like-for-like with other rows), although this configuration answers from Qwen3.6-27B captions.
+          <strong>‡</strong> Memexa's Total Tokens / Cost include the one-time memory build (33.9M tokens / ~$3.80 over all 11,034 items, amortizable across evaluations) plus the 31-question query (0.40M / ~$0.04); other rows' agent costs are per full run.
         </p>
       </div>
 
@@ -845,9 +857,9 @@
           { type: 'Memory', harness: 'MemPalace',            index_time:  0.5, answer_model: 'Qwen3-VL-8B-Instruct', memory_model: 'Qwen3-VL-2B-Instruct', retriever: 'MiniLM-L6', qs: 56.80, recall: 76.40, link: 'https://github.com/MemPalace/mempalace' },
           { type: 'Memory', harness: 'SimpleMem',            index_time: 16.0, answer_model: 'Qwen3-VL-8B-Instruct', memory_model: 'Qwen3-VL-2B-Instruct', retriever: 'MiniLM-L6', qs: 27.30, recall: 23.30, link: 'https://github.com/aiming-lab/SimpleMem' },
 
-          // --- Memexa (community PR) — recall is the like-for-like comparison; QS uses a DeepSeek-V4-flash judge, not gpt-5-mini (see PR description) ---
-          { type: 'Memory', harness: 'Memexa',               index_time: null, answer_model: 'DeepSeek-V4-flash', memory_model: 'DeepSeek-V4-flash + Qwen3-VL-2B captions (fixed)', retriever: 'BGE-M3 + bge-reranker-v2-m3', qs: 65.28, recall: 78.93, link: null },
-          { type: 'Memory', harness: 'Memexa',               index_time: null, answer_model: 'DeepSeek-V4-flash', memory_model: 'DeepSeek-V4-flash + Qwen3.6-27B captions',       retriever: 'BGE-M3 + bge-reranker-v2-m3', qs: 68.04, recall: 79.09, link: null },
+          // --- Memexa (community PR) — recall is the like-for-like comparison; QS* uses a DeepSeek-V4-flash judge, not gpt-5-mini (see legend) ---
+          { type: 'Memory', harness: 'Memexa',               index_time: null, answer_model: 'DeepSeek-V4-flash', memory_model: 'DeepSeek-V4-flash + Qwen3-VL-2B captions (fixed)', retriever: 'BGE-M3 + bge-reranker-v2-m3', qs: 65.28, recall: 78.93, link: 'https://github.com/labazhou2024/memexa', notes: { qs: '*' } },
+          { type: 'Memory', harness: 'Memexa',               index_time: null, answer_model: 'DeepSeek-V4-flash', memory_model: 'DeepSeek-V4-flash + Qwen3.6-27B captions',       retriever: 'BGE-M3 + bge-reranker-v2-m3', qs: 68.04, recall: 79.09, link: 'https://github.com/labazhou2024/memexa', notes: { qs: '*' } },
 
           // --- RAG (one row per system; default setup with MiniLM-L6) ---
           { type: 'RAG', harness: 'HippoRAG2', index_time: 1.5, answer_model: 'Qwen3-VL-8B-Instruct', memory_model: 'Qwen3-VL-2B-Instruct', retriever: 'MiniLM-L6', qs: 42.90, recall: 66.40, link: 'https://github.com/OSU-NLP-Group/HippoRAG' },
@@ -927,15 +939,15 @@
           { type: 'Memory', harness: 'MemPalace', model: 'Qwen3-VL-8B-Instruct', qs:  9.70, recall: 28.30, total_tokens: null, link: 'https://github.com/MemPalace/mempalace' },
           { type: 'Memory', harness: 'SimpleMem', model: 'Qwen3-VL-8B-Instruct', qs:  3.20, recall:  7.00, total_tokens: null, link: 'https://github.com/aiming-lab/SimpleMem' },
 
-          // --- Memexa (community PR) + same-LLM (DeepSeek-V4-flash) re-runs of baselines ---
-          { type: 'Memory', harness: 'Memexa',    model: 'DeepSeek-V4-flash (mem+ans) · Qwen3.6-27B captions · 1-time index build 34M tok / $3.80', qs: 47.85, recall: 44.67, total_tokens: 0.40, cost_usd: 0.04, link: null },
-          { type: 'Memory', harness: 'A-Mem',     model: 'DeepSeek-V4-flash (re-run)', qs: 16.71, recall: 38.52, total_tokens: null, link: 'https://github.com/WujiangXu/A-mem' },
-          { type: 'Memory', harness: 'MemPalace', model: 'DeepSeek-V4-flash (re-run)', qs: 13.64, recall: 28.87, total_tokens: null, link: 'https://github.com/MemPalace/mempalace' },
+          // --- Memexa (community PR) + same-LLM (DeepSeek-V4-flash) re-runs of baselines. QS* = flash judge (not gpt-5-mini); see legend ---
+          { type: 'Memory', harness: 'Memexa',    model: 'DeepSeek-V4-flash (mem+ans) · Qwen3.6-27B captions', qs: 47.85, recall: 44.67, total_tokens: 34.30, cost_usd: 3.84, link: 'https://github.com/labazhou2024/memexa', notes: { qs: '*', recall: '†', total_tokens: '‡', cost_usd: '‡' } },
+          { type: 'Memory', harness: 'A-Mem',     model: 'DeepSeek-V4-flash (re-run)', qs: 16.71, recall: 38.52, total_tokens: null, link: 'https://github.com/WujiangXu/A-mem', notes: { qs: '*' } },
+          { type: 'Memory', harness: 'MemPalace', model: 'DeepSeek-V4-flash (re-run)', qs: 13.64, recall: 28.87, total_tokens: null, link: 'https://github.com/MemPalace/mempalace', notes: { qs: '*' } },
 
           // --- RAG (one row per system) ---
           { type: 'RAG', harness: 'HippoRAG2', model: 'Qwen3-VL-8B-Instruct', qs:  9.40, recall: 31.90, total_tokens: null, link: 'https://github.com/OSU-NLP-Group/HippoRAG' },
           { type: 'RAG', harness: 'ATM-RAG',   model: 'Qwen3-VL-8B-Instruct', qs: 13.80, recall: 30.40, total_tokens: null, link: 'https://github.com/JingbiaoMei/ATM-Bench' },
-          { type: 'RAG', harness: 'HippoRAG2', model: 'DeepSeek-V4-flash (re-run)', qs: 12.27, recall: 32.16, total_tokens: null, link: 'https://github.com/OSU-NLP-Group/HippoRAG' }
+          { type: 'RAG', harness: 'HippoRAG2', model: 'DeepSeek-V4-flash (re-run)', qs: 12.27, recall: 32.16, total_tokens: null, link: 'https://github.com/OSU-NLP-Group/HippoRAG', notes: { qs: '*' } }
         ]
       },
       {
@@ -1257,6 +1269,13 @@
               td.classList.add('lb-best');
             }
           }
+          // Footnote marker (e.g. * † ‡) for cells flagged in row.notes — see panel legend.
+          if (row.notes && row.notes[col.key]) {
+            const sup = document.createElement('sup');
+            sup.className = 'lb-note';
+            sup.textContent = row.notes[col.key];
+            td.appendChild(sup);
+          }
           tr.appendChild(td);
         });
 
@@ -1320,9 +1339,9 @@
         filter_all: "All",
         empty_filter: "No rows match the current filter.",
         panel_atm_bench_title: "ATM-Bench",
-        legend_atm_bench: '<code>-</code> indicates the field has not been reported by the submitter. <strong>Memory Model</strong> is the LLM used to construct the memory store; <strong>Retriever</strong> is the embedding model used at query time. Click any column header to sort; click a filter chip to narrow by system type.',
+        legend_atm_bench: '<code>-</code> indicates the field has not been reported by the submitter. <strong>Memory Model</strong> is the LLM used to construct the memory store; <strong>Retriever</strong> is the embedding model used at query time. Click any column header to sort; click a filter chip to narrow by system type. <strong>*</strong> Memexa\'s QS is measured with a DeepSeek-V4-flash judge (its own answer model), not the gpt-5-mini judge used for every other row, so it is shown for reference and is not directly comparable; Recall is judge-independent and like-for-like.',
         panel_atm_bench_hard_title: "ATM-Bench-Hard",
-        legend_atm_bench_hard: '<code>-</code> indicates the field has not been reported. All coding agents use their default configuration, including the reasoning effort. Results use our proposed <strong>SGM</strong> (Schema-Guided Memory) unless marked <code>(w/o SGM)</code>.',
+        legend_atm_bench_hard: '<code>-</code> indicates the field has not been reported. All coding agents use their default configuration, including the reasoning effort. Results use our proposed <strong>SGM</strong> (Schema-Guided Memory) unless marked <code>(w/o SGM)</code>. <strong>*</strong> QS on the Memexa and <code>(re-run)</code> rows is measured with a DeepSeek-V4-flash judge (the system\'s own model), not the gpt-5-mini judge used for the other rows — shown for reference, not directly comparable. <strong>†</strong> Memexa\'s Recall is reported on the fixed Qwen3-VL-2B captions (like-for-like with other rows), although this configuration answers from Qwen3.6-27B captions. <strong>‡</strong> Memexa\'s Total Tokens / Cost include the one-time memory build (33.9M tokens / ~$3.80 over all 11,034 items, amortizable across evaluations) plus the 31-question query (0.40M / ~$0.04); other rows\' agent costs are per full run.',
         panel_niah_title: "ATM-Bench-Hard-NIAH",
         panel_niah_intro: "Needle-in-a-haystack sweep on ATM-Bench-Hard (31 questions): each question's gold evidence is hidden among k = 25 / 50 / 100 / 200 distractor memory items, under the SGM (Schema-Guided Memory) setting. Oracle = gold evidence only, no haystack; judge: gpt-5-mini. Approximate context depth is shown in each column header.",
         niah_status: "Preview · More submissions welcome",
@@ -1359,9 +1378,9 @@
         filter_all: "全部",
         empty_filter: "当前筛选条件下没有匹配的行。",
         panel_atm_bench_title: "ATM-Bench",
-        legend_atm_bench: '<code>-</code> 表示该字段未被提交者填写。<strong>Memory Model</strong> 是用于构建记忆存储的 LLM；<strong>Retriever</strong> 是查询时使用的嵌入模型。点击任意列标题可排序，点击筛选条可按系统类型筛选。',
+        legend_atm_bench: '<code>-</code> 表示该字段未被提交者填写。<strong>Memory Model</strong> 是用于构建记忆存储的 LLM；<strong>Retriever</strong> 是查询时使用的嵌入模型。点击任意列标题可排序，点击筛选条可按系统类型筛选。<strong>*</strong> Memexa 的 QS 使用 DeepSeek-V4-flash（其自身回答模型）作为评审，而非其他所有行使用的 gpt-5-mini 评审，故仅供参考、不可直接比较；Recall 与评审无关，可同口径比较。',
         panel_atm_bench_hard_title: "ATM-Bench-Hard",
-        legend_atm_bench_hard: '<code>-</code> 表示该字段未被填写。所有编码智能体均使用默认配置（包括推理强度）。除标注 <code>(w/o SGM)</code> 的结果外，其余均使用我们提出的 <strong>SGM</strong>（符号图记忆）。',
+        legend_atm_bench_hard: '<code>-</code> 表示该字段未被填写。所有编码智能体均使用默认配置（包括推理强度）。除标注 <code>(w/o SGM)</code> 的结果外，其余均使用我们提出的 <strong>SGM</strong>（符号图记忆）。<strong>*</strong> Memexa 与 <code>(re-run)</code> 行的 QS 使用 DeepSeek-V4-flash（系统自身模型）作为评审，而非其他行使用的 gpt-5-mini 评审，仅供参考、不可直接比较。<strong>†</strong> Memexa 的 Recall 基于固定的 Qwen3-VL-2B 字幕（与其他行同口径），尽管该配置回答时使用 Qwen3.6-27B 字幕。<strong>‡</strong> Memexa 的 Total Tokens / Cost 包含一次性记忆构建（覆盖全部 11,034 条，33.9M tokens / 约 $3.80，可在多次评测间摊销）加上 31 题查询（0.40M / 约 $0.04）；其他行的智能体成本为每次完整运行。',
         panel_niah_title: "ATM-Bench-Hard-NIAH",
         panel_niah_intro: "在 ATM-Bench-Hard（31 题）上的大海捞针扫描：每题的标准证据被混入 k = 25 / 50 / 100 / 200 个干扰记忆项中（SGM，Schema-Guided Memory）。Oracle = 仅给标准证据、无干扰；评测：gpt-5-mini。各列表头括号内为近似上下文长度。",
         niah_status: "预览 · 欢迎更多提交",

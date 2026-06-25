@@ -865,7 +865,7 @@
           { type: 'Memory', harness: 'SimpleMem',            index_time: 16.0, answer_model: 'Qwen3-VL-8B-Instruct', memory_model: 'Qwen3-VL-2B-Instruct', retriever: 'MiniLM-L6', qs: 27.30, recall: 23.30, link: 'https://github.com/aiming-lab/SimpleMem' },
 
           // --- Memexa (community PR) — recall is the like-for-like comparison; QS* uses a DeepSeek-V4-flash judge, not gpt-5-mini (see legend) ---
-          { type: 'Memory', harness: 'Memexa',               index_time: null, answer_model: 'DeepSeek-V4-flash', memory_model: 'DeepSeek-V4-flash + Qwen3-VL-2B captions', retriever: 'BGE-M3 + bge-reranker-v2-m3', qs: 65.28, recall: 78.93, link: 'https://github.com/labazhou2024/memexa', notes: { qs: '*' } },
+          { type: 'Memory', harness: 'Memexa',               index_time: null, answer_model: 'DeepSeek-V4-flash', memory_model: 'DeepSeek-V4-flash', retriever: 'BGE-M3 + bge-reranker-v2-m3', qs: 65.28, recall: 78.93, link: 'https://github.com/labazhou2024/memexa', notes: { qs: '*' } },
           { type: 'Memory', harness: 'Memexa',               index_time: null, answer_model: 'DeepSeek-V4-flash', memory_model: 'DeepSeek-V4-flash + Qwen3.6-27B captions',       retriever: 'BGE-M3 + bge-reranker-v2-m3', qs: 68.04, recall: 79.09, link: 'https://github.com/labazhou2024/memexa', notes: { qs: '*' } },
 
           // --- RAG (one row per system; default setup with MiniLM-L6) ---

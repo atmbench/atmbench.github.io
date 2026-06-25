@@ -845,6 +845,10 @@
           { type: 'Memory', harness: 'MemPalace',            index_time:  0.5, answer_model: 'Qwen3-VL-8B-Instruct', memory_model: 'Qwen3-VL-2B-Instruct', retriever: 'MiniLM-L6', qs: 56.80, recall: 76.40, link: 'https://github.com/MemPalace/mempalace' },
           { type: 'Memory', harness: 'SimpleMem',            index_time: 16.0, answer_model: 'Qwen3-VL-8B-Instruct', memory_model: 'Qwen3-VL-2B-Instruct', retriever: 'MiniLM-L6', qs: 27.30, recall: 23.30, link: 'https://github.com/aiming-lab/SimpleMem' },
 
+          // --- Memexa (community PR) — recall is the like-for-like comparison; QS uses a DeepSeek-V4-flash judge, not gpt-5-mini (see PR description) ---
+          { type: 'Memory', harness: 'Memexa',               index_time: null, answer_model: 'DeepSeek-V4-flash', memory_model: 'DeepSeek-V4-flash + Qwen3-VL-2B captions (fixed)', retriever: 'BGE-M3 + bge-reranker-v2-m3', qs: 65.28, recall: 78.93, link: null },
+          { type: 'Memory', harness: 'Memexa',               index_time: null, answer_model: 'DeepSeek-V4-flash', memory_model: 'DeepSeek-V4-flash + Qwen3.6-27B captions',       retriever: 'BGE-M3 + bge-reranker-v2-m3', qs: 68.04, recall: 79.09, link: null },
+
           // --- RAG (one row per system; default setup with MiniLM-L6) ---
           { type: 'RAG', harness: 'HippoRAG2', index_time: 1.5, answer_model: 'Qwen3-VL-8B-Instruct', memory_model: 'Qwen3-VL-2B-Instruct', retriever: 'MiniLM-L6', qs: 42.90, recall: 66.40, link: 'https://github.com/OSU-NLP-Group/HippoRAG' },
           { type: 'RAG', harness: 'Self-RAG',  index_time: 0.5, answer_model: 'Qwen3-VL-8B-Instruct', memory_model: 'Qwen3-VL-2B-Instruct', retriever: 'MiniLM-L6', qs: 50.30, recall: 68.70, link: 'https://github.com/AkariAsai/self-rag' },

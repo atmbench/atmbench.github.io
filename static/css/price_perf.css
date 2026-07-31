@@ -1,0 +1,120 @@
+/* ATM-Bench-Hard price-performance chart.
+   Shared by index.html and leaderboard.html; paired with static/js/price_perf.js.
+   Relies on the page-level tokens --ink, --muted, --line and --panel-shadow,
+   which both pages define identically in :root.
+
+   --pp-c1..c7 are chart series colors, NOT page accents. The page has five
+   accents and this chart draws seven models at once, so a hue would have to
+   serve two models. The sequence below was validated against the card surface
+   (#fdfbf8) on the adjacent pairlist: worst colour-vision-deficiency separation
+   dE 9.1, worst normal-vision dE 19.6, both above their floors. Legend order is
+   palette order — reordering series without re-validating can introduce an
+   unchecked pair. Three slots sit under 3:1 contrast against the surface, which
+   is allowed only because every series carries a direct label. */
+
+.pp-wrap {
+  border-radius: 14px;
+  border: 1px solid rgba(31, 36, 48, 0.10);
+  background: rgba(255, 255, 255, 0.96);
+  padding: 1rem 1.1rem 0.9rem;
+  --pp-c1: #2a78d6; --pp-c2: #eb6834; --pp-c3: #1baf7a; --pp-c4: #eda100;
+  --pp-c5: #e87ba4; --pp-c6: #008300; --pp-c7: #4a3aa7; --pp-c0: #7d7a72;
+  --pp-surface: #fdfbf8;
+}
+
+.pp-title { text-align: center; margin-bottom: 0.75rem; }
+
+.pp-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 0.9rem;
+  align-items: center;
+  margin-bottom: 0.35rem;
+}
+
+.pp-lgi {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--muted);
+  cursor: pointer;
+  user-select: none;
+  padding: 0.15rem 0.45rem;
+  border-radius: 7px;
+}
+
+.pp-lgi:hover { background: rgba(31, 36, 48, 0.05); color: var(--ink); }
+.pp-lgi[data-off="1"] { opacity: 0.34; }
+.pp-lgi .pp-key { width: 26px; height: 12px; flex: none; }
+
+.pp-sub {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.1rem;
+  align-items: center;
+  margin: 0.5rem 0 0.75rem;
+  padding-top: 0.6rem;
+  border-top: 1px solid var(--line);
+  font-size: 0.76rem;
+  color: var(--muted);
+}
+
+.pp-sub .pp-item { display: inline-flex; align-items: center; gap: 0.4rem; white-space: nowrap; }
+.pp-sizes { display: inline-flex; align-items: flex-end; gap: 3px; }
+
+.pp-plot { position: relative; }
+.pp-plot svg { display: block; width: 100%; height: auto; overflow: hidden; }
+
+.pp-grid line { stroke: rgba(31, 36, 48, 0.08); stroke-width: 1; shape-rendering: crispEdges; }
+.pp-axis line { stroke: var(--line); stroke-width: 1; }
+.pp-axis text { fill: var(--muted); font-size: 12px; }
+.pp-axis-title { fill: var(--ink); font-size: 13px; font-weight: 700; }
+.pp-curve { fill: none; stroke-width: 2.8; stroke-linejoin: round; stroke-linecap: round; }
+.pp-mark { cursor: pointer; }
+.pp-faded { opacity: 0.12; }
+
+.pp-tier {
+  font-size: 10.5px; font-weight: 600; pointer-events: none; fill: var(--muted);
+  paint-order: stroke fill; stroke: var(--pp-surface); stroke-width: 3.5; stroke-linejoin: round;
+}
+
+.pp-name {
+  font-size: 12.5px; font-weight: 700; pointer-events: none;
+  paint-order: stroke fill; stroke: var(--pp-surface); stroke-width: 4; stroke-linejoin: round;
+}
+
+.pp-dot-name {
+  font-size: 11.5px; font-weight: 700; pointer-events: none; fill: var(--ink);
+  paint-order: stroke fill; stroke: var(--pp-surface); stroke-width: 4; stroke-linejoin: round;
+}
+
+/* max-width matters: the tooltip is absolutely positioned with an inline `left`,
+   and a hidden one still contributes to the page's scrollable width. Paired with
+   hide() clearing that inline position, it can never widen the page. */
+.pp-tip {
+  position: absolute; pointer-events: none; opacity: 0; transition: opacity 0.1s;
+  background: #fffdfa; border: 1px solid var(--line); border-radius: 12px;
+  box-shadow: var(--panel-shadow); padding: 0.7rem 0.85rem;
+  min-width: 200px; max-width: 100%; z-index: 20;
+}
+
+.pp-tip[data-show="1"] { opacity: 1; }
+.pp-tip .pp-tt { font-size: 0.85rem; font-weight: 700; display: flex; align-items: center; gap: 0.45rem; }
+.pp-tip .pp-tt i { width: 15px; height: 3px; border-radius: 2px; flex: none; }
+.pp-tip .pp-ts { font-size: 0.72rem; color: var(--muted); margin: 0.15rem 0 0.5rem; }
+.pp-tip .pp-row {
+  display: flex; justify-content: space-between; gap: 1.1rem;
+  font-size: 0.78rem; padding: 0.12rem 0; font-variant-numeric: tabular-nums;
+}
+.pp-tip .pp-row span:first-child { color: var(--muted); }
+.pp-tip .pp-row span:last-child { color: var(--ink); font-weight: 700; }
+.pp-tip .pp-big { font-size: 1.05rem; }
+
+.pp-more { text-align: center; margin-top: 0.9rem; font-size: 0.92rem; }
+.pp-more a { color: var(--accent-rust); font-weight: 700; }
+
+@media screen and (max-width: 640px) {
+  .pp-sub .pp-item { white-space: normal; }
+}

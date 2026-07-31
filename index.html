@@ -43,9 +43,12 @@
   <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
   <link rel="stylesheet" href="static/css/index.css">
+  <!-- price-performance chart, shared with leaderboard.html -->
+  <link rel="stylesheet" href="static/css/price_perf.css">
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script src="static/js/price_perf.js"></script>
   <script src="static/js/bulma-carousel.min.js"></script>
   <script src="static/js/bulma-slider.min.js"></script>
   <script src="static/js/index.js"></script>
@@ -744,6 +747,29 @@
               </figcaption>
             </figure>
 
+            <!-- Price-performance chart. Markup, styling and data are shared with
+                 leaderboard.html via static/{css,js}/price_perf.*; the chart fills
+                 its own [data-pp-i18n] nodes, so no index.html translation keys. -->
+            <div style="margin-top: 2.75rem; max-width: 1100px; margin-left: auto; margin-right: auto;">
+              <h2 class="title is-3 pp-title section-title-display" data-pp-i18n="title">Price vs. Performance</h2>
+              <p class="section-intro" data-pp-i18n="intro" style="margin-bottom: 1.1rem;">
+                ATM-Bench-Hard agent runs: what each one scored against what it cost, at API list-price
+                equivalent. A line joins one model's reasoning-effort tiers; a diamond is a single configuration.
+              </p>
+              <div class="pp-wrap">
+                <div class="pp-legend" id="pp-legend"></div>
+                <div class="pp-sub" id="pp-sub"></div>
+                <div class="pp-plot">
+                  <!-- aria-label is set by PricePerf.render() so it follows the language toggle -->
+                  <svg id="pp-chart" viewBox="0 0 880 660" role="img"></svg>
+                  <div class="pp-tip" id="pp-tip"></div>
+                </div>
+              </div>
+              <p class="pp-more">
+                <a href="leaderboard.html#leaderboard" data-pp-i18n="more">See every result on the ATM-Bench-Hard leaderboard →</a>
+              </p>
+            </div>
+
           </div>
         </div>
       </div>
@@ -1292,6 +1318,9 @@
 
       // Update html lang attribute
       document.documentElement.setAttribute("lang", lang === "zh" ? "zh-CN" : "en");
+
+      // The chart carries its own strings, so it re-renders on the toggle too
+      if (window.PricePerf) PricePerf.render();
     }
 
     // Auto-detect browser language on load
@@ -1299,6 +1328,7 @@
       var userLang = navigator.language || navigator.userLanguage || "en";
       var detectedLang = userLang.toLowerCase().startsWith("zh") ? "zh" : "en";
       setLanguage(detectedLang);
+      if (window.PricePerf) PricePerf.init();
     })();
 
     function copyBibtex(codeId) {

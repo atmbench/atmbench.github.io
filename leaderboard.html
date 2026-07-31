@@ -38,9 +38,12 @@
   <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
   <link rel="stylesheet" href="static/css/index.css">
+  <!-- price-performance chart, shared with index.html -->
+  <link rel="stylesheet" href="static/css/price_perf.css">
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script src="static/js/price_perf.js"></script>
 
   <style>
     :root {
@@ -692,6 +695,23 @@
   <section class="section section-board" id="leaderboard">
     <div class="container is-max-desktop">
 
+      <!-- Price-performance chart. Sits above the tabs and stays visible on all
+           three, so its intro line has to name the board it draws (Hard). -->
+      <h2 class="title is-3 pp-title section-title-display" data-pp-i18n="title">Price vs. Performance</h2>
+      <p class="section-intro" data-pp-i18n="intro" style="margin-bottom:1.1rem;">
+        ATM-Bench-Hard agent runs: what each one scored against what it cost, at API list-price
+        equivalent. A line joins one model's reasoning-effort tiers; a diamond is a single configuration.
+      </p>
+      <div class="pp-wrap" style="margin-bottom:2.25rem;">
+        <div class="pp-legend" id="pp-legend"></div>
+        <div class="pp-sub" id="pp-sub"></div>
+        <div class="pp-plot">
+          <!-- aria-label is set in renderPricePerf() so it follows the language toggle -->
+          <svg id="pp-chart" viewBox="0 0 880 660" role="img"></svg>
+          <div class="pp-tip" id="pp-tip"></div>
+        </div>
+      </div>
+
       <!-- Tabs -->
       <div class="lb-tabs">
         <button type="button" id="tab-btn-atm-bench" class="is-active" onclick="showTab('atm-bench')">ATM-Bench</button>
@@ -731,7 +751,10 @@
           <strong>†</strong> Memexa's Recall is reported on the fixed Qwen3-VL-2B captions (like-for-like with other rows), although this configuration answers from Qwen3.6-27B captions.
           <strong>‡</strong> Memexa's Total Tokens / Cost include the one-time memory build (33.9M tokens / ~$3.80 over all 11,034 items, amortizable across evaluations) plus the 31-question query (0.40M / ~$0.04); other rows' agent costs are per full run.
           <strong>Cost</strong> is an API-equivalent estimate calculated from saved per-call token counters with Tokdash's bundled standard short-context rates; it does not represent Codex subscription charges.
+          <strong>§</strong> OpenCode meters the DeepSeek V4 Flash Free endpoint at $0; the cost shown is the underlying model's list-price equivalent at the same rates as every other row.
+          <strong>¶</strong> GPT-5.6 Luna and Terra costs follow OpenAI's official price reduction for these models, verified 2026-07-31: Luna $1.00/$6.00 to $0.20/$1.20 and Terra $2.50/$15.00 to $2.00/$12.00 per million input/output tokens. The runs are unchanged — same tokens, same QS — only the rate they are priced at.
         </p>
+
       </div>
 
       <!-- Panel: NIAH -->
@@ -920,15 +943,18 @@
           { type: 'Agent',  harness: 'Claude Code', model: 'Claude Opus 4.6',           qs: 33.80, recall: null, total_tokens: 4.93,  cost_usd:  8.01, link: 'https://github.com/anthropics/claude-code' },
           { type: 'Agent',  harness: 'Claude Code', model: 'Claude Opus 4.7 (w/o SGM)', qs: 23.10, recall: null, total_tokens: 16.95, cost_usd: 19.84, link: 'https://github.com/anthropics/claude-code' },
           { type: 'Agent',  harness: 'Codex',       model: 'GPT-5.6 Sol (medium)',       qs: 58.76, recall: null, total_tokens: 7.52,  cost_usd: 12.52, link: 'https://github.com/openai/codex' },
-          { type: 'Agent',  harness: 'Codex',       model: 'GPT-5.6 Luna (xhigh)',       qs: 42.39, recall: null, total_tokens: 18.82, cost_usd:  5.03, link: 'https://github.com/openai/codex' },
-          { type: 'Agent',  harness: 'Codex',       model: 'GPT-5.6 Luna (medium)',      qs: 34.93, recall: null, total_tokens: 8.34,  cost_usd:  2.67, link: 'https://github.com/openai/codex' },
-          { type: 'Agent',  harness: 'Codex',       model: 'GPT-5.6 Terra (xhigh)',      qs: 40.96, recall: null, total_tokens: 9.36,  cost_usd:  7.46, link: 'https://github.com/openai/codex' },
-          { type: 'Agent',  harness: 'Codex',       model: 'GPT-5.6 Terra (medium)',     qs: 28.22, recall: null, total_tokens: 6.71,  cost_usd:  5.40, link: 'https://github.com/openai/codex' },
+          // Luna/Terra costs re-computed at OpenAI's reduced rates (Tokdash v2.0.11, verified
+          // 2026-07-31). Tokens and QS are unchanged from the original submission.
+          { type: 'Agent',  harness: 'Codex',       model: 'GPT-5.6 Luna (xhigh)',       qs: 42.39, recall: null, total_tokens: 18.82, cost_usd:  1.01, link: 'https://github.com/openai/codex', notes: { cost_usd: '¶' } },
+          { type: 'Agent',  harness: 'Codex',       model: 'GPT-5.6 Luna (medium)',      qs: 34.93, recall: null, total_tokens: 8.34,  cost_usd:  0.53, link: 'https://github.com/openai/codex', notes: { cost_usd: '¶' } },
+          { type: 'Agent',  harness: 'Codex',       model: 'GPT-5.6 Terra (xhigh)',      qs: 40.96, recall: null, total_tokens: 9.36,  cost_usd:  5.96, link: 'https://github.com/openai/codex', notes: { cost_usd: '¶' } },
+          { type: 'Agent',  harness: 'Codex',       model: 'GPT-5.6 Terra (medium)',     qs: 28.22, recall: null, total_tokens: 6.71,  cost_usd:  4.32, link: 'https://github.com/openai/codex', notes: { cost_usd: '¶' } },
           { type: 'Agent',  harness: 'Codex',       model: 'GPT-5.5 (xhigh)',     qs: 48.10, recall: null, total_tokens: 22.89, cost_usd: 39.74, link: 'https://github.com/openai/codex' },
           { type: 'Agent',  harness: 'Codex',       model: 'GPT-5.5 (medium)',    qs: 41.40, recall: null, total_tokens: 16.14, cost_usd: 27.17, link: 'https://github.com/openai/codex' },
           { type: 'Agent',  harness: 'Codex',       model: 'GPT-5.2',             qs: 39.70, recall: null, total_tokens: 15.46, cost_usd: null,  link: 'https://github.com/openai/codex' },
           { type: 'Agent',  harness: 'Codex',       model: 'GPT-5.4',             qs: 29.60, recall: null, total_tokens: 14.29, cost_usd:  9.33, link: 'https://github.com/openai/codex' },
           { type: 'Agent',  harness: 'Codex',       model: 'GPT-5.2 (w/o SGM)',   qs: 16.30, recall: null, total_tokens: 22.23, cost_usd:  9.22, link: 'https://github.com/openai/codex' },
+          { type: 'Agent',  harness: 'Kimi Code',   model: 'Kimi K3-256k (high)',        qs: 52.53, recall: null, total_tokens: 7.94,  cost_usd:  5.54, link: 'https://github.com/MoonshotAI/kimi-code' },
           { type: 'Agent',  harness: 'Pi',          model: 'GLM-5.1',             qs: 38.80, recall: null, total_tokens: 8.17,  cost_usd:  4.33, link: 'https://github.com/earendil-works/pi' },
           { type: 'Agent',  harness: 'Pi',          model: 'Kimi K2.5',           qs: 37.80, recall: null, total_tokens: 9.92,  cost_usd:  2.67, link: 'https://github.com/earendil-works/pi' },
           { type: 'Agent',  harness: 'Pi',          model: 'MiMo V2.5',           qs: 36.10, recall: null, total_tokens: 18.23, cost_usd:  2.06, link: 'https://github.com/earendil-works/pi' },
@@ -944,6 +970,8 @@
           { type: 'Agent',  harness: 'OpenCode',    model: 'Kimi K2.5 (w/o SGM)', qs:  6.50, recall: null, total_tokens: 21.40, cost_usd:  6.40, link: 'https://github.com/sst/opencode' },
           { type: 'Agent',  harness: 'OpenCode',    model: 'MiniMax M2.5',        qs: 22.90, recall: null, total_tokens: 14.5,  cost_usd:  4.43, link: 'https://github.com/sst/opencode' },
           { type: 'Agent',  harness: 'OpenCode',    model: 'MiniMax M2.7',        qs: 27.80, recall: null, total_tokens: 13.48, cost_usd:  1.36, link: 'https://github.com/sst/opencode' },
+          // gpt-5-mini judge (like every other Agent row) — this is the answer model, not the judge
+          { type: 'Agent',  harness: 'OpenCode',    model: 'DeepSeek V4 Flash (0731)',   qs: 38.28, recall: null, total_tokens: 12.54, cost_usd:  0.26, link: 'https://github.com/sst/opencode', notes: { cost_usd: '§' } },
           { type: 'Agent',  harness: 'OpenClaw 🦞', model: 'Kimi K2.5',           qs: 25.40, recall: null, total_tokens: 9.63,  cost_usd:  2.37 },
 
           // --- Memory (one row per system; values from latest project README) ---
@@ -1308,6 +1336,7 @@
         renderFilter(t);
         renderTrack(t);
       });
+      PricePerf.render();  // static/js/price_perf.js — follows currentLang
     }
 
     /* --------------------------------------------------------------- */
@@ -1357,7 +1386,7 @@
         panel_atm_bench_title: "ATM-Bench",
         legend_atm_bench: '<code>-</code> indicates the field has not been reported by the submitter. <strong>Memory Model</strong> is the LLM used to construct the memory store; <strong>Retriever</strong> is the embedding model used at query time. Click any column header to sort; click a filter chip to narrow by system type. When a caption model is not stated, it is <strong>Qwen3-VL-2B</strong> (the default). <strong>*</strong> Memexa\'s QS is measured with a DeepSeek-V4-flash judge (its own answer model), not the gpt-5-mini judge used for every other row, so it is shown for reference and is not directly comparable; Recall is judge-independent and like-for-like.',
         panel_atm_bench_hard_title: "ATM-Bench-Hard",
-        legend_atm_bench_hard: '<code>-</code> indicates the field has not been reported. Coding agents use their default configuration unless the model label states a reasoning effort. Results use our proposed <strong>SGM</strong> (Schema-Guided Memory) unless marked <code>(w/o SGM)</code>. When a caption model is not stated, it is <strong>Qwen3-VL-2B</strong> (the default). <strong>*</strong> QS on the DeepSeek-V4-flash rows (Memexa and the A-Mem / MemPalace / HippoRAG2 re-runs) is measured with a DeepSeek-V4-flash judge (the system\'s own model), not the gpt-5-mini judge used for the other rows — shown for reference, not directly comparable. The three baseline re-runs are community-run at this LLM tier, not the original authors\' official numbers. <strong>†</strong> Memexa\'s Recall is reported on the fixed Qwen3-VL-2B captions (like-for-like with other rows), although this configuration answers from Qwen3.6-27B captions. <strong>‡</strong> Memexa\'s Total Tokens / Cost include the one-time memory build (33.9M tokens / ~$3.80 over all 11,034 items, amortizable across evaluations) plus the 31-question query (0.40M / ~$0.04); other rows\' agent costs are per full run. <strong>Cost</strong> is an API-equivalent estimate calculated from saved per-call token counters with Tokdash\'s bundled standard short-context rates; it does not represent Codex subscription charges.',
+        legend_atm_bench_hard: '<code>-</code> indicates the field has not been reported. Coding agents use their default configuration unless the model label states a reasoning effort. Results use our proposed <strong>SGM</strong> (Schema-Guided Memory) unless marked <code>(w/o SGM)</code>. When a caption model is not stated, it is <strong>Qwen3-VL-2B</strong> (the default). <strong>*</strong> QS on the DeepSeek-V4-flash rows (Memexa and the A-Mem / MemPalace / HippoRAG2 re-runs) is measured with a DeepSeek-V4-flash judge (the system\'s own model), not the gpt-5-mini judge used for the other rows — shown for reference, not directly comparable. The three baseline re-runs are community-run at this LLM tier, not the original authors\' official numbers. <strong>†</strong> Memexa\'s Recall is reported on the fixed Qwen3-VL-2B captions (like-for-like with other rows), although this configuration answers from Qwen3.6-27B captions. <strong>‡</strong> Memexa\'s Total Tokens / Cost include the one-time memory build (33.9M tokens / ~$3.80 over all 11,034 items, amortizable across evaluations) plus the 31-question query (0.40M / ~$0.04); other rows\' agent costs are per full run. <strong>Cost</strong> is an API-equivalent estimate calculated from saved per-call token counters with Tokdash\'s bundled standard short-context rates; it does not represent Codex subscription charges. <strong>§</strong> OpenCode meters the DeepSeek V4 Flash Free endpoint at $0; the cost shown is the underlying model\'s list-price equivalent at the same rates as every other row. <strong>¶</strong> GPT-5.6 Luna and Terra costs follow OpenAI\'s official price reduction for these models, verified 2026-07-31: Luna $1.00/$6.00 to $0.20/$1.20 and Terra $2.50/$15.00 to $2.00/$12.00 per million input/output tokens. The runs are unchanged — same tokens, same QS — only the rate they are priced at.',
         panel_niah_title: "ATM-Bench-Hard-NIAH",
         panel_niah_intro: "Needle-in-a-haystack sweep on ATM-Bench-Hard (31 questions): each question's gold evidence is hidden among k = 25 / 50 / 100 / 200 distractor memory items, under the SGM (Schema-Guided Memory) setting. Oracle = gold evidence only, no haystack; judge: gpt-5-mini. Approximate context depth is shown in each column header.",
         niah_status: "Preview · More submissions welcome",
@@ -1396,7 +1425,7 @@
         panel_atm_bench_title: "ATM-Bench",
         legend_atm_bench: '<code>-</code> 表示该字段未被提交者填写。<strong>Memory Model</strong> 是用于构建记忆存储的 LLM；<strong>Retriever</strong> 是查询时使用的嵌入模型。点击任意列标题可排序，点击筛选条可按系统类型筛选。未注明时，caption 模型默认为 <strong>Qwen3-VL-2B</strong>。<strong>*</strong> Memexa 的 QS 使用 DeepSeek-V4-flash（其自身回答模型）作为评审，而非其他所有行使用的 gpt-5-mini 评审，故仅供参考、不可直接比较；Recall 与评审无关，可同口径比较。',
         panel_atm_bench_hard_title: "ATM-Bench-Hard",
-        legend_atm_bench_hard: '<code>-</code> 表示该字段未被填写。除非模型标签注明推理强度，编码智能体均使用默认配置。除标注 <code>(w/o SGM)</code> 的结果外，其余均使用我们提出的 <strong>SGM</strong>（符号图记忆）。未注明时，caption 模型默认为 <strong>Qwen3-VL-2B</strong>。<strong>*</strong> DeepSeek-V4-flash 行（Memexa 与 A-Mem / MemPalace / HippoRAG2 复跑）的 QS 使用 DeepSeek-V4-flash（系统自身模型）作为评审，而非其他行使用的 gpt-5-mini 评审，仅供参考、不可直接比较。这三项基线为社区在该 LLM 档位的复跑，并非原作者的官方数值。<strong>†</strong> Memexa 的 Recall 基于固定的 Qwen3-VL-2B caption（与其他行同口径），尽管该配置回答时使用 Qwen3.6-27B caption。<strong>‡</strong> Memexa 的 Total Tokens / Cost 包含一次性记忆构建（覆盖全部 11,034 条，33.9M tokens / 约 $3.80，可在多次评测间摊销）加上 31 题查询（0.40M / 约 $0.04）；其他行的智能体成本为每次完整运行。<strong>成本</strong>为使用保存的每次调用 token 计数与 Tokdash 内置标准短上下文费率计算的 API 等价估算，不代表 Codex 订阅费用。',
+        legend_atm_bench_hard: '<code>-</code> 表示该字段未被填写。除非模型标签注明推理强度，编码智能体均使用默认配置。除标注 <code>(w/o SGM)</code> 的结果外，其余均使用我们提出的 <strong>SGM</strong>（符号图记忆）。未注明时，caption 模型默认为 <strong>Qwen3-VL-2B</strong>。<strong>*</strong> DeepSeek-V4-flash 行（Memexa 与 A-Mem / MemPalace / HippoRAG2 复跑）的 QS 使用 DeepSeek-V4-flash（系统自身模型）作为评审，而非其他行使用的 gpt-5-mini 评审，仅供参考、不可直接比较。这三项基线为社区在该 LLM 档位的复跑，并非原作者的官方数值。<strong>†</strong> Memexa 的 Recall 基于固定的 Qwen3-VL-2B caption（与其他行同口径），尽管该配置回答时使用 Qwen3.6-27B caption。<strong>‡</strong> Memexa 的 Total Tokens / Cost 包含一次性记忆构建（覆盖全部 11,034 条，33.9M tokens / 约 $3.80，可在多次评测间摊销）加上 31 题查询（0.40M / 约 $0.04）；其他行的智能体成本为每次完整运行。<strong>成本</strong>为使用保存的每次调用 token 计数与 Tokdash 内置标准短上下文费率计算的 API 等价估算，不代表 Codex 订阅费用。<strong>§</strong> OpenCode 对 DeepSeek V4 Flash Free 端点按 $0 计费；此处成本为该模型在与其他行相同费率下的标价等价值。<strong>¶</strong> GPT-5.6 Luna 与 Terra 的成本采用 OpenAI 对这两个模型的官方降价后费率（2026-07-31 核对）：Luna 由 $1.00/$6.00 降至 $0.20/$1.20，Terra 由 $2.50/$15.00 降至 $2.00/$12.00（每百万输入/输出 token）。运行本身未变 — token 数与 QS 相同 — 仅计价费率不同。',
         panel_niah_title: "ATM-Bench-Hard-NIAH",
         panel_niah_intro: "在 ATM-Bench-Hard（31 题）上的大海捞针扫描：每题的标准证据被混入 k = 25 / 50 / 100 / 200 个干扰记忆项中（SGM，Schema-Guided Memory）。Oracle = 仅给标准证据、无干扰；评测：gpt-5-mini。各列表头括号内为近似上下文长度。",
         niah_status: "预览 · 欢迎更多提交",
@@ -1443,6 +1472,7 @@
       var detectedLang = userLang.toLowerCase().startsWith("zh") ? "zh" : "en";
       setLanguage(detectedLang);
       renderAll();
+      PricePerf.init();  // renders once more and binds the chart's hover listeners
     })();
   </script>
 

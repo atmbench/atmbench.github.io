@@ -115,6 +115,34 @@
 .pp-more { text-align: center; margin-top: 0.9rem; font-size: 0.92rem; }
 .pp-more a { color: var(--accent-rust); font-weight: 700; }
 
+/* --- Full scatter (leaderboard only; static/js/price_perf_full.js) ---------
+   Its own palette, and it has to be: --pp-c1..c7 above were validated on the
+   ADJACENT pairlist, which is all a line chart needs. Here every point can land
+   beside every other, so the set below was validated over ALL pairs against
+   #fdfbf8 — worst colour-vision-deficiency separation dE 11.0, worst
+   normal-vision dE 15.6. Two slots sit under 3:1 contrast, which is allowed
+   because the frontier is directly labelled, every point is hoverable, and the
+   same numbers are in the table directly above. Six harnesses, six slots: a
+   seventh needs the validator re-run, not an extra hue. */
+.ppf-wrap {
+  --ppf-c1: #0072B2; --ppf-c2: #D55E00; --ppf-c3: #009E73;
+  --ppf-c4: #E69F00; --ppf-c5: #56B4E9; --ppf-c6: #b0175f;
+}
+
+.ppf-wrap .pp-lgi .pp-key { width: 14px; height: 12px; }
+
+.ppf-front {
+  fill: none; stroke: var(--muted); stroke-width: 1.8;
+  stroke-dasharray: 5 4; stroke-linejoin: round; opacity: 0.7;
+}
+
 @media screen and (max-width: 640px) {
   .pp-sub .pp-item { white-space: normal; }
+
+  /* 55 points scaled to a phone's width put the frontier labels below reading
+     size. Give this chart a floor and let it scroll sideways inside its own
+     box instead — the page itself still never scrolls horizontally. The
+     focused chart at the top is sparse enough to keep shrinking. */
+  .ppf-wrap .pp-plot { overflow-x: auto; }
+  .ppf-wrap .pp-plot svg { min-width: 660px; }
 }

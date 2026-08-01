@@ -85,7 +85,10 @@ var PRICE_PERF = {
     { key: 'm3', label: 'MiniMax-M3', harness: 'OpenCode', qs: 47.31, cost: 2.83, tokens: 16.30 },
     { key: 'dsv4', label: 'DeepSeek V4 Flash 0731', harness: 'OpenCode', qs: 38.28, cost: 0.26, tokens: 12.54 }
   ],
-  /* Not rendered — the record of what is measured but not drawn. */
+  /* Not rendered here — the record of what is measured but left off this chart
+     to keep it readable. All six are now rows in the leaderboard table and
+     points on the full scatter below it (static/js/price_perf_full.js), so
+     nothing dropped here is hidden from the reader. */
   excluded: [
     { series: 'GPT-5.5', tier: 'medium', qs: 41.41, cost: 27.17, why: 'answered 24 of 31; leaves GPT-5.5 xhigh as a single point' },
     { series: 'GPT-5.6 Sol', tier: 'max', qs: 48.30, cost: 23.90, why: 'ends the Sol ladder at xhigh' },

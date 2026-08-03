@@ -4,8 +4,6 @@
 
    Markup the page must provide:
 
-     <h3 data-ppf-i18n="title"></h3>
-     <p  data-ppf-i18n="intro"></p>
      <div class="pp-wrap ppf-wrap">
        <div class="pp-legend" id="ppf-legend"></div>
        <div class="pp-sub" id="ppf-sub"></div>
@@ -15,10 +13,16 @@
        </div>
      </div>
 
-   It takes NO dataset of its own: the page hands it the Hard track's `rows`
-   array and it plots whatever is in there. That is deliberate — the focused
-   chart keeps a hand-maintained copy and has to be reconciled with the table by
-   hand, and this one cannot drift by construction. Add a row, it appears here.
+   The heading and the intro paragraph are NOT in here — each page writes its
+   own through the usual `data-i18n` mechanism, because what to say about the
+   chart depends on what sits around it. Only the strings that are the same
+   everywhere (axes, keys, tooltip rows, aria) live in PPF_I18N below.
+
+   It takes NO dataset of its own: the page hands it ATM_HARD_ROWS (see
+   static/js/atm_hard_rows.js) and it plots whatever is in there. That is
+   deliberate — the focused chart keeps a hand-maintained copy that has to be
+   reconciled with the table by hand, and this one cannot drift by
+   construction. Add a row, it appears here, on both pages.
 
    Reasoning effort and the SGM ablation are read out of the model label:
    a trailing `(low|medium|high|xhigh|max)` is the effort tier, and
@@ -46,19 +50,15 @@ var PricePerfFull = (function () {
 
   var PPF_I18N = {
     en: {
-      title: 'Every priced run',
-      /* No run count in the copy on purpose — the legend chips carry the per-harness
-         counts, and those follow the data instead of going stale on the next row. */
-      intro: 'The same axes as the chart at the top of the page, but with nothing left out: '
-           + 'every agent run in the table above that has a cost, coloured by harness. '
-           + 'The staircase is the Pareto frontier — the best score money can buy at each price.',
       aria: 'Scatter plot of ATM-Bench-Hard score against run cost for every priced agent run, '
           + 'with a Pareto frontier staircase.',
       axis_x: 'Cost (USD)',
       axis_y: 'Score — higher is better',
       key_front: 'staircase = best score at or below each price',
       key_raw: 'hollow = run without SGM',
-      key_hint: 'click a harness to hide it; every point is a row in the table above',
+      /* Page-neutral on purpose — this chart appears on index.html too, where
+         there is no table to point at. */
+      key_hint: 'click a harness to hide it; hover a point for tokens and cost per score point',
       tip_score: 'Score',
       tip_cost: 'Run cost',
       tip_per_point: 'Cost per score point',
@@ -66,15 +66,12 @@ var PricePerfFull = (function () {
       tip_front: 'on the Pareto frontier'
     },
     zh: {
-      title: '全部计价运行',
-      intro: '与页面顶部图表同样的坐标轴，但不作取舍：上表中每一次有成本的智能体运行，按 Harness 着色。'
-           + '阶梯线为帕累托前沿 — 在每个价位上能买到的最好成绩。',
       aria: 'ATM-Bench-Hard 全部计价智能体运行的得分对成本散点图，并标出帕累托前沿阶梯线。',
       axis_x: '成本（USD）',
       axis_y: '得分 — 越高越好',
       key_front: '阶梯线 = 在该价位及以下可达的最高得分',
       key_raw: '空心 = 未使用 SGM 的运行',
-      key_hint: '点击 Harness 可隐藏；每个点都对应上表中的一行',
+      key_hint: '点击 Harness 可隐藏；悬停任意点可查看 Token 数与每分成本',
       tip_score: '得分',
       tip_cost: '运行成本',
       tip_per_point: '每分成本',

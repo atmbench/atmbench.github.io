@@ -48,7 +48,8 @@
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script defer src="static/js/fontawesome.all.min.js"></script>
-  <script src="static/js/price_perf.js"></script>
+  <script src="static/js/atm_hard_rows.js"></script>
+  <script src="static/js/price_perf_full.js"></script>
   <script src="static/js/bulma-carousel.min.js"></script>
   <script src="static/js/bulma-slider.min.js"></script>
   <script src="static/js/index.js"></script>
@@ -747,26 +748,29 @@
               </figcaption>
             </figure>
 
-            <!-- Price-performance chart. Markup, styling and data are shared with
-                 leaderboard.html via static/{css,js}/price_perf.*; the chart fills
-                 its own [data-pp-i18n] nodes, so no index.html translation keys. -->
+            <!-- Price-performance chart: the full scatter (every priced Agent row),
+                 same renderer and styling the leaderboard uses below its table.
+                 It plots ATM_HARD_ROWS directly, so this page and the board can
+                 never disagree. Heading and intro are ours — the chart only owns
+                 its axes, keys and tooltip copy. -->
             <div style="margin-top: 2.75rem; max-width: 1100px; margin-left: auto; margin-right: auto;">
-              <h2 class="title is-3 pp-title section-title-display" data-pp-i18n="title">Price vs. Performance</h2>
-              <p class="section-intro" data-pp-i18n="intro" style="margin-bottom: 1.1rem;">
-                ATM-Bench-Hard agent runs: what each one scored against what it cost, at API list-price
-                equivalent. A line joins one model's reasoning-effort tiers; a diamond is a single configuration.
+              <h2 class="title is-3 pp-title section-title-display" data-i18n="pp_title">Price vs. Performance</h2>
+              <p class="section-intro" data-i18n="pp_intro" style="margin-bottom: 1.1rem;">
+                Every ATM-Bench-Hard agent run we have priced: what it scored against what it cost, at API
+                list-price equivalent. Colour is the coding harness; the staircase is the Pareto frontier —
+                the best score money can buy at each price.
               </p>
-              <div class="pp-wrap">
-                <div class="pp-legend" id="pp-legend"></div>
-                <div class="pp-sub" id="pp-sub"></div>
+              <div class="pp-wrap ppf-wrap">
+                <div class="pp-legend" id="ppf-legend"></div>
+                <div class="pp-sub" id="ppf-sub"></div>
                 <div class="pp-plot">
-                  <!-- aria-label is set by PricePerf.render() so it follows the language toggle -->
-                  <svg id="pp-chart" viewBox="0 0 880 660" role="img"></svg>
-                  <div class="pp-tip" id="pp-tip"></div>
+                  <!-- aria-label is set by PricePerfFull so it follows the language toggle -->
+                  <svg id="ppf-chart" viewBox="0 0 880 620" role="img"></svg>
+                  <div class="pp-tip" id="ppf-tip"></div>
                 </div>
               </div>
               <p class="pp-more">
-                <a href="leaderboard.html#leaderboard" data-pp-i18n="more">See every result on the ATM-Bench-Hard leaderboard →</a>
+                <a href="leaderboard.html#leaderboard" data-i18n="pp_more">See every result on the ATM-Bench-Hard leaderboard →</a>
               </p>
             </div>
 
@@ -1080,6 +1084,9 @@
         stat4_detail: "Single-pass lookup is often not enough to answer correctly.",
         stat5_label: "accuracy on Hard",
         stat5_detail: "The hardest split still exposes large gaps in current systems.",
+        pp_title: "Price vs. Performance",
+        pp_intro: "Every ATM-Bench-Hard agent run we have priced: what it scored against what it cost, at API list-price equivalent. Colour is the coding harness; the staircase is the Pareto frontier \u2014 the best score money can buy at each price.",
+        pp_more: "See every result on the ATM-Bench-Hard leaderboard \u2192",
         demo_video_caption: "ATM-Bench demo: multimodal personal memory QA in action.",
         nav_overview: "Overview",
         nav_puzzles: "Memory Puzzles",
@@ -1187,6 +1194,9 @@
         stat4_detail: "单次检索往往不足以正确回答。",
         stat5_label: "Hard 难度准确率",
         stat5_detail: "最难的拆分仍然暴露出当前系统的巨大差距。",
+        pp_title: "成本 – 得分",
+        pp_intro: "我们已计价的每一次 ATM-Bench-Hard 智能体运行：得分与花费（按 API 标价等价折算）。颜色表示编码 Harness；阶梯线为帕累托前沿 —— 在每个价位上能买到的最好成绩。",
+        pp_more: "在 ATM-Bench-Hard 排行榜查看全部结果 \u2192",
         demo_video_caption: "ATM-Bench 演示：多模态个人记忆问答实战。",
         nav_overview: "概述",
         nav_puzzles: "记忆难题",
@@ -1319,8 +1329,8 @@
       // Update html lang attribute
       document.documentElement.setAttribute("lang", lang === "zh" ? "zh-CN" : "en");
 
-      // The chart carries its own strings, so it re-renders on the toggle too
-      if (window.PricePerf) PricePerf.render();
+      // The chart carries its own axis/key/tooltip strings, so it re-renders too
+      if (window.PricePerfFull) PricePerfFull.render();
     }
 
     // Auto-detect browser language on load
@@ -1328,7 +1338,8 @@
       var userLang = navigator.language || navigator.userLanguage || "en";
       var detectedLang = userLang.toLowerCase().startsWith("zh") ? "zh" : "en";
       setLanguage(detectedLang);
-      if (window.PricePerf) PricePerf.init();
+      // Same rows the leaderboard table renders — see static/js/atm_hard_rows.js
+      if (window.PricePerfFull) PricePerfFull.init(window.ATM_HARD_ROWS);
     })();
 
     function copyBibtex(codeId) {

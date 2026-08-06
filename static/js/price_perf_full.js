@@ -1,5 +1,6 @@
 /* Full price-performance scatter for the ATM-Bench-Hard board — every priced
-   Agent row, plotted. Leaderboard-only; index.html carries the focused chart
+   Agent row except the w/o-SGM ablations (see parse()). Leaderboard-only;
+   index.html carries the focused chart
    (static/js/price_perf.js) instead. Shares static/css/price_perf.css.
 
    Markup the page must provide:
@@ -19,14 +20,15 @@
    everywhere (axes, keys, tooltip rows, aria) live in PPF_I18N below.
 
    It takes NO dataset of its own: the page hands it ATM_HARD_ROWS (see
-   static/js/atm_hard_rows.js) and it plots whatever is in there. That is
-   deliberate — the focused chart keeps a hand-maintained copy that has to be
-   reconciled with the table by hand, and this one cannot drift by
-   construction. Add a row, it appears here, on both pages.
+   static/js/atm_hard_rows.js). That is deliberate — the focused chart keeps a
+   hand-maintained copy that has to be reconciled with the table by hand, and
+   this one cannot drift from the table by construction. Add a row, it appears
+   here, on both pages. The one filter it applies is the ablation exclusion in
+   parse(), which is a property of the label, not a per-run judgement.
 
-   Reasoning effort and the SGM ablation are read out of the model label:
-   a trailing `(low|medium|high|xhigh|max)` is the effort tier, and
-   `(w/o SGM)` marks a run without Schema-Guided Memory (drawn hollow).
+   Reasoning effort is read out of the model label: a trailing
+   `(low|medium|high|xhigh|max)` is the effort tier. A trailing `(w/o SGM)`
+   marks an ablation run, and those are excluded from this chart — see parse().
 
    The staircase is the Pareto frontier — the best score reachable at or below
    each price. It is recomputed over whatever the legend leaves visible, so
@@ -39,23 +41,28 @@ var PricePerfFull = (function () {
   var W = 880, H = 620, M = { t: 22, r: 118, b: 58, l: 74 };
   var IW = W - M.l - M.r, IH = H - M.t - M.b;
 
-  /* Harness identity. Order is palette order: the sequence in --ppf-c1..c6 was
+  /* Cost axis: log10, same as price_perf.js. A power axis was tried and
+     reverted — see the note there. This chart is where it showed worst: 0.36
+     drove 17 of 21 marker collisions into the top-left corner, against 8 of 22
+     spread across the plot under log. */
+
+  /* Harness identity. Order is palette order: the sequence in --ppf-c1..c7 was
      validated against the card surface over ALL pairs, not just neighbours,
      because in a scatter any two points can end up side by side. Reordering or
      adding a harness means re-running the validator. */
-  var HARNESS = ['Claude Code', 'Codex', 'Kimi Code', 'OpenCode', 'Pi', 'OpenClaw 🦞'];
+  var HARNESS = ['Claude Code', 'Codex', 'Kimi Code', 'OpenCode', 'Pi', 'OpenClaw 🦞',
+                 'Antigravity'];
 
   var TIERS = ['low', 'medium', 'high', 'xhigh', 'max'];
   var rowsIn = [], hidden = {}, hits = [], emphasis = null, bound = false;
 
   var PPF_I18N = {
     en: {
-      aria: 'Scatter plot of ATM-Bench-Hard score against run cost for every priced agent run, '
-          + 'with a Pareto frontier staircase.',
+      aria: 'Scatter plot of ATM-Bench-Hard score against run cost for every priced agent run '
+          + 'except the without-SGM ablations, with a Pareto frontier staircase.',
       axis_x: 'Cost (USD)',
       axis_y: 'Score — higher is better',
       key_front: 'staircase = best score at or below each price',
-      key_raw: 'hollow = run without SGM',
       /* Page-neutral on purpose — this chart appears on index.html too, where
          there is no table to point at. */
       key_hint: 'click a harness to hide it; hover a point for tokens and cost per score point',
@@ -66,11 +73,10 @@ var PricePerfFull = (function () {
       tip_front: 'on the Pareto frontier'
     },
     zh: {
-      aria: 'ATM-Bench-Hard 全部计价智能体运行的得分对成本散点图，并标出帕累托前沿阶梯线。',
+      aria: 'ATM-Bench-Hard 全部计价智能体运行（不含未使用 SGM 的消融运行）的得分对成本散点图，并标出帕累托前沿阶梯线。',
       axis_x: '成本（USD）',
       axis_y: '得分 — 越高越好',
       key_front: '阶梯线 = 在该价位及以下可达的最高得分',
-      key_raw: '空心 = 未使用 SGM 的运行',
       key_hint: '点击 Harness 可隐藏；悬停任意点可查看 Token 数与每分成本',
       tip_score: '得分',
       tip_cost: '运行成本',
@@ -105,20 +111,27 @@ var PricePerfFull = (function () {
   function pct(v) { return v.toFixed(1) + '%'; }
   function money(v) { return v < 1 ? '$' + v.toFixed(2).replace(/0$/, '') : '$' + v; }
 
-  /* One plot point per priced Agent row, with the label parsed apart. */
+  /* One plot point per priced Agent row, with the label parsed apart.
+
+     The w/o-SGM ablations are parsed and then dropped. They score 6.5-23.1%
+     where every real configuration scores 28% or better, so carrying them
+     stretched the score axis by 19 points to hold six runs that answer a
+     different question — "does SGM matter", not "what does this configuration
+     cost". The axis was spending 45% of its height on empty space: 9.1 pixels
+     per score point with them, 13.2 without.
+
+     They are not hidden — every one is in the leaderboard table directly above
+     this chart, and in the README table. Only the scatter leaves them out. */
   function parse() {
     return rowsIn.filter(function (r) {
-      return r.type === 'Agent' && r.cost_usd !== null && r.cost_usd !== undefined;
+      return r.type === 'Agent' && r.cost_usd !== null && r.cost_usd !== undefined
+          && !/\(\s*w\/o sgm\s*\)\s*$/i.test(r.model);
     }).map(function (r) {
-      var name = r.model, tier = null, sgm = true;
+      var name = r.model, tier = null;
       var m = /^(.*?)\s*\(([^)]+)\)\s*$/.exec(name);
-      if (m) {
-        var inner = m[2].toLowerCase();
-        if (TIERS.indexOf(inner) >= 0) { name = m[1]; tier = inner; }
-        else if (inner === 'w/o sgm') { name = m[1]; sgm = false; }
-      }
+      if (m && TIERS.indexOf(m[2].toLowerCase()) >= 0) { name = m[1]; tier = m[2].toLowerCase(); }
       return {
-        harness: r.harness, model: r.model, name: name, tier: tier, sgm: sgm,
+        harness: r.harness, model: r.model, name: name, tier: tier, sgm: true,
         qs: r.qs, cost: r.cost_usd, tokens: r.total_tokens
       };
     });
@@ -148,7 +161,7 @@ var PricePerfFull = (function () {
     return out;
   }
 
-  function logTicks(a, b) {
+  function decadeTicks(a, b) {
     var out = [];
     [0.01, 0.1, 1, 10, 100].forEach(function (base) {
       [1, 2, 5].forEach(function (m) {
@@ -191,7 +204,7 @@ var PricePerfFull = (function () {
     var X = function (v) { return M.l + (Math.log10(v) - lc0) / (lc1 - lc0) * IW; };
     var Y = function (v) { return M.t + IH - (v - q0) / (q1 - q0) * IH; };
 
-    var yv = linTicks(q0, q1, 6), xv = logTicks(c0, c1);
+    var yv = linTicks(q0, q1, 6), xv = decadeTicks(c0, c1);
     /* Tick-label footprints, kept for the label placer below. Without these a
        frontier label near the left edge lands on top of a y-axis tick. */
     var axisBoxes = yv.map(function (v) {
@@ -240,9 +253,7 @@ var PricePerfFull = (function () {
       g.setAttribute('aria-label', p.harness + ' ' + p.model + ': ' + pct(p.qs) + ', ' + usd(p.cost));
       /* 2px surface ring so overlapping runs stay countable. */
       g.appendChild(el('circle', { cx: cx, cy: cy, r: rad + 2, fill: 'none', stroke: cssv('--pp-surface'), 'stroke-width': 3 }));
-      g.appendChild(p.sgm
-        ? el('circle', { cx: cx, cy: cy, r: rad, fill: col })
-        : el('circle', { cx: cx, cy: cy, r: rad, fill: cssv('--pp-surface'), stroke: col, 'stroke-width': 2.4 }));
+      g.appendChild(el('circle', { cx: cx, cy: cy, r: rad, fill: col }));
       marks.appendChild(g);
       hits.push({ p: p, cx: cx, cy: cy, rad: rad, g: g, front: !!onFront[p.model] });
     });
@@ -312,8 +323,7 @@ var PricePerfFull = (function () {
     head.appendChild(key); head.appendChild(name);
     var sub = document.createElement('div');
     sub.className = 'pp-ts';
-    sub.textContent = p.harness + ' · ' + (p.sgm ? 'SGM' : 'no SGM')
-      + (isFront ? ' · ' + t('tip_front') : '');
+    sub.textContent = p.harness + ' · SGM' + (isFront ? ' · ' + t('tip_front') : '');
     tip.appendChild(head); tip.appendChild(sub);
     var row = function (label, value, big) {
       var dv = document.createElement('div');
@@ -429,15 +439,6 @@ var PricePerfFull = (function () {
       }));
       w.appendChild(sv);
     }, t('key_front'));
-    addItem(function (w) {
-      var sv = document.createElementNS(NS, 'svg');
-      sv.setAttribute('width', 14); sv.setAttribute('height', 14);
-      sv.appendChild(el('circle', {
-        cx: 7, cy: 7, r: 5, fill: cssv('--pp-surface'),
-        stroke: cssv('--muted'), 'stroke-width': 2.2
-      }));
-      w.appendChild(sv);
-    }, t('key_raw'));
     addItem(null, t('key_hint'));
   }
 

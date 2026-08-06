@@ -38,8 +38,7 @@ var PRICE_PERF = {
       points: [
         { tier: 'low', qs: 41.68, cost: 9.53, tokens: 5.06 },
         { tier: 'medium', qs: 58.76, cost: 12.52, tokens: 7.52 },
-        { tier: 'high', qs: 51.54, cost: 14.79, tokens: 10.19 },
-        { tier: 'xhigh', qs: 43.98, cost: 17.79, tokens: 11.49 }
+        { tier: 'high', qs: 51.54, cost: 14.79, tokens: 10.19 }
       ] },
     { key: 'opus5', label: 'Claude Opus 5', plot: 'Claude Opus 5', harness: 'Claude Code', tiers: false,
       points: [
@@ -48,8 +47,7 @@ var PRICE_PERF = {
         /* 30 answers on disk: one question was repeatedly blocked by the
            provider, not left unfinished. Treated as a final run — the count is
            kept for the tooltip but no longer changes how the marker is drawn. */
-        { tier: 'xhigh', qs: 58.37, cost: 12.33, tokens: 6.09, answered: 30 },
-        { tier: 'max', qs: 55.96, cost: 17.22, tokens: 8.87 }
+        { tier: 'xhigh', qs: 58.37, cost: 12.33, tokens: 6.09, answered: 30 }
       ] },
     { key: 'fable5', label: 'Claude Fable 5', plot: 'Claude Fable 5', harness: 'Claude Code', tiers: false, pin: 'right',
       points: [
@@ -76,14 +74,33 @@ var PRICE_PERF = {
         { tier: 'medium', qs: 34.92, cost: 0.53, tokens: 8.34 },
         { tier: 'high', qs: 41.70, cost: 0.78, tokens: 13.96 },
         { tier: 'xhigh', qs: 42.39, cost: 1.01, tokens: 18.82 }
+      ] },
+    /* Google's Antigravity CLI (`agy`) under Harbor. Uses the seventh palette
+       slot, which was already provisioned and validated for a series this chart
+       did not yet have.
+
+       The 3.5 Flash ladder is NOT here: its `low` run is unfinished at 11/31, so
+       there is no complete ladder to draw. Its high (55.84) and medium (54.43)
+       are in the table and on the full scatter below.
+
+       Effort order and cost order agree, but score is not monotonic — high costs
+       more than medium and scores 3.4 points lower, the same shape as Sol. */
+    { key: 'gem36', label: 'Gemini 3.6 Flash', plot: 'Gemini 3.6 Flash', harness: 'Antigravity', tiers: false,
+      points: [
+        { tier: 'low', qs: 42.77, cost: 13.59, tokens: 27.44 },
+        { tier: 'medium', qs: 48.15, cost: 19.96, tokens: 54.30 }
       ] }
   ],
   points: [
     { key: 'k27', label: 'Kimi K2.7', harness: 'Kimi Code', qs: 49.10, cost: 3.53, tokens: 14.12 },
-    { key: 'gpt55', label: 'GPT-5.5 (xhigh)', harness: 'Codex', qs: 48.08, cost: 39.74, tokens: 22.89, pin: 'left' },
+    /* Pinned right: it is the dearest point on the chart, so the space to its
+       right is empty and a left-hand label crowds the runs behind it. */
+    { key: 'gpt55', label: 'GPT-5.5 (xhigh)', harness: 'Codex', qs: 48.08, cost: 39.74, tokens: 22.89, pin: 'right' },
     { key: 'opus48', label: 'Claude Opus 4.8', harness: 'Claude Code', qs: 41.63, cost: 7.49, tokens: 4.42, pin: 'below' },
-    { key: 'm3', label: 'MiniMax-M3', harness: 'OpenCode', qs: 47.31, cost: 2.83, tokens: 16.30 },
-    { key: 'dsv4', label: 'DeepSeek V4 Flash 0731', harness: 'OpenCode', qs: 38.28, cost: 0.26, tokens: 12.54 }
+    { key: 'dsv4', label: 'DeepSeek V4 Flash 0731', harness: 'OpenCode', qs: 38.28, cost: 0.26, tokens: 12.54 },
+    /* Volcano Engine coding plan. Single configuration — GLM-5.2 exposes no
+       effort ladder — and the best non-frontier score on the chart. */
+    { key: 'glm52cc', label: 'GLM-5.2', harness: 'Claude Code', qs: 47.69, cost: 3.29, tokens: 4.96 }
   ],
   /* Not rendered here — the record of what is measured but left off this chart
      to keep it readable. All six are now rows in the leaderboard table and
@@ -92,6 +109,14 @@ var PRICE_PERF = {
   excluded: [
     { series: 'GPT-5.5', tier: 'medium', qs: 41.41, cost: 27.17, why: 'answered 24 of 31; leaves GPT-5.5 xhigh as a single point' },
     { series: 'GPT-5.6 Sol', tier: 'max', qs: 48.30, cost: 23.90, why: 'ends the Sol ladder at xhigh' },
+    /* Trimmed 2026-08-06 for legibility, at the reviewer's request. Each is the
+       dearest rung of a ladder that had already turned down, so the shape of
+       every curve is unchanged — only the tail is shorter. All four remain in
+       the table and on the full scatter below. */
+    { series: 'GPT-5.6 Sol', tier: 'xhigh', qs: 43.98, cost: 17.79, why: 'ends the Sol ladder at high; xhigh cost more than medium and scored 14.8 points lower' },
+    { series: 'Claude Opus 5', tier: 'max', qs: 55.96, cost: 17.22, why: 'ends the Opus 5 ladder at xhigh; max cost 1.4x xhigh and scored 2.4 points lower' },
+    { series: 'Gemini 3.6 Flash', tier: 'high', qs: 44.73, cost: 21.02, why: 'ends the Gemini ladder at medium; high cost more and scored 3.4 points lower' },
+    { point: 'MiniMax-M3', harness: 'OpenCode', qs: 47.31, cost: 2.83, why: 'dropped to declutter the cheap end of the chart' },
     { series: 'Kimi K3', tier: 'max', qs: 51.35, cost: 4.90, why: 'plain K3 between two K3-256k rungs' },
     { series: 'Kimi K3-256k', tier: 'max', qs: 48.47, cost: 5.83, why: 'dearer than high and 4.1 points worse' },
     { series: 'GPT-5.6 Terra', tier: 'low', qs: 43.46, cost: 4.08, why: 'outscores medium, high and xhigh' },
@@ -137,6 +162,26 @@ var PricePerf = (function () {
   var NS = 'http://www.w3.org/2000/svg';
   var W = 880, H = 660, M = { t: 24, r: 122, b: 60, l: 74 };
   var IW = W - M.l - M.r, IH = H - M.t - M.b;
+
+  /* Cost axis: log10, same as price_perf_full.js so the two charts on this site
+     read alike.
+
+     A power axis (x^0.36) was tried here and reverted. By normal Q-Q it is the
+     straighter axis — it spreads the MARGINAL distribution of cost more evenly
+     than log, which leaves this data skewed -1.01. But a scatter is not judged
+     on its marginal: two runs collide when they are close in cost AND close in
+     score. Counting collisions between the actual drawn markers put log at the
+     optimum, and showed 0.36 herding them into one corner — on the full chart
+     17 of 21 collisions landed in the top-left under 0.36, against 8 of 22
+     spread across the plot under log. Negative exponents are worse again (22
+     overlaps at -0.5 against 10 at log): they expand the cheap end and crush
+     the expensive runs together.
+
+     Note lambda = 0 is the log case only as a limit — Math.pow(v, 0) is 1 for
+     every v — so this cannot be written as a tunable exponent.
+
+     Working: PersonalMemoryQA result_numbers/price_performance_plot/claude/scale_lab/ */
+
   var R = { low: 5.5, medium: 6.5, high: 7.5, xhigh: 8.5, max: 9.5 };
   var hidden = {}, hits = [], emphasis = null, bound = false;
 
@@ -173,7 +218,7 @@ var PricePerf = (function () {
     return out;
   }
 
-  function logTicks(a, b) {
+  function decadeTicks(a, b) {
     var out = [];
     [0.01, 0.1, 1, 10, 100].forEach(function (base) {
       [1, 2, 5].forEach(function (m) {
@@ -226,7 +271,7 @@ var PricePerf = (function () {
     var X = function (v) { return M.l + (Math.log10(v) - lc0) / (lc1 - lc0) * IW; };
     var Y = function (v) { return M.t + IH - (v - q0) / (q1 - q0) * IH; };
 
-    var yv = linTicks(q0, q1, 6), xv = logTicks(c0, c1);
+    var yv = linTicks(q0, q1, 6), xv = decadeTicks(c0, c1);
     var grid = el('g', { class: 'pp-grid' });
     yv.forEach(function (v) { grid.appendChild(el('line', { x1: M.l, x2: M.l + IW, y1: Y(v), y2: Y(v) })); });
     xv.forEach(function (v) { grid.appendChild(el('line', { y1: M.t, y2: M.t + IH, x1: X(v), x2: X(v) })); });

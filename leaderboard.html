@@ -673,7 +673,7 @@
 
             <div>
               <span class="last-updated">
-                <span data-i18n="last_updated_label">Last updated</span>:&nbsp;<span id="last-updated-date">2026-06-01</span>
+                <span data-i18n="last_updated_label">Last updated</span>:&nbsp;<span id="last-updated-date">2026-08-06</span>
               </span>
             </div>
           </div>
@@ -763,7 +763,7 @@
         <h3 class="title is-4 pp-title section-title-display" data-i18n="ppf_title"
           style="margin:2.75rem 0 0.6rem;">Every priced run</h3>
         <p class="section-intro" data-i18n="ppf_intro" style="margin-bottom:1.1rem;">
-          The same axes as the chart at the top of the page, but with nothing left out.
+          The same axes as the chart at the top of the page, with every configuration on it.
         </p>
         <div class="pp-wrap ppf-wrap">
           <div class="pp-legend" id="ppf-legend"></div>
@@ -1330,7 +1330,7 @@
         legend_atm_bench: '<code>-</code> indicates the field has not been reported by the submitter. <strong>Memory Model</strong> is the LLM used to construct the memory store; <strong>Retriever</strong> is the embedding model used at query time. Click any column header to sort; click a filter chip to narrow by system type. When a caption model is not stated, it is <strong>Qwen3-VL-2B</strong> (the default). <strong>*</strong> Memexa\'s QS is measured with a DeepSeek-V4-flash judge (its own answer model), not the gpt-5-mini judge used for every other row, so it is shown for reference and is not directly comparable; Recall is judge-independent and like-for-like.',
         panel_atm_bench_hard_title: "ATM-Bench-Hard",
         ppf_title: 'Every priced run',
-        ppf_intro: 'The same axes as the chart at the top of the page, but with nothing left out: every agent run in the table above that has a cost, coloured by harness. The staircase is the Pareto frontier \u2014 the best score money can buy at each price.',
+        ppf_intro: 'The same axes as the chart at the top of the page, with every configuration on it: each priced agent run in the table above, coloured by harness. The without-SGM ablations are the one omission \u2014 they score far below every real configuration, and carrying them cost 45% of the vertical resolution. The staircase is the Pareto frontier \u2014 the best score money can buy at each price.',
         legend_atm_bench_hard: '<code>-</code> indicates the field has not been reported. Coding agents use their default configuration unless the model label states a reasoning effort. Results use our proposed <strong>SGM</strong> (Schema-Guided Memory) unless marked <code>(w/o SGM)</code>. When a caption model is not stated, it is <strong>Qwen3-VL-2B</strong> (the default). <strong>*</strong> QS on the DeepSeek-V4-flash rows (Memexa and the A-Mem / MemPalace / HippoRAG2 re-runs) is measured with a DeepSeek-V4-flash judge (the system\'s own model), not the gpt-5-mini judge used for the other rows — shown for reference, not directly comparable. The three baseline re-runs are community-run at this LLM tier, not the original authors\' official numbers. <strong>†</strong> Memexa\'s Recall is reported on the fixed Qwen3-VL-2B captions (like-for-like with other rows), although this configuration answers from Qwen3.6-27B captions. <strong>‡</strong> Memexa\'s Total Tokens / Cost include the one-time memory build (33.9M tokens / ~$3.80 over all 11,034 items, amortizable across evaluations) plus the 31-question query (0.40M / ~$0.04); other rows\' agent costs are per full run. <strong>Cost</strong> is an API-equivalent estimate calculated from saved per-call token counters with Tokdash\'s bundled standard short-context rates; it is what the run would cost at list price and is not what was actually billed, since several of these rows ran on fixed-price coding plans (Codex, Kimi, MiniMax, Xiaomi). <strong>§</strong> OpenCode meters the DeepSeek V4 Flash Free endpoint at $0; the cost shown is the underlying model\'s list-price equivalent at the same rates as every other row. <strong>¶</strong> GPT-5.6 Luna and Terra costs follow OpenAI\'s official price reduction for these models, verified 2026-07-31: Luna $1.00/$6.00 to $0.20/$1.20 and Terra $2.50/$15.00 to $2.00/$12.00 per million input/output tokens. The runs are unchanged — same tokens, same QS — only the rate they are priced at.',
         panel_niah_title: "ATM-Bench-Hard-NIAH",
         panel_niah_intro: "Needle-in-a-haystack sweep on ATM-Bench-Hard (31 questions): each question's gold evidence is hidden among k = 25 / 50 / 100 / 200 distractor memory items, under the SGM (Schema-Guided Memory) setting. Oracle = gold evidence only, no haystack; judge: gpt-5-mini. Approximate context depth is shown in each column header.",
@@ -1371,7 +1371,7 @@
         legend_atm_bench: '<code>-</code> 表示该字段未被提交者填写。<strong>Memory Model</strong> 是用于构建记忆存储的 LLM；<strong>Retriever</strong> 是查询时使用的嵌入模型。点击任意列标题可排序，点击筛选条可按系统类型筛选。未注明时，caption 模型默认为 <strong>Qwen3-VL-2B</strong>。<strong>*</strong> Memexa 的 QS 使用 DeepSeek-V4-flash（其自身回答模型）作为评审，而非其他所有行使用的 gpt-5-mini 评审，故仅供参考、不可直接比较；Recall 与评审无关，可同口径比较。',
         panel_atm_bench_hard_title: "ATM-Bench-Hard",
         ppf_title: '全部计价运行',
-        ppf_intro: '与页面顶部图表同样的坐标轴，但不作取舍：上表中每一次有成本的智能体运行，按 Harness 着色。阶梯线为帕累托前沿 — 在每个价位上能买到的最好成绩。',
+        ppf_intro: '与页面顶部图表同样的坐标轴，但涵盖全部配置：上表中每一次有成本的智能体运行，按 Harness 着色。唯一未画出的是未使用 SGM 的消融运行——它们的得分远低于任何真实配置，保留它们会占去 45% 的纵向分辨率。阶梯线为帕累托前沿 — 在每个价位上能买到的最好成绩。',
         legend_atm_bench_hard: '<code>-</code> 表示该字段未被填写。除非模型标签注明推理强度，编码智能体均使用默认配置。除标注 <code>(w/o SGM)</code> 的结果外，其余均使用我们提出的 <strong>SGM</strong>（符号图记忆）。未注明时，caption 模型默认为 <strong>Qwen3-VL-2B</strong>。<strong>*</strong> DeepSeek-V4-flash 行（Memexa 与 A-Mem / MemPalace / HippoRAG2 复跑）的 QS 使用 DeepSeek-V4-flash（系统自身模型）作为评审，而非其他行使用的 gpt-5-mini 评审，仅供参考、不可直接比较。这三项基线为社区在该 LLM 档位的复跑，并非原作者的官方数值。<strong>†</strong> Memexa 的 Recall 基于固定的 Qwen3-VL-2B caption（与其他行同口径），尽管该配置回答时使用 Qwen3.6-27B caption。<strong>‡</strong> Memexa 的 Total Tokens / Cost 包含一次性记忆构建（覆盖全部 11,034 条，33.9M tokens / 约 $3.80，可在多次评测间摊销）加上 31 题查询（0.40M / 约 $0.04）；其他行的智能体成本为每次完整运行。<strong>成本</strong>为使用保存的每次调用 token 计数与 Tokdash 内置标准短上下文费率计算的 API 等价估算：它是该次运行按标价折算的成本，并非实际账单 —— 其中多行运行在固定价格的编码套餐上（Codex、Kimi、MiniMax、小米）。<strong>§</strong> OpenCode 对 DeepSeek V4 Flash Free 端点按 $0 计费；此处成本为该模型在与其他行相同费率下的标价等价值。<strong>¶</strong> GPT-5.6 Luna 与 Terra 的成本采用 OpenAI 对这两个模型的官方降价后费率（2026-07-31 核对）：Luna 由 $1.00/$6.00 降至 $0.20/$1.20，Terra 由 $2.50/$15.00 降至 $2.00/$12.00（每百万输入/输出 token）。运行本身未变 — token 数与 QS 相同 — 仅计价费率不同。',
         panel_niah_title: "ATM-Bench-Hard-NIAH",
         panel_niah_intro: "在 ATM-Bench-Hard（31 题）上的大海捞针扫描：每题的标准证据被混入 k = 25 / 50 / 100 / 200 个干扰记忆项中（SGM，Schema-Guided Memory）。Oracle = 仅给标准证据、无干扰；评测：gpt-5-mini。各列表头括号内为近似上下文长度。",

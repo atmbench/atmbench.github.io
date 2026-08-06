@@ -99,6 +99,46 @@ var ATM_HARD_ROWS = [
   { type: 'Agent',  harness: 'OpenCode',    model: 'DeepSeek V4 Flash (0731)',   qs: 38.28, recall: null, total_tokens: 12.54, cost_usd:  0.26, link: 'https://github.com/sst/opencode', notes: { cost_usd: '§' } },
   { type: 'Agent',  harness: 'OpenClaw 🦞', model: 'Kimi K2.5',           qs: 25.40, recall: null, total_tokens: 9.63,  cost_usd:  2.37 },
 
+  // --- Volcano Engine coding plan, three harnesses on the same three models
+  //     (SGM, gpt-5-mini judge) — added 2026-08-06.
+  //     Cross-harness reading: Claude Code leads on every model it ran.
+  //     Two runs are short of 31 questions and score over 31 regardless, as the
+  //     board's convention requires: Doubao is 29/31 on Claude Code and 30/31 on
+  //     OpenCode, LongCat 30/31. Their scores are floors, not estimates.
+  //     Omitted deliberately: OpenCode GLM-5.2 (8 of 30 answers were truncation
+  //     artefacts, not answers) and Pi LongCat (23 of 31 died on an exhausted
+  //     account, leaving 8 real answers).
+  //     Costs are list-price recomputations from the token counters, as every
+  //     other row is. NOT the figure each runner reports for itself: Claude Code
+  //     prices its own runs at Anthropic rates because the endpoint is
+  //     Anthropic-compatible, which overstates these three roughly 4x
+  //     ($12.52 rather than $3.29 for GLM-5.2).
+  { type: 'Agent',  harness: 'Claude Code', model: 'GLM-5.2',               qs: 47.69, recall: null, total_tokens:  4.96, cost_usd:  3.29, link: 'https://github.com/anthropics/claude-code' },
+  { type: 'Agent',  harness: 'Claude Code', model: 'Kimi K2.7 Code',        qs: 47.04, recall: null, total_tokens: 10.66, cost_usd:  3.00, link: 'https://github.com/anthropics/claude-code' },
+  { type: 'Agent',  harness: 'Claude Code', model: 'Doubao Seed 2.1 Turbo', qs: 46.22, recall: null, total_tokens:  9.29, cost_usd:  1.63, link: 'https://github.com/anthropics/claude-code' },
+  { type: 'Agent',  harness: 'Pi',          model: 'GLM-5.2',               qs: 45.08, recall: null, total_tokens:  5.04, cost_usd:  3.02, link: 'https://github.com/earendil-works/pi' },
+  { type: 'Agent',  harness: 'Pi',          model: 'Kimi K2.7 Code',        qs: 39.22, recall: null, total_tokens: 17.09, cost_usd:  4.44, link: 'https://github.com/earendil-works/pi' },
+  { type: 'Agent',  harness: 'Pi',          model: 'Doubao Seed 2.1 Turbo', qs: 36.83, recall: null, total_tokens:  4.91, cost_usd:  0.97, link: 'https://github.com/earendil-works/pi' },
+  { type: 'Agent',  harness: 'OpenCode',    model: 'Kimi K2.7 Code',        qs: 37.78, recall: null, total_tokens: 32.88, cost_usd:  6.81, link: 'https://github.com/sst/opencode' },
+  { type: 'Agent',  harness: 'OpenCode',    model: 'Doubao Seed 2.1 Turbo', qs: 37.69, recall: null, total_tokens:  9.77, cost_usd:  1.69, link: 'https://github.com/sst/opencode' },
+  { type: 'Agent',  harness: 'OpenCode',    model: 'LongCat 2.0',           qs: 28.22, recall: null, total_tokens: 31.17, cost_usd:  0.72, link: 'https://github.com/sst/opencode' },
+
+  // --- Antigravity (Google's `agy` CLI, run under Harbor), SGM, gpt-5-mini
+  //     judge — added 2026-08-06. Effort is baked into the model id, so each
+  //     row is its own model string rather than a tier suffix on one ladder.
+  //     The 3.5 Flash ladder is INCOMPLETE: `low` is still unfinished at 11/31
+  //     and is deliberately absent rather than listed as a partial run.
+  //     Note these cost an order of magnitude more than the Volcano rows above:
+  //     the Antigravity path re-reads a large cached context every turn, which
+  //     shows up as 20-120M total tokens per 31-question run.
+  { type: 'Agent',  harness: 'Antigravity', model: 'Gemini 3.5 Flash (high)',   qs: 55.84, recall: null, total_tokens:  49.53, cost_usd: 19.09, link: 'https://antigravity.google' },
+  { type: 'Agent',  harness: 'Antigravity', model: 'Gemini 3.5 Flash (medium)', qs: 54.43, recall: null, total_tokens: 121.96, cost_usd: 50.18, link: 'https://antigravity.google' },
+  { type: 'Agent',  harness: 'Antigravity', model: 'Gemini 3.6 Flash (medium)', qs: 48.15, recall: null, total_tokens:  54.30, cost_usd: 19.96, link: 'https://antigravity.google' },
+  { type: 'Agent',  harness: 'Antigravity', model: 'Gemini 3.6 Flash (high)',   qs: 44.73, recall: null, total_tokens:  56.57, cost_usd: 21.02, link: 'https://antigravity.google' },
+  { type: 'Agent',  harness: 'Antigravity', model: 'Gemini 3.1 Pro (high)',     qs: 43.65, recall: null, total_tokens:  54.73, cost_usd: 28.14, link: 'https://antigravity.google' },
+  { type: 'Agent',  harness: 'Antigravity', model: 'Gemini 3.6 Flash (low)',    qs: 42.77, recall: null, total_tokens:  27.44, cost_usd: 13.59, link: 'https://antigravity.google' },
+  { type: 'Agent',  harness: 'Antigravity', model: 'Gemini 3.1 Pro (low)',      qs: 40.26, recall: null, total_tokens:  21.29, cost_usd: 13.41, link: 'https://antigravity.google' },
+
   // --- Memory (one row per system; values from latest project README) ---
   { type: 'Memory', harness: 'A-Mem',     model: 'Qwen3-VL-8B-Instruct', qs:  9.90, recall: 31.70, total_tokens: null, link: 'https://github.com/WujiangXu/A-mem' },
   { type: 'Memory', harness: 'Mem0',      model: 'Qwen3-VL-8B-Instruct', qs:  9.20, recall: 23.70, total_tokens: null, link: 'https://github.com/mem0ai/mem0' },

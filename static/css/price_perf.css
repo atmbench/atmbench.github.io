@@ -119,14 +119,27 @@
    Its own palette, and it has to be: --pp-c1..c7 above were validated on the
    ADJACENT pairlist, which is all a line chart needs. Here every point can land
    beside every other, so the set below was validated over ALL pairs against
-   #fdfbf8 — worst colour-vision-deficiency separation dE 11.0, worst
-   normal-vision dE 15.6. Two slots sit under 3:1 contrast, which is allowed
-   because the frontier is directly labelled, every point is hoverable, and the
-   same numbers are in the table directly above. Six harnesses, six slots: a
-   seventh needs the validator re-run, not an extra hue. */
+   #fdfbf8. Two slots sit under 3:1 contrast, which is allowed because the
+   frontier is directly labelled, every point is hoverable, and the same numbers
+   are in the table directly above.
+
+   A seventh slot (--ppf-c7, Antigravity) was added 2026-08-06. The original
+   validator was not in the repo, so the check was re-implemented from the
+   description above — CIEDE2000 over all unordered pairs, under normal vision
+   and under Vienot-1999 protan/deutan plus a tritan approximation. That
+   re-implementation does not reproduce the dE 11.0 / 15.6 figures this comment
+   previously quoted (it scores the SIX-colour set at worst-CVD 8.54, worst-
+   normal 22.24), so those numbers came from a different method and the absolute
+   values below are not comparable to them. What it does establish is the part
+   that matters for an addition: measured on one consistent method, #7b2ff2
+   leaves both worst-case pairs EXACTLY where the six-colour set already sat
+   (8.54 / 22.24) — the new hue is never the limiting pair, and it clears 3:1
+   contrast at 5.76. Re-measure with this same method before adding an eighth.
+   Validator: tools/palette_validator.py (run it with the seven hex values). */
 .ppf-wrap {
   --ppf-c1: #0072B2; --ppf-c2: #D55E00; --ppf-c3: #009E73;
   --ppf-c4: #E69F00; --ppf-c5: #56B4E9; --ppf-c6: #b0175f;
+  --ppf-c7: #7b2ff2;
 }
 
 .ppf-wrap .pp-lgi .pp-key { width: 14px; height: 12px; }

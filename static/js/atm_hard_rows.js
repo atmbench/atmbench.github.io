@@ -97,22 +97,42 @@ var ATM_HARD_ROWS = [
   { type: 'Agent',  harness: 'OpenCode',    model: 'MiniMax M3',                 qs: 47.31, recall: null, total_tokens: 16.30, cost_usd:  2.83, link: 'https://github.com/sst/opencode' },
   // gpt-5-mini judge (like every other Agent row) — this is the answer model, not the judge
   { type: 'Agent',  harness: 'OpenCode',    model: 'DeepSeek V4 Flash (0731)',   qs: 38.28, recall: null, total_tokens: 12.54, cost_usd:  0.26, link: 'https://github.com/sst/opencode', notes: { cost_usd: '§' } },
+  // --- DeepSeek's own metered API, same weights as the OpenCode row above —
+  //     added 2026-08-06/07. Codex goes over the Responses API (which DeepSeek
+  //     shipped shortly before), Claude Code the Anthropic-compatible path, Pi
+  //     the OpenAI-compatible one. Separate endpoints and serving stacks, so
+  //     these are distinct runs rather than repeats.
+  //     All four ran at DeepSeek's server default reasoning effort.
+  //     They span 4.6 QS points while tokens span 7x: the harness barely moves
+  //     the score and dominates the bill — Codex spends 1.29M tokens a question
+  //     against Pi's 185K to buy +4.6.
+  //     Costs are list-price recomputations from the token counters, not the
+  //     figure Claude Code reports for itself — see the Volcano Engine note.
+  //     Claude Code answered 27 of 31 and still scores over 31, as the board's
+  //     convention requires, so 39.57 is a floor and not an estimate.
+  { type: 'Agent',  harness: 'Codex',       model: 'DeepSeek V4 Flash (0731)',   qs: 41.53, recall: null, total_tokens: 39.87, cost_usd:  0.46, link: 'https://github.com/openai/codex' },
+  { type: 'Agent',  harness: 'Claude Code', model: 'DeepSeek V4 Flash (0731)',   qs: 39.57, recall: null, total_tokens:  7.89, cost_usd:  0.18, link: 'https://github.com/anthropics/claude-code' },
+  { type: 'Agent',  harness: 'Pi',          model: 'DeepSeek V4 Flash (0731)',   qs: 36.94, recall: null, total_tokens:  5.74, cost_usd:  0.13, link: 'https://github.com/earendil-works/pi' },
   { type: 'Agent',  harness: 'OpenClaw 🦞', model: 'Kimi K2.5',           qs: 25.40, recall: null, total_tokens: 9.63,  cost_usd:  2.37 },
 
-  // --- Volcano Engine coding plan, three harnesses on the same three models
-  //     (SGM, gpt-5-mini judge) — added 2026-08-06.
-  //     Cross-harness reading: Claude Code leads on every model it ran.
-  //     Two runs are short of 31 questions and score over 31 regardless, as the
-  //     board's convention requires: Doubao is 29/31 on Claude Code and 30/31 on
-  //     OpenCode, LongCat 30/31. Their scores are floors, not estimates.
+  // --- Volcano Engine coding plan, four harnesses across three models
+  //     (SGM, gpt-5-mini judge) — added 2026-08-06, Codex 2026-08-07.
+  //     Cross-harness reading: Codex leads GLM-5.2, Claude Code leads the rest.
+  //     GLM-5.2 is the widest harness spread on the board for one model
+  //     (23.4 to 49.4) — the same weights on the same endpoint.
   //     Omitted deliberately: OpenCode GLM-5.2 (8 of 30 answers were truncation
   //     artefacts, not answers) and Pi LongCat (23 of 31 died on an exhausted
   //     account, leaving 8 real answers).
+  //     Three runs are short of 31 questions and score over 31 regardless, as
+  //     the board's convention requires: Doubao is 29/31 on Claude Code and
+  //     30/31 on OpenCode, LongCat 30/31. Their scores are floors, not
+  //     estimates.
   //     Costs are list-price recomputations from the token counters, as every
   //     other row is. NOT the figure each runner reports for itself: Claude Code
   //     prices its own runs at Anthropic rates because the endpoint is
   //     Anthropic-compatible, which overstates these three roughly 4x
   //     ($12.52 rather than $3.29 for GLM-5.2).
+  { type: 'Agent',  harness: 'Codex',       model: 'GLM-5.2',               qs: 49.43, recall: null, total_tokens:  9.62, cost_usd:  5.25, link: 'https://github.com/openai/codex' },
   { type: 'Agent',  harness: 'Claude Code', model: 'GLM-5.2',               qs: 47.69, recall: null, total_tokens:  4.96, cost_usd:  3.29, link: 'https://github.com/anthropics/claude-code' },
   { type: 'Agent',  harness: 'Claude Code', model: 'Kimi K2.7 Code',        qs: 47.04, recall: null, total_tokens: 10.66, cost_usd:  3.00, link: 'https://github.com/anthropics/claude-code' },
   { type: 'Agent',  harness: 'Claude Code', model: 'Doubao Seed 2.1 Turbo', qs: 46.22, recall: null, total_tokens:  9.29, cost_usd:  1.63, link: 'https://github.com/anthropics/claude-code' },

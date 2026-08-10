@@ -158,4 +158,10 @@
      focused chart at the top is sparse enough to keep shrinking. */
   .ppf-wrap .pp-plot { overflow-x: auto; }
   .ppf-wrap .pp-plot svg { min-width: 660px; }
+
+  /* Same treatment, different reason: the harness chart carries five named
+     agent labels across its foot, and those cannot shrink below reading size
+     without colliding with each other. */
+  .hx-wrap .pp-plot { overflow-x: auto; }
+  .hx-wrap .pp-plot svg { min-width: 640px; }
 }

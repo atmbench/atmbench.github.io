@@ -46,6 +46,11 @@
   <script src="static/js/atm_hard_rows.js"></script>
   <script src="static/js/price_perf.js"></script>
   <script src="static/js/price_perf_full.js"></script>
+  <!-- harness comparison: rows first, chart second — harness_perf.js reads
+       HARNESS_DATA at render time, not at parse time, but keeping the pair in
+       dependency order matches the two charts above -->
+  <script src="static/js/harness_rows.js"></script>
+  <script src="static/js/harness_perf.js"></script>
 
   <style>
     :root {
@@ -714,6 +719,26 @@
         </div>
       </div>
 
+      <!-- Harness comparison. Sits directly under the price-performance chart
+           because it is that chart's inverse: there the model varies and each
+           vendor's own agent is fixed; here the model is fixed and the agent
+           varies. One heading level down, for the same reason. -->
+      <h3 class="title is-4 pp-title section-title-display" data-hx-i18n="title"
+          style="margin-bottom:0.45rem;">Does the harness matter?</h3>
+      <p class="section-intro" data-hx-i18n="intro" style="margin-bottom:1.1rem;">
+        The same weights, driven by different coding agents.
+      </p>
+      <div class="pp-wrap hx-wrap" style="margin-bottom:1.1rem;">
+        <div class="pp-legend" id="hx-legend"></div>
+        <div class="pp-sub" id="hx-sub"></div>
+        <div class="pp-plot">
+          <!-- aria-label is set in HarnessPerf.render() so it follows the language toggle -->
+          <svg id="hx-chart" viewBox="0 0 880 560" role="img"></svg>
+          <div class="pp-tip" id="hx-tip"></div>
+        </div>
+      </div>
+      <p class="section-intro hx-foot" data-hx-i18n="foot" style="margin-bottom:2.25rem;"></p>
+
       <!-- Tabs -->
       <div class="lb-tabs">
         <button type="button" id="tab-btn-atm-bench" class="is-active" onclick="showTab('atm-bench')">ATM-Bench</button>
@@ -1280,6 +1305,7 @@
       });
       PricePerf.render();      // static/js/price_perf.js — follows currentLang
       PricePerfFull.render();  // static/js/price_perf_full.js — same
+      HarnessPerf.render();    // static/js/harness_perf.js — same
     }
 
     /* --------------------------------------------------------------- */
@@ -1423,6 +1449,9 @@
       // The full scatter plots the Hard rows themselves — hand it the array so
       // the two can never disagree.
       PricePerfFull.init(TRACKS.find(t => t.id === 'atm-bench-hard').rows);
+      // Harness chart carries its own numbers (static/js/harness_rows.js) — they
+      // are per-run, not per-board-row, so there is no array to hand it.
+      HarnessPerf.init();
     })();
   </script>
 

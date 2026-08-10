@@ -79,9 +79,17 @@ var PRICE_PERF = {
        slot, which was already provisioned and validated for a series this chart
        did not yet have.
 
-       The 3.5 Flash ladder is NOT here: its `low` run is unfinished at 11/31, so
-       there is no complete ladder to draw. Its high (55.84) and medium (54.43)
-       are in the table and on the full scatter below.
+       The 3.5 Flash ladder is NOT here, though as of 2026-08-10 it could be:
+       `low` finished (50.37, $37.82) and all three tiers are now 31/31. It is
+       kept off deliberately — one Antigravity series is enough on a chart about
+       effort ladders, and 3.6 Flash is the newer model. All three 3.5 tiers are
+       in the table and on the full scatter below.
+
+       Worth knowing before promoting it: 3.5 Flash's cost order runs BACKWARDS
+       against effort (low $37.82 beats high $19.09, medium $50.18 is dearest of
+       all) while score falls monotonically from high to low. On these axes that
+       ladder would double back on itself — a different failure from the merely
+       non-monotonic score below.
 
        Effort order and cost order agree, but score is not monotonic — high costs
        more than medium and scores 3.4 points lower, the same shape as Sol. */

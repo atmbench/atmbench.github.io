@@ -152,7 +152,7 @@
 @media screen and (max-width: 640px) {
   .pp-sub .pp-item { white-space: normal; }
 
-  /* 55 points scaled to a phone's width put the frontier labels below reading
+  /* 70 points scaled to a phone's width put the frontier labels below reading
      size. Give this chart a floor and let it scroll sideways inside its own
      box instead — the page itself still never scrolls horizontally. The
      focused chart at the top is sparse enough to keep shrinking. */

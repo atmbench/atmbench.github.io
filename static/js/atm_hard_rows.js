@@ -146,13 +146,24 @@ var ATM_HARD_ROWS = [
   // --- Antigravity (Google's `agy` CLI, run under Harbor), SGM, gpt-5-mini
   //     judge — added 2026-08-06. Effort is baked into the model id, so each
   //     row is its own model string rather than a tier suffix on one ladder.
-  //     The 3.5 Flash ladder is INCOMPLETE: `low` is still unfinished at 11/31
-  //     and is deliberately absent rather than listed as a partial run.
+  //     The 3.5 Flash ladder completed 2026-08-10 when `low` finished; all
+  //     three tiers are 31/31.
   //     Note these cost an order of magnitude more than the Volcano rows above:
   //     the Antigravity path re-reads a large cached context every turn, which
   //     shows up as 20-120M total tokens per 31-question run.
+  //     THE 3.5 FLASH LADDER IS BACKWARDS IN COST. Score falls monotonically
+  //     from high to low, but low costs twice what high does and medium costs
+  //     most of all. Cache reads carry the bill — 79.9M of low's 93.8M tokens
+  //     against 44.2M of high's 49.5M — so the cheaper reasoning tier plans
+  //     retrieval worse and re-reads the same context more often. Generation is
+  //     never the expense: output is 0.66M tokens on low.
+  //     `low`'s 31 trials come from two attempts (11 on 2026-08-04 at $1.59/q,
+  //     20 re-run on 2026-08-10 at $1.02/q after the first attempt lost 19
+  //     trials to quota exhaustion). Each trial is counted once, so the total is
+  //     a real 31-trial figure, but it blends two runs at different unit costs.
   { type: 'Agent',  harness: 'Antigravity', model: 'Gemini 3.5 Flash (high)',   qs: 55.84, recall: null, total_tokens:  49.53, cost_usd: 19.09, link: 'https://antigravity.google' },
   { type: 'Agent',  harness: 'Antigravity', model: 'Gemini 3.5 Flash (medium)', qs: 54.43, recall: null, total_tokens: 121.96, cost_usd: 50.18, link: 'https://antigravity.google' },
+  { type: 'Agent',  harness: 'Antigravity', model: 'Gemini 3.5 Flash (low)',    qs: 50.37, recall: null, total_tokens:  93.77, cost_usd: 37.82, link: 'https://antigravity.google' },
   { type: 'Agent',  harness: 'Antigravity', model: 'Gemini 3.6 Flash (medium)', qs: 48.15, recall: null, total_tokens:  54.30, cost_usd: 19.96, link: 'https://antigravity.google' },
   { type: 'Agent',  harness: 'Antigravity', model: 'Gemini 3.6 Flash (high)',   qs: 44.73, recall: null, total_tokens:  56.57, cost_usd: 21.02, link: 'https://antigravity.google' },
   { type: 'Agent',  harness: 'Antigravity', model: 'Gemini 3.1 Pro (high)',     qs: 43.65, recall: null, total_tokens:  54.73, cost_usd: 28.14, link: 'https://antigravity.google' },

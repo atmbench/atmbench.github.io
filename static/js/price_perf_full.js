@@ -233,8 +233,11 @@ var PricePerfFull = (function () {
     ax.appendChild(xt); ax.appendChild(yt); svg.appendChild(ax);
 
     /* Staircase first, so the markers sit on top of it. */
-    var front = frontier(pts), onFront = {};
-    front.forEach(function (p) { onFront[p.model] = true; });
+    var front = frontier(pts);
+    /* Membership is by IDENTITY, not by model name. Four DeepSeek V4 Flash runs
+       sit on this chart and only three are on the frontier — keying by name
+       enlarged the fourth and told its tooltip it was on the frontier too. */
+    var isFrontPoint = function (p) { return front.indexOf(p) !== -1; };
     var d = '';
     front.forEach(function (p, i) {
       if (!i) { d = 'M' + X(p.cost) + ' ' + Y(p.qs); return; }
@@ -248,14 +251,15 @@ var PricePerfFull = (function () {
     var marks = el('g');
     pts.forEach(function (p) {
       var cx = X(p.cost), cy = Y(p.qs), col = color(p.harness);
-      var rad = onFront[p.model] ? 7 : 5.5;
+      var onF = isFrontPoint(p);
+      var rad = onF ? 7 : 5.5;
       var g = el('g', { class: 'pp-mark', tabindex: '0', role: 'img', 'data-ppf': p.harness });
       g.setAttribute('aria-label', p.harness + ' ' + p.model + ': ' + pct(p.qs) + ', ' + usd(p.cost));
       /* 2px surface ring so overlapping runs stay countable. */
       g.appendChild(el('circle', { cx: cx, cy: cy, r: rad + 2, fill: 'none', stroke: cssv('--pp-surface'), 'stroke-width': 3 }));
       g.appendChild(el('circle', { cx: cx, cy: cy, r: rad, fill: col }));
       marks.appendChild(g);
-      hits.push({ p: p, cx: cx, cy: cy, rad: rad, g: g, front: !!onFront[p.model] });
+      hits.push({ p: p, cx: cx, cy: cy, rad: rad, g: g, front: onF });
     });
     svg.appendChild(marks);
 
@@ -304,8 +308,17 @@ var PricePerfFull = (function () {
         return;
       }
     };
+    /* A model can hold several rungs of the staircase — DeepSeek V4 Flash holds
+       three, one per harness — and the bare model name then repeats down the
+       chart with no way to tell the points apart. Qualify with the harness only
+       where the name is ambiguous, so the common case stays short. */
+    var frontNameCount = {};
     front.forEach(function (p) {
-      place(X(p.cost), Y(p.qs), 11, p.model, color(p.harness), 11);
+      frontNameCount[p.model] = (frontNameCount[p.model] || 0) + 1;
+    });
+    front.forEach(function (p) {
+      var text = frontNameCount[p.model] > 1 ? p.model + ' · ' + p.harness : p.model;
+      place(X(p.cost), Y(p.qs), 11, text, color(p.harness), 11);
     });
     svg.appendChild(lg);
     applyEmphasis();

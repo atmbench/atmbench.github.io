@@ -1,8 +1,9 @@
 /* ATM-Bench-Hard harness comparison — data for static/js/harness_perf.js.
 
    GENERATED from PersonalMemoryQA/result_numbers/price_performance_plot/claude/
-   harness_v1/chart_data.json. Edit there and regenerate; do not hand-patch, or
-   the site and the working chart will disagree.
+   harness_v1/chart_data.json by gen_site_rows.py in that directory. Edit there
+   and regenerate; do not hand-patch, or the site and the working chart will
+   disagree.
 
    Every point on a line is the SAME model weights, the same 31 ATM-Bench-Hard
    questions, the same SGM memory and the same gpt-5-mini judge — only the
@@ -24,7 +25,7 @@
 
    `excluded` and `omitted` are not drawn. They are the record of runs measured
    but kept off the chart, so removals stay visible to whoever edits this next.
-   Built 2026-08-07T18:06:02+01:00. Judge gpt-5-mini-2025-08-07, dataset atm-hard-20260307. */
+   Built 2026-08-13T10:48:21+01:00. Judge gpt-5-mini-2025-08-07, dataset atm-hard-20260307. */
 
 var HARNESS_DATA = {
   harnesses: [
@@ -47,8 +48,9 @@ var HARNESS_DATA = {
       { harness: 'Pi', col: 2, shape: 'triangle', qs: 36.83, cost: 0.971, tokensPerQ: 0.159, rel: 1, gap: 9.39, answered: 31, effort: null },
       { harness: 'OpenCode', col: 3, shape: 'diamond', qs: 37.69, cost: 1.691, tokensPerQ: 0.315, rel: 1.74, gap: 8.53, answered: 30, effort: null },
     ] },
-    { key: 'k27', label: 'Kimi K2.7 Code', spread: 11.31, points: [
+    { key: 'k27', label: 'Kimi K2.7 Code', spread: 13.31, points: [
       { harness: 'Claude Code', col: 0, shape: 'square', qs: 47.04, cost: 2.996, tokensPerQ: 0.344, rel: 1, gap: 2.06, answered: 31, effort: null },
+      { harness: 'Codex', col: 1, shape: 'circle', qs: 35.79, cost: 4.567, tokensPerQ: 0.595, rel: 1.52, gap: 13.31, answered: 31, effort: null },
       { harness: 'Pi', col: 2, shape: 'triangle', qs: 39.22, cost: 4.444, tokensPerQ: 0.551, rel: 1.48, gap: 9.88, answered: 31, effort: null },
       { harness: 'OpenCode', col: 3, shape: 'diamond', qs: 37.78, cost: 6.81, tokensPerQ: 1.061, rel: 2.27, gap: 11.31, answered: 31, effort: null },
       { harness: 'Kimi For Coding', col: 4, shape: 'star', qs: 49.1, cost: 3.534, tokensPerQ: 0.455, rel: 1.18, gap: 0, answered: 31, effort: null },
@@ -59,6 +61,12 @@ var HARNESS_DATA = {
       { harness: 'Pi', col: 2, shape: 'triangle', qs: 36.94, cost: 0.131, tokensPerQ: 0.185, rel: 1, gap: 4.59, answered: 31, effort: null },
       { harness: 'OpenCode', col: 3, shape: 'diamond', qs: 38.28, cost: 0.265, tokensPerQ: 0.404, rel: 2.02, gap: 3.26, answered: 31, effort: null },
     ] },
+    { key: 'dsv4pro', label: 'DeepSeek V4 Pro 0813', spread: 10.08, points: [
+      { harness: 'Claude Code', col: 0, shape: 'square', qs: 43.06, cost: 0.612, tokensPerQ: 0.22, rel: 1.4, gap: 2.86, answered: 30, effort: null },
+      { harness: 'Codex', col: 1, shape: 'circle', qs: 45.32, cost: 1.125, tokensPerQ: 1.592, rel: 2.57, gap: 0.6, answered: 31, effort: 'high' },
+      { harness: 'Pi', col: 2, shape: 'triangle', qs: 45.92, cost: 0.438, tokensPerQ: 0.258, rel: 1, gap: 0, answered: 31, effort: null },
+      { harness: 'OpenCode', col: 3, shape: 'diamond', qs: 35.84, cost: 0.742, tokensPerQ: 0.406, rel: 1.69, gap: 10.08, answered: 31, effort: null },
+    ] },
     { key: 'glm52', label: 'GLM-5.2', spread: 4.36, points: [
       { harness: 'Claude Code', col: 0, shape: 'square', qs: 47.69, cost: 3.288, tokensPerQ: 0.16, rel: 1.09, gap: 1.74, answered: 31, effort: null },
       { harness: 'Codex', col: 1, shape: 'circle', qs: 49.43, cost: 5.255, tokensPerQ: 0.31, rel: 1.74, gap: 0, answered: 31, effort: 'medium' },
@@ -66,10 +74,10 @@ var HARNESS_DATA = {
     ] },
   ],
   scorecard: [
-    { harness: 'Claude Code', shape: 'square', n: 5, wins: 1, median: 1.96, mean: 6.68, worst: 27.64, rel: 1.23 },
-    { harness: 'Codex', shape: 'circle', n: 4, wins: 2, median: 3.65, mean: 5.13, worst: 13.22, rel: 2.27 },
-    { harness: 'Pi', shape: 'triangle', n: 5, wins: 0, median: 4.59, mean: 6.46, worst: 9.88, rel: 1.34 },
-    { harness: 'OpenCode', shape: 'diamond', n: 4, wins: 1, median: 5.89, mean: 5.78, worst: 11.31, rel: 1.97, meanIfKept: 9.83, nIfKept: 5 },
+    { harness: 'Claude Code', shape: 'square', n: 6, wins: 1, median: 2.01, mean: 6.04, worst: 27.64, rel: 1.26 },
+    { harness: 'Codex', shape: 'circle', n: 6, wins: 2, median: 3.95, mean: 5.74, worst: 13.31, rel: 2.2 },
+    { harness: 'Pi', shape: 'triangle', n: 6, wins: 1, median: 4.47, mean: 5.38, worst: 9.88, rel: 1.28 },
+    { harness: 'OpenCode', shape: 'diamond', n: 5, wins: 1, median: 8.53, mean: 6.64, worst: 11.31, rel: 1.92, meanIfKept: 9.88, nIfKept: 6 },
     { harness: 'Kimi For Coding', shape: 'star', n: 1, wins: 1, median: 0, mean: 0, worst: 0, rel: 1.18 },
   ],
   excluded: [

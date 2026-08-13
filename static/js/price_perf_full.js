@@ -210,6 +210,12 @@ var PricePerfFull = (function () {
     var axisBoxes = yv.map(function (v) {
       return { x0: M.l - 46, x1: M.l - 8, y0: Y(v) - 9, y1: Y(v) + 6 };
     });
+    /* The rotated y-axis title is a full-height strip in the left gutter, and it
+       was missing from this list. A long frontier label at the cheap end could
+       therefore clear every tick and still land across the axis title — which is
+       what "DeepSeek V4 Flash (0731) · Pi" did, since the leftmost frontier
+       point carries one of the longest names. */
+    axisBoxes.push({ x0: 0, x1: 30, y0: M.t, y1: M.t + IH });
     var grid = el('g', { class: 'pp-grid' });
     yv.forEach(function (v) { grid.appendChild(el('line', { x1: M.l, x2: M.l + IW, y1: Y(v), y2: Y(v) })); });
     xv.forEach(function (v) { grid.appendChild(el('line', { y1: M.t, y2: M.t + IH, x1: X(v), x2: X(v) })); });
@@ -294,7 +300,26 @@ var PricePerfFull = (function () {
       });
       cands.push({ a: 'end', x: cx - rad - 9, y: cy - 16 });
       cands.push({ a: 'start', x: cx + rad + 9, y: cy - 16 });
-      cands.push({ a: 'middle', x: cx, y: cy + rad + size + 5 });
+      /* Rungs BELOW the marker, mirroring the ones above. The cheapest frontier
+         points sit hard against the left axis and carry the longest names
+         (model + harness), so there is often no width for them up there — the
+         only fits were ones that spilled into the axis gutter. Dropping down is
+         both legible and free: the space under the frontier's left end is the
+         emptiest part of this chart. */
+      [0, 14, 28, 42, 56, 70].forEach(function (dy) {
+        var y = cy + rad + size + 5 + dy;
+        cands.push({ a: 'middle', x: cx, y: y });
+        cands.push({ a: 'start', x: cx - rad, y: y });
+        cands.push({ a: 'end', x: cx + rad, y: y });
+        /* Flush with the plot's left edge, and ONLY for a point so close to the
+           axis that its own centred label would cross it. Offered unguarded,
+           this slot is the emptiest on the chart, so the greedy loop hands it to
+           whichever point asks first — Claude Opus 5 (high), at $7.70, landed
+           against the axis. The guard keeps it to the case it exists for: the
+           cheapest frontier points, whose labels are the longest (model +
+           harness) and whose column has no room above. */
+        if (cx - tw / 2 < M.l) cands.push({ a: 'start', x: M.l + 2, y: y });
+      });
       cands.push({ a: 'end', x: cx - rad - 9, y: cy + 20 });
       cands.push({ a: 'start', x: cx + rad + 9, y: cy + 20 });
       for (var i = 0; i < cands.length; i++) {
@@ -303,6 +328,17 @@ var PricePerfFull = (function () {
         var b = { x0: x0 - 2, x1: x0 + tw + 2, y0: c.y - size + 1, y1: c.y + 4 };
         if (b.x0 < 3 || b.x1 > W - 3 || b.y0 < M.t - 12 || b.y1 > M.t + IH + 10) continue;
         if (collides(b)) continue;
+        /* A label pushed several rungs clear of its marker stops reading as that
+           marker's label. Past ~34px, draw a hairline from the dot down to the
+           label's top edge — placed first so the text paints over it. The line
+           is only ever vertical and only ever downward, so it cannot be mistaken
+           for the staircase. */
+        if (c.y - cy > 34 && c.x !== undefined) {
+          var lx = Math.min(Math.max(cx, b.x0 + 6), b.x1 - 6);
+          lg.appendChild(el('line', {
+            x1: lx, x2: lx, y1: cy + rad + 2, y2: b.y0 - 2, class: 'ppf-leader'
+          }));
+        }
         var e = el('text', { x: c.x, y: c.y, 'text-anchor': c.a, class: 'pp-dot-name', fill: fill, 'font-size': size });
         e.textContent = text; lg.appendChild(e); boxes.push(b);
         return;

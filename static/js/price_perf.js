@@ -106,15 +106,26 @@ var PRICE_PERF = {
     { key: 'gpt55', label: 'GPT-5.5 (xhigh)', harness: 'Codex', qs: 48.08, cost: 39.74, tokens: 22.89, pin: 'right' },
     { key: 'opus48', label: 'Claude Opus 4.8', harness: 'Claude Code', qs: 41.63, cost: 7.49, tokens: 4.42, pin: 'below' },
     { key: 'dsv4', label: 'DeepSeek V4 Flash 0731', harness: 'OpenCode', qs: 38.28, cost: 0.26, tokens: 12.54 },
+    /* DeepSeek's own metered API, 0813 checkpoint. Pi is drawn because it is
+       both the best AND the cheapest of the four harnesses on these weights, so
+       no curation choice is being hidden — the other three are dearer and score
+       lower. The whole group is on the full scatter and in the table. */
+    { key: 'dsv4pro', label: 'DeepSeek V4 Pro 0813', harness: 'Pi', qs: 45.92, cost: 0.44, tokens: 8.01 },
     /* Volcano Engine coding plan. Single configuration — GLM-5.2 exposes no
        effort ladder — and the best non-frontier score on the chart. */
     { key: 'glm52cc', label: 'GLM-5.2', harness: 'Claude Code', qs: 47.69, cost: 3.29, tokens: 4.96 }
   ],
   /* Not rendered here — the record of what is measured but left off this chart
-     to keep it readable. All six are now rows in the leaderboard table and
-     points on the full scatter below it (static/js/price_perf_full.js), so
-     nothing dropped here is hidden from the reader. */
+     to keep it readable. All are rows in the leaderboard table and points on the
+     full scatter below it (static/js/price_perf_full.js), so nothing dropped
+     here is hidden from the reader. */
   excluded: [
+    /* The three dearer, lower-scoring harnesses on the V4 Pro weights. Drawing
+       one point per model is this chart's whole premise; the harness comparison
+       is the chart below it. */
+    { point: 'DeepSeek V4 Pro 0813', harness: 'Codex', qs: 45.32, cost: 1.12, why: 'Pi is drawn: cheaper and 0.6 points higher' },
+    { point: 'DeepSeek V4 Pro 0813', harness: 'Claude Code', qs: 43.06, cost: 0.61, why: 'Pi is drawn: cheaper and 2.9 points higher' },
+    { point: 'DeepSeek V4 Pro 0813', harness: 'OpenCode', qs: 35.84, cost: 0.74, why: 'Pi is drawn: cheaper and 10.1 points higher' },
     { series: 'GPT-5.5', tier: 'medium', qs: 41.41, cost: 27.17, why: 'answered 24 of 31; leaves GPT-5.5 xhigh as a single point' },
     { series: 'GPT-5.6 Sol', tier: 'max', qs: 48.30, cost: 23.90, why: 'ends the Sol ladder at xhigh' },
     /* Trimmed 2026-08-06 for legibility, at the reviewer's request. Each is the

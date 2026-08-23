@@ -25,7 +25,7 @@
 
    `excluded` and `omitted` are not drawn. They are the record of runs measured
    but kept off the chart, so removals stay visible to whoever edits this next.
-   Built 2026-08-13T10:48:21+01:00. Judge gpt-5-mini-2025-08-07, dataset atm-hard-20260307. */
+   Built 2026-08-23T13:06:52+01:00. Judge gpt-5-mini-2025-08-07, dataset atm-hard-20260307. */
 
 var HARNESS_DATA = {
   harnesses: [
@@ -72,12 +72,18 @@ var HARNESS_DATA = {
       { harness: 'Codex', col: 1, shape: 'circle', qs: 49.43, cost: 5.255, tokensPerQ: 0.31, rel: 1.74, gap: 0, answered: 31, effort: 'medium' },
       { harness: 'Pi', col: 2, shape: 'triangle', qs: 45.08, cost: 3.02, tokensPerQ: 0.163, rel: 1, gap: 4.36, answered: 31, effort: null },
     ] },
+    { key: 'qwen38', label: 'Qwen3.8-27B', spread: 14.5, points: [
+      { harness: 'Claude Code', col: 0, shape: 'square', qs: 35.41, cost: 2.248, tokensPerQ: 0.163, rel: 1.3, gap: 14.5, answered: 31, effort: 'xhigh' },
+      { harness: 'Codex', col: 1, shape: 'circle', qs: 43.97, cost: 3.149, tokensPerQ: 0.945, rel: 1.81, gap: 5.94, answered: 31, effort: 'xhigh' },
+      { harness: 'Pi', col: 2, shape: 'triangle', qs: 49.9, cost: 1.895, tokensPerQ: 0.352, rel: 1.09, gap: 0, answered: 31, effort: null },
+      { harness: 'OpenCode', col: 3, shape: 'diamond', qs: 47.49, cost: 1.734, tokensPerQ: 0.332, rel: 1, gap: 2.41, answered: 31, effort: null },
+    ] },
   ],
   scorecard: [
-    { harness: 'Claude Code', shape: 'square', n: 6, wins: 1, median: 2.01, mean: 6.04, worst: 27.64, rel: 1.26 },
-    { harness: 'Codex', shape: 'circle', n: 6, wins: 2, median: 3.95, mean: 5.74, worst: 13.31, rel: 2.2 },
-    { harness: 'Pi', shape: 'triangle', n: 6, wins: 1, median: 4.47, mean: 5.38, worst: 9.88, rel: 1.28 },
-    { harness: 'OpenCode', shape: 'diamond', n: 5, wins: 1, median: 8.53, mean: 6.64, worst: 11.31, rel: 1.92, meanIfKept: 9.88, nIfKept: 6 },
+    { harness: 'Claude Code', shape: 'square', n: 7, wins: 1, median: 2.06, mean: 7.25, worst: 27.64, rel: 1.27 },
+    { harness: 'Pi', shape: 'triangle', n: 7, wins: 2, median: 4.36, mean: 4.61, worst: 9.88, rel: 1.26 },
+    { harness: 'OpenCode', shape: 'diamond', n: 6, wins: 1, median: 5.89, mean: 5.93, worst: 11.31, rel: 1.76, meanIfKept: 8.81, nIfKept: 7 },
+    { harness: 'Codex', shape: 'circle', n: 7, wins: 2, median: 5.94, mean: 5.77, worst: 13.31, rel: 2.14 },
     { harness: 'Kimi For Coding', shape: 'star', n: 1, wins: 1, median: 0, mean: 0, worst: 0, rel: 1.18 },
   ],
   excluded: [
@@ -86,6 +92,6 @@ var HARNESS_DATA = {
   omitted: [
     { run: 'codex/deepseek_deepseek-v4-flash-low', qs: 48.43, cost: 0.32, why: 'DeepSeek V4 Flash at Codex effort low (48.4%, $0.32)' },
     { run: 'codex/deepseek_deepseek-v4-flash-max', qs: 35.33, cost: 0.35, why: 'DeepSeek V4 Flash at Codex effort max (35.3%, $0.35)' },
-    { run: 'pi/pi5-litellm_deepseek-v4-flash', qs: 24.13, cost: 1.05, why: 'DeepSeek V4 Flash through a LiteLLM proxy (24.1%, $1.05)' },
+    { run: 'pi/pi5-litellm_deepseek-v4-flash', qs: 24.13, cost: 3.33, why: 'DeepSeek V4 Flash through a LiteLLM proxy (24.1%, $1.05)' },
   ],
 };

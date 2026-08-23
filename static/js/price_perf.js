@@ -75,28 +75,56 @@ var PRICE_PERF = {
         { tier: 'high', qs: 41.70, cost: 0.78, tokens: 13.96 },
         { tier: 'xhigh', qs: 42.39, cost: 1.01, tokens: 18.82 }
       ] },
-    /* Google's Antigravity CLI (`agy`) under Harbor. Uses the seventh palette
-       slot, which was already provisioned and validated for a series this chart
-       did not yet have.
+    /* Google's Antigravity CLI (`agy`) under Harbor. Two generations are drawn,
+       in palette slots seven and eight.
 
        The 3.5 Flash ladder is NOT here, though as of 2026-08-10 it could be:
-       `low` finished (50.37, $37.82) and all three tiers are now 31/31. It is
-       kept off deliberately — one Antigravity series is enough on a chart about
-       effort ladders, and 3.6 Flash is the newer model. All three 3.5 tiers are
-       in the table and on the full scatter below.
+       `low` finished (50.37, $37.82) and all three tiers are 31/31. It is kept
+       off because its cost order runs BACKWARDS against effort — low $37.82
+       beats high $19.09 and medium $50.18 is dearest of all — while score falls
+       monotonically from high to low. On these axes that ladder doubles back on
+       itself, which is a different and worse failure than a merely non-monotonic
+       score. All three 3.5 tiers are in the table and on the full scatter below.
 
-       Worth knowing before promoting it: 3.5 Flash's cost order runs BACKWARDS
-       against effort (low $37.82 beats high $19.09, medium $50.18 is dearest of
-       all) while score falls monotonically from high to low. On these axes that
-       ladder would double back on itself — a different failure from the merely
-       non-monotonic score below.
-
-       Effort order and cost order agree, but score is not monotonic — high costs
-       more than medium and scores 3.4 points lower, the same shape as Sol. */
+       3.6: effort order and cost order agree, but score is not monotonic — high
+       costs more than medium and scores 3.4 points lower, the same shape as Sol,
+       so the ladder ends at medium. */
     { key: 'gem36', label: 'Gemini 3.6 Flash', plot: 'Gemini 3.6 Flash', harness: 'Antigravity', tiers: false,
       points: [
         { tier: 'low', qs: 42.77, cost: 13.59, tokens: 27.44 },
         { tier: 'medium', qs: 48.15, cost: 19.96, tokens: 54.30 }
+      ] },
+    /* 3.7, added 2026-08-23, and the only ladder on this chart that rises
+       monotonically in score across every rung it has — 3.5 inverts on cost,
+       3.6 turns down at high, Sol turns down at high, Opus 5 and Terra turn down
+       at max. All three tiers answered 31/31. It also tops the chart outright at
+       62.92, ahead of Sol's 58.76.
+       Where the effort goes is worth reading off the by-qtype split behind these
+       numbers: open-ended answers climb 38.5 -> 53.8 -> 69.2 while list_recall
+       peaks at medium (79.5) and gives back 8.6 points at high. More thought
+       helps the questions with no fixed answer and actively hurts the ones with
+       an exact list, so the top rung is not uniformly the best configuration —
+       it is the best average of two opposite trends. */
+    { key: 'gem37', label: 'Gemini 3.7 Flash', plot: 'Gemini 3.7 Flash', harness: 'Antigravity', tiers: false,
+      points: [
+        { tier: 'low', qs: 45.18, cost: 7.70, tokens: 36.11 },
+        { tier: 'medium', qs: 59.80, cost: 10.21, tokens: 51.02 },
+        { tier: 'high', qs: 62.92, cost: 13.58, tokens: 74.00 }
+      ] },
+    /* Qwen3.8-27B through Pi, the only open-weights ladder here and the only one
+       whose cost is a PROXY rather than a bill — the endpoint is a self-hosted
+       vLLM instance that meters nothing, so the tokens are priced against the
+       AkashML listing for the same weights. Pi is drawn because Pi is the only
+       harness whose effort was swept; the other three sit on the full scatter
+       and on the harness chart below.
+       `xhigh` here means the parameter was OMITTED, not sent: pi rewrites xhigh
+       to `high` on the wire and this server answers that with a 400, so the
+       server default — which is xhigh — is reached by saying nothing.
+       Two rungs, not three: see `low` under excluded. */
+    { key: 'qwen38', label: 'Qwen3.8-27B', plot: 'Qwen3.8-27B', harness: 'Pi', tiers: false,
+      points: [
+        { tier: 'medium', qs: 30.94, cost: 0.83, tokens: 4.45 },
+        { tier: 'xhigh', qs: 49.90, cost: 1.89, tokens: 10.92 }
       ] }
   ],
   points: [
@@ -139,7 +167,15 @@ var PRICE_PERF = {
     { series: 'Kimi K3', tier: 'max', qs: 51.35, cost: 4.90, why: 'plain K3 between two K3-256k rungs' },
     { series: 'Kimi K3-256k', tier: 'max', qs: 48.47, cost: 5.83, why: 'dearer than high and 4.1 points worse' },
     { series: 'GPT-5.6 Terra', tier: 'low', qs: 43.46, cost: 4.08, why: 'outscores medium, high and xhigh' },
-    { series: 'GPT-5.6 Luna', tier: 'max', qs: 28.25, cost: 1.44, why: '1.4x the cost of xhigh, 14.1 points lower' }
+    { series: 'GPT-5.6 Luna', tier: 'max', qs: 28.25, cost: 1.44, why: '1.4x the cost of xhigh, 14.1 points lower' },
+    /* Two independent reasons, either of which would be enough. (1) It answered
+       30 of 31 — it never returned 30ad0a48 — so 26.60 is a floor over the full
+       denominator, not a point estimate. (2) It cost MORE than medium ($1.18 vs
+       $0.83) while scoring 4.3 points lower, so medium dominates it outright and
+       drawing it would double the ladder back on itself, the same failure that
+       keeps Gemini 3.5 Flash off this chart. The low tier rambles: 7.02M tokens
+       against medium's 4.45M, for a worse answer. It is in the table. */
+    { series: 'Qwen3.8-27B', tier: 'low', qs: 26.60, cost: 1.18, why: 'answered 30 of 31, and dearer than medium while 4.3 points lower — the ladder would double back' }
   ]
 };
 

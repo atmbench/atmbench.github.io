@@ -3,14 +3,31 @@
    Relies on the page-level tokens --ink, --muted, --line and --panel-shadow,
    which both pages define identically in :root.
 
-   --pp-c1..c7 are chart series colors, NOT page accents. The page has five
-   accents and this chart draws seven models at once, so a hue would have to
-   serve two models. The sequence below was validated against the card surface
+   --pp-c1..c9 are chart series colors, NOT page accents. The page has five
+   accents and this chart draws nine models at once, so a hue would have to
+   serve two models. The first seven were validated against the card surface
    (#fdfbf8) on the adjacent pairlist: worst colour-vision-deficiency separation
    dE 9.1, worst normal-vision dE 19.6, both above their floors. Legend order is
    palette order — reordering series without re-validating can introduce an
-   unchecked pair. Three slots sit under 3:1 contrast against the surface, which
-   is allowed only because every series carries a direct label. */
+   unchecked pair. Five slots sit under 3:1 contrast against the surface, which
+   is allowed only because every series carries a direct label.
+
+   --pp-c8 (brown) and --pp-c9 (near-black) were added 2026-08-23 for the Gemini
+   3.7 Flash and Qwen3.8-27B ladders, and the check follows the precedent set
+   for --ppf-c7 below: the original validator is not in the repo and
+   tools/palette_validator.py does not reproduce the 9.1/19.6 figures above, so
+   those numbers are NOT comparable to anything measured now. What one
+   consistent method does establish is the part an addition can affect. Measured
+   on the adjacent pairlist this palette actually uses, the seven-colour worst
+   case is CVD dE 4.21 (#eda100 vs #e87ba4, tritan) and normal dE 43.16; adding
+   these two leaves both EXACTLY there — neither new hue is ever the limiting
+   pair. The worst pair involving a new colour is dE 14.56 (#008300 vs #795548
+   under deutan), 3.5x the existing floor. Both also clear the neutral grey
+   --pp-c0 used for single-configuration diamonds (dE 18.6 and 25.5) so a line
+   marker never reads as a diamond. Contrast vs surface: 6.34 and 12.23.
+   Re-measure the same way before adding a tenth:
+     python3 tools/palette_validator.py  (all-pairs — the scatter's test)
+   with the adjacent-pair variant described here for this chart. */
 
 .pp-wrap {
   border-radius: 14px;
@@ -18,7 +35,8 @@
   background: rgba(255, 255, 255, 0.96);
   padding: 1rem 1.1rem 0.9rem;
   --pp-c1: #2a78d6; --pp-c2: #eb6834; --pp-c3: #1baf7a; --pp-c4: #eda100;
-  --pp-c5: #e87ba4; --pp-c6: #008300; --pp-c7: #4a3aa7; --pp-c0: #7d7a72;
+  --pp-c5: #e87ba4; --pp-c6: #008300; --pp-c7: #4a3aa7; --pp-c8: #795548;
+  --pp-c9: #333333; --pp-c0: #7d7a72;
   --pp-surface: #fdfbf8;
 }
 

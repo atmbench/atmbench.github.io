@@ -201,14 +201,73 @@ var ATM_HARD_ROWS = [
   //     20 re-run on 2026-08-10 at $1.02/q after the first attempt lost 19
   //     trials to quota exhaustion). Each trial is counted once, so the total is
   //     a real 31-trial figure, but it blends two runs at different unit costs.
+  //     GEMINI 3.7 FLASH, added 2026-08-23. The first Antigravity ladder that
+  //     is monotonic in BOTH score and cost — 3.5 runs backwards in cost and
+  //     3.6's score peaks at medium, so this one is the only clean read of what
+  //     effort buys. All three tiers answered 31/31. `high` at 62.92 is the
+  //     best agent result on this board, ahead of Codex + GPT-5.6 Sol (58.76).
+  //     The gain is almost entirely open-ended recall (38.5 -> 53.8 -> 69.2)
+  //     while list_recall peaks at medium (79.5) and gives back 8.6 points at
+  //     high — spending more thought helps the questions with no fixed answer
+  //     and hurts the ones with an exact list.
+  //     Priced from tokdash's gemini-3.7-flash ($0.75/$3.75/$0.075 per M in /
+  //     out / cache-read), half of 3.6 Flash. That is a real generational cut,
+  //     not a snapshot mismatch: tokdash carries 3.5, 3.6 and 3.7 on one basis,
+  //     so the three Flash ladders stay comparable without re-pricing anything.
+  //     Do not mix in the live OpenRouter listing, which is uniformly half of
+  //     tokdash across the family.
+  { type: 'Agent',  harness: 'Antigravity', model: 'Gemini 3.7 Flash (high)',   qs: 62.92, recall: null, total_tokens:  74.00, cost_usd: 13.58, link: 'https://antigravity.google' },
+  { type: 'Agent',  harness: 'Antigravity', model: 'Gemini 3.7 Flash (medium)', qs: 59.80, recall: null, total_tokens:  51.02, cost_usd: 10.21, link: 'https://antigravity.google' },
   { type: 'Agent',  harness: 'Antigravity', model: 'Gemini 3.5 Flash (high)',   qs: 55.84, recall: null, total_tokens:  49.53, cost_usd: 19.09, link: 'https://antigravity.google' },
   { type: 'Agent',  harness: 'Antigravity', model: 'Gemini 3.5 Flash (medium)', qs: 54.43, recall: null, total_tokens: 121.96, cost_usd: 50.18, link: 'https://antigravity.google' },
   { type: 'Agent',  harness: 'Antigravity', model: 'Gemini 3.5 Flash (low)',    qs: 50.37, recall: null, total_tokens:  93.77, cost_usd: 37.82, link: 'https://antigravity.google' },
   { type: 'Agent',  harness: 'Antigravity', model: 'Gemini 3.6 Flash (medium)', qs: 48.15, recall: null, total_tokens:  54.30, cost_usd: 19.96, link: 'https://antigravity.google' },
+  { type: 'Agent',  harness: 'Antigravity', model: 'Gemini 3.7 Flash (low)',    qs: 45.18, recall: null, total_tokens:  36.11, cost_usd:  7.70, link: 'https://antigravity.google' },
   { type: 'Agent',  harness: 'Antigravity', model: 'Gemini 3.6 Flash (high)',   qs: 44.73, recall: null, total_tokens:  56.57, cost_usd: 21.02, link: 'https://antigravity.google' },
   { type: 'Agent',  harness: 'Antigravity', model: 'Gemini 3.1 Pro (high)',     qs: 43.65, recall: null, total_tokens:  54.73, cost_usd: 28.14, link: 'https://antigravity.google' },
   { type: 'Agent',  harness: 'Antigravity', model: 'Gemini 3.6 Flash (low)',    qs: 42.77, recall: null, total_tokens:  27.44, cost_usd: 13.59, link: 'https://antigravity.google' },
   { type: 'Agent',  harness: 'Antigravity', model: 'Gemini 3.1 Pro (low)',      qs: 40.26, recall: null, total_tokens:  21.29, cost_usd: 13.41, link: 'https://antigravity.google' },
+
+  // --- Self-hosted Qwen3.8-27B-FP8 (vLLM on the HPC box), all four harnesses ---
+  //     SGM, 31 questions, gpt-5-mini judge, run tag atm-hard-20260307.
+  //     REPLACED 2026-08-23 with the MTP-off rerun. The earlier set (47.70 /
+  //     43.62 / 42.57 / 39.63) was measured with multi-token prediction on and
+  //     with OpenCode at 29/31 and Codex at 28/31; those two were floors. Every
+  //     row below answered 31/31, so this is the first clean four-harness set
+  //     for these weights. Do not mix the two — the whole series moved at once.
+  //     The rerun did NOT establish an MTP effect. Pi gained 2.20 and Claude
+  //     Code lost 7.16, opposite signs on the only two harnesses that answered
+  //     all 31 both times; at ~3.2 points per question that is two questions
+  //     either way, which one run cannot separate from noise.
+  //     COST IS A PROXY, NOT A BILL. The endpoint is self-hosted and unmetered,
+  //     so nothing was charged; these figures price the measured tokens against
+  //     the AkashML hosted listing for the same weights ($0.45 / $3.20 / $0.05
+  //     per M in / out / cache-read, supplied 2026-08-18), so the rows can share
+  //     the cost axis with metered runs. data.json keeps the `unmetered_endpoint`
+  //     flag on all four. Qwen3.6-27B on the same box is still unpriced upstream
+  //     while carrying costs here — reconcile the two together, not separately.
+  //     Codex spends 29.3M tokens to Claude Code's 5.1M — 5.8x — and lands 8.6
+  //     points ahead of it. The bill barely follows: $3.15 against $2.25,
+  //     because a flat per-token rate with no cache discount to chase makes
+  //     token count and cost nearly the same axis.
+  //     REASONING EFFORT: only Pi was swept, so only Pi carries tier suffixes.
+  //     The four unsuffixed rows are all the same configuration — this server
+  //     accepts `low`, `medium` and its own default, and the default IS xhigh,
+  //     reached by omitting the parameter rather than sending it (pi rewrites
+  //     `xhigh` to `high` on the wire and the server rejects `high` with a 400).
+  //     So an unsuffixed row here means xhigh, not "unspecified".
+  { type: 'Agent',  harness: 'Pi',          model: 'Qwen3.8-27B',               qs: 49.90, recall: null, total_tokens: 10.92, cost_usd:  1.89, link: 'https://github.com/earendil-works/pi' },
+  { type: 'Agent',  harness: 'OpenCode',    model: 'Qwen3.8-27B',               qs: 47.49, recall: null, total_tokens: 10.28, cost_usd:  1.73, link: 'https://github.com/sst/opencode' },
+  { type: 'Agent',  harness: 'Codex',       model: 'Qwen3.8-27B',               qs: 43.97, recall: null, total_tokens: 29.29, cost_usd:  3.15, link: 'https://github.com/openai/codex' },
+  { type: 'Agent',  harness: 'Claude Code', model: 'Qwen3.8-27B',               qs: 35.41, recall: null, total_tokens:  5.05, cost_usd:  2.25, link: 'https://github.com/anthropics/claude-code' },
+  //     Pi's two lower effort tiers. `medium` is CHEAPER than `low` ($0.83 vs
+  //     $1.18) and 4.3 points better, so low is dominated outright — the low
+  //     tier rambles, spending 7.02M tokens to medium's 4.45M and still losing.
+  //     low answered 30/31 (it never returned 30ad0a48, the question that also
+  //     defeated every harness here until Codex recovered it on 2026-08-21), so
+  //     26.60 is a floor over the full 31-question denominator, not an estimate.
+  { type: 'Agent',  harness: 'Pi',          model: 'Qwen3.8-27B (medium)',      qs: 30.94, recall: null, total_tokens:  4.45, cost_usd:  0.83, link: 'https://github.com/earendil-works/pi' },
+  { type: 'Agent',  harness: 'Pi',          model: 'Qwen3.8-27B (low)',         qs: 26.60, recall: null, total_tokens:  7.02, cost_usd:  1.18, link: 'https://github.com/earendil-works/pi' },
 
   // --- Memory (one row per system; values from latest project README) ---
   { type: 'Memory', harness: 'A-Mem',     model: 'Qwen3-VL-8B-Instruct', qs:  9.90, recall: 31.70, total_tokens: null, link: 'https://github.com/WujiangXu/A-mem' },

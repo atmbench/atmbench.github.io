@@ -40,7 +40,10 @@ var PRICE_PERF = {
         { tier: 'medium', qs: 58.76, cost: 12.52, tokens: 7.52 },
         { tier: 'high', qs: 51.54, cost: 14.79, tokens: 10.19 }
       ] },
-    { key: 'opus5', label: 'Claude Opus 5', plot: 'Claude Opus 5', harness: 'Claude Code', tiers: false,
+    /* Drawn labels drop the "Claude" prefix here and on Fable 5: every mark on
+       this chart is a model name, so the vendor costs width without adding
+       information. `label` keeps the full name for the legend and tooltip. */
+    { key: 'opus5', label: 'Claude Opus 5', plot: 'Opus 5', harness: 'Claude Code', tiers: false,
       points: [
         { tier: 'medium', qs: 51.37, cost: 5.84, tokens: 3.18 },
         { tier: 'high', qs: 53.36, cost: 7.29, tokens: 3.54 },
@@ -49,7 +52,7 @@ var PRICE_PERF = {
            kept for the tooltip but no longer changes how the marker is drawn. */
         { tier: 'xhigh', qs: 58.37, cost: 12.33, tokens: 6.09, answered: 30 }
       ] },
-    { key: 'fable5', label: 'Claude Fable 5', plot: 'Claude Fable 5', harness: 'Claude Code', tiers: false, pin: 'right',
+    { key: 'fable5', label: 'Claude Fable 5', plot: 'Fable 5', harness: 'Claude Code', tiers: false, pin: 'right',
       points: [
         { tier: 'low', qs: 46.77, cost: 7.93, tokens: 1.95 },
         { tier: 'medium', qs: 51.69, cost: 10.13, tokens: 2.24 },
@@ -125,6 +128,36 @@ var PRICE_PERF = {
       points: [
         { tier: 'medium', qs: 30.94, cost: 0.83, tokens: 4.45 },
         { tier: 'xhigh', qs: 49.90, cost: 1.89, tokens: 10.92 }
+      ] },
+    /* Claude Fable 5.1 — slot 10, added 2026-09-06. Highest line on the chart,
+       and it beats Fable 5 at every rung. HIGH AND XHIGH BOTH SCORE 61.02: a
+       real plateau, not a duplicated point. The two runs disagree on 19 of 31
+       predictions and on 4 per-question scores and the partial credit cancels,
+       so the flat top rung is xhigh costing 1.85x high and buying nothing. */
+    { key: 'fable51', label: 'Claude Fable 5.1', plot: 'Fable 5.1', harness: 'Claude Code', tiers: false,
+      points: [
+        { tier: 'low', qs: 57.26, cost: 7.50, tokens: 1.59 },
+        { tier: 'medium', qs: 57.46, cost: 9.15, tokens: 2.00 },
+        { tier: 'high', qs: 61.02, cost: 14.70, tokens: 2.91 },
+        { tier: 'xhigh', qs: 61.02, cost: 27.21, tokens: 4.14 }
+      ] },
+    /* Qwen3.8-Flash-Next through Pi — slot 11, added 2026-09-06. Same
+       self-hosted vLLM box as the 27B above and the same PROXY pricing: the
+       endpoint meters nothing, so tokens are priced against the hosted
+       qwen3.8-flash listing, which is the same model under its vendor name.
+       Pi is drawn for the same reason the 27B is, but the reason is stronger
+       here: three harnesses were swept across effort, and Pi is the only one
+       whose ladder rises monotonically (Codex is flat at 50.0/49.0/48.9,
+       OpenCode scores lower at medium than at low). Claude Code has no ladder
+       at all and cannot have one — its CLI never puts effort on the wire and
+       this endpoint drops reasoning_effort on the /v1/messages route regardless.
+       All four harnesses sit on the full scatter and the harness chart below.
+       `xhigh` is the server default, reached by omitting the parameter. */
+    { key: 'qwen38fn', label: 'Qwen3.8-Flash-Next', plot: 'Qwen3.8-Flash', harness: 'Pi', tiers: false,
+      points: [
+        { tier: 'low', qs: 41.84, cost: 0.67, tokens: 4.20 },
+        { tier: 'medium', qs: 44.99, cost: 0.82, tokens: 5.29 },
+        { tier: 'xhigh', qs: 51.61, cost: 1.89, tokens: 12.15 }
       ] }
   ],
   points: [
@@ -132,7 +165,6 @@ var PRICE_PERF = {
     /* Pinned right: it is the dearest point on the chart, so the space to its
        right is empty and a left-hand label crowds the runs behind it. */
     { key: 'gpt55', label: 'GPT-5.5 (xhigh)', harness: 'Codex', qs: 48.08, cost: 39.74, tokens: 22.89, pin: 'right' },
-    { key: 'opus48', label: 'Claude Opus 4.8', harness: 'Claude Code', qs: 41.63, cost: 7.49, tokens: 4.42, pin: 'below' },
     { key: 'dsv4', label: 'DeepSeek V4 Flash 0731', harness: 'OpenCode', qs: 38.28, cost: 0.26, tokens: 12.54 },
     /* DeepSeek's own metered API, 0813 checkpoint. Pi is drawn because it is
        both the best AND the cheapest of the four harnesses on these weights, so
@@ -164,6 +196,10 @@ var PRICE_PERF = {
     { series: 'Claude Opus 5', tier: 'max', qs: 55.96, cost: 17.22, why: 'ends the Opus 5 ladder at xhigh; max cost 1.4x xhigh and scored 2.4 points lower' },
     { series: 'Gemini 3.6 Flash', tier: 'high', qs: 44.73, cost: 21.02, why: 'ends the Gemini ladder at medium; high cost more and scored 3.4 points lower' },
     { point: 'MiniMax-M3', harness: 'OpenCode', qs: 47.31, cost: 2.83, why: 'dropped to declutter the cheap end of the chart' },
+    /* Removed 2026-09-08. It sat in the crowded $5-$10 band between the Terra
+       and Opus 5 lines and is a superseded checkpoint, so it was the least
+       informative mark in the densest part of the chart. */
+    { point: 'Claude Opus 4.8', harness: 'Claude Code', qs: 41.63, cost: 7.49, why: 'dropped to declutter the $5-$10 band; superseded by Opus 5' },
     { series: 'Kimi K3', tier: 'max', qs: 51.35, cost: 4.90, why: 'plain K3 between two K3-256k rungs' },
     { series: 'Kimi K3-256k', tier: 'max', qs: 48.47, cost: 5.83, why: 'dearer than high and 4.1 points worse' },
     { series: 'GPT-5.6 Terra', tier: 'low', qs: 43.46, cost: 4.08, why: 'outscores medium, high and xhigh' },

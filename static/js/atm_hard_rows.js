@@ -47,6 +47,15 @@ var ATM_HARD_ROWS = [
   { type: 'Agent',  harness: 'Claude Code', model: 'Claude Fable 5 (medium)',  qs: 51.69, recall: null, total_tokens: 2.24,  cost_usd: 10.13, link: 'https://github.com/anthropics/claude-code' },
   { type: 'Agent',  harness: 'Claude Code', model: 'Claude Fable 5 (high)',    qs: 52.55, recall: null, total_tokens: 2.55,  cost_usd: 11.95, link: 'https://github.com/anthropics/claude-code' },
   { type: 'Agent',  harness: 'Claude Code', model: 'Claude Fable 5 (xhigh)',   qs: 56.42, recall: null, total_tokens: 2.90,  cost_usd: 15.06, link: 'https://github.com/anthropics/claude-code' },
+  //     Claude Fable 5.1, added 2026-09-06. Beats Fable 5 at every tier and its
+  //     weakest rung outscores Fable 5's best. HIGH AND XHIGH BOTH SCORE 61.02
+  //     and that is a real plateau, not a duplicated run: the two disagree on 19
+  //     of 31 predictions and on 4 per-question scores, and the partial credit
+  //     happens to cancel. xhigh costs 1.85x high for it.
+  { type: 'Agent',  harness: 'Claude Code', model: 'Claude Fable 5.1 (low)',     qs: 57.26, recall: null, total_tokens: 1.59,  cost_usd:  7.50, link: 'https://github.com/anthropics/claude-code' },
+  { type: 'Agent',  harness: 'Claude Code', model: 'Claude Fable 5.1 (medium)',  qs: 57.46, recall: null, total_tokens: 2.00,  cost_usd:  9.15, link: 'https://github.com/anthropics/claude-code' },
+  { type: 'Agent',  harness: 'Claude Code', model: 'Claude Fable 5.1 (high)',    qs: 61.02, recall: null, total_tokens: 2.91,  cost_usd: 14.70, link: 'https://github.com/anthropics/claude-code' },
+  { type: 'Agent',  harness: 'Claude Code', model: 'Claude Fable 5.1 (xhigh)',   qs: 61.02, recall: null, total_tokens: 4.14,  cost_usd: 27.21, link: 'https://github.com/anthropics/claude-code' },
   { type: 'Agent',  harness: 'Claude Code', model: 'Claude Opus 4.7 (max)',     qs: 46.60, recall: null, total_tokens: 6.93,  cost_usd:  9.58, link: 'https://github.com/anthropics/claude-code' },
   { type: 'Agent',  harness: 'Claude Code', model: 'Claude Opus 4.8',           qs: 41.63, recall: null, total_tokens: 4.42,  cost_usd:  7.49, link: 'https://github.com/anthropics/claude-code' },
   { type: 'Agent',  harness: 'Claude Code', model: 'Claude Opus 4.7 (xhigh)',   qs: 39.50, recall: null, total_tokens: 5.03,  cost_usd:  7.70, link: 'https://github.com/anthropics/claude-code' },
@@ -268,6 +277,34 @@ var ATM_HARD_ROWS = [
   //     26.60 is a floor over the full 31-question denominator, not an estimate.
   { type: 'Agent',  harness: 'Pi',          model: 'Qwen3.8-27B (medium)',      qs: 30.94, recall: null, total_tokens:  4.45, cost_usd:  0.83, link: 'https://github.com/earendil-works/pi' },
   { type: 'Agent',  harness: 'Pi',          model: 'Qwen3.8-27B (low)',         qs: 26.60, recall: null, total_tokens:  7.02, cost_usd:  1.18, link: 'https://github.com/earendil-works/pi' },
+
+  // --- Self-hosted Qwen3.8-Flash-Next (same vLLM box, weights swapped) ---
+  //     Added 2026-09-06. SGM, 31 questions, gpt-5-mini judge, all four
+  //     harnesses, every cell 31/31. Same unmetered endpoint as the 27B above,
+  //     so COST IS AGAIN A PROXY: measured tokens priced against the hosted
+  //     qwen3.8-flash listing, which is the same model under its vendor name.
+  //     EVERY TIER IS SUFFIXED HERE, unlike the 27B block. xhigh is the
+  //     server's default, so an unsuffixed row would mean xhigh rather than
+  //     "unspecified" — the 27B says so in prose and it is easy to misread.
+  //     Three harnesses were swept across effort; Claude Code was not, and
+  //     CANNOT be. Its CLI emits byte-identical /v1/messages bodies at every
+  //     --effort, and this endpoint drops reasoning_effort on that route anyway
+  //     (200 for a value /v1/chat/completions rejects with 400). Its single row
+  //     runs at the server default, which is what the (xhigh) suffix records.
+  //     THE LADDER IS NOT MONOTONE and the shape repeats across harnesses:
+  //     medium scores below low on Codex and OpenCode, and output tokens go
+  //     low ~ medium < xhigh on all three. Read medium as buying little over
+  //     low on this deployment; the real step is at xhigh.
+  { type: 'Agent',  harness: 'Pi',          model: 'Qwen3.8-Flash-Next (low)',    qs: 41.84, recall: null, total_tokens:  4.20, cost_usd: 0.67, link: 'https://github.com/earendil-works/pi' },
+  { type: 'Agent',  harness: 'Pi',          model: 'Qwen3.8-Flash-Next (medium)', qs: 44.99, recall: null, total_tokens:  5.29, cost_usd: 0.82, link: 'https://github.com/earendil-works/pi' },
+  { type: 'Agent',  harness: 'Pi',          model: 'Qwen3.8-Flash-Next (xhigh)',  qs: 51.61, recall: null, total_tokens: 12.15, cost_usd: 1.89, link: 'https://github.com/earendil-works/pi' },
+  { type: 'Agent',  harness: 'OpenCode',    model: 'Qwen3.8-Flash-Next (low)',    qs: 44.31, recall: null, total_tokens:  5.60, cost_usd: 0.88, link: 'https://github.com/sst/opencode' },
+  { type: 'Agent',  harness: 'OpenCode',    model: 'Qwen3.8-Flash-Next (medium)', qs: 40.88, recall: null, total_tokens:  6.05, cost_usd: 0.95, link: 'https://github.com/sst/opencode' },
+  { type: 'Agent',  harness: 'OpenCode',    model: 'Qwen3.8-Flash-Next (xhigh)',  qs: 51.70, recall: null, total_tokens:  9.03, cost_usd: 1.40, link: 'https://github.com/sst/opencode' },
+  { type: 'Agent',  harness: 'Codex',       model: 'Qwen3.8-Flash-Next (low)',    qs: 50.04, recall: null, total_tokens: 12.47, cost_usd: 0.50, link: 'https://github.com/openai/codex' },
+  { type: 'Agent',  harness: 'Codex',       model: 'Qwen3.8-Flash-Next (medium)', qs: 48.97, recall: null, total_tokens: 12.34, cost_usd: 0.51, link: 'https://github.com/openai/codex' },
+  { type: 'Agent',  harness: 'Codex',       model: 'Qwen3.8-Flash-Next (xhigh)',  qs: 48.87, recall: null, total_tokens: 15.11, cost_usd: 0.59, link: 'https://github.com/openai/codex' },
+  { type: 'Agent',  harness: 'Claude Code', model: 'Qwen3.8-Flash-Next (xhigh)',  qs: 36.47, recall: null, total_tokens:  7.55, cost_usd: 1.19, link: 'https://github.com/anthropics/claude-code' },
 
   // --- Memory (one row per system; values from latest project README) ---
   { type: 'Memory', harness: 'A-Mem',     model: 'Qwen3-VL-8B-Instruct', qs:  9.90, recall: 31.70, total_tokens: null, link: 'https://github.com/WujiangXu/A-mem' },

@@ -28,7 +28,8 @@
    separate them. Measured, that assumption is wrong. On the log axis the two
    charts above already use, each model's harnesses span:
 
-     DeepSeek 3.5x   MiniMax 2.8x   Kimi 2.3x   Doubao 1.7x   GLM 1.7x
+     DeepSeek Flash 3.5x   Qwen3.8-FN 3.2x   DeepSeek Pro 2.6x
+     Kimi 2.3x   Qwen3.8-27B 1.8x   GLM 1.7x
 
    which is 13% to 30% of the axis width — about 95px to 210px at this size,
    not the near-vertical zigzag the categorical version was defending against.
@@ -63,10 +64,13 @@ var HX_I18N = {
     tip_tokens: 'Tokens / question',
     tip_best: '— best',
     tip_pts: 'pts',
-    foot: 'MiniMax-M3 on Claude Code is a real result, not a broken run: every answer is '
-        + 'present, but it spent 0.14M tokens per question against 0.50–1.05M for the other '
-        + 'three and answered "Unknown" where they found the record. That is also why it is '
-        + 'the cheapest point on its line.'
+    foot: 'Two fully measured models are left off this chart to reduce noise, and the omission '
+        + 'is not free. MiniMax-M3 spread 27.6 points — the widest harness effect measured here, '
+        + 'and the only one traced to a token-spend collapse: Claude Code spent 0.14M tokens per '
+        + 'question against 0.50–1.05M for the other three and answered "Unknown" where they '
+        + 'found the record. Doubao Seed 2.1 Turbo was Claude Code\'s only win. Without the two, '
+        + 'Claude Code leads none of the six models drawn and its worst gap reads 15.2 points '
+        + 'rather than 27.6. Both remain in the table above and on the full scatter.'
   },
   zh: {
     title: '智能体框架有多重要？',
@@ -86,9 +90,12 @@ var HX_I18N = {
     tip_tokens: 'Token / 每题',
     tip_best: '— 最佳',
     tip_pts: '分',
-    foot: 'MiniMax-M3 在 Claude Code 上的结果是真实的，并非运行故障：答案均已产出，'
-        + '但它每题仅消耗 0.14M token，而其余三者为 0.50–1.05M，并在其他框架能查到记录之处回答“Unknown”。'
-        + '这也正是它成为该折线上最便宜一点的原因。'
+    foot: '为降低视觉噪声，本图省略了两个已完整测量的模型，而这一取舍并非没有代价。'
+        + 'MiniMax-M3 的落差达 27.6 分 —— 这是此处测得的最大框架效应，也是唯一一例可追溯到 '
+        + 'token 消耗骤降的情况：Claude Code 每题仅消耗 0.14M token，而其余三者为 0.50–1.05M，'
+        + '并在其他框架能查到记录之处回答“Unknown”。Doubao Seed 2.1 Turbo 则是 Claude Code 唯一一次领先。'
+        + '去掉这两条线后，Claude Code 在所绘的六个模型中无一领先，其最大落差也由 27.6 分变为 15.2 分。'
+        + '两者仍保留在上方表格与完整散点图中。'
   }
 };
 

@@ -3,8 +3,8 @@
    Relies on the page-level tokens --ink, --muted, --line and --panel-shadow,
    which both pages define identically in :root.
 
-   --pp-c1..c9 are chart series colors, NOT page accents. The page has five
-   accents and this chart draws nine models at once, so a hue would have to
+   --pp-c1..c11 are chart series colors, NOT page accents. The page has five
+   accents and this chart draws eleven models at once, so a hue would have to
    serve two models. The first seven were validated against the card surface
    (#fdfbf8) on the adjacent pairlist: worst colour-vision-deficiency separation
    dE 9.1, worst normal-vision dE 19.6, both above their floors. Legend order is
@@ -25,7 +25,28 @@
    under deutan), 3.5x the existing floor. Both also clear the neutral grey
    --pp-c0 used for single-configuration diamonds (dE 18.6 and 25.5) so a line
    marker never reads as a diamond. Contrast vs surface: 6.34 and 12.23.
-   Re-measure the same way before adding a tenth:
+   --pp-c10 (olive-gold) and --pp-c11 (plum) were added 2026-09-06 for the
+   Claude Fable 5.1 and Qwen3.8-Flash-Next ladders, measured the same way.
+   CORRECTION TO THE PARAGRAPH ABOVE while re-running it: adding c8/c9 did NOT
+   leave the adjacent normal-vision worst case "EXACTLY" at 43.16. The CVD
+   figure did hold at 4.21, but c8-c9 (#795548 vs #333333, brown against
+   near-black) is dE 21.06 on this pairlist, so 21.06 has been the real
+   normal-vision floor since August. The c10/c11 check is stated against the
+   true baseline rather than the recorded one.
+   Against that baseline the two new hues are never the limiting pair: the
+   eleven-colour adjacent worst case is CVD dE 4.21 and normal dE 21.06,
+   unchanged in both. The new adjacent pairs are far clear of it — c9-c10 CVD
+   39.58 / normal 39.82, c10-c11 CVD 19.75 / normal 62.11 — and the worst pair
+   involving either new colour anywhere in the palette is CVD 4.45 (#7e1b56 vs
+   #795548) and normal 21.48 (#938b15 vs #eda100), both still above the floor.
+   Both clear the neutral --pp-c0 diamond grey (CVD 20.3 and 19.5) so a line
+   marker never reads as a single-configuration diamond. Contrast vs surface:
+   3.42 and 9.33.
+   Only four hue bands were viable at all (around 40deg and 280-320deg);
+   everything else collided with a slot already in use, which is the real
+   signal that this palette is full. Prefer curating a series out to adding a
+   twelfth.
+   Re-measure the same way before adding a twelfth:
      python3 tools/palette_validator.py  (all-pairs — the scatter's test)
    with the adjacent-pair variant described here for this chart. */
 
@@ -36,7 +57,7 @@
   padding: 1rem 1.1rem 0.9rem;
   --pp-c1: #2a78d6; --pp-c2: #eb6834; --pp-c3: #1baf7a; --pp-c4: #eda100;
   --pp-c5: #e87ba4; --pp-c6: #008300; --pp-c7: #4a3aa7; --pp-c8: #795548;
-  --pp-c9: #333333; --pp-c0: #7d7a72;
+  --pp-c9: #333333; --pp-c10: #938b15; --pp-c11: #7e1b56; --pp-c0: #7d7a72;
   --pp-surface: #fdfbf8;
 }
 

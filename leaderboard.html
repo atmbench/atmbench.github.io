@@ -74,8 +74,8 @@
       --accent-plum: #7a4c72;
     }
 
-    html { scroll-behavior: smooth; }
-    body { background: var(--page-bg); color: var(--ink); }
+    html { scroll-behavior: smooth; overflow-x: hidden; }
+    body { background: var(--page-bg); color: var(--ink); overflow-x: hidden; }
 
     .section-hero {
       background: var(--hero-bg);
@@ -678,7 +678,7 @@
 
             <div>
               <span class="last-updated">
-                <span data-i18n="last_updated_label">Last updated</span>:&nbsp;<span id="last-updated-date">2026-08-23</span>
+                <span data-i18n="last_updated_label">Last updated</span>:&nbsp;<span id="last-updated-date">2026-10-04</span>
               </span>
             </div>
           </div>
@@ -760,9 +760,8 @@
           <strong>Retriever</strong> is the embedding model used at query time.
           Click any column header to sort; click a filter chip to narrow by system type.
           When a caption model is not stated, it is <strong>Qwen3-VL-2B</strong> (the default).
-          <strong>*</strong> Memexa's QS is measured with a DeepSeek-V4-flash judge (its own answer model), not the gpt-5-mini judge used for every other row, so it is shown for reference and is not directly comparable; Recall is judge-independent; metric definitions and input settings still need to match.
-          <strong>◇</strong> Memexa v2 uses DeepSeek V4.1 for answering and judging. The submitter expects judge quality comparable to or stronger than GPT-5; this is an expectation, not a measured cross-judge result. The benchmark-standard judge is gpt-5-mini, and these runs have not been rejudged with it. DS-v4.1 descriptions and custom cards replace default 2B captions and official SGM. Single full-set development runs. Recall@10 uses the actual final returned evidence order, including planning. One-time reusable build: $6.77 (24.94M tokens); full-split query only: Main $17.20 (94.11M), Hard $1.31 (5.21M). The same bank serves both splits and future query runs. Tokens/cost include one shared memory build (recorded retries included) plus the selected successful Planner/Reader calls of the full split; each row includes the build once. Cost is an API-equivalent estimate at current DeepSeek V4.1 Flash off-peak USD rates per million tokens: cached input $0.003, uncached input $0.15, output $0.60. Judge, supplied description generation, GPU compute and calls with missing usage are excluded; query recovery-attempt accounting is supplied separately. Unknown cache splits are conservatively priced as uncached input. This is not an actual school invoice.
-          <strong>‖</strong> RE-call reports 92.89 as the share of questions with any gold hit in the top ten (Hit@10), whereas the official Recall@10 averages the fraction of gold evidence retrieved per question. The original value is retained pending recomputation with the official evaluator; these two definitions are not directly comparable.
+          <strong>*</strong> Memexa's QS is measured with a DeepSeek-V4-flash judge, not the gpt-5-mini judge used for the other rows, so it is shown for reference and is not directly comparable; Recall is judge-independent.
+          <strong>◇</strong> Memexa v2: DeepSeek V4.1 answers, rejudged with the benchmark-standard <strong>gpt-5-mini</strong> (Main: 1,013 questions, 76.68% QS; Hard: 31 questions, 63.57% QS). Custom descriptions/cards replace default captions/SGM. Recall@10 follows the final returned evidence order. See the <a href="https://github.com/labazhou2024/memexa/releases/tag/atmbench-memexa-v2-20261002" target="_blank" rel="noopener noreferrer">release archive</a> for inputs and cost accounting.
         </p>
       </div>
 
@@ -776,13 +775,13 @@
           Coding agents use their default configuration unless the model label states a reasoning effort.
           Results use our proposed <strong>SGM</strong> (Schema-Guided Memory) unless marked <code>(w/o SGM)</code>.
           When a caption model is not stated, it is <strong>Qwen3-VL-2B</strong> (the default).
-          <strong>*</strong> QS on the DeepSeek-V4-flash rows (Memexa and the A-Mem / MemPalace / HippoRAG2 re-runs) is measured with a DeepSeek-V4-flash judge (the system's own model), not the gpt-5-mini judge used for the other rows — shown for reference, not directly comparable. The three baseline re-runs are community-run at this LLM tier, not the original authors' official numbers.
-          <strong>◇</strong> Memexa v2 uses DeepSeek V4.1 for answering and judging. The submitter expects judge quality comparable to or stronger than GPT-5; this is an expectation, not a measured cross-judge result. The benchmark-standard judge is gpt-5-mini, and these runs have not been rejudged with it. DS-v4.1 descriptions and custom cards replace default 2B captions and official SGM. Single full-set development runs. Recall@10 uses the actual final returned evidence order, including planning. One-time reusable build: $6.77 (24.94M tokens); full-split query only: Main $17.20 (94.11M), Hard $1.31 (5.21M). The same bank serves both splits and future query runs. Tokens/cost include one shared memory build (recorded retries included) plus the selected successful Planner/Reader calls of the full split; each row includes the build once. Cost is an API-equivalent estimate at current DeepSeek V4.1 Flash off-peak USD rates per million tokens: cached input $0.003, uncached input $0.15, output $0.60. Judge, supplied description generation, GPU compute and calls with missing usage are excluded; query recovery-attempt accounting is supplied separately. Unknown cache splits are conservatively priced as uncached input. This is not an actual school invoice.
-          <strong>†</strong> Memexa's Recall is reported on the fixed Qwen3-VL-2B captions (like-for-like with other rows), although this configuration answers from Qwen3.6-27B captions.
-          <strong>‡</strong> Memexa's Total Tokens / Cost include the one-time memory build (33.9M tokens / ~$3.80 over all 11,034 items, amortizable across evaluations) plus the 31-question query (0.40M / ~$0.04); other rows' agent costs are per full run.
-          <strong>Cost</strong> is an API-equivalent estimate calculated from saved per-call token counters with Tokdash's bundled standard short-context rates; it does not represent Codex subscription charges.
-          <strong>§</strong> OpenCode meters the DeepSeek V4 Flash Free endpoint at $0; the cost shown is the underlying model's list-price equivalent at the same rates as every other row.
-          <strong>¶</strong> GPT-5.6 Luna and Terra costs follow OpenAI's official price reduction for these models, verified 2026-07-31: Luna $1.00/$6.00 to $0.20/$1.20 and Terra $2.50/$15.00 to $2.00/$12.00 per million input/output tokens. The runs are unchanged — same tokens, same QS — only the rate they are priced at.
+          <strong>*</strong> QS on the DeepSeek-V4-flash rows is measured with a DeepSeek-V4-flash judge, not the gpt-5-mini judge used for the other rows; those values are shown for reference, not direct comparison.
+          <strong>◇</strong> Memexa v2: DeepSeek V4.1 answers, rejudged with the benchmark-standard <strong>gpt-5-mini</strong> (Main: 1,013 questions, 76.68% QS; Hard: 31 questions, 63.57% QS). Custom descriptions/cards replace default captions/SGM. Recall@10 follows the final returned evidence order. See the <a href="https://github.com/labazhou2024/memexa/releases/tag/atmbench-memexa-v2-20261002" target="_blank" rel="noopener noreferrer">release archive</a> for inputs and cost accounting. Hard costs include one reusable build ($6.77, 24.94M tokens) plus queries ($1.31, 5.21M tokens); judge costs are excluded. The shared-build total for Main + Hard is $25.28, not the sum of two build-inclusive rows.
+          <strong>†</strong> Memexa's Recall is reported on fixed Qwen3-VL-2B captions, although this configuration answers from Qwen3.6-27B captions.
+          <strong>‡</strong> Memexa's Total Tokens / Cost include the one-time memory build plus the 31-question query; other rows' agent costs are per full run.
+          <strong>Cost</strong> is an API-equivalent estimate calculated from saved per-call token counters, not an actual invoice.
+          <strong>§</strong> OpenCode meters the DeepSeek V4 Flash Free endpoint at $0; the displayed cost is the underlying model's list-price equivalent.
+          <strong>¶</strong> GPT-5.6 Luna and Terra costs use the official reduced rates verified 2026-07-31; the runs themselves are unchanged.
         </p>
 
         <!-- Full price-performance scatter. Lives inside the Hard panel (it is
@@ -907,9 +906,7 @@
           { key: 'memory_model', label: { en: 'Memory Model', zh: '记忆模型' }, fmt: 'plain' },
           { key: 'retriever',    label: { en: 'Retriever',    zh: '检索器' },   fmt: 'plain' },
           { key: 'qs',           label: { en: 'QS ↑',         zh: '问答得分 ↑' }, fmt: 'percent', goal: 'high', primary: true },
-          { key: 'recall',       label: { en: 'Recall@10 ↑',  zh: 'Recall@10 ↑' }, fmt: 'percent', goal: 'high' },
-          { key: 'total_tokens', label: { en: 'Total Tokens ↓', zh: '总 Token ↓' }, fmt: 'tokens_m', goal: 'low' },
-          { key: 'cost_usd', label: { en: 'Cost (USD) ↓', zh: '成本 (USD) ↓' }, fmt: 'usd', goal: 'low' }
+          { key: 'recall',       label: { en: 'Recall@10 ↑',  zh: 'Recall@10 ↑' }, fmt: 'percent', goal: 'high' }
         ],
         rows: [
           // --- Oracle (paper Table 4 — SGM variant, one row per answer model) ---
@@ -938,8 +935,8 @@
           { type: 'Memory', harness: 'MemPalace',            index_time:  0.5, answer_model: 'Qwen3-VL-8B-Instruct', memory_model: 'Qwen3-VL-2B-Instruct', retriever: 'MiniLM-L6', qs: 56.80, recall: 76.40, link: 'https://github.com/MemPalace/mempalace' },
           { type: 'Memory', harness: 'SimpleMem',            index_time: 16.0, answer_model: 'Qwen3-VL-8B-Instruct', memory_model: 'Qwen3-VL-2B-Instruct', retriever: 'MiniLM-L6', qs: 27.30, recall: 23.30, link: 'https://github.com/aiming-lab/SimpleMem' },
 
-          // Memexa v2: single full-set DeepSeek V4.1-judged result; see diamond footnote.
-          { type: 'Memory', harness: 'Memexa v2', index_time: null, answer_model: 'DeepSeek V4.1', memory_model: 'DeepSeek V4.1', retriever: 'BGE-M3 + bge-reranker-v2-m3', qs: 78.26, recall: 92.32, total_tokens: 119.056533, cost_usd: 23.974441626, link: 'https://github.com/labazhou2024/memexa', notes: { qs: '◇', recall: '◇', total_tokens: '◇', cost_usd: '◇' } },
+          // Memexa v2: single full-set gpt-5-mini rejudged result (exact QS 76.68170920885629%); see diamond footnote.
+          { type: 'Memory', harness: 'Memexa v2', index_time: null, answer_model: 'DeepSeek V4.1', memory_model: 'DeepSeek V4.1', retriever: 'BGE-M3 + bge-reranker-v2-m3', qs: 76.68, recall: 92.32, link: 'https://github.com/labazhou2024/memexa', notes: { qs: '◇', recall: '◇' } },
           // --- Memexa (community PR) — recall is the like-for-like comparison; QS* uses a DeepSeek-V4-flash judge, not gpt-5-mini (see legend) ---
           { type: 'Memory', harness: 'Memexa',               index_time: null, answer_model: 'DeepSeek-V4-flash', memory_model: 'DeepSeek-V4-flash', retriever: 'BGE-M3 + bge-reranker-v2-m3', qs: 65.28, recall: 78.93, link: 'https://github.com/labazhou2024/memexa', notes: { qs: '*' } },
           { type: 'Memory', harness: 'Memexa',               index_time: null, answer_model: 'DeepSeek-V4-flash', memory_model: 'DeepSeek-V4-flash + Qwen3.6-27B captions',       retriever: 'BGE-M3 + bge-reranker-v2-m3', qs: 68.04, recall: 79.09, link: 'https://github.com/labazhou2024/memexa', notes: { qs: '*' } },
@@ -949,7 +946,7 @@
           { type: 'RAG', harness: 'Self-RAG',  index_time: 0.5, answer_model: 'Qwen3-VL-8B-Instruct', memory_model: 'Qwen3-VL-2B-Instruct', retriever: 'MiniLM-L6', qs: 50.30, recall: 68.70, link: 'https://github.com/AkariAsai/self-rag' },
           { type: 'RAG', harness: 'ATM-RAG',   index_time: 0.5, answer_model: 'Qwen3-VL-8B-Instruct', memory_model: 'Qwen3-VL-2B-Instruct', retriever: 'MiniLM-L6', qs: 51.00, recall: 68.70, link: 'https://github.com/JingbiaoMei/ATM-Bench' },
           // RE-call full ATM-Bench run, 1,013 questions.
-          { type: 'RAG', harness: 'RE-call',  index_time: null, answer_model: 'DeepSeek V4 Pro (OpenRouter)', memory_model: 'Qwen3-VL-2B-Instruct', retriever: 'Voyage-4-large + Voyage rerank-2.5', qs: 68.43, recall: 92.89, link: 'https://github.com/GiulioDER/RE-call', notes: { recall: '\u2016' } }
+          { type: 'RAG', harness: 'RE-call',  index_time: null, answer_model: 'DeepSeek V4 Pro (OpenRouter)', memory_model: 'Qwen3-VL-2B-Instruct', retriever: 'Voyage-4-large + Voyage rerank-2.5', qs: 68.43, recall: 92.89, link: 'https://github.com/GiulioDER/RE-call', noBest: ['recall'] }
         ]
       },
       {
@@ -962,8 +959,8 @@
           { key: 'model',        label: { en: 'Model',          zh: '模型' },     fmt: 'model' },
           { key: 'qs',           label: { en: 'QS ↑',           zh: '问答得分 ↑' }, fmt: 'percent', goal: 'high', primary: true },
           { key: 'recall',       label: { en: 'Recall@10 ↑',    zh: 'Recall@10 ↑' }, fmt: 'percent', goal: 'high' },
-          { key: 'total_tokens', label: { en: 'Total Tokens ↓', zh: '总 Token ↓' }, fmt: 'tokens_m', goal: 'low' },
-          { key: 'cost_usd',     label: { en: 'Cost (USD) ↓',   zh: '成本 (USD) ↓' }, fmt: 'usd', goal: 'low' }
+          { key: 'total_tokens', label: { en: 'Total Tokens ↓', zh: '总 Token ↓' }, fmt: 'tokens_m', goal: 'low', minBestComparable: 2 },
+          { key: 'cost_usd',     label: { en: 'Cost (USD) ↓',   zh: '成本 (USD) ↓' }, fmt: 'usd', goal: 'low', minBestComparable: 2 }
         ],
         // Shared with index.html so the full scatter and this table cannot drift.
         rows: ATM_HARD_ROWS
@@ -1043,9 +1040,10 @@
       return col.label;
     }
 
-    function bestValue(rows, colKey, goal) {
-      const vals = rows.map(r => r[colKey]).filter(v => typeof v === 'number');
-      if (vals.length === 0) return null;
+    function bestValue(rows, colKey, goal, minComparable = 1) {
+      const vals = rows.filter(r => !(r.noBest || []).includes(colKey))
+        .map(r => r[colKey]).filter(v => typeof v === 'number' && Number.isFinite(v));
+      if (vals.length < minComparable) return null;
       return goal === 'high' ? Math.max(...vals) : Math.min(...vals);
     }
 
@@ -1150,7 +1148,7 @@
       // Best values relative to visible rows
       const bests = {};
       track.columns.forEach(col => {
-        if (isNumericCol(col)) bests[col.key] = bestValue(visibleRows, col.key, col.goal);
+        if (isNumericCol(col)) bests[col.key] = bestValue(visibleRows, col.key, col.goal, col.minBestComparable || 1);
       });
 
       // Sort. Nulls always sink to the bottom.
@@ -1284,7 +1282,7 @@
             td.textContent = val;
           } else {
             td.textContent = fmtCell(col.fmt, val);
-            if (!track.noBest && numeric && typeof val === 'number' && bests[col.key] !== null
+            if (!track.noBest && !(row.noBest || []).includes(col.key) && numeric && typeof val === 'number' && bests[col.key] !== null
               && Math.abs(val - bests[col.key]) < 1e-9) {
               td.classList.add('lb-best');
             }
@@ -1362,11 +1360,11 @@
         filter_all: "All",
         empty_filter: "No rows match the current filter.",
         panel_atm_bench_title: "ATM-Bench",
-        legend_atm_bench: '<code>-</code> indicates the field has not been reported by the submitter. <strong>Memory Model</strong> is the LLM used to construct the memory store; <strong>Retriever</strong> is the embedding model used at query time. Click any column header to sort; click a filter chip to narrow by system type. When a caption model is not stated, it is <strong>Qwen3-VL-2B</strong> (the default). <strong>*</strong> Memexa\'s QS is measured with a DeepSeek-V4-flash judge (its own answer model), not the gpt-5-mini judge used for every other row, so it is shown for reference and is not directly comparable; Recall is judge-independent; metric definitions and input settings still need to match. <strong>◇</strong> Memexa v2 uses DeepSeek V4.1 for answering and judging. The submitter expects judge quality comparable to or stronger than GPT-5; this is an expectation, not a measured cross-judge result. The benchmark-standard judge is gpt-5-mini, and these runs have not been rejudged with it. DS-v4.1 descriptions and custom cards replace default 2B captions and official SGM. Single full-set development runs. Recall@10 uses the actual final returned evidence order, including planning. One-time reusable build: $6.77 (24.94M tokens); full-split query only: Main $17.20 (94.11M), Hard $1.31 (5.21M). The same bank serves both splits and future query runs. Tokens/cost include one shared memory build (recorded retries included) plus the selected successful Planner/Reader calls of the full split; each row includes the build once. Cost is an API-equivalent estimate at current DeepSeek V4.1 Flash off-peak USD rates per million tokens: cached input $0.003, uncached input $0.15, output $0.60. Judge, supplied description generation, GPU compute and calls with missing usage are excluded; query recovery-attempt accounting is supplied separately. Unknown cache splits are conservatively priced as uncached input. This is not an actual school invoice. <strong>‖</strong> RE-call reports 92.89 as the share of questions with any gold hit in the top ten (Hit@10), whereas the official Recall@10 averages the fraction of gold evidence retrieved per question. The original value is retained pending recomputation with the official evaluator; these two definitions are not directly comparable.',
+        legend_atm_bench: '<code>-</code> indicates the field has not been reported by the submitter. <strong>Memory Model</strong> is the LLM used to construct the memory store; <strong>Retriever</strong> is the embedding model used at query time. Click any column header to sort; click a filter chip to narrow by system type. When a caption model is not stated, it is <strong>Qwen3-VL-2B</strong> (the default). <strong>*</strong> Memexa QS is measured with a DeepSeek-V4-flash judge, not the gpt-5-mini judge used for the other rows, so it is shown for reference and is not directly comparable; Recall is judge-independent. <strong>◇</strong> Memexa v2 answers with DeepSeek V4.1 and its frozen answers were rejudged with the benchmark-standard <strong>gpt-5-mini</strong>: Main 76.68% QS (1,013 questions), Hard 63.57% QS (31 questions). See the <a href="https://github.com/labazhou2024/memexa/releases/tag/atmbench-memexa-v2-20261002" target="_blank" rel="noopener noreferrer">release archive</a> for inputs and cost accounting.',
         panel_atm_bench_hard_title: "ATM-Bench-Hard",
         ppf_title: 'Every priced run',
         ppf_intro: 'The same axes as the chart at the top of the page, with every configuration on it: each priced agent run in the table above, coloured by harness. The without-SGM ablations are the one omission \u2014 they score far below every real configuration, and carrying them cost 45% of the vertical resolution. The staircase is the Pareto frontier \u2014 the best score money can buy at each price.',
-        legend_atm_bench_hard: '<code>-</code> indicates the field has not been reported. Coding agents use their default configuration unless the model label states a reasoning effort. Results use our proposed <strong>SGM</strong> (Schema-Guided Memory) unless marked <code>(w/o SGM)</code>. When a caption model is not stated, it is <strong>Qwen3-VL-2B</strong> (the default). <strong>*</strong> QS on the DeepSeek-V4-flash rows (Memexa and the A-Mem / MemPalace / HippoRAG2 re-runs) is measured with a DeepSeek-V4-flash judge (the system\'s own model), not the gpt-5-mini judge used for the other rows — shown for reference, not directly comparable. The three baseline re-runs are community-run at this LLM tier, not the original authors\' official numbers. <strong>†</strong> Memexa\'s Recall is reported on the fixed Qwen3-VL-2B captions (like-for-like with other rows), although this configuration answers from Qwen3.6-27B captions. <strong>‡</strong> Memexa\'s Total Tokens / Cost include the one-time memory build (33.9M tokens / ~$3.80 over all 11,034 items, amortizable across evaluations) plus the 31-question query (0.40M / ~$0.04); other rows\' agent costs are per full run. <strong>Cost</strong> is an API-equivalent estimate calculated from saved per-call token counters with Tokdash\'s bundled standard short-context rates; it is what the run would cost at list price and is not what was actually billed, since several of these rows ran on fixed-price coding plans (Codex, Kimi, MiniMax, Xiaomi). <strong>§</strong> OpenCode meters the DeepSeek V4 Flash Free endpoint at $0; the cost shown is the underlying model\'s list-price equivalent at the same rates as every other row. <strong>¶</strong> GPT-5.6 Luna and Terra costs follow OpenAI\'s official price reduction for these models, verified 2026-07-31: Luna $1.00/$6.00 to $0.20/$1.20 and Terra $2.50/$15.00 to $2.00/$12.00 per million input/output tokens. The runs are unchanged — same tokens, same QS — only the rate they are priced at. <strong>◇</strong> Memexa v2 uses DeepSeek V4.1 for answering and judging. The submitter expects judge quality comparable to or stronger than GPT-5; this is an expectation, not a measured cross-judge result. The benchmark-standard judge is gpt-5-mini, and these runs have not been rejudged with it. DS-v4.1 descriptions and custom cards replace default 2B captions and official SGM. Single full-set development runs. Recall@10 uses the actual final returned evidence order, including planning. One-time reusable build: $6.77 (24.94M tokens); full-split query only: Main $17.20 (94.11M), Hard $1.31 (5.21M). The same bank serves both splits and future query runs. Tokens/cost include one shared memory build (recorded retries included) plus the selected successful Planner/Reader calls of the full split; each row includes the build once. Cost is an API-equivalent estimate at current DeepSeek V4.1 Flash off-peak USD rates per million tokens: cached input $0.003, uncached input $0.15, output $0.60. Judge, supplied description generation, GPU compute and calls with missing usage are excluded; query recovery-attempt accounting is supplied separately. Unknown cache splits are conservatively priced as uncached input. This is not an actual school invoice.',
+        legend_atm_bench_hard: '<code>-</code> indicates the field has not been reported. Coding agents use their default configuration unless the model label states a reasoning effort. Results use <strong>SGM</strong> unless marked <code>(w/o SGM)</code>. When a caption model is not stated, it is <strong>Qwen3-VL-2B</strong> (the default). <strong>*</strong> DeepSeek-V4-flash rows use a DeepSeek-V4-flash judge, not the gpt-5-mini judge used for the other rows; they are shown for reference, not direct comparison. <strong>◇</strong> Memexa v2 answers with DeepSeek V4.1 and its frozen answers were rejudged with the benchmark-standard <strong>gpt-5-mini</strong>: Main 76.68% QS (1,013 questions), Hard 63.57% QS (31 questions). See the <a href="https://github.com/labazhou2024/memexa/releases/tag/atmbench-memexa-v2-20261002" target="_blank" rel="noopener noreferrer">release archive</a>. <strong>†</strong> Memexa Recall uses fixed Qwen3-VL-2B captions. <strong>‡</strong> Memexa Total Tokens / Cost include one reusable build plus the 31-question query. <strong>Cost</strong> is an API-equivalent estimate, not an invoice. <strong>§</strong> OpenCode meters the DeepSeek V4 Flash Free endpoint at $0. <strong>¶</strong> GPT-5.6 Luna and Terra use the reduced rates verified 2026-07-31.',
         panel_niah_title: "ATM-Bench-Hard-NIAH",
         panel_niah_intro: "Needle-in-a-haystack sweep on ATM-Bench-Hard (31 questions): each question's gold evidence is hidden among k = 25 / 50 / 100 / 200 distractor memory items, under the SGM (Schema-Guided Memory) setting. Oracle = gold evidence only, no haystack; judge: gpt-5-mini. Approximate context depth is shown in each column header.",
         niah_status: "Preview · More submissions welcome",
@@ -1403,11 +1401,11 @@
         filter_all: "全部",
         empty_filter: "当前筛选条件下没有匹配的行。",
         panel_atm_bench_title: "ATM-Bench",
-        legend_atm_bench: '<code>-</code> 表示该字段未被提交者填写。<strong>Memory Model</strong> 是用于构建记忆存储的 LLM；<strong>Retriever</strong> 是查询时使用的嵌入模型。点击任意列标题可排序，点击筛选条可按系统类型筛选。未注明时，caption 模型默认为 <strong>Qwen3-VL-2B</strong>。<strong>*</strong> Memexa 的 QS 使用 DeepSeek-V4-flash（其自身回答模型）作为评审，而非其他所有行使用的 gpt-5-mini 评审，故仅供参考、不可直接比较；Recall 与评审无关；指标定义和输入设置仍需一致。 <strong>◇</strong> Memexa v2 的回答与评审模型均为 DeepSeek V4.1。提交者预期其评审能力与 GPT-5 相当或更强；这是能力判断，并非跨 judge 对照实验的结论。本榜标准评审为 gpt-5-mini，本次未用它重判。输入为 DS-v4.1 descriptions 与自定义卡片，非默认 2B captions 或官方 SGM。报告单次全量开发实验。Recall@10 按含规划检索的最终实际返回证据顺序计算。一次性共享构建：$6.77（24.94M tokens）；仅全量查询：Main $17.20（94.11M）、Hard $1.31（5.21M）。两榜及后续查询可复用同一记忆库。Token/成本包含一次共享记忆构建（含已记录构建重试），加该榜全量选定成功 Planner/Reader 调用；每行各计一次构建。成本按 DeepSeek V4.1 Flash 当前谷价估算，每百万 token：缓存命中输入 $0.003、未命中输入 $0.15、输出 $0.60。不含 judge、已有 descriptions 生成、GPU 算力及缺失 usage 的调用；查询恢复尝试另列核算。未知缓存拆分按未命中输入保守计价。这不是学校实际账单。 <strong>‖</strong> RE-call 的 92.89 表示 top-10 至少命中一条 gold 的问题比例（Hit@10）；官方 Recall@10 是逐题 gold 命中比例的均值。原数值保留，待按官方 evaluator 重算；两种定义不能直接比较。',
+        legend_atm_bench: '<code>-</code> 表示该字段未被提交者填写。<strong>Memory Model</strong> 是用于构建记忆存储的 LLM；<strong>Retriever</strong> 是查询时使用的嵌入模型。点击任意列标题可排序，点击筛选条可按系统类型筛选。未注明时，caption 模型默认为 <strong>Qwen3-VL-2B</strong>。<strong>*</strong> Memexa 的 QS 使用 DeepSeek-V4-flash（其自身回答模型）作为评审，而非其他所有行使用的 gpt-5-mini 评审，故仅供参考、不可直接比较；Recall 与评审无关；指标定义和输入设置仍需一致。 <strong>◇</strong> Memexa v2 uses DeepSeek V4.1; frozen answers were rejudged with gpt-5-mini: Main QS 76.68% (1,013 questions), Hard QS 63.57% (31 questions). <a href="https://github.com/labazhou2024/memexa/releases/tag/atmbench-memexa-v2-20261002" target="_blank" rel="noopener noreferrer">Release archive</a>.',
         panel_atm_bench_hard_title: "ATM-Bench-Hard",
         ppf_title: '全部计价运行',
         ppf_intro: '与页面顶部图表同样的坐标轴，但涵盖全部配置：上表中每一次有成本的智能体运行，按 Harness 着色。唯一未画出的是未使用 SGM 的消融运行——它们的得分远低于任何真实配置，保留它们会占去 45% 的纵向分辨率。阶梯线为帕累托前沿 — 在每个价位上能买到的最好成绩。',
-        legend_atm_bench_hard: '<code>-</code> 表示该字段未被填写。除非模型标签注明推理强度，编码智能体均使用默认配置。除标注 <code>(w/o SGM)</code> 的结果外，其余均使用我们提出的 <strong>SGM</strong>（符号图记忆）。未注明时，caption 模型默认为 <strong>Qwen3-VL-2B</strong>。<strong>*</strong> DeepSeek-V4-flash 行（Memexa 与 A-Mem / MemPalace / HippoRAG2 复跑）的 QS 使用 DeepSeek-V4-flash（系统自身模型）作为评审，而非其他行使用的 gpt-5-mini 评审，仅供参考、不可直接比较。这三项基线为社区在该 LLM 档位的复跑，并非原作者的官方数值。<strong>†</strong> Memexa 的 Recall 基于固定的 Qwen3-VL-2B caption（与其他行同口径），尽管该配置回答时使用 Qwen3.6-27B caption。<strong>‡</strong> Memexa 的 Total Tokens / Cost 包含一次性记忆构建（覆盖全部 11,034 条，33.9M tokens / 约 $3.80，可在多次评测间摊销）加上 31 题查询（0.40M / 约 $0.04）；其他行的智能体成本为每次完整运行。<strong>成本</strong>为使用保存的每次调用 token 计数与 Tokdash 内置标准短上下文费率计算的 API 等价估算：它是该次运行按标价折算的成本，并非实际账单 —— 其中多行运行在固定价格的编码套餐上（Codex、Kimi、MiniMax、小米）。<strong>§</strong> OpenCode 对 DeepSeek V4 Flash Free 端点按 $0 计费；此处成本为该模型在与其他行相同费率下的标价等价值。<strong>¶</strong> GPT-5.6 Luna 与 Terra 的成本采用 OpenAI 对这两个模型的官方降价后费率（2026-07-31 核对）：Luna 由 $1.00/$6.00 降至 $0.20/$1.20，Terra 由 $2.50/$15.00 降至 $2.00/$12.00（每百万输入/输出 token）。运行本身未变 — token 数与 QS 相同 — 仅计价费率不同。 <strong>◇</strong> Memexa v2 的回答与评审模型均为 DeepSeek V4.1。提交者预期其评审能力与 GPT-5 相当或更强；这是能力判断，并非跨 judge 对照实验的结论。本榜标准评审为 gpt-5-mini，本次未用它重判。输入为 DS-v4.1 descriptions 与自定义卡片，非默认 2B captions 或官方 SGM。报告单次全量开发实验。Recall@10 按含规划检索的最终实际返回证据顺序计算。一次性共享构建：$6.77（24.94M tokens）；仅全量查询：Main $17.20（94.11M）、Hard $1.31（5.21M）。两榜及后续查询可复用同一记忆库。Token/成本包含一次共享记忆构建（含已记录构建重试），加该榜全量选定成功 Planner/Reader 调用；每行各计一次构建。成本按 DeepSeek V4.1 Flash 当前谷价估算，每百万 token：缓存命中输入 $0.003、未命中输入 $0.15、输出 $0.60。不含 judge、已有 descriptions 生成、GPU 算力及缺失 usage 的调用；查询恢复尝试另列核算。未知缓存拆分按未命中输入保守计价。这不是学校实际账单。',
+        legend_atm_bench_hard: '<code>-</code> 表示该字段未被填写。除非模型标签注明推理强度，编码智能体均使用默认配置。除标注 <code>(w/o SGM)</code> 的结果外，其余均使用我们提出的 <strong>SGM</strong>（符号图记忆）。未注明时，caption 模型默认为 <strong>Qwen3-VL-2B</strong>。<strong>*</strong> DeepSeek-V4-flash 行（Memexa 与 A-Mem / MemPalace / HippoRAG2 复跑）的 QS 使用 DeepSeek-V4-flash（系统自身模型）作为评审，而非其他行使用的 gpt-5-mini 评审，仅供参考、不可直接比较。这三项基线为社区在该 LLM 档位的复跑，并非原作者的官方数值。<strong>◇</strong> Memexa v2 uses DeepSeek V4.1; frozen answers were rejudged with gpt-5-mini: Main QS 76.68% (1,013 questions), Hard QS 63.57% (31 questions). <a href="https://github.com/labazhou2024/memexa/releases/tag/atmbench-memexa-v2-20261002" target="_blank" rel="noopener noreferrer">Release archive</a>. <strong>†</strong> Memexa 的 Recall 基于固定的 Qwen3-VL-2B caption（与其他行同口径），尽管该配置回答时使用 Qwen3.6-27B caption。<strong>‡</strong> Memexa 的 Total Tokens / Cost 包含一次性记忆构建（覆盖全部 11,034 条，33.9M tokens / 约 $3.80，可在多次评测间摊销）加上 31 题查询（0.40M / 约 $0.04）；其他行的智能体成本为每次完整运行。<strong>成本</strong>为使用保存的每次调用 token 计数与 Tokdash 内置标准短上下文费率计算的 API 等价估算：它是该次运行按标价折算的成本，并非实际账单 —— 其中多行运行在固定价格的编码套餐上（Codex、Kimi、MiniMax、小米）。<strong>§</strong> OpenCode 对 DeepSeek V4 Flash Free 端点按 $0 计费；此处成本为该模型在与其他行相同费率下的标价等价值。<strong>¶</strong> GPT-5.6 Luna 与 Terra 的成本采用 OpenAI 对这两个模型的官方降价后费率（2026-07-31 核对）：Luna 由 $1.00/$6.00 降至 $0.20/$1.20，Terra 由 $2.50/$15.00 降至 $2.00/$12.00（每百万输入/输出 token）。运行本身未变 — token 数与 QS 相同 — 仅计价费率不同。 ',
         panel_niah_title: "ATM-Bench-Hard-NIAH",
         panel_niah_intro: "在 ATM-Bench-Hard（31 题）上的大海捞针扫描：每题的标准证据被混入 k = 25 / 50 / 100 / 200 个干扰记忆项中（SGM，Schema-Guided Memory）。Oracle = 仅给标准证据、无干扰；评测：gpt-5-mini。各列表头括号内为近似上下文长度。",
         niah_status: "预览 · 欢迎更多提交",

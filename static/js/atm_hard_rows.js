@@ -313,7 +313,7 @@ var ATM_HARD_ROWS = [
   { type: 'Memory', harness: 'MemPalace', model: 'Qwen3-VL-8B-Instruct', qs:  9.70, recall: 28.30, total_tokens: null, link: 'https://github.com/MemPalace/mempalace' },
   { type: 'Memory', harness: 'SimpleMem', model: 'Qwen3-VL-8B-Instruct', qs:  3.20, recall:  7.00, total_tokens: null, link: 'https://github.com/aiming-lab/SimpleMem' },
 
-  // Memexa v2: full Hard31, DeepSeek V4.1 judge (diamond footnote).
+  // Memexa v2: full Hard31, gpt-5-mini rejudge (exact QS 63.56886840757808%) (diamond footnote).
   { type: 'Memory', harness: 'Memexa v2', model: 'DeepSeek V4.1', qs: 63.57, recall: 63.05, total_tokens: 30.157385, cost_usd: 8.077242108, link: 'https://github.com/labazhou2024/memexa', notes: { qs: '◇', recall: '◇', total_tokens: '◇', cost_usd: '◇' } },
 
   // --- Memexa (community PR) + same-LLM (DeepSeek-V4-flash) re-runs of baselines. QS* = flash judge (not gpt-5-mini); see legend ---

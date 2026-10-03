@@ -92,11 +92,21 @@ Conventions:
   [ATM-Bench](https://github.com/JingbiaoMei/ATM-Bench) README). Unknown fields are `null`
   → the renderer prints `-` and excludes them from sorting and "best-in-column" highlights.
 - **QS** (Question Score) and **Recall@10** are percentages (two decimals, e.g. `41.60`).
-  **Total tokens** are stored in millions (`4.42` → `4.42M`, ATM-Bench-Hard track). **Index
-  time** is in hours and exists only on the ATM-Bench (first) track.
+  **Total tokens** are stored in millions (`4.42` → `4.42M`). **Cost** is stored in USD and displayed with two decimals.
+  The Hard table shows these optional fields; Main costs stay in run reports until
+  multiple submissions report them. Preserve exact cost accounting in the linked run
+  report. Cost/token best highlights require at least two reported comparable values
+  in the current filter. **Index time** is in hours and exists only on the ATM-Bench
+  (first) track.
 - Set `link` to the system's canonical repo/paper to make the harness name clickable.
 - The headline view filters **Oracle off** by default (it is a no-retrieval upper bound);
   click the Oracle chip to include it.
+
+## Validation
+
+Run `node tools/verify_leaderboard.mjs` before submitting. It checks numeric bounds,
+row coverage, best-value eligibility, footnote consistency, and the reported rejudge
+scores against the public per-question score summary.
 
 ## Deployment
 

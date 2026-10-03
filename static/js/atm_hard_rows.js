@@ -9,7 +9,7 @@
 
    Contributor flow is unchanged — append one line to the array below. Field
    reference and per-type conventions are in AGENTS.md; the renderer, columns
-   and footnote markers still live in leaderboard.html.
+   and table provenance is written in each row.
 
    Row order here is cosmetic (grouped by system family for editing); the table
    sorts itself by the primary column at render time. */
@@ -68,16 +68,16 @@ var ATM_HARD_ROWS = [
   { type: 'Agent',  harness: 'Codex',       model: 'GPT-5.6 Sol (max)',          qs: 48.30, recall: null, total_tokens: 17.60, cost_usd: 23.90, link: 'https://github.com/openai/codex' },
   // Luna/Terra costs re-computed at OpenAI's reduced rates (Tokdash v2.0.11, verified
   // 2026-07-31). Tokens and QS are unchanged from the original submission.
-  { type: 'Agent',  harness: 'Codex',       model: 'GPT-5.6 Luna (low)',         qs: 31.57, recall: null, total_tokens: 7.02,  cost_usd:  0.45, link: 'https://github.com/openai/codex', notes: { cost_usd: '¶' } },
-  { type: 'Agent',  harness: 'Codex',       model: 'GPT-5.6 Luna (medium)',      qs: 34.92, recall: null, total_tokens: 8.34,  cost_usd:  0.53, link: 'https://github.com/openai/codex', notes: { cost_usd: '¶' } },
-  { type: 'Agent',  harness: 'Codex',       model: 'GPT-5.6 Luna (high)',        qs: 41.70, recall: null, total_tokens: 13.96, cost_usd:  0.78, link: 'https://github.com/openai/codex', notes: { cost_usd: '¶' } },
-  { type: 'Agent',  harness: 'Codex',       model: 'GPT-5.6 Luna (xhigh)',       qs: 42.39, recall: null, total_tokens: 18.82, cost_usd:  1.01, link: 'https://github.com/openai/codex', notes: { cost_usd: '¶' } },
-  { type: 'Agent',  harness: 'Codex',       model: 'GPT-5.6 Luna (max)',         qs: 28.25, recall: null, total_tokens: 28.82, cost_usd:  1.44, link: 'https://github.com/openai/codex', notes: { cost_usd: '¶' } },
-  { type: 'Agent',  harness: 'Codex',       model: 'GPT-5.6 Terra (low)',        qs: 43.46, recall: null, total_tokens: 6.16,  cost_usd:  4.08, link: 'https://github.com/openai/codex', notes: { cost_usd: '¶' } },
-  { type: 'Agent',  harness: 'Codex',       model: 'GPT-5.6 Terra (medium)',     qs: 28.22, recall: null, total_tokens: 6.71,  cost_usd:  4.32, link: 'https://github.com/openai/codex', notes: { cost_usd: '¶' } },
-  { type: 'Agent',  harness: 'Codex',       model: 'GPT-5.6 Terra (high)',       qs: 38.61, recall: null, total_tokens: 7.83,  cost_usd:  5.01, link: 'https://github.com/openai/codex', notes: { cost_usd: '¶' } },
-  { type: 'Agent',  harness: 'Codex',       model: 'GPT-5.6 Terra (xhigh)',      qs: 40.95, recall: null, total_tokens: 9.36,  cost_usd:  5.96, link: 'https://github.com/openai/codex', notes: { cost_usd: '¶' } },
-  { type: 'Agent',  harness: 'Codex',       model: 'GPT-5.6 Terra (max)',        qs: 44.47, recall: null, total_tokens: 17.21, cost_usd:  9.92, link: 'https://github.com/openai/codex', notes: { cost_usd: '¶' } },
+  { type: 'Agent',  harness: 'Codex',       model: 'GPT-5.6 Luna (low)',         qs: 31.57, recall: null, total_tokens: 7.02,  cost_usd:  0.45, link: 'https://github.com/openai/codex' },
+  { type: 'Agent',  harness: 'Codex',       model: 'GPT-5.6 Luna (medium)',      qs: 34.92, recall: null, total_tokens: 8.34,  cost_usd:  0.53, link: 'https://github.com/openai/codex' },
+  { type: 'Agent',  harness: 'Codex',       model: 'GPT-5.6 Luna (high)',        qs: 41.70, recall: null, total_tokens: 13.96, cost_usd:  0.78, link: 'https://github.com/openai/codex' },
+  { type: 'Agent',  harness: 'Codex',       model: 'GPT-5.6 Luna (xhigh)',       qs: 42.39, recall: null, total_tokens: 18.82, cost_usd:  1.01, link: 'https://github.com/openai/codex' },
+  { type: 'Agent',  harness: 'Codex',       model: 'GPT-5.6 Luna (max)',         qs: 28.25, recall: null, total_tokens: 28.82, cost_usd:  1.44, link: 'https://github.com/openai/codex' },
+  { type: 'Agent',  harness: 'Codex',       model: 'GPT-5.6 Terra (low)',        qs: 43.46, recall: null, total_tokens: 6.16,  cost_usd:  4.08, link: 'https://github.com/openai/codex' },
+  { type: 'Agent',  harness: 'Codex',       model: 'GPT-5.6 Terra (medium)',     qs: 28.22, recall: null, total_tokens: 6.71,  cost_usd:  4.32, link: 'https://github.com/openai/codex' },
+  { type: 'Agent',  harness: 'Codex',       model: 'GPT-5.6 Terra (high)',       qs: 38.61, recall: null, total_tokens: 7.83,  cost_usd:  5.01, link: 'https://github.com/openai/codex' },
+  { type: 'Agent',  harness: 'Codex',       model: 'GPT-5.6 Terra (xhigh)',      qs: 40.95, recall: null, total_tokens: 9.36,  cost_usd:  5.96, link: 'https://github.com/openai/codex' },
+  { type: 'Agent',  harness: 'Codex',       model: 'GPT-5.6 Terra (max)',        qs: 44.47, recall: null, total_tokens: 17.21, cost_usd:  9.92, link: 'https://github.com/openai/codex' },
   { type: 'Agent',  harness: 'Codex',       model: 'GPT-5.5 (xhigh)',     qs: 48.08, recall: null, total_tokens: 22.89, cost_usd: 39.74, link: 'https://github.com/openai/codex' },
   { type: 'Agent',  harness: 'Codex',       model: 'GPT-5.5 (medium)',    qs: 41.40, recall: null, total_tokens: 16.14, cost_usd: 27.17, link: 'https://github.com/openai/codex' },
   { type: 'Agent',  harness: 'Codex',       model: 'GPT-5.2',             qs: 39.70, recall: null, total_tokens: 15.46, cost_usd: null,  link: 'https://github.com/openai/codex' },
@@ -118,7 +118,7 @@ var ATM_HARD_ROWS = [
   { type: 'Agent',  harness: 'Codex',       model: 'MiniMax M3 (medium)',        qs: 40.01, recall: null, total_tokens: 32.54, cost_usd:  4.34, link: 'https://github.com/openai/codex' },
   { type: 'Agent',  harness: 'Claude Code', model: 'MiniMax M3',                 qs: 19.67, recall: null, total_tokens:  4.41, cost_usd:  1.53, link: 'https://github.com/anthropics/claude-code' },
   // gpt-5-mini judge (like every other Agent row) — this is the answer model, not the judge
-  { type: 'Agent',  harness: 'OpenCode',    model: 'DeepSeek V4 Flash (0731)',   qs: 38.28, recall: null, total_tokens: 12.54, cost_usd:  0.26, link: 'https://github.com/sst/opencode', notes: { cost_usd: '§' } },
+  { type: 'Agent',  harness: 'OpenCode',    model: 'DeepSeek V4 Flash (0731)',   qs: 38.28, recall: null, total_tokens: 12.54, cost_usd:  0.26, link: 'https://github.com/sst/opencode' },
   // --- DeepSeek's own metered API, same weights as the OpenCode row above —
   //     added 2026-08-06/07. Codex goes over the Responses API (which DeepSeek
   //     shipped shortly before), Claude Code the Anthropic-compatible path, Pi
@@ -313,16 +313,16 @@ var ATM_HARD_ROWS = [
   { type: 'Memory', harness: 'MemPalace', model: 'Qwen3-VL-8B-Instruct', qs:  9.70, recall: 28.30, total_tokens: null, link: 'https://github.com/MemPalace/mempalace' },
   { type: 'Memory', harness: 'SimpleMem', model: 'Qwen3-VL-8B-Instruct', qs:  3.20, recall:  7.00, total_tokens: null, link: 'https://github.com/aiming-lab/SimpleMem' },
 
-  // Memexa v2: full Hard31, gpt-5-mini rejudge (exact QS 63.56886840757808%) (diamond footnote).
-  { type: 'Memory', harness: 'Memexa v2', model: 'DeepSeek V4.1', qs: 63.57, recall: 63.05, total_tokens: 30.157385, cost_usd: 8.077242108, link: 'https://github.com/labazhou2024/memexa', notes: { qs: '◇', recall: '◇', total_tokens: '◇', cost_usd: '◇' } },
+  // Memexa v2: full Hard31, gpt-5-mini rejudge (exact QS 63.56886840757808%).
+  { type: 'Memory', harness: 'Memexa v2', model: 'DeepSeek V4.1 / gpt-5-mini judge', qs: 63.57, recall: 63.05, total_tokens: 30.157385, cost_usd: 8.077242108, link: 'https://github.com/labazhou2024/memexa' },
 
   // --- Memexa (community PR) + same-LLM (DeepSeek-V4-flash) re-runs of baselines. QS* = flash judge (not gpt-5-mini); see legend ---
-  { type: 'Memory', harness: 'Memexa',    model: 'DeepSeek-V4-flash (mem+ans) · Qwen3.6-27B captions', qs: 47.85, recall: 44.67, total_tokens: 34.30, cost_usd: 3.84, link: 'https://github.com/labazhou2024/memexa', notes: { qs: '*', recall: '†', total_tokens: '‡', cost_usd: '‡' } },
-  { type: 'Memory', harness: 'A-Mem',     model: 'DeepSeek-V4-flash (mem+ans)', qs: 16.71, recall: 38.52, total_tokens: null, link: 'https://github.com/WujiangXu/A-mem', notes: { qs: '*' } },
-  { type: 'Memory', harness: 'MemPalace', model: 'DeepSeek-V4-flash (mem+ans)', qs: 13.64, recall: 28.87, total_tokens: null, link: 'https://github.com/MemPalace/mempalace', notes: { qs: '*' } },
+  { type: 'Memory', harness: 'Memexa',    model: 'DeepSeek-V4-flash (mem+ans) · Qwen3.6-27B captions', qs: 47.85, recall: 44.67, total_tokens: 34.30, cost_usd: 3.84, link: 'https://github.com/labazhou2024/memexa' },
+  { type: 'Memory', harness: 'A-Mem',     model: 'DeepSeek-V4-flash (mem+ans) / flash judge', qs: 16.71, recall: 38.52, total_tokens: null, link: 'https://github.com/WujiangXu/A-mem' },
+  { type: 'Memory', harness: 'MemPalace', model: 'DeepSeek-V4-flash (mem+ans) / flash judge', qs: 13.64, recall: 28.87, total_tokens: null, link: 'https://github.com/MemPalace/mempalace' },
 
   // --- RAG (one row per system) ---
   { type: 'RAG', harness: 'HippoRAG2', model: 'Qwen3-VL-8B-Instruct', qs:  9.40, recall: 31.90, total_tokens: null, link: 'https://github.com/OSU-NLP-Group/HippoRAG' },
   { type: 'RAG', harness: 'ATM-RAG',   model: 'Qwen3-VL-8B-Instruct', qs: 13.80, recall: 30.40, total_tokens: null, link: 'https://github.com/JingbiaoMei/ATM-Bench' },
-  { type: 'RAG', harness: 'HippoRAG2', model: 'DeepSeek-V4-flash (mem+ans)', qs: 12.27, recall: 32.16, total_tokens: null, link: 'https://github.com/OSU-NLP-Group/HippoRAG', notes: { qs: '*' } }
+  { type: 'RAG', harness: 'HippoRAG2', model: 'DeepSeek-V4-flash (mem+ans) / flash judge', qs: 12.27, recall: 32.16, total_tokens: null, link: 'https://github.com/OSU-NLP-Group/HippoRAG' }
 ];

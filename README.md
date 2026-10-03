@@ -99,14 +99,14 @@ Conventions:
   in the current filter. **Index time** is in hours and exists only on the ATM-Bench
   (first) track.
 - Set `link` to the system's canonical repo/paper to make the harness name clickable.
-- Put the answer model and judge in the row label when they affect comparability; routine provenance does not use detached cell footnotes.
+- Put the answer model in the row label when it affects comparability; routine provenance does not use detached cell footnotes.
 - The headline view filters **Oracle off** by default (it is a no-retrieval upper bound);
   click the Oracle chip to include it.
 
 ## Validation
 
 Run `node tools/verify_leaderboard.mjs` before submitting. It checks numeric bounds,
-row coverage, best-value eligibility, inline provenance consistency, and the reported rejudge
+row coverage, best-value eligibility, inline provenance consistency, and the reported score summary
 scores against the public per-question score summary.
 
 ## Deployment

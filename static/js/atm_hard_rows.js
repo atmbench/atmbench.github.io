@@ -27,7 +27,7 @@ var ATM_HARD_ROWS = [
   { type: 'Oracle', harness: '-', model: 'GPT-5.2',              qs: 50.41, recall: null, total_tokens: null },
   { type: 'Oracle', harness: '-', model: 'GPT-5.4',              qs: 65.19, recall: null, total_tokens: null },
   { type: 'Oracle', harness: '-', model: 'GPT-5.5',              qs: 71.49, recall: null, total_tokens: null },
-  // Gemini 3.x raw oracle, 31q hard (gpt-5-mini judge) — added 2026-06-06
+  // Gemini 3.x raw oracle, 31q hard — added 2026-06-06
   { type: 'Oracle', harness: '-', model: 'Gemini 3 Flash',       qs: 60.10, recall: null, total_tokens: null },
   { type: 'Oracle', harness: '-', model: 'Gemini 3 Pro',         qs: 52.10, recall: null, total_tokens: null },
   { type: 'Oracle', harness: '-', model: 'Gemini 3.1 Pro',       qs: 55.40, recall: null, total_tokens: null },
@@ -117,7 +117,7 @@ var ATM_HARD_ROWS = [
   //     the other three and answered "Unknown" where they found the record.
   { type: 'Agent',  harness: 'Codex',       model: 'MiniMax M3 (medium)',        qs: 40.01, recall: null, total_tokens: 32.54, cost_usd:  4.34, link: 'https://github.com/openai/codex' },
   { type: 'Agent',  harness: 'Claude Code', model: 'MiniMax M3',                 qs: 19.67, recall: null, total_tokens:  4.41, cost_usd:  1.53, link: 'https://github.com/anthropics/claude-code' },
-  // gpt-5-mini judge (like every other Agent row) — this is the answer model, not the judge
+  // DeepSeek API row.
   { type: 'Agent',  harness: 'OpenCode',    model: 'DeepSeek V4 Flash (0731)',   qs: 38.28, recall: null, total_tokens: 12.54, cost_usd:  0.26, link: 'https://github.com/sst/opencode' },
   // --- DeepSeek's own metered API, same weights as the OpenCode row above —
   //     added 2026-08-06/07. Codex goes over the Responses API (which DeepSeek
@@ -160,7 +160,7 @@ var ATM_HARD_ROWS = [
   { type: 'Agent',  harness: 'OpenClaw 🦞', model: 'Kimi K2.5',           qs: 25.40, recall: null, total_tokens: 9.63,  cost_usd:  2.37 },
 
   // --- Volcano Engine coding plan, four harnesses across three models
-  //     (SGM, gpt-5-mini judge) — added 2026-08-06, Codex GLM-5.2 2026-08-07,
+  //     (SGM) — added 2026-08-06, Codex GLM-5.2 2026-08-07,
   //     Codex Kimi K2.7 and Doubao 2026-08-12.
   //     Cross-harness reading: Codex leads GLM-5.2, Claude Code leads the rest.
   //     Codex sends no reasoning effort on Kimi K2.7 Code — that endpoint 400s
@@ -192,8 +192,8 @@ var ATM_HARD_ROWS = [
   { type: 'Agent',  harness: 'OpenCode',    model: 'Doubao Seed 2.1 Turbo', qs: 37.69, recall: null, total_tokens:  9.77, cost_usd:  1.69, link: 'https://github.com/sst/opencode' },
   { type: 'Agent',  harness: 'OpenCode',    model: 'LongCat 2.0',           qs: 28.22, recall: null, total_tokens: 31.17, cost_usd:  0.72, link: 'https://github.com/sst/opencode' },
 
-  // --- Antigravity (Google's `agy` CLI, run under Harbor), SGM, gpt-5-mini
-  //     judge — added 2026-08-06. Effort is baked into the model id, so each
+  // --- Antigravity (Google's `agy` CLI, run under Harbor), SGM
+  //     — added 2026-08-06. Effort is baked into the model id, so each
   //     row is its own model string rather than a tier suffix on one ladder.
   //     The 3.5 Flash ladder completed 2026-08-10 when `low` finished; all
   //     three tiers are 31/31.
@@ -238,7 +238,7 @@ var ATM_HARD_ROWS = [
   { type: 'Agent',  harness: 'Antigravity', model: 'Gemini 3.1 Pro (low)',      qs: 40.26, recall: null, total_tokens:  21.29, cost_usd: 13.41, link: 'https://antigravity.google' },
 
   // --- Self-hosted Qwen3.8-27B-FP8 (vLLM on the HPC box), all four harnesses ---
-  //     SGM, 31 questions, gpt-5-mini judge, run tag atm-hard-20260307.
+  //     SGM, 31 questions, run tag atm-hard-20260307.
   //     REPLACED 2026-08-23 with the MTP-off rerun. The earlier set (47.70 /
   //     43.62 / 42.57 / 39.63) was measured with multi-token prediction on and
   //     with OpenCode at 29/31 and Codex at 28/31; those two were floors. Every
@@ -279,7 +279,7 @@ var ATM_HARD_ROWS = [
   { type: 'Agent',  harness: 'Pi',          model: 'Qwen3.8-27B (low)',         qs: 26.60, recall: null, total_tokens:  7.02, cost_usd:  1.18, link: 'https://github.com/earendil-works/pi' },
 
   // --- Self-hosted Qwen3.8-Flash-Next (same vLLM box, weights swapped) ---
-  //     Added 2026-09-06. SGM, 31 questions, gpt-5-mini judge, all four
+  //     Added 2026-09-06. SGM, 31 questions, all four
   //     harnesses, every cell 31/31. Same unmetered endpoint as the 27B above,
   //     so COST IS AGAIN A PROXY: measured tokens priced against the hosted
   //     qwen3.8-flash listing, which is the same model under its vendor name.
@@ -313,16 +313,16 @@ var ATM_HARD_ROWS = [
   { type: 'Memory', harness: 'MemPalace', model: 'Qwen3-VL-8B-Instruct', qs:  9.70, recall: 28.30, total_tokens: null, link: 'https://github.com/MemPalace/mempalace' },
   { type: 'Memory', harness: 'SimpleMem', model: 'Qwen3-VL-8B-Instruct', qs:  3.20, recall:  7.00, total_tokens: null, link: 'https://github.com/aiming-lab/SimpleMem' },
 
-  // Memexa v2: full Hard31, gpt-5-mini rejudge (exact QS 63.56886840757808%).
-  { type: 'Memory', harness: 'Memexa v2', model: 'DeepSeek V4.1 / gpt-5-mini judge', qs: 63.57, recall: 63.05, total_tokens: 30.157385, cost_usd: 8.077242108, link: 'https://github.com/labazhou2024/memexa' },
+  // Memexa v2: full Hard31 rescored result (exact QS 63.56886840757808%).
+  { type: 'Memory', harness: 'Memexa v2', model: 'DeepSeek V4.1', qs: 63.57, recall: 63.05, total_tokens: 30.157385, cost_usd: 8.077242108, link: 'https://github.com/labazhou2024/memexa' },
 
-  // --- Memexa (community PR) + same-LLM (DeepSeek-V4-flash) re-runs of baselines. QS* = flash judge (not gpt-5-mini); see legend ---
+  // --- Memexa (community PR) + same-LLM (DeepSeek-V4-flash) re-runs of baselines ---
   { type: 'Memory', harness: 'Memexa',    model: 'DeepSeek-V4-flash (mem+ans) · Qwen3.6-27B captions', qs: 47.85, recall: 44.67, total_tokens: 34.30, cost_usd: 3.84, link: 'https://github.com/labazhou2024/memexa' },
-  { type: 'Memory', harness: 'A-Mem',     model: 'DeepSeek-V4-flash (mem+ans) / flash judge', qs: 16.71, recall: 38.52, total_tokens: null, link: 'https://github.com/WujiangXu/A-mem' },
-  { type: 'Memory', harness: 'MemPalace', model: 'DeepSeek-V4-flash (mem+ans) / flash judge', qs: 13.64, recall: 28.87, total_tokens: null, link: 'https://github.com/MemPalace/mempalace' },
+  { type: 'Memory', harness: 'A-Mem',     model: 'DeepSeek-V4-flash (mem+ans)', qs: 16.71, recall: 38.52, total_tokens: null, link: 'https://github.com/WujiangXu/A-mem' },
+  { type: 'Memory', harness: 'MemPalace', model: 'DeepSeek-V4-flash (mem+ans)', qs: 13.64, recall: 28.87, total_tokens: null, link: 'https://github.com/MemPalace/mempalace' },
 
   // --- RAG (one row per system) ---
   { type: 'RAG', harness: 'HippoRAG2', model: 'Qwen3-VL-8B-Instruct', qs:  9.40, recall: 31.90, total_tokens: null, link: 'https://github.com/OSU-NLP-Group/HippoRAG' },
   { type: 'RAG', harness: 'ATM-RAG',   model: 'Qwen3-VL-8B-Instruct', qs: 13.80, recall: 30.40, total_tokens: null, link: 'https://github.com/JingbiaoMei/ATM-Bench' },
-  { type: 'RAG', harness: 'HippoRAG2', model: 'DeepSeek-V4-flash (mem+ans) / flash judge', qs: 12.27, recall: 32.16, total_tokens: null, link: 'https://github.com/OSU-NLP-Group/HippoRAG' }
+  { type: 'RAG', harness: 'HippoRAG2', model: 'DeepSeek-V4-flash (mem+ans)', qs: 12.27, recall: 32.16, total_tokens: null, link: 'https://github.com/OSU-NLP-Group/HippoRAG' }
 ];

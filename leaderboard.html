@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 
 <head>
@@ -450,6 +450,14 @@
       font-weight: 500;
     }
 
+    .lb-note {
+      color: #b15c2e;
+      font-weight: 800;
+      font-size: 0.72em;
+      margin-left: 1px;
+      line-height: 0;
+    }
+
     .lb-model { font-weight: 600; }
 
     .lb-type {
@@ -753,6 +761,8 @@
           <strong>Retriever</strong> is the embedding model used at query time.
           Click a column header to sort or a filter chip to narrow by system type.
           When a caption model is not stated, it is <strong>Qwen3-VL-2B</strong>.
+          <strong>*</strong> The two legacy Memexa rows use a DeepSeek-V4-flash judge, not the standard gpt-5-mini judge, and are shown for reference rather than direct QS comparison.
+          <strong>&#9671;</strong> Memexa v2 uses DS-v4.1 descriptions and custom source-grounded cards; QS uses gpt-5-mini. <a href="https://github.com/labazhou2024/memexa/releases/tag/atmbench-memexa-v2-20261002">Frozen evidence</a> / <a href="docs/memexa-v2-rejudge.json">per-question score summary</a>.
         </p>
       </div>
 
@@ -766,6 +776,8 @@
           Coding agents use their default configuration unless the model label states a reasoning effort.
           Results use <strong>SGM</strong> unless marked <code>(w/o SGM)</code>.
           When a caption model is not stated, it is <strong>Qwen3-VL-2B</strong>.
+          <strong>*</strong> The DeepSeek-V4-flash rows use a DeepSeek-V4-flash judge, not the standard gpt-5-mini judge; the baseline reruns are community-run, not the original authors' official numbers.
+          <strong>&#9671;</strong> Memexa v2 uses DS-v4.1 descriptions and custom source-grounded cards; QS uses gpt-5-mini. <a href="https://github.com/labazhou2024/memexa/releases/tag/atmbench-memexa-v2-20261002">Frozen evidence</a> / <a href="docs/memexa-v2-rejudge.json">per-question score summary</a>.
           Cost is an API-equivalent estimate from saved token counters, not an invoice.
         </p>
 
@@ -921,10 +933,10 @@
           { type: 'Memory', harness: 'SimpleMem',            index_time: 16.0, answer_model: 'Qwen3-VL-8B-Instruct', memory_model: 'Qwen3-VL-2B-Instruct', retriever: 'MiniLM-L6', qs: 27.30, recall: 23.30, link: 'https://github.com/aiming-lab/SimpleMem' },
 
           // Memexa v2: single full-set rescored result (exact QS 76.68170920885629%).
-          { type: 'Memory', harness: 'Memexa v2', index_time: null, answer_model: 'DeepSeek V4.1', memory_model: 'DeepSeek V4.1', retriever: 'BGE-M3 + bge-reranker-v2-m3', qs: 76.68, recall: 92.32, link: 'https://github.com/labazhou2024/memexa' },
+          { type: 'Memory', harness: 'Memexa v2', index_time: null, answer_model: 'DeepSeek V4.1', memory_model: 'DeepSeek V4.1', retriever: 'BGE-M3 + bge-reranker-v2-m3', qs: 76.68, recall: 92.32, link: 'https://github.com/labazhou2024/memexa', notes: { answer_model: '\u25c7' } },
           // --- Memexa (community PR) — recall is the like-for-like comparison ---
-          { type: 'Memory', harness: 'Memexa',               index_time: null, answer_model: 'DeepSeek-V4-flash', memory_model: 'DeepSeek-V4-flash', retriever: 'BGE-M3 + bge-reranker-v2-m3', qs: 65.28, recall: 78.93, link: 'https://github.com/labazhou2024/memexa' },
-          { type: 'Memory', harness: 'Memexa',               index_time: null, answer_model: 'DeepSeek-V4-flash', memory_model: 'DeepSeek-V4-flash + Qwen3.6-27B captions',       retriever: 'BGE-M3 + bge-reranker-v2-m3', qs: 68.04, recall: 79.09, link: 'https://github.com/labazhou2024/memexa' },
+          { type: 'Memory', harness: 'Memexa',               index_time: null, answer_model: 'DeepSeek-V4-flash', memory_model: 'DeepSeek-V4-flash', retriever: 'BGE-M3 + bge-reranker-v2-m3', qs: 65.28, recall: 78.93, link: 'https://github.com/labazhou2024/memexa', notes: { qs: '*' } },
+          { type: 'Memory', harness: 'Memexa',               index_time: null, answer_model: 'DeepSeek-V4-flash', memory_model: 'DeepSeek-V4-flash + Qwen3.6-27B captions',       retriever: 'BGE-M3 + bge-reranker-v2-m3', qs: 68.04, recall: 79.09, link: 'https://github.com/labazhou2024/memexa', notes: { qs: '*' } },
 
           // --- RAG (one row per system; default setup with MiniLM-L6) ---
           { type: 'RAG', harness: 'HippoRAG2', index_time: 1.5, answer_model: 'Qwen3-VL-8B-Instruct', memory_model: 'Qwen3-VL-2B-Instruct', retriever: 'MiniLM-L6', qs: 42.90, recall: 66.40, link: 'https://github.com/OSU-NLP-Group/HippoRAG' },
@@ -1272,6 +1284,14 @@
               td.classList.add('lb-best');
             }
           }
+          // Footnote markers (e.g. * or the input-disclosure diamond) stay
+          // attached to the cell whose comparability they qualify.
+          if (row.notes && row.notes[col.key]) {
+            const sup = document.createElement('sup');
+            sup.className = 'lb-note';
+            sup.textContent = row.notes[col.key];
+            td.appendChild(sup);
+          }
           tr.appendChild(td);
         });
 
@@ -1338,11 +1358,11 @@
         filter_all: "All",
         empty_filter: "No rows match the current filter.",
         panel_atm_bench_title: "ATM-Bench",
-        legend_atm_bench: '<code>-</code> indicates an unreported field. <strong>Memory Model</strong> is the LLM used to build the memory store; <strong>Retriever</strong> is the embedding model used at query time. Click a column header to sort or a filter chip to narrow by system type. When a caption model is not stated, it is <strong>Qwen3-VL-2B</strong>.',
+        legend_atm_bench: '<code>-</code> indicates an unreported field. <strong>Memory Model</strong> is the LLM used to build the memory store; <strong>Retriever</strong> is the embedding model used at query time. Click a column header to sort or a filter chip to narrow by system type. When a caption model is not stated, it is <strong>Qwen3-VL-2B</strong>. <strong>*</strong> Legacy Memexa QS uses a DeepSeek-V4-flash judge, not the standard gpt-5-mini judge, and is shown for reference rather than direct comparison. <strong>&#9671;</strong> Memexa v2 uses DS-v4.1 descriptions and custom source-grounded cards; QS uses gpt-5-mini. <a href="https://github.com/labazhou2024/memexa/releases/tag/atmbench-memexa-v2-20261002">Frozen evidence</a> / <a href="docs/memexa-v2-rejudge.json">per-question score summary</a>.',
         panel_atm_bench_hard_title: "ATM-Bench-Hard",
         ppf_title: 'Every priced run',
         ppf_intro: 'The same axes as the chart at the top of the page, with every configuration on it: each priced agent run in the table above, coloured by harness. The without-SGM ablations are the one omission \u2014 they score far below every real configuration, and carrying them cost 45% of the vertical resolution. The staircase is the Pareto frontier \u2014 the best score money can buy at each price.',
-        legend_atm_bench_hard: '<code>-</code> indicates an unreported field. Coding agents use their default configuration unless the model label states a reasoning effort. Results use <strong>SGM</strong> unless marked <code>(w/o SGM)</code>. When a caption model is not stated, it is <strong>Qwen3-VL-2B</strong>. Cost is an API-equivalent estimate from saved token counters, not an invoice.',
+        legend_atm_bench_hard: '<code>-</code> indicates an unreported field. Coding agents use their default configuration unless the model label states a reasoning effort. Results use <strong>SGM</strong> unless marked <code>(w/o SGM)</code>. When a caption model is not stated, it is <strong>Qwen3-VL-2B</strong>. Cost is an API-equivalent estimate from saved token counters, not an invoice. <strong>*</strong> DeepSeek-V4-flash rows use a DeepSeek-V4-flash judge; baseline reruns are community-run, not original-author official numbers. <strong>&#9671;</strong> Memexa v2 uses DS-v4.1 descriptions and custom source-grounded cards; QS uses gpt-5-mini. <a href="https://github.com/labazhou2024/memexa/releases/tag/atmbench-memexa-v2-20261002">Frozen evidence</a> / <a href="docs/memexa-v2-rejudge.json">per-question score summary</a>.',
         panel_niah_title: "ATM-Bench-Hard-NIAH",
         panel_niah_intro: "Needle-in-a-haystack sweep on ATM-Bench-Hard (31 questions): each question's gold evidence is hidden among k = 25 / 50 / 100 / 200 distractor memory items, under the SGM (Schema-Guided Memory) setting. Oracle = gold evidence only, no haystack. Approximate context depth is shown in each column header.",
         niah_status: "Preview · More submissions welcome",
@@ -1379,11 +1399,11 @@
         filter_all: "全部",
         empty_filter: "当前筛选条件下没有匹配的行。",
         panel_atm_bench_title: "ATM-Bench",
-        legend_atm_bench: '<code>-</code> 表示该字段未被提交者填写。<strong>Memory Model</strong> 是用于构建记忆存储的 LLM；<strong>Retriever</strong> 是查询时使用的嵌入模型。点击任意列标题可排序，点击筛选条可按系统类型筛选。未注明时，caption 模型默认为 <strong>Qwen3-VL-2B</strong>。',
+        legend_atm_bench: '<code>-</code> 表示该字段未被提交者填写。<strong>Memory Model</strong> 是用于构建记忆存储的 LLM；<strong>Retriever</strong> 是查询时使用的嵌入模型。点击任意列标题可排序，点击筛选条可按系统类型筛选。未注明时，caption 模型默认为 <strong>Qwen3-VL-2B</strong>。 <strong>*</strong> Legacy Memexa QS uses a DeepSeek-V4-flash judge, not the standard gpt-5-mini judge, and is shown for reference rather than direct comparison. <strong>&#9671;</strong> Memexa v2 uses DS-v4.1 descriptions and custom source-grounded cards; QS uses gpt-5-mini. <a href="https://github.com/labazhou2024/memexa/releases/tag/atmbench-memexa-v2-20261002">Frozen evidence</a> / <a href="docs/memexa-v2-rejudge.json">per-question score summary</a>.',
         panel_atm_bench_hard_title: "ATM-Bench-Hard",
         ppf_title: '全部计价运行',
         ppf_intro: '与页面顶部图表同样的坐标轴，但涵盖全部配置：上表中每一次有成本的智能体运行，按 Harness 着色。唯一未画出的是未使用 SGM 的消融运行——它们的得分远低于任何真实配置，保留它们会占去 45% 的纵向分辨率。阶梯线为帕累托前沿 — 在每个价位上能买到的最好成绩。',
-        legend_atm_bench_hard: '<code>-</code> 表示该字段未被填写。除非模型标签注明推理强度，编码智能体均使用默认配置。除标注 <code>(w/o SGM)</code> 的结果外，其余均使用我们提出的 <strong>SGM</strong>（符号图记忆）。未注明时，caption 模型默认为 <strong>Qwen3-VL-2B</strong>。Cost is an API-equivalent estimate, not an invoice.',
+        legend_atm_bench_hard: '<code>-</code> 表示该字段未被填写。除非模型标签注明推理强度，编码智能体均使用默认配置。除标注 <code>(w/o SGM)</code> 的结果外，其余均使用我们提出的 <strong>SGM</strong>（符号图记忆）。未注明时，caption 模型默认为 <strong>Qwen3-VL-2B</strong>。Cost is an API-equivalent estimate, not an invoice. <strong>*</strong> DeepSeek-V4-flash rows use a DeepSeek-V4-flash judge; baseline reruns are community-run, not original-author official numbers. <strong>&#9671;</strong> Memexa v2 uses DS-v4.1 descriptions and custom source-grounded cards; QS uses gpt-5-mini. <a href="https://github.com/labazhou2024/memexa/releases/tag/atmbench-memexa-v2-20261002">Frozen evidence</a> / <a href="docs/memexa-v2-rejudge.json">per-question score summary</a>.',
         panel_niah_title: "ATM-Bench-Hard-NIAH",
         panel_niah_intro: "在 ATM-Bench-Hard（31 题）上的大海捞针扫描：每题的标准证据被混入 k = 25 / 50 / 100 / 200 个干扰记忆项中（SGM，Schema-Guided Memory）。Oracle = 仅给标准证据、无干扰。各列表头括号内为近似上下文长度。",
         niah_status: "预览 · 欢迎更多提交",
@@ -1443,4 +1463,3 @@
 </body>
 
 </html>
-

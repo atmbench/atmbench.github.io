@@ -1,0 +1,4228 @@
+{
+  "schema_version": 1,
+  "judge_model": "gpt-5-mini",
+  "status": "complete",
+  "judge_calls": 527,
+  "splits": {
+    "main": {
+      "questions": 1013,
+      "qs_percent": 76.68170920885629,
+      "prior_qs_percent": 78.26117613876745,
+      "judge_changes": 34,
+      "per_type": {
+        "number": {
+          "questions": 360,
+          "qs_percent": 80.27777777777779
+        },
+        "list_recall": {
+          "questions": 139,
+          "qs_percent": 59.55806783144912
+        },
+        "open_end": {
+          "questions": 514,
+          "qs_percent": 78.79377431906615
+        }
+      },
+      "scores": [
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 0.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "number",
+          "score": 0.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 0.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 0.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 0.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 0.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 0.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 0.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 0.42857142857142855
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 0.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 0.14285714285714285
+        },
+        {
+          "qtype": "number",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 0.5
+        },
+        {
+          "qtype": "list_recall",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 0.6666666666666666
+        },
+        {
+          "qtype": "number",
+          "score": 0.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 1.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 0.7142857142857143
+        },
+        {
+          "qtype": "number",
+          "score": 0.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 0.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 0.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 0.5
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 0.5
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "number",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 0.3333333333333333
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 0.6666666666666666
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 0.0
+        },
+        {
+          "qtype": "number",
+          "score": 0.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 0.3333333333333333
+        },
+        {
+          "qtype": "list_recall",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 0.5
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 0.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 0.0
+        },
+        {
+          "qtype": "number",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 0.75
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 0.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "number",
+          "score": 0.0
+        },
+        {
+          "qtype": "number",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 0.0
+        },
+        {
+          "qtype": "number",
+          "score": 0.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 0.0
+        },
+        {
+          "qtype": "number",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 0.3333333333333333
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 0.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 0.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 1.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 0.5
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 0.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 0.0
+        },
+        {
+          "qtype": "number",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 0.5
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 0.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 0.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 0.5
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 0.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 0.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 0.6666666666666666
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 0.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 0.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 0.6666666666666666
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 0.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 0.5
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 0.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 0.25
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 0.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 0.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 0.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "number",
+          "score": 0.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 0.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 0.16666666666666666
+        },
+        {
+          "qtype": "list_recall",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 0.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 0.8
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 0.5
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "number",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 0.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 0.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 0.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 0.0
+        },
+        {
+          "qtype": "number",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 1.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 0.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 0.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 0.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 0.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 0.2
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 0.0
+        },
+        {
+          "qtype": "number",
+          "score": 0.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 0.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 0.0
+        },
+        {
+          "qtype": "number",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 0.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 1.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 0.5
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 0.0
+        },
+        {
+          "qtype": "number",
+          "score": 0.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 1.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 0.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "number",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 0.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "number",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 0.6666666666666666
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 1.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 0.6
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 0.4
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 0.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        }
+      ]
+    },
+    "hard": {
+      "questions": 31,
+      "qs_percent": 63.56886840757808,
+      "prior_qs_percent": 63.56886840757808,
+      "judge_changes": 2,
+      "per_type": {
+        "number": {
+          "questions": 6,
+          "qs_percent": 50.0
+        },
+        "list_recall": {
+          "questions": 12,
+          "qs_percent": 72.55291005291005
+        },
+        "open_end": {
+          "questions": 13,
+          "qs_percent": 61.53846153846154
+        }
+      },
+      "scores": [
+        {
+          "qtype": "list_recall",
+          "score": 0.7777777777777778
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 0.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 1.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 0.42857142857142855
+        },
+        {
+          "qtype": "list_recall",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "number",
+          "score": 1.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 0.42857142857142855
+        },
+        {
+          "qtype": "list_recall",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 1.0
+        },
+        {
+          "qtype": "number",
+          "score": 0.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 0.875
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 0.75
+        },
+        {
+          "qtype": "list_recall",
+          "score": 0.875
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 0.0
+        },
+        {
+          "qtype": "open_end",
+          "score": 1.0
+        },
+        {
+          "qtype": "list_recall",
+          "score": 0.5714285714285714
+        }
+      ]
+    }
+  }
+}

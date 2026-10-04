@@ -74,8 +74,8 @@
       --accent-plum: #7a4c72;
     }
 
-    html { scroll-behavior: smooth; }
-    body { background: var(--page-bg); color: var(--ink); }
+    html { scroll-behavior: smooth; overflow-x: hidden; }
+    body { background: var(--page-bg); color: var(--ink); overflow-x: hidden; }
 
     .section-hero {
       background: var(--hero-bg);
@@ -444,17 +444,18 @@
       font-weight: 800;
     }
 
+
+    .lb-empty {
+      color: rgba(31, 36, 48, 0.32);
+      font-weight: 500;
+    }
+
     .lb-note {
       color: #b15c2e;
       font-weight: 800;
       font-size: 0.72em;
       margin-left: 1px;
       line-height: 0;
-    }
-
-    .lb-empty {
-      color: rgba(31, 36, 48, 0.32);
-      font-weight: 500;
     }
 
     .lb-model { font-weight: 600; }
@@ -678,7 +679,7 @@
 
             <div>
               <span class="last-updated">
-                <span data-i18n="last_updated_label">Last updated</span>:&nbsp;<span id="last-updated-date">2026-08-23</span>
+                <span data-i18n="last_updated_label">Last updated</span>:&nbsp;<span id="last-updated-date">2026-10-04</span>
               </span>
             </div>
           </div>
@@ -755,12 +756,13 @@
         <div class="lb-filter-bar" id="filter-atm-bench"></div>
         <div class="lb-table-wrap"><div id="table-atm-bench"></div></div>
         <p class="lb-legend" data-i18n-html="legend_atm_bench">
-          <code>-</code> indicates the field has not been reported by the submitter.
-          <strong>Memory Model</strong> is the LLM used to construct the memory store;
+          <code>-</code> indicates an unreported field.
+          <strong>Memory Model</strong> is the LLM used to build the memory store;
           <strong>Retriever</strong> is the embedding model used at query time.
-          Click any column header to sort; click a filter chip to narrow by system type.
-          When a caption model is not stated, it is <strong>Qwen3-VL-2B</strong> (the default).
-          <strong>*</strong> Memexa's QS is measured with a DeepSeek-V4-flash judge (its own answer model), not the gpt-5-mini judge used for every other row, so it is shown for reference and is not directly comparable; Recall is judge-independent and like-for-like.
+          Click a column header to sort or a filter chip to narrow by system type.
+          When a caption model is not stated, it is <strong>Qwen3-VL-2B</strong>.
+          <strong>*</strong> The two legacy Memexa rows use a DeepSeek-V4-flash judge, not the standard gpt-5-mini judge, and are shown for reference rather than direct QS comparison.
+          <strong>&#9671;</strong> Memexa v2 uses DS-v4.1 descriptions and custom source-grounded cards; QS uses gpt-5-mini. <a href="https://github.com/labazhou2024/memexa/releases/tag/atmbench-memexa-v2-20261002">Frozen evidence</a> / <a href="docs/memexa-v2-rejudge.json">per-question score summary</a>.
         </p>
       </div>
 
@@ -770,16 +772,13 @@
         <div class="lb-filter-bar" id="filter-atm-bench-hard"></div>
         <div class="lb-table-wrap"><div id="table-atm-bench-hard"></div></div>
         <p class="lb-legend" data-i18n-html="legend_atm_bench_hard">
-          <code>-</code> indicates the field has not been reported.
+          <code>-</code> indicates an unreported field.
           Coding agents use their default configuration unless the model label states a reasoning effort.
-          Results use our proposed <strong>SGM</strong> (Schema-Guided Memory) unless marked <code>(w/o SGM)</code>.
-          When a caption model is not stated, it is <strong>Qwen3-VL-2B</strong> (the default).
-          <strong>*</strong> QS on the DeepSeek-V4-flash rows (Memexa and the A-Mem / MemPalace / HippoRAG2 re-runs) is measured with a DeepSeek-V4-flash judge (the system's own model), not the gpt-5-mini judge used for the other rows — shown for reference, not directly comparable. The three baseline re-runs are community-run at this LLM tier, not the original authors' official numbers.
-          <strong>†</strong> Memexa's Recall is reported on the fixed Qwen3-VL-2B captions (like-for-like with other rows), although this configuration answers from Qwen3.6-27B captions.
-          <strong>‡</strong> Memexa's Total Tokens / Cost include the one-time memory build (33.9M tokens / ~$3.80 over all 11,034 items, amortizable across evaluations) plus the 31-question query (0.40M / ~$0.04); other rows' agent costs are per full run.
-          <strong>Cost</strong> is an API-equivalent estimate calculated from saved per-call token counters with Tokdash's bundled standard short-context rates; it does not represent Codex subscription charges.
-          <strong>§</strong> OpenCode meters the DeepSeek V4 Flash Free endpoint at $0; the cost shown is the underlying model's list-price equivalent at the same rates as every other row.
-          <strong>¶</strong> GPT-5.6 Luna and Terra costs follow OpenAI's official price reduction for these models, verified 2026-07-31: Luna $1.00/$6.00 to $0.20/$1.20 and Terra $2.50/$15.00 to $2.00/$12.00 per million input/output tokens. The runs are unchanged — same tokens, same QS — only the rate they are priced at.
+          Results use <strong>SGM</strong> unless marked <code>(w/o SGM)</code>.
+          When a caption model is not stated, it is <strong>Qwen3-VL-2B</strong>.
+          <strong>*</strong> The DeepSeek-V4-flash rows use a DeepSeek-V4-flash judge, not the standard gpt-5-mini judge; the baseline reruns are community-run, not the original authors' official numbers.
+          <strong>&#9671;</strong> Memexa v2 uses DS-v4.1 descriptions and custom source-grounded cards; QS uses gpt-5-mini. <a href="https://github.com/labazhou2024/memexa/releases/tag/atmbench-memexa-v2-20261002">Frozen evidence</a> / <a href="docs/memexa-v2-rejudge.json">per-question score summary</a>.
+          Cost is an API-equivalent estimate from saved token counters, not an invoice.
         </p>
 
         <!-- Full price-performance scatter. Lives inside the Hard panel (it is
@@ -810,7 +809,7 @@
           <span class="lb-status-badge" data-i18n="niah_status">Preview · More submissions welcome</span>
         </div>
         <p class="section-intro" data-i18n="panel_niah_intro">
-          Needle-in-a-haystack sweep on ATM-Bench-Hard (31 questions): each question's gold evidence is hidden among k = 25 / 50 / 100 / 200 distractor memory items, under the SGM (Schema-Guided Memory) setting. Oracle = gold evidence only, no haystack; judge: gpt-5-mini. Approximate context depth is shown in each column header.
+          Needle-in-a-haystack sweep on ATM-Bench-Hard (31 questions): each question's gold evidence is hidden among k = 25 / 50 / 100 / 200 distractor memory items, under the SGM (Schema-Guided Memory) setting. Oracle = gold evidence only, no haystack. Approximate context depth is shown in each column header.
         </p>
         <h3 class="lb-panel-title" data-i18n="niah_head_sgm" style="font-size:1.05rem;margin:1.25rem 0 .5rem;">SGM</h3>
         <div class="lb-table-wrap"><div id="table-niah"></div></div>
@@ -915,10 +914,10 @@
           { type: 'Oracle', harness: '-', index_time: null, answer_model: 'Claude Sonnet 4.5',    memory_model: null, retriever: null, qs: 83.30, recall: null },
           { type: 'Oracle', harness: '-', index_time: null, answer_model: 'Claude Opus 4.5',      memory_model: null, retriever: null, qs: 86.00, recall: null },
           { type: 'Oracle', harness: '-', index_time: null, answer_model: 'GPT-5',                memory_model: null, retriever: null, qs: 85.30, recall: null },
-          // GPT-5.2 / GPT-5.4 raw oracle (reasoning=medium; ATMBench repo, gpt-5-mini judge) — added 2026-06-06
+          // GPT-5.2 / GPT-5.4 raw oracle (reasoning=medium; ATMBench repo) — added 2026-06-06
           { type: 'Oracle', harness: '-', index_time: null, answer_model: 'GPT-5.2',              memory_model: null, retriever: null, qs: 84.12, recall: null },
           { type: 'Oracle', harness: '-', index_time: null, answer_model: 'GPT-5.4',              memory_model: null, retriever: null, qs: 85.10, recall: null },
-          // open-weight answerer oracle (bench-full, gpt-5-mini judge) — RAW for multimodal, SGM for text-only MiMo V2.5 Pro — added 2026-06-06
+          // open-weight answerer oracle (bench-full) — RAW for multimodal, SGM for text-only MiMo V2.5 Pro — added 2026-06-06
           { type: 'Oracle', harness: '-', index_time: null, answer_model: 'MiniMax M3',           memory_model: null, retriever: null, qs: 83.60, recall: null },
           { type: 'Oracle', harness: '-', index_time: null, answer_model: 'MiMo V2.5',            memory_model: null, retriever: null, qs: 82.60, recall: null },
           { type: 'Oracle', harness: '-', index_time: null, answer_model: 'MiMo V2.5 Pro',        memory_model: null, retriever: null, qs: 71.70, recall: null },
@@ -933,7 +932,9 @@
           { type: 'Memory', harness: 'MemPalace',            index_time:  0.5, answer_model: 'Qwen3-VL-8B-Instruct', memory_model: 'Qwen3-VL-2B-Instruct', retriever: 'MiniLM-L6', qs: 56.80, recall: 76.40, link: 'https://github.com/MemPalace/mempalace' },
           { type: 'Memory', harness: 'SimpleMem',            index_time: 16.0, answer_model: 'Qwen3-VL-8B-Instruct', memory_model: 'Qwen3-VL-2B-Instruct', retriever: 'MiniLM-L6', qs: 27.30, recall: 23.30, link: 'https://github.com/aiming-lab/SimpleMem' },
 
-          // --- Memexa (community PR) — recall is the like-for-like comparison; QS* uses a DeepSeek-V4-flash judge, not gpt-5-mini (see legend) ---
+          // Memexa v2: single full-set rescored result (exact QS 76.68170920885629%).
+          { type: 'Memory', harness: 'Memexa v2', index_time: null, answer_model: 'DeepSeek V4.1', memory_model: 'DeepSeek V4.1', retriever: 'BGE-M3 + bge-reranker-v2-m3', qs: 76.68, recall: 92.32, link: 'https://github.com/labazhou2024/memexa', notes: { answer_model: '\u25c7' } },
+          // --- Memexa (community PR) — recall is the like-for-like comparison ---
           { type: 'Memory', harness: 'Memexa',               index_time: null, answer_model: 'DeepSeek-V4-flash', memory_model: 'DeepSeek-V4-flash', retriever: 'BGE-M3 + bge-reranker-v2-m3', qs: 65.28, recall: 78.93, link: 'https://github.com/labazhou2024/memexa', notes: { qs: '*' } },
           { type: 'Memory', harness: 'Memexa',               index_time: null, answer_model: 'DeepSeek-V4-flash', memory_model: 'DeepSeek-V4-flash + Qwen3.6-27B captions',       retriever: 'BGE-M3 + bge-reranker-v2-m3', qs: 68.04, recall: 79.09, link: 'https://github.com/labazhou2024/memexa', notes: { qs: '*' } },
 
@@ -955,8 +956,8 @@
           { key: 'model',        label: { en: 'Model',          zh: '模型' },     fmt: 'model' },
           { key: 'qs',           label: { en: 'QS ↑',           zh: '问答得分 ↑' }, fmt: 'percent', goal: 'high', primary: true },
           { key: 'recall',       label: { en: 'Recall@10 ↑',    zh: 'Recall@10 ↑' }, fmt: 'percent', goal: 'high' },
-          { key: 'total_tokens', label: { en: 'Total Tokens ↓', zh: '总 Token ↓' }, fmt: 'tokens_m', goal: 'low' },
-          { key: 'cost_usd',     label: { en: 'Cost (USD) ↓',   zh: '成本 (USD) ↓' }, fmt: 'usd', goal: 'low' }
+          { key: 'total_tokens', label: { en: 'Total Tokens ↓', zh: '总 Token ↓' }, fmt: 'tokens_m', goal: 'low', minBestComparable: 2 },
+          { key: 'cost_usd',     label: { en: 'Cost (USD) ↓',   zh: '成本 (USD) ↓' }, fmt: 'usd', goal: 'low', minBestComparable: 2 }
         ],
         // Shared with index.html so the full scatter and this table cannot drift.
         rows: ATM_HARD_ROWS
@@ -965,7 +966,7 @@
         id: 'niah',
         target: 'table-niah',
         noBest: true,  // NIAH table: do not bold the per-column max
-        // Schema-Guided Memory (SGM) haystack sweep on ATM-Bench-Hard (31q), gpt-5-mini judge.
+        // Schema-Guided Memory (SGM) haystack sweep on ATM-Bench-Hard (31q).
         // Columns are the haystack size; the ≈token figure in each header is the avg context depth.
         // Oracle = gold evidence only (no haystack). A parallel Raw table follows (the niah-raw track).
         // MiMo V2.5 Pro removed 2026-06-07: text-only, and its noisy 31q oracle inverted below NIAH-25.
@@ -990,7 +991,7 @@
         id: 'niah-raw',
         target: 'table-niah-raw',
         noBest: true,  // NIAH table: do not bold the per-column max
-        // Raw (real images/video) haystack sweep — multimodal answerers only, ATM-Bench-Hard (31q), gpt-5-mini judge.
+        // Raw (real images/video) haystack sweep — multimodal answerers only, ATM-Bench-Hard (31q).
         // "failed" = pool exceeded the model's image/video count or the API upload/payload limit (a serving limit, not a model result).
         columns: [
           { key: 'model',   label: { en: 'Model',            zh: '模型' },             fmt: 'model' },
@@ -1036,9 +1037,10 @@
       return col.label;
     }
 
-    function bestValue(rows, colKey, goal) {
-      const vals = rows.map(r => r[colKey]).filter(v => typeof v === 'number');
-      if (vals.length === 0) return null;
+    function bestValue(rows, colKey, goal, minComparable = 1) {
+      const vals = rows.filter(r => !(r.noBest || []).includes(colKey))
+        .map(r => r[colKey]).filter(v => typeof v === 'number' && Number.isFinite(v));
+      if (vals.length < minComparable) return null;
       return goal === 'high' ? Math.max(...vals) : Math.min(...vals);
     }
 
@@ -1143,7 +1145,7 @@
       // Best values relative to visible rows
       const bests = {};
       track.columns.forEach(col => {
-        if (isNumericCol(col)) bests[col.key] = bestValue(visibleRows, col.key, col.goal);
+        if (isNumericCol(col)) bests[col.key] = bestValue(visibleRows, col.key, col.goal, col.minBestComparable || 1);
       });
 
       // Sort. Nulls always sink to the bottom.
@@ -1277,12 +1279,13 @@
             td.textContent = val;
           } else {
             td.textContent = fmtCell(col.fmt, val);
-            if (!track.noBest && numeric && typeof val === 'number' && bests[col.key] !== null
+            if (!track.noBest && !(row.noBest || []).includes(col.key) && numeric && typeof val === 'number' && bests[col.key] !== null
               && Math.abs(val - bests[col.key]) < 1e-9) {
               td.classList.add('lb-best');
             }
           }
-          // Footnote marker (e.g. * † ‡) for cells flagged in row.notes — see panel legend.
+          // Footnote markers (e.g. * or the input-disclosure diamond) stay
+          // attached to the cell whose comparability they qualify.
           if (row.notes && row.notes[col.key]) {
             const sup = document.createElement('sup');
             sup.className = 'lb-note';
@@ -1355,13 +1358,13 @@
         filter_all: "All",
         empty_filter: "No rows match the current filter.",
         panel_atm_bench_title: "ATM-Bench",
-        legend_atm_bench: '<code>-</code> indicates the field has not been reported by the submitter. <strong>Memory Model</strong> is the LLM used to construct the memory store; <strong>Retriever</strong> is the embedding model used at query time. Click any column header to sort; click a filter chip to narrow by system type. When a caption model is not stated, it is <strong>Qwen3-VL-2B</strong> (the default). <strong>*</strong> Memexa\'s QS is measured with a DeepSeek-V4-flash judge (its own answer model), not the gpt-5-mini judge used for every other row, so it is shown for reference and is not directly comparable; Recall is judge-independent and like-for-like.',
+        legend_atm_bench: '<code>-</code> indicates an unreported field. <strong>Memory Model</strong> is the LLM used to build the memory store; <strong>Retriever</strong> is the embedding model used at query time. Click a column header to sort or a filter chip to narrow by system type. When a caption model is not stated, it is <strong>Qwen3-VL-2B</strong>. <strong>*</strong> Legacy Memexa QS uses a DeepSeek-V4-flash judge, not the standard gpt-5-mini judge, and is shown for reference rather than direct comparison. <strong>&#9671;</strong> Memexa v2 uses DS-v4.1 descriptions and custom source-grounded cards; QS uses gpt-5-mini. <a href="https://github.com/labazhou2024/memexa/releases/tag/atmbench-memexa-v2-20261002">Frozen evidence</a> / <a href="docs/memexa-v2-rejudge.json">per-question score summary</a>.',
         panel_atm_bench_hard_title: "ATM-Bench-Hard",
         ppf_title: 'Every priced run',
         ppf_intro: 'The same axes as the chart at the top of the page, with every configuration on it: each priced agent run in the table above, coloured by harness. The without-SGM ablations are the one omission \u2014 they score far below every real configuration, and carrying them cost 45% of the vertical resolution. The staircase is the Pareto frontier \u2014 the best score money can buy at each price.',
-        legend_atm_bench_hard: '<code>-</code> indicates the field has not been reported. Coding agents use their default configuration unless the model label states a reasoning effort. Results use our proposed <strong>SGM</strong> (Schema-Guided Memory) unless marked <code>(w/o SGM)</code>. When a caption model is not stated, it is <strong>Qwen3-VL-2B</strong> (the default). <strong>*</strong> QS on the DeepSeek-V4-flash rows (Memexa and the A-Mem / MemPalace / HippoRAG2 re-runs) is measured with a DeepSeek-V4-flash judge (the system\'s own model), not the gpt-5-mini judge used for the other rows — shown for reference, not directly comparable. The three baseline re-runs are community-run at this LLM tier, not the original authors\' official numbers. <strong>†</strong> Memexa\'s Recall is reported on the fixed Qwen3-VL-2B captions (like-for-like with other rows), although this configuration answers from Qwen3.6-27B captions. <strong>‡</strong> Memexa\'s Total Tokens / Cost include the one-time memory build (33.9M tokens / ~$3.80 over all 11,034 items, amortizable across evaluations) plus the 31-question query (0.40M / ~$0.04); other rows\' agent costs are per full run. <strong>Cost</strong> is an API-equivalent estimate calculated from saved per-call token counters with Tokdash\'s bundled standard short-context rates; it is what the run would cost at list price and is not what was actually billed, since several of these rows ran on fixed-price coding plans (Codex, Kimi, MiniMax, Xiaomi). <strong>§</strong> OpenCode meters the DeepSeek V4 Flash Free endpoint at $0; the cost shown is the underlying model\'s list-price equivalent at the same rates as every other row. <strong>¶</strong> GPT-5.6 Luna and Terra costs follow OpenAI\'s official price reduction for these models, verified 2026-07-31: Luna $1.00/$6.00 to $0.20/$1.20 and Terra $2.50/$15.00 to $2.00/$12.00 per million input/output tokens. The runs are unchanged — same tokens, same QS — only the rate they are priced at.',
+        legend_atm_bench_hard: '<code>-</code> indicates an unreported field. Coding agents use their default configuration unless the model label states a reasoning effort. Results use <strong>SGM</strong> unless marked <code>(w/o SGM)</code>. When a caption model is not stated, it is <strong>Qwen3-VL-2B</strong>. Cost is an API-equivalent estimate from saved token counters, not an invoice. <strong>*</strong> DeepSeek-V4-flash rows use a DeepSeek-V4-flash judge; baseline reruns are community-run, not original-author official numbers. <strong>&#9671;</strong> Memexa v2 uses DS-v4.1 descriptions and custom source-grounded cards; QS uses gpt-5-mini. <a href="https://github.com/labazhou2024/memexa/releases/tag/atmbench-memexa-v2-20261002">Frozen evidence</a> / <a href="docs/memexa-v2-rejudge.json">per-question score summary</a>.',
         panel_niah_title: "ATM-Bench-Hard-NIAH",
-        panel_niah_intro: "Needle-in-a-haystack sweep on ATM-Bench-Hard (31 questions): each question's gold evidence is hidden among k = 25 / 50 / 100 / 200 distractor memory items, under the SGM (Schema-Guided Memory) setting. Oracle = gold evidence only, no haystack; judge: gpt-5-mini. Approximate context depth is shown in each column header.",
+        panel_niah_intro: "Needle-in-a-haystack sweep on ATM-Bench-Hard (31 questions): each question's gold evidence is hidden among k = 25 / 50 / 100 / 200 distractor memory items, under the SGM (Schema-Guided Memory) setting. Oracle = gold evidence only, no haystack. Approximate context depth is shown in each column header.",
         niah_status: "Preview · More submissions welcome",
         legend_niah: '<strong>Why SGM, not raw?</strong> Raw (real images/video) edges out SGM at the Oracle ceiling. But that advantage collapses under realistic conditions: as the haystack fills with distractors, raw degrades and even fails (payload/context limits), and under agentic retrieval the gap is stark — every "w/o SGM" (raw) agent lands far below its SGM run. SGM is the representation that holds up once there is noise under realistic conditions.',
         niah_head_sgm: "SGM",
@@ -1396,13 +1399,13 @@
         filter_all: "全部",
         empty_filter: "当前筛选条件下没有匹配的行。",
         panel_atm_bench_title: "ATM-Bench",
-        legend_atm_bench: '<code>-</code> 表示该字段未被提交者填写。<strong>Memory Model</strong> 是用于构建记忆存储的 LLM；<strong>Retriever</strong> 是查询时使用的嵌入模型。点击任意列标题可排序，点击筛选条可按系统类型筛选。未注明时，caption 模型默认为 <strong>Qwen3-VL-2B</strong>。<strong>*</strong> Memexa 的 QS 使用 DeepSeek-V4-flash（其自身回答模型）作为评审，而非其他所有行使用的 gpt-5-mini 评审，故仅供参考、不可直接比较；Recall 与评审无关，可同口径比较。',
+        legend_atm_bench: '<code>-</code> 表示该字段未被提交者填写。<strong>Memory Model</strong> 是用于构建记忆存储的 LLM；<strong>Retriever</strong> 是查询时使用的嵌入模型。点击任意列标题可排序，点击筛选条可按系统类型筛选。未注明时，caption 模型默认为 <strong>Qwen3-VL-2B</strong>。 <strong>*</strong> Legacy Memexa QS uses a DeepSeek-V4-flash judge, not the standard gpt-5-mini judge, and is shown for reference rather than direct comparison. <strong>&#9671;</strong> Memexa v2 uses DS-v4.1 descriptions and custom source-grounded cards; QS uses gpt-5-mini. <a href="https://github.com/labazhou2024/memexa/releases/tag/atmbench-memexa-v2-20261002">Frozen evidence</a> / <a href="docs/memexa-v2-rejudge.json">per-question score summary</a>.',
         panel_atm_bench_hard_title: "ATM-Bench-Hard",
         ppf_title: '全部计价运行',
         ppf_intro: '与页面顶部图表同样的坐标轴，但涵盖全部配置：上表中每一次有成本的智能体运行，按 Harness 着色。唯一未画出的是未使用 SGM 的消融运行——它们的得分远低于任何真实配置，保留它们会占去 45% 的纵向分辨率。阶梯线为帕累托前沿 — 在每个价位上能买到的最好成绩。',
-        legend_atm_bench_hard: '<code>-</code> 表示该字段未被填写。除非模型标签注明推理强度，编码智能体均使用默认配置。除标注 <code>(w/o SGM)</code> 的结果外，其余均使用我们提出的 <strong>SGM</strong>（符号图记忆）。未注明时，caption 模型默认为 <strong>Qwen3-VL-2B</strong>。<strong>*</strong> DeepSeek-V4-flash 行（Memexa 与 A-Mem / MemPalace / HippoRAG2 复跑）的 QS 使用 DeepSeek-V4-flash（系统自身模型）作为评审，而非其他行使用的 gpt-5-mini 评审，仅供参考、不可直接比较。这三项基线为社区在该 LLM 档位的复跑，并非原作者的官方数值。<strong>†</strong> Memexa 的 Recall 基于固定的 Qwen3-VL-2B caption（与其他行同口径），尽管该配置回答时使用 Qwen3.6-27B caption。<strong>‡</strong> Memexa 的 Total Tokens / Cost 包含一次性记忆构建（覆盖全部 11,034 条，33.9M tokens / 约 $3.80，可在多次评测间摊销）加上 31 题查询（0.40M / 约 $0.04）；其他行的智能体成本为每次完整运行。<strong>成本</strong>为使用保存的每次调用 token 计数与 Tokdash 内置标准短上下文费率计算的 API 等价估算：它是该次运行按标价折算的成本，并非实际账单 —— 其中多行运行在固定价格的编码套餐上（Codex、Kimi、MiniMax、小米）。<strong>§</strong> OpenCode 对 DeepSeek V4 Flash Free 端点按 $0 计费；此处成本为该模型在与其他行相同费率下的标价等价值。<strong>¶</strong> GPT-5.6 Luna 与 Terra 的成本采用 OpenAI 对这两个模型的官方降价后费率（2026-07-31 核对）：Luna 由 $1.00/$6.00 降至 $0.20/$1.20，Terra 由 $2.50/$15.00 降至 $2.00/$12.00（每百万输入/输出 token）。运行本身未变 — token 数与 QS 相同 — 仅计价费率不同。',
+        legend_atm_bench_hard: '<code>-</code> 表示该字段未被填写。除非模型标签注明推理强度，编码智能体均使用默认配置。除标注 <code>(w/o SGM)</code> 的结果外，其余均使用我们提出的 <strong>SGM</strong>（符号图记忆）。未注明时，caption 模型默认为 <strong>Qwen3-VL-2B</strong>。Cost is an API-equivalent estimate, not an invoice. <strong>*</strong> DeepSeek-V4-flash rows use a DeepSeek-V4-flash judge; baseline reruns are community-run, not original-author official numbers. <strong>&#9671;</strong> Memexa v2 uses DS-v4.1 descriptions and custom source-grounded cards; QS uses gpt-5-mini. <a href="https://github.com/labazhou2024/memexa/releases/tag/atmbench-memexa-v2-20261002">Frozen evidence</a> / <a href="docs/memexa-v2-rejudge.json">per-question score summary</a>.',
         panel_niah_title: "ATM-Bench-Hard-NIAH",
-        panel_niah_intro: "在 ATM-Bench-Hard（31 题）上的大海捞针扫描：每题的标准证据被混入 k = 25 / 50 / 100 / 200 个干扰记忆项中（SGM，Schema-Guided Memory）。Oracle = 仅给标准证据、无干扰；评测：gpt-5-mini。各列表头括号内为近似上下文长度。",
+        panel_niah_intro: "在 ATM-Bench-Hard（31 题）上的大海捞针扫描：每题的标准证据被混入 k = 25 / 50 / 100 / 200 个干扰记忆项中（SGM，Schema-Guided Memory）。Oracle = 仅给标准证据、无干扰。各列表头括号内为近似上下文长度。",
         niah_status: "预览 · 欢迎更多提交",
         legend_niah: '<strong>为什么用 SGM 而非 Raw？</strong> Raw（真实图像/视频）在 Oracle 上限略优，但在真实条件下这一优势随即消失：随着干扰项增多，Raw 会退化、甚至直接失败（载荷/上下文限制）；在智能体检索下差距更明显——每个 "w/o SGM"（Raw）智能体都远低于其 SGM 版本。在真实噪声条件下，SGM 才是稳健的表示。',
         niah_head_sgm: "SGM",

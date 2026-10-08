@@ -34,23 +34,34 @@
 
 var PRICE_PERF = {
   series: [
-    { key: 'sol', label: 'GPT-5.6 Sol', plot: 'GPT-5.6 Sol', harness: 'Codex', tiers: false,
+    /* Slots one and two changed hands 2026-10-07. GPT-6.1 Sol and Claude Opus
+       5.5 took them over from GPT-5.6 Sol and Claude Opus 5, which they
+       supersede. The palette is full (see price_perf.css), so a new ladder has to
+       replace a line rather than add a twelfth hue. Both retired ladders are
+       listed under `excluded`, and they stay in the table and on the full
+       scatter. Sonnet 5.5 and GPT-6 Astra were measured in the same sweeps and
+       are in the table and on the full scatter only.
+
+       6.1 Sol rises with effort where 5.6 Sol peaked at medium. Low and medium
+       sit close, and the jump at high is open-ended answers. Standard rates:
+       $2/$10/$0.10 per M. */
+    { key: 'sol61', label: 'GPT-6.1 Sol', plot: 'GPT-6.1 Sol', harness: 'Codex', tiers: false,
       points: [
-        { tier: 'low', qs: 41.68, cost: 9.53, tokens: 5.06 },
-        { tier: 'medium', qs: 58.76, cost: 12.52, tokens: 7.52 },
-        { tier: 'high', qs: 51.54, cost: 14.79, tokens: 10.19 }
+        { tier: 'low', qs: 42.10, cost: 2.48, tokens: 3.83 },
+        { tier: 'medium', qs: 43.51, cost: 2.96, tokens: 4.73 },
+        { tier: 'high', qs: 57.38, cost: 3.30, tokens: 5.68 }
       ] },
     /* Drawn labels drop the "Claude" prefix here and on Fable 5: every mark on
        this chart is a model name, so the vendor costs width without adding
-       information. `label` keeps the full name for the legend and tooltip. */
-    { key: 'opus5', label: 'Claude Opus 5', plot: 'Opus 5', harness: 'Claude Code', tiers: false,
+       information. `label` keeps the full name for the legend and tooltip.
+       Opus 5.5 low and medium tie (49.99 vs 49.96), so the line runs flat and
+       then climbs. At high it lands level with 6.1 Sol high. Cost is at
+       tokdash's 5-minute cache-write rate, like every Claude row on the board. */
+    { key: 'opus55', label: 'Claude Opus 5.5', plot: 'Opus 5.5', harness: 'Claude Code', tiers: false,
       points: [
-        { tier: 'medium', qs: 51.37, cost: 5.84, tokens: 3.18 },
-        { tier: 'high', qs: 53.36, cost: 7.29, tokens: 3.54 },
-        /* 30 answers on disk: one question was repeatedly blocked by the
-           provider, not left unfinished. Treated as a final run — the count is
-           kept for the tooltip but no longer changes how the marker is drawn. */
-        { tier: 'xhigh', qs: 58.37, cost: 12.33, tokens: 6.09, answered: 30 }
+        { tier: 'low', qs: 49.99, cost: 1.85, tokens: 1.04 },
+        { tier: 'medium', qs: 49.96, cost: 3.27, tokens: 1.76 },
+        { tier: 'high', qs: 57.63, cost: 4.39, tokens: 2.54 }
       ] },
     { key: 'fable5', label: 'Claude Fable 5', plot: 'Fable 5', harness: 'Claude Code', tiers: false, pin: 'right',
       points: [
@@ -152,8 +163,10 @@ var PRICE_PERF = {
        at all and cannot have one — its CLI never puts effort on the wire and
        this endpoint drops reasoning_effort on the /v1/messages route regardless.
        All four harnesses sit on the full scatter and the harness chart below.
-       `xhigh` is the server default, reached by omitting the parameter. */
-    { key: 'qwen38fn', label: 'Qwen3.8-Flash-Next', plot: 'Qwen3.8-Flash', harness: 'Pi', tiers: false,
+       `xhigh` is the server default, reached by omitting the parameter.
+       Label pinned above (2026-10-07): the placer avoids labels and markers but
+       not lines, and its default right-hand spot now sits on the Opus 5.5 line. */
+    { key: 'qwen38fn', label: 'Qwen3.8-Flash-Next', plot: 'Qwen3.8-Flash', harness: 'Pi', tiers: false, pin: 'above',
       points: [
         { tier: 'low', qs: 41.84, cost: 0.67, tokens: 4.20 },
         { tier: 'medium', qs: 44.99, cost: 0.82, tokens: 5.29 },
@@ -180,6 +193,18 @@ var PRICE_PERF = {
      full scatter below it (static/js/price_perf_full.js), so nothing dropped
      here is hidden from the reader. */
   excluded: [
+    /* Retired 2026-10-07 when GPT-6.1 Sol and Claude Opus 5.5 took slots one and
+       two. The other rungs of both ladders (Sol xhigh/max, Opus 5 max) were
+       already held out below. Sonnet 5.5 and GPT-6 Astra were never drawn here,
+       to keep the palette at eleven. */
+    { series: 'GPT-5.6 Sol', tier: 'low', qs: 41.68, cost: 9.53, why: 'line retired; superseded by GPT-6.1 Sol' },
+    { series: 'GPT-5.6 Sol', tier: 'medium', qs: 58.76, cost: 12.52, why: 'line retired; superseded by GPT-6.1 Sol' },
+    { series: 'GPT-5.6 Sol', tier: 'high', qs: 51.54, cost: 14.79, why: 'line retired; superseded by GPT-6.1 Sol' },
+    { series: 'Claude Opus 5', tier: 'medium', qs: 51.37, cost: 5.84, why: 'line retired; superseded by Claude Opus 5.5' },
+    { series: 'Claude Opus 5', tier: 'high', qs: 53.36, cost: 7.29, why: 'line retired; superseded by Claude Opus 5.5' },
+    { series: 'Claude Opus 5', tier: 'xhigh', qs: 58.37, cost: 12.33, why: 'line retired; superseded by Claude Opus 5.5' },
+    { point: 'Claude Sonnet 5.5', harness: 'Claude Code', qs: 48.51, cost: 1.48, why: 'not drawn; palette full. Best tier (medium) shown here' },
+    { point: 'GPT-6 Astra', harness: 'Codex', qs: 49.33, cost: 13.52, why: 'not drawn; palette full, and dominated by GPT-6.1 Sol high. Best tier (medium) shown here' },
     /* The three dearer, lower-scoring harnesses on the V4 Pro weights. Drawing
        one point per model is this chart's whole premise; the harness comparison
        is the chart below it. */
@@ -397,7 +422,12 @@ var PricePerf = (function () {
 
     var marks = el('g');
     hits = [];
-    linePts.forEach(function (p) {
+    /* Larger markers first, so a smaller one is never buried under a bigger one.
+       Series order alone did exactly that to Claude Opus 5.5 low ($1.85, 49.99,
+       r 5.5): Qwen3.8-27B xhigh ($1.89, 49.90, r 8.5) sits on the same spot and
+       covered it completely, so the Opus line seemed to start from a black dot.
+       sort() is stable, so equal-sized markers keep series order. */
+    linePts.slice().sort(function (a, b) { return radiusOf(b) - radiusOf(a); }).forEach(function (p) {
       var cx = X(p.cost), cy = Y(p.qs), rad = radiusOf(p);
       var col = color(PRICE_PERF.series.indexOf(p.s));
       var g = el('g', { class: 'pp-mark', tabindex: '0', role: 'img', 'data-pp': p.s.key });

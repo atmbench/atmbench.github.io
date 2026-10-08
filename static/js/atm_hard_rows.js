@@ -56,6 +56,20 @@ var ATM_HARD_ROWS = [
   { type: 'Agent',  harness: 'Claude Code', model: 'Claude Fable 5.1 (medium)',  qs: 57.46, recall: null, total_tokens: 2.00,  cost_usd:  9.15, link: 'https://github.com/anthropics/claude-code' },
   { type: 'Agent',  harness: 'Claude Code', model: 'Claude Fable 5.1 (high)',    qs: 61.02, recall: null, total_tokens: 2.91,  cost_usd: 14.70, link: 'https://github.com/anthropics/claude-code' },
   { type: 'Agent',  harness: 'Claude Code', model: 'Claude Fable 5.1 (xhigh)',   qs: 61.02, recall: null, total_tokens: 4.14,  cost_usd: 27.21, link: 'https://github.com/anthropics/claude-code' },
+  //     Claude Opus 5.5 and Sonnet 5.5, added 2026-10-07 (run 2026-10-06), all
+  //     six tiers 31/31. Opus 5.5 high beats Opus 5 high by 4.3 points at 60% of
+  //     its cost; low and medium tie, and the step at high is open-ended
+  //     answers. Sonnet 5.5 peaks at medium and falls back at high for 1.8x the
+  //     tokens. Costs are tokdash's 5-minute cache-write rate, like every other
+  //     Claude Code row here; Claude Code writes 1-hour cache, so true list price
+  //     is 1.3-1.4x (Opus 5.5 high $6.10, not $4.39). Every Claude row shares
+  //     that understatement.
+  { type: 'Agent',  harness: 'Claude Code', model: 'Claude Opus 5.5 (low)',      qs: 49.99, recall: null, total_tokens: 1.04,  cost_usd:  1.85, link: 'https://github.com/anthropics/claude-code' },
+  { type: 'Agent',  harness: 'Claude Code', model: 'Claude Opus 5.5 (medium)',   qs: 49.96, recall: null, total_tokens: 1.76,  cost_usd:  3.27, link: 'https://github.com/anthropics/claude-code' },
+  { type: 'Agent',  harness: 'Claude Code', model: 'Claude Opus 5.5 (high)',     qs: 57.63, recall: null, total_tokens: 2.54,  cost_usd:  4.39, link: 'https://github.com/anthropics/claude-code' },
+  { type: 'Agent',  harness: 'Claude Code', model: 'Claude Sonnet 5.5 (low)',    qs: 36.39, recall: null, total_tokens: 1.38,  cost_usd:  1.29, link: 'https://github.com/anthropics/claude-code' },
+  { type: 'Agent',  harness: 'Claude Code', model: 'Claude Sonnet 5.5 (medium)', qs: 48.51, recall: null, total_tokens: 1.74,  cost_usd:  1.48, link: 'https://github.com/anthropics/claude-code' },
+  { type: 'Agent',  harness: 'Claude Code', model: 'Claude Sonnet 5.5 (high)',   qs: 43.44, recall: null, total_tokens: 3.22,  cost_usd:  2.37, link: 'https://github.com/anthropics/claude-code' },
   { type: 'Agent',  harness: 'Claude Code', model: 'Claude Opus 4.7 (max)',     qs: 46.60, recall: null, total_tokens: 6.93,  cost_usd:  9.58, link: 'https://github.com/anthropics/claude-code' },
   { type: 'Agent',  harness: 'Claude Code', model: 'Claude Opus 4.8',           qs: 41.63, recall: null, total_tokens: 4.42,  cost_usd:  7.49, link: 'https://github.com/anthropics/claude-code' },
   { type: 'Agent',  harness: 'Claude Code', model: 'Claude Opus 4.7 (xhigh)',   qs: 39.50, recall: null, total_tokens: 5.03,  cost_usd:  7.70, link: 'https://github.com/anthropics/claude-code' },
@@ -66,6 +80,21 @@ var ATM_HARD_ROWS = [
   { type: 'Agent',  harness: 'Codex',       model: 'GPT-5.6 Sol (high)',         qs: 51.54, recall: null, total_tokens: 10.19, cost_usd: 14.79, link: 'https://github.com/openai/codex' },
   { type: 'Agent',  harness: 'Codex',       model: 'GPT-5.6 Sol (xhigh)',        qs: 43.98, recall: null, total_tokens: 11.49, cost_usd: 17.79, link: 'https://github.com/openai/codex' },
   { type: 'Agent',  harness: 'Codex',       model: 'GPT-5.6 Sol (max)',          qs: 48.30, recall: null, total_tokens: 17.60, cost_usd: 23.90, link: 'https://github.com/openai/codex' },
+  //     The Sol rows above stay at the $5/$30 standard rate they were published
+  //     at. Tokdash has since listed a temporary promotional $4/$20 (from
+  //     2026-08-21), which would show them about 22% lower; it is not applied.
+  //     GPT-6.1 Sol and GPT-6 Astra, added 2026-10-07, all six tiers 31/31,
+  //     priced at their standard rates ($2/$10/$0.10 and $10/$50/$1 per M in /
+  //     out / cache-read). 6.1 Sol rises with effort, unlike 5.6 Sol, and its
+  //     high tier ties Opus 5.5 high (57.38 vs 57.63) at three quarters of the
+  //     cost. Astra is dominated by it: its best tier, medium, costs 4x Sol high
+  //     and scores 8 points lower.
+  { type: 'Agent',  harness: 'Codex',       model: 'GPT-6.1 Sol (low)',          qs: 42.10, recall: null, total_tokens: 3.83,  cost_usd:  2.48, link: 'https://github.com/openai/codex' },
+  { type: 'Agent',  harness: 'Codex',       model: 'GPT-6.1 Sol (medium)',       qs: 43.51, recall: null, total_tokens: 4.73,  cost_usd:  2.96, link: 'https://github.com/openai/codex' },
+  { type: 'Agent',  harness: 'Codex',       model: 'GPT-6.1 Sol (high)',         qs: 57.38, recall: null, total_tokens: 5.68,  cost_usd:  3.30, link: 'https://github.com/openai/codex' },
+  { type: 'Agent',  harness: 'Codex',       model: 'GPT-6 Astra (low)',          qs: 44.61, recall: null, total_tokens: 3.59,  cost_usd: 13.32, link: 'https://github.com/openai/codex' },
+  { type: 'Agent',  harness: 'Codex',       model: 'GPT-6 Astra (medium)',       qs: 49.33, recall: null, total_tokens: 3.80,  cost_usd: 13.52, link: 'https://github.com/openai/codex' },
+  { type: 'Agent',  harness: 'Codex',       model: 'GPT-6 Astra (high)',         qs: 44.67, recall: null, total_tokens: 4.61,  cost_usd: 16.66, link: 'https://github.com/openai/codex' },
   // Luna/Terra costs re-computed at OpenAI's reduced rates (Tokdash v2.0.11, verified
   // 2026-07-31). Tokens and QS are unchanged from the original submission.
   { type: 'Agent',  harness: 'Codex',       model: 'GPT-5.6 Luna (low)',         qs: 31.57, recall: null, total_tokens: 7.02,  cost_usd:  0.45, link: 'https://github.com/openai/codex' },

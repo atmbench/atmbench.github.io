@@ -36,11 +36,14 @@ var PRICE_PERF = {
   series: [
     /* Slots one and two changed hands 2026-10-07. GPT-6.1 Sol and Claude Opus
        5.5 took them over from GPT-5.6 Sol and Claude Opus 5, which they
-       supersede. The palette is full (see price_perf.css), so a new ladder has to
-       replace a line rather than add a twelfth hue. Both retired ladders are
-       listed under `excluded`, and they stay in the table and on the full
-       scatter. Sonnet 5.5 and GPT-6 Astra were measured in the same sweeps and
-       are in the table and on the full scatter only.
+       supersede. Slots three and seven followed on 2026-10-10: Claude Sonnet 5.5
+       and Haiku 5.5 took them from Claude Fable 5 and Gemini 3.6 Flash, each
+       superseded by a line still drawn (Fable 5.1, Gemini 3.7 Flash). The
+       palette is full (see price_perf.css), so a new ladder has to replace a
+       line rather than add a twelfth hue. All four retired ladders are listed
+       under `excluded`, and they stay in the table and on the full scatter.
+       GPT-6 Astra was measured alongside 6.1 Sol and is in the table and on the
+       full scatter only.
 
        6.1 Sol rises with effort where 5.6 Sol peaked at medium. Low and medium
        sit close, and the jump at high is open-ended answers. Standard rates:
@@ -51,24 +54,31 @@ var PRICE_PERF = {
         { tier: 'medium', qs: 43.51, cost: 2.96, tokens: 4.73 },
         { tier: 'high', qs: 57.38, cost: 3.30, tokens: 5.68 }
       ] },
-    /* Drawn labels drop the "Claude" prefix here and on Fable 5: every mark on
+    /* Drawn labels drop the "Claude" prefix on every Claude line: every mark on
        this chart is a model name, so the vendor costs width without adding
        information. `label` keeps the full name for the legend and tooltip.
        Opus 5.5 low and medium tie (49.99 vs 49.96), so the line runs flat and
-       then climbs. At high it lands level with 6.1 Sol high. Cost is at
-       tokdash's 5-minute cache-write rate, like every Claude row on the board. */
+       then climbs. At high it lands level with 6.1 Sol high; xhigh dips 1.2
+       points and max is its best, at 4.7x the cost of high. All five rungs are
+       drawn. Cost is at tokdash's 5-minute cache-write rate, like every Claude
+       row on the board. */
     { key: 'opus55', label: 'Claude Opus 5.5', plot: 'Opus 5.5', harness: 'Claude Code', tiers: false,
       points: [
         { tier: 'low', qs: 49.99, cost: 1.85, tokens: 1.04 },
         { tier: 'medium', qs: 49.96, cost: 3.27, tokens: 1.76 },
-        { tier: 'high', qs: 57.63, cost: 4.39, tokens: 2.54 }
+        { tier: 'high', qs: 57.63, cost: 4.39, tokens: 2.54 },
+        { tier: 'xhigh', qs: 56.42, cost: 7.57, tokens: 5.05 },
+        { tier: 'max', qs: 59.14, cost: 20.65, tokens: 15.11 }
       ] },
-    { key: 'fable5', label: 'Claude Fable 5', plot: 'Fable 5', harness: 'Claude Code', tiers: false, pin: 'right',
+    /* Slot three, from Fable 5 on 2026-10-10. Sonnet 5.5 dips at high (43.44)
+       between medium and xhigh, then jumps 15.3 points: xhigh at 58.73 for
+       $4.24 out-scores Opus 5.5 high and xhigh. The ladder ends at xhigh. */
+    { key: 'sonnet55', label: 'Claude Sonnet 5.5', plot: 'Sonnet 5.5', harness: 'Claude Code', tiers: false,
       points: [
-        { tier: 'low', qs: 46.77, cost: 7.93, tokens: 1.95 },
-        { tier: 'medium', qs: 51.69, cost: 10.13, tokens: 2.24 },
-        { tier: 'high', qs: 52.55, cost: 11.95, tokens: 2.55 },
-        { tier: 'xhigh', qs: 56.42, cost: 15.06, tokens: 2.90 }
+        { tier: 'low', qs: 36.39, cost: 1.29, tokens: 1.38 },
+        { tier: 'medium', qs: 48.51, cost: 1.48, tokens: 1.74 },
+        { tier: 'high', qs: 43.44, cost: 2.37, tokens: 3.22 },
+        { tier: 'xhigh', qs: 58.73, cost: 4.24, tokens: 5.52 }
       ] },
     { key: 'k3', label: 'Kimi K3-256k', plot: 'Kimi K3', harness: 'Kimi Code', tiers: false,
       points: [
@@ -89,8 +99,19 @@ var PRICE_PERF = {
         { tier: 'high', qs: 41.70, cost: 0.78, tokens: 13.96 },
         { tier: 'xhigh', qs: 42.39, cost: 1.01, tokens: 18.82 }
       ] },
-    /* Google's Antigravity CLI (`agy`) under Harbor. Two generations are drawn,
-       in palette slots seven and eight.
+    /* Slot seven, from Gemini 3.6 Flash on 2026-10-10. Claude Haiku 5.5 is the
+       cheapest ladder on the chart, every rung under $0.50. It zigzags like
+       Sonnet 5.5 (high scores below medium) and ends at xhigh, 42.30 for $0.40. */
+    { key: 'haiku55', label: 'Claude Haiku 5.5', plot: 'Haiku 5.5', harness: 'Claude Code', tiers: false,
+      points: [
+        { tier: 'low', qs: 27.14, cost: 0.12, tokens: 2.15 },
+        { tier: 'medium', qs: 38.06, cost: 0.15, tokens: 2.85 },
+        { tier: 'high', qs: 30.28, cost: 0.23, tokens: 5.47 },
+        { tier: 'xhigh', qs: 42.30, cost: 0.40, tokens: 9.01 }
+      ] },
+    /* Google's Antigravity CLI (`agy`) under Harbor. Only 3.7 Flash is drawn,
+       in palette slot eight; 3.6 Flash held slot seven until 2026-10-10 and is
+       under `excluded`.
 
        The 3.5 Flash ladder is NOT here, though as of 2026-08-10 it could be:
        `low` finished (50.37, $37.82) and all three tiers are 31/31. It is kept
@@ -98,16 +119,7 @@ var PRICE_PERF = {
        beats high $19.09 and medium $50.18 is dearest of all — while score falls
        monotonically from high to low. On these axes that ladder doubles back on
        itself, which is a different and worse failure than a merely non-monotonic
-       score. All three 3.5 tiers are in the table and on the full scatter below.
-
-       3.6: effort order and cost order agree, but score is not monotonic — high
-       costs more than medium and scores 3.4 points lower, the same shape as Sol,
-       so the ladder ends at medium. */
-    { key: 'gem36', label: 'Gemini 3.6 Flash', plot: 'Gemini 3.6 Flash', harness: 'Antigravity', tiers: false,
-      points: [
-        { tier: 'low', qs: 42.77, cost: 13.59, tokens: 27.44 },
-        { tier: 'medium', qs: 48.15, cost: 19.96, tokens: 54.30 }
-      ] },
+       score. All three 3.5 tiers are in the table and on the full scatter below. */
     /* 3.7, added 2026-08-23, and the only ladder on this chart that rises
        monotonically in score across every rung it has — 3.5 inverts on cost,
        3.6 turns down at high, Sol turns down at high, Opus 5 and Terra turn down
@@ -193,17 +205,24 @@ var PRICE_PERF = {
      full scatter below it (static/js/price_perf_full.js), so nothing dropped
      here is hidden from the reader. */
   excluded: [
+    /* Retired 2026-10-10 when Claude Sonnet 5.5 and Haiku 5.5 took slots three
+       and seven. Gemini 3.6 Flash high was already held out below. */
+    { series: 'Claude Fable 5', tier: 'low', qs: 46.77, cost: 7.93, why: 'line retired; superseded by Claude Fable 5.1' },
+    { series: 'Claude Fable 5', tier: 'medium', qs: 51.69, cost: 10.13, why: 'line retired; superseded by Claude Fable 5.1' },
+    { series: 'Claude Fable 5', tier: 'high', qs: 52.55, cost: 11.95, why: 'line retired; superseded by Claude Fable 5.1' },
+    { series: 'Claude Fable 5', tier: 'xhigh', qs: 56.42, cost: 15.06, why: 'line retired; superseded by Claude Fable 5.1' },
+    { series: 'Gemini 3.6 Flash', tier: 'low', qs: 42.77, cost: 13.59, why: 'line retired; superseded by Gemini 3.7 Flash' },
+    { series: 'Gemini 3.6 Flash', tier: 'medium', qs: 48.15, cost: 19.96, why: 'line retired; superseded by Gemini 3.7 Flash' },
     /* Retired 2026-10-07 when GPT-6.1 Sol and Claude Opus 5.5 took slots one and
        two. The other rungs of both ladders (Sol xhigh/max, Opus 5 max) were
-       already held out below. Sonnet 5.5 and GPT-6 Astra were never drawn here,
-       to keep the palette at eleven. */
+       already held out below. GPT-6 Astra was never drawn here, to keep the
+       palette at eleven. */
     { series: 'GPT-5.6 Sol', tier: 'low', qs: 41.68, cost: 9.53, why: 'line retired; superseded by GPT-6.1 Sol' },
     { series: 'GPT-5.6 Sol', tier: 'medium', qs: 58.76, cost: 12.52, why: 'line retired; superseded by GPT-6.1 Sol' },
     { series: 'GPT-5.6 Sol', tier: 'high', qs: 51.54, cost: 14.79, why: 'line retired; superseded by GPT-6.1 Sol' },
     { series: 'Claude Opus 5', tier: 'medium', qs: 51.37, cost: 5.84, why: 'line retired; superseded by Claude Opus 5.5' },
     { series: 'Claude Opus 5', tier: 'high', qs: 53.36, cost: 7.29, why: 'line retired; superseded by Claude Opus 5.5' },
     { series: 'Claude Opus 5', tier: 'xhigh', qs: 58.37, cost: 12.33, why: 'line retired; superseded by Claude Opus 5.5' },
-    { point: 'Claude Sonnet 5.5', harness: 'Claude Code', qs: 48.51, cost: 1.48, why: 'not drawn; palette full. Best tier (medium) shown here' },
     { point: 'GPT-6 Astra', harness: 'Codex', qs: 49.33, cost: 13.52, why: 'not drawn; palette full, and dominated by GPT-6.1 Sol high. Best tier (medium) shown here' },
     /* The three dearer, lower-scoring harnesses on the V4 Pro weights. Drawing
        one point per model is this chart's whole premise; the harness comparison

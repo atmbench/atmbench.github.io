@@ -56,20 +56,30 @@ var ATM_HARD_ROWS = [
   { type: 'Agent',  harness: 'Claude Code', model: 'Claude Fable 5.1 (medium)',  qs: 57.46, recall: null, total_tokens: 2.00,  cost_usd:  9.15, link: 'https://github.com/anthropics/claude-code' },
   { type: 'Agent',  harness: 'Claude Code', model: 'Claude Fable 5.1 (high)',    qs: 61.02, recall: null, total_tokens: 2.91,  cost_usd: 14.70, link: 'https://github.com/anthropics/claude-code' },
   { type: 'Agent',  harness: 'Claude Code', model: 'Claude Fable 5.1 (xhigh)',   qs: 61.02, recall: null, total_tokens: 4.14,  cost_usd: 27.21, link: 'https://github.com/anthropics/claude-code' },
-  //     Claude Opus 5.5 and Sonnet 5.5, added 2026-10-07 (run 2026-10-06), all
-  //     six tiers 31/31. Opus 5.5 high beats Opus 5 high by 4.3 points at 60% of
-  //     its cost; low and medium tie, and the step at high is open-ended
-  //     answers. Sonnet 5.5 peaks at medium and falls back at high for 1.8x the
-  //     tokens. Costs are tokdash's 5-minute cache-write rate, like every other
-  //     Claude Code row here; Claude Code writes 1-hour cache, so true list price
-  //     is 1.3-1.4x (Opus 5.5 high $6.10, not $4.39). Every Claude row shares
-  //     that understatement.
+  //     Claude Opus 5.5 and Sonnet 5.5 low/medium/high added 2026-10-07 (run
+  //     2026-10-06). Opus 5.5 xhigh/max, Sonnet 5.5 xhigh and the Haiku 5.5
+  //     ladder added 2026-10-10 (run 2026-10-09/10). Every tier listed is 31/31.
+  //     Opus 5.5 high beats Opus 5 high by 4.3 points at 60% of its cost; xhigh
+  //     dips 1.2 points and max is its best at 4.7x the cost of high. Sonnet 5.5
+  //     dips at high, then xhigh jumps 15.3 points to 58.73 at $4.24, above Opus
+  //     5.5 high. Haiku 5.5 zigzags the same way and ends at 42.30 for $0.40.
+  //     Costs are tokdash's 5-minute cache-write rate, like every other Claude
+  //     Code row here; Claude Code writes 1-hour cache, so true list price is
+  //     1.3-1.4x (Opus 5.5 high $6.10, not $4.39). Every Claude row shares that
+  //     understatement.
   { type: 'Agent',  harness: 'Claude Code', model: 'Claude Opus 5.5 (low)',      qs: 49.99, recall: null, total_tokens: 1.04,  cost_usd:  1.85, link: 'https://github.com/anthropics/claude-code' },
   { type: 'Agent',  harness: 'Claude Code', model: 'Claude Opus 5.5 (medium)',   qs: 49.96, recall: null, total_tokens: 1.76,  cost_usd:  3.27, link: 'https://github.com/anthropics/claude-code' },
   { type: 'Agent',  harness: 'Claude Code', model: 'Claude Opus 5.5 (high)',     qs: 57.63, recall: null, total_tokens: 2.54,  cost_usd:  4.39, link: 'https://github.com/anthropics/claude-code' },
+  { type: 'Agent',  harness: 'Claude Code', model: 'Claude Opus 5.5 (xhigh)',    qs: 56.42, recall: null, total_tokens: 5.05,  cost_usd:  7.57, link: 'https://github.com/anthropics/claude-code' },
+  { type: 'Agent',  harness: 'Claude Code', model: 'Claude Opus 5.5 (max)',      qs: 59.14, recall: null, total_tokens: 15.11, cost_usd: 20.65, link: 'https://github.com/anthropics/claude-code' },
   { type: 'Agent',  harness: 'Claude Code', model: 'Claude Sonnet 5.5 (low)',    qs: 36.39, recall: null, total_tokens: 1.38,  cost_usd:  1.29, link: 'https://github.com/anthropics/claude-code' },
   { type: 'Agent',  harness: 'Claude Code', model: 'Claude Sonnet 5.5 (medium)', qs: 48.51, recall: null, total_tokens: 1.74,  cost_usd:  1.48, link: 'https://github.com/anthropics/claude-code' },
   { type: 'Agent',  harness: 'Claude Code', model: 'Claude Sonnet 5.5 (high)',   qs: 43.44, recall: null, total_tokens: 3.22,  cost_usd:  2.37, link: 'https://github.com/anthropics/claude-code' },
+  { type: 'Agent',  harness: 'Claude Code', model: 'Claude Sonnet 5.5 (xhigh)',  qs: 58.73, recall: null, total_tokens: 5.52,  cost_usd:  4.24, link: 'https://github.com/anthropics/claude-code' },
+  { type: 'Agent',  harness: 'Claude Code', model: 'Claude Haiku 5.5 (low)',     qs: 27.14, recall: null, total_tokens: 2.15,  cost_usd:  0.12, link: 'https://github.com/anthropics/claude-code' },
+  { type: 'Agent',  harness: 'Claude Code', model: 'Claude Haiku 5.5 (medium)',  qs: 38.06, recall: null, total_tokens: 2.85,  cost_usd:  0.15, link: 'https://github.com/anthropics/claude-code' },
+  { type: 'Agent',  harness: 'Claude Code', model: 'Claude Haiku 5.5 (high)',    qs: 30.28, recall: null, total_tokens: 5.47,  cost_usd:  0.23, link: 'https://github.com/anthropics/claude-code' },
+  { type: 'Agent',  harness: 'Claude Code', model: 'Claude Haiku 5.5 (xhigh)',   qs: 42.30, recall: null, total_tokens: 9.01,  cost_usd:  0.40, link: 'https://github.com/anthropics/claude-code' },
   { type: 'Agent',  harness: 'Claude Code', model: 'Claude Opus 4.7 (max)',     qs: 46.60, recall: null, total_tokens: 6.93,  cost_usd:  9.58, link: 'https://github.com/anthropics/claude-code' },
   { type: 'Agent',  harness: 'Claude Code', model: 'Claude Opus 4.8',           qs: 41.63, recall: null, total_tokens: 4.42,  cost_usd:  7.49, link: 'https://github.com/anthropics/claude-code' },
   { type: 'Agent',  harness: 'Claude Code', model: 'Claude Opus 4.7 (xhigh)',   qs: 39.50, recall: null, total_tokens: 5.03,  cost_usd:  7.70, link: 'https://github.com/anthropics/claude-code' },

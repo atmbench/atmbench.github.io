@@ -329,14 +329,20 @@ var PricePerfFull = (function () {
         if (b.x0 < 3 || b.x1 > W - 3 || b.y0 < M.t - 12 || b.y1 > M.t + IH + 10) continue;
         if (collides(b)) continue;
         /* A label pushed several rungs clear of its marker stops reading as that
-           marker's label. Past ~34px, draw a hairline from the dot down to the
-           label's top edge — placed first so the text paints over it. The line
-           is only ever vertical and only ever downward, so it cannot be mistaken
-           for the staircase. */
-        if (c.y - cy > 34 && c.x !== undefined) {
+           marker's label. Past ~34px, draw a hairline from the dot to the
+           label's near edge — placed first so the text paints over it. The line
+           is only ever vertical, so it cannot be mistaken for the staircase.
+           Upward too since 2026-10-10: Claude Haiku 5.5 (medium) found its only
+           free slot two rungs up, level with the Haiku xhigh dot beside it, and
+           read as that dot's label until it had a line back to its own. */
+        if (Math.abs(c.y - cy) > 34 && c.x !== undefined) {
           var lx = Math.min(Math.max(cx, b.x0 + 6), b.x1 - 6);
+          var below = c.y > cy;
           lg.appendChild(el('line', {
-            x1: lx, x2: lx, y1: cy + rad + 2, y2: b.y0 - 2, class: 'ppf-leader'
+            x1: lx, x2: lx,
+            y1: below ? cy + rad + 2 : cy - rad - 2,
+            y2: below ? b.y0 - 2 : b.y1 + 2,
+            class: 'ppf-leader'
           }));
         }
         var e = el('text', { x: c.x, y: c.y, 'text-anchor': c.a, class: 'pp-dot-name', fill: fill, 'font-size': size });

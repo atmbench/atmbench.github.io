@@ -2,17 +2,31 @@
  "schema_version": 1,
  "system": "Graphon V1",
  "row": {
-  "harness": "Graphon V1 (deep)",
-  "answer_model": "GPT-6 Astra"
+  "harness": "Graphon V1",
+  "profile": "deep",
+  "answer_model": "GPT-6 Astra",
+  "memory_model": "Graphon V1",
+  "retriever": "Graphon V1"
  },
  "protocol": {
-  "pipeline": "Graphon's own ingest, retrieval and answer synthesis over the benchmark's raw emails, images and videos plus the released processed_memory captions as file metadata",
-  "memory_mode": "processed_memory",
+  "system": "Graphon V1. Graphon uses a set of open source models as one part of a much larger closed source system. At ingest, Graphon processes the benchmark's raw emails, images and videos, and a VLM describes images and video frames; the benchmark's released processed-memory fields for images and videos (captions, OCR text, locations and tags) are kept as file metadata. The answer model below writes the answer from Graphon's retrieved context.",
+  "profile": "deep",
   "execution_profile": "high",
+  "execution_profile_note": "API name of the profile; low = fast, medium = standard, high = deep",
+  "memory_mode": "processed_memory",
   "answer_model": "gpt-6-astra",
+  "answer_model_settings": {
+   "reasoning_effort": "medium",
+   "thinking": "on"
+  },
+  "thinking_off_retries": 0,
   "answer_source": "native",
   "answer_contract": "atm_bench",
+  "context": "In the deep profile there is a predetermined maximum number of items passed to the answer model, and internal pruning can pass fewer when items are judged very irrelevant to the question. The cutoff does not depend on the answers or the gold evidence.",
+  "retrieved_top10": "the 10 most relevant distinct memories among the items passed to the answer model; fewer when that context holds fewer than 10 distinct memories",
   "retrieval_cutoff": 10,
+  "retrieval_determinism": "The answer model does not drive retrieval. The retriever is non-deterministic.",
+  "data_access": "Graphon received only the raw emails, images and videos and the benchmark's released processed-memory fields for images and videos. The questions, gold answers and gold evidence ids never reached Graphon; the eval harness used them only to score the run afterwards.",
   "judge_model": "gpt-5-mini",
   "judge_reasoning_effort": "minimal",
   "evaluator": {
@@ -21,6 +35,8 @@
    "evaluate_qa_sha256": "0581963c1c6b9729398d8007f3d40664b2c026499c9cbf0436a92f77dcb1b66e"
   },
   "predictions_sha256": "b2280a2d7b4b057b6f94092ee084314300baba7115dc396474843383514976ac",
+  "predictions_sha256_note": "sha256 of the JSONL file the evaluator scored; it also carries internal run metadata, so it is not published. predictions_json_sha256 is the published predictions.json, which holds the same id and answer for every question.",
+  "predictions_json_sha256": "58bd59acf21a519a1542378e4540a02ee9d8aefe18fef875888a5d860c8230ad",
   "questions_sha256": "503e11e0c123c62f85781a0d5f04446974595a17b4bee734519cc94de1aa27e8",
   "run_id": "c39b8957-5afe-420f-b2c2-9040dba4026c",
   "deployed_commit": "1b3739d8c8ec570c24b9498070170106bc6120c4",
@@ -30,7 +46,6 @@
   "refilled_questions": 0,
   "refill_policy": "questions whose query failed with a server error in the main run were re-answered once, unchanged settings, in a separate graded run",
   "answer_failures": 0,
-  "context_note": "retrieved_top10 lists the memories passed to the answer model, which can be fewer than 10",
   "judge_status": "complete"
  },
  "splits": {

@@ -1,0 +1,9 @@
+{
+  "harness": "Graphon V1",
+  "type": "Memory",
+  "model": "GPT-6-Astra",
+  "memory_model": "Graphon V1",
+  "retriever": "Graphon V1",
+  "organization": "Graphon Labs",
+  "code_available": false
+}

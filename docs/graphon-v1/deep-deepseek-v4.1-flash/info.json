@@ -1,0 +1,9 @@
+{
+  "harness": "Graphon V1",
+  "type": "Memory",
+  "model": "DeepSeek-V4.1-Flash",
+  "memory_model": "Graphon V1",
+  "retriever": "Graphon V1",
+  "organization": "Graphon Labs",
+  "code_available": false
+}

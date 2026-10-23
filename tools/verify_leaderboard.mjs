@@ -1,4 +1,4 @@
-﻿import { readFileSync, existsSync } from 'node:fs';
+﻿import { readFileSync, existsSync, readdirSync } from 'node:fs';
 import vm from 'node:vm';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -6,6 +6,34 @@ import { fileURLToPath } from 'node:url';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const html = readFileSync(path.join(root, 'leaderboard.html'), 'utf8');
 const hardSrc = readFileSync(path.join(root, 'static/js/atm_hard_rows.js'), 'utf8');
+
+// Every script the pages run must at least parse. One syntax error in an inline
+// <script> stops the whole block, so every table renders empty. The checks below
+// evaluate only the row arrays, so they cannot see an error elsewhere in the block.
+function compileOrThrow(source, label, firstLine = 1) {
+  try {
+    new vm.Script(source, { filename: label });
+  } catch (err) {
+    const line = Number((err.stack.match(new RegExp(`${label.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}:(\\d+)`)) || [])[1] || 0);
+    const where = line ? ` at line ${firstLine + line - 1}` : '';
+    throw new Error(`${label}: ${err.name}: ${err.message}${where}`);
+  }
+}
+for (const page of ['leaderboard.html', 'index.html']) {
+  const source = readFileSync(path.join(root, page), 'utf8');
+  const inline = /<script(?![^>]*\bsrc=)[^>]*>([\s\S]*?)<\/script>/g;
+  let match, count = 0;
+  while ((match = inline.exec(source))) {
+    count++;
+    const firstLine = source.slice(0, match.index + match[0].indexOf('>') + 1).split('\n').length;
+    compileOrThrow(match[1], `${page} inline script ${count}`, firstLine);
+  }
+}
+for (const file of readdirSync(path.join(root, 'static/js'))) {
+  if (file.endsWith('.js') && !file.endsWith('.min.js')) {
+    compileOrThrow(readFileSync(path.join(root, 'static/js', file), 'utf8'), `static/js/${file}`);
+  }
+}
 
 function extractArray(source, marker) {
   const start = source.indexOf(marker);

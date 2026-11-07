@@ -363,5 +363,6 @@ var ATM_HARD_ROWS = [
   // --- RAG (one row per system) ---
   { type: 'RAG', harness: 'HippoRAG2', model: 'Qwen3-VL-8B-Instruct', qs:  9.40, recall: 31.90, total_tokens: null, link: 'https://github.com/OSU-NLP-Group/HippoRAG' },
   { type: 'RAG', harness: 'ATM-RAG',   model: 'Qwen3-VL-8B-Instruct', qs: 13.80, recall: 30.40, total_tokens: null, link: 'https://github.com/JingbiaoMei/ATM-Bench' },
-  { type: 'RAG', harness: 'HippoRAG2', model: 'DeepSeek-V4-flash (mem+ans)', qs: 12.27, recall: 32.16, total_tokens: null, link: 'https://github.com/OSU-NLP-Group/HippoRAG', notes: { qs: '*' } }
+  { type: 'RAG', harness: 'HippoRAG2', model: 'DeepSeek-V4-flash (mem+ans)', qs: 12.27, recall: 32.16, total_tokens: null, link: 'https://github.com/OSU-NLP-Group/HippoRAG', notes: { qs: '*' } },
+  { type: 'Memory', harness: 'Graphon V1', model: 'GPT-6.1 Terra', qs: 65.61, recall: 66.57, total_tokens: null, link: 'https://graphonlabs.ai', notes: { model: '§' } }
 ];

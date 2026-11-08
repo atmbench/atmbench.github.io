@@ -6,12 +6,18 @@ on:
       - 'leaderboard.html'
       - 'static/js/atm_hard_rows.js'
       - 'docs/memexa-v2-rejudge.json'
+      - 'docs/sensemem-main.json'
+      - 'docs/sensemem-main.md'
+      - 'docs/sensemem/**'
       - 'tools/verify_leaderboard.mjs'
   pull_request:
     paths:
       - 'leaderboard.html'
       - 'static/js/atm_hard_rows.js'
       - 'docs/memexa-v2-rejudge.json'
+      - 'docs/sensemem-main.json'
+      - 'docs/sensemem-main.md'
+      - 'docs/sensemem/**'
       - 'tools/verify_leaderboard.mjs'
 
 jobs:

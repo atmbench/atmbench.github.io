@@ -1,5 +1,6 @@
 ﻿import { readFileSync, existsSync } from 'node:fs';
 import vm from 'node:vm';
+import { createHash } from 'node:crypto';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -126,6 +127,35 @@ const hardEvidence = validateSplit('Hard evidence', summary.splits?.hard, 31);
 close(summary.splits.main.qs_percent, 76.68170920885629, 'summary Main QS');
 close(summary.splits.hard.qs_percent, 63.56886840757808, 'summary Hard QS');
 
+const sensememRow = row(main, 'SenseMem');
+const sensemem = JSON.parse(readFileSync(path.join(root, 'docs/sensemem-main.json'), 'utf8'));
+const sensememMain = sensemem.splits.main;
+const sensememEvidence = validateSplit('SenseMem Main', sensememMain, 1013);
+assert(sensemem.protocol.judge_model === 'gpt-5-mini' && sensemem.protocol.judge_status === 'complete', 'SenseMem judge protocol mismatch');
+assert(sensememRow.answer_model === sensemem.row.answer_model, 'SenseMem answer model mismatch');
+assert(sensememRow.memory_model === sensemem.row.memory_model, 'SenseMem memory model mismatch');
+assert(sensememRow.retriever === sensemem.row.retriever, 'SenseMem retriever mismatch');
+assert(sensememRow.notes?.qs === '\u00a7', 'SenseMem input footnote missing');
+assert((html.match(/\blegend_sensemem:/g) || []).length === 2, 'SenseMem footnote must have English and Chinese translations');
+close(sensememRow.qs, Number(sensememMain.qs_percent.toFixed(2)), 'SenseMem displayed QS');
+close(sensememRow.recall, Number(sensememMain.recall_at_10.toFixed(2)), 'SenseMem displayed Recall@10');
+const predictionBytes = readFileSync(path.join(root, 'docs', sensemem.protocol.predictions_json));
+assert(createHash('sha256').update(predictionBytes).digest('hex') === sensemem.protocol.predictions_json_sha256, 'SenseMem predictions hash mismatch');
+const predictions = JSON.parse(predictionBytes.toString('utf8'));
+assert(predictions.length === sensememMain.questions, 'SenseMem prediction coverage mismatch');
+const sensememIds = new Set();
+for (const [index, entry] of sensememMain.scores.entries()) {
+  assert(typeof entry.id === 'string' && !sensememIds.has(entry.id), `SenseMem duplicate or missing question ID at ${index}`);
+  sensememIds.add(entry.id);
+  assert(predictions[index].id === entry.id && typeof predictions[index].answer === 'string', `SenseMem prediction mismatch at ${index}`);
+  assert(Array.isArray(entry.retrieved_top10) && entry.retrieved_top10.length <= 10 && new Set(entry.retrieved_top10).size === entry.retrieved_top10.length, `SenseMem top-10 sources invalid at ${index}`);
+}
+for (const cutoff of [1, 5, 10]) {
+  const key = `recall_at_${cutoff}`;
+  for (const entry of sensememMain.scores) assert(Number.isFinite(entry[key]) && entry[key] >= 0 && entry[key] <= 1, `SenseMem ${key} outside [0, 1]`);
+  close(sensememMain[key], sensememMain.scores.reduce((total, entry) => total + entry[key], 0) / sensememMain.questions * 100, `SenseMem aggregate ${key}`);
+}
+
 console.log(JSON.stringify({
   ok: true,
   main_rows: main.rows.length,
@@ -134,5 +164,6 @@ console.log(JSON.stringify({
   judge_model: summary.judge_model,
   rejudged_qs: { main: mainMemexa.qs, hard: hardMemexa.qs },
   official_recall: recall.recall,
+  sensemem: { questions: sensememEvidence.questions, qs: sensememRow.qs, recall_at_10: sensememRow.recall },
   legacy_disclosures: { main: mainLegacy.length, hard: hardLegacy.length }
 }, null, 2));

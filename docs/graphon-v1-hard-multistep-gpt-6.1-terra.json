@@ -31,7 +31,7 @@
   "retrieval_cutoff": 10,
   "retrieval_determinism": "The answer call does not drive retrieval. Before it, multi-step reasoning picks evidence and may run follow-up searches. The retriever is non-deterministic.",
   "data_access": "Graphon received the raw emails, images and videos and the benchmark's released processed-memory fields for images and videos.",
-  "tuning": "Developed with root-cause analysis on multi-hop questions, including ATM-Bench-Hard; adds multi-step reasoning for questions that span many memories.",
+  "tuning": "Developed with root-cause analysis on multi-hop questions, including ATM-Bench-Hard: its questions, reference answers and evidence were inspected, and settings and answer rules were chosen from that analysis. Broad questions (lists and aggregates) have more gold memories, so they run a broader search. Some questions use relative dates such as \"yesterday\", so the run sets a reference date. Adds multi-step reasoning for questions that span many memories.",
   "judge_model": "gpt-5-mini",
   "judge_reasoning_effort": "minimal",
   "evaluator": {

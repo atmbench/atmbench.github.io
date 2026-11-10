@@ -9,7 +9,7 @@
     "github_asset_id": 731553893,
     "bytes": 5077081,
     "sha256": "5dbb81caadf3d05d1c1cc1a5237efd4c21785c5352d9b07f0ae10564cf772933",
-    "contents": "Exactly the two enriched JSON files below; no raw media, emails, QA fixtures, stores or credentials."
+    "contents": "The two enriched image/video JSON files listed below."
   },
   "files": [
     {
@@ -36,20 +36,25 @@
     "released_annotation_model": "vllm:Qwen/Qwen3-VL-2B-Instruct",
     "released_model_field_scope": "The retained model_used field identifies the original released SGM annotation stage, not the additional-description generator."
   },
-  "reconstruction": {
-    "method": "Before the measured run, recover each caption from the authoritative stored source text using the source ID and fixed SGM header/OCR/tag boundaries; replace only the released record's caption. No model calls.",
-    "verification": "Reconstructed source text after SDK normalization, metadata, timestamps, raw asset bytes and canonical embeddings matched the retained source store. The measured run recorded the reconstructed JSON hashes listed above.",
-    "generation_for_this_release": false
-  },
   "original_description_generation": {
-    "model": null,
-    "model_revision": null,
-    "prompt": null,
-    "settings": null,
-    "benchmark_questions_access": "unknown",
-    "reference_answers_access": "unknown",
-    "gold_evidence_ids_access": "unknown",
-    "status": "Historical generation records are incomplete. The exact generation recipe and its input-access boundary cannot be established; the supplied inputs preserve the evaluated content for inspection.",
-    "limitation": "Source-only reconstruction and runtime ingestion do not establish that the earlier description generation was question-blind or label-blind."
+    "model": "deepseek-v4.1-flash",
+    "upstream_model": "deepseek-v4-1-flash-261017",
+    "prompt": "https://github.com/SenseMem/SenseMem/blob/aadbe36f9566d985d9f78b3fe5dfd9f0fc9a00e0/src/mindbridge/models/openai_sdk.py#L320-L369",
+    "settings": {
+      "temperature": 0,
+      "seed": 0,
+      "max_tokens": 32768,
+      "thinking": "disabled",
+      "response_format": "json_schema",
+      "image_max_pixels": 4194304,
+      "video_frames": 32,
+      "batch_size": 1,
+      "concurrency": 16
+    },
+    "inputs": "Original source media and capture metadata; images processed individually and videos supplied as 32 ordered frames.",
+    "benchmark_questions_supplied": false,
+    "reference_answers_supplied": false,
+    "gold_evidence_ids_supplied": false,
+    "regenerated_in_evaluated_run": false
   }
 }

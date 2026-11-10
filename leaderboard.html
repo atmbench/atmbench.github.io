@@ -765,7 +765,7 @@
           <strong>&#9671;</strong> Memexa v2 uses DS-v4.1 descriptions and custom source-grounded cards; QS uses gpt-5-mini. <a href="https://github.com/labazhou2024/memexa/releases/tag/atmbench-memexa-v2-20261002">Frozen evidence</a> / <a href="docs/memexa-v2-rejudge.json">per-question score summary</a>. <strong>&#8224;</strong> MediaFind runs the official MMRAG pipeline with its own on-device ranking over the same captions and emails; Qwen3-VL-8B answers via OpenRouter (hosted, not the local FP8 copy). On that setup the official ATM-RAG retriever scores QS 48.4 / R@10 68.1. <a href="docs/mediafind-atmbench.json">Per-question score summary</a>. <strong>&#8225;</strong> Graphon V1 (deep profile) processes the raw emails, images and videos with its own pipeline, in which a VLM describes images and video frames at ingest, and keeps the benchmark's released processed-memory fields for images and videos (Qwen3-VL-2B captions, OCR text, locations and tags) as file metadata. Recall@10 counts the 10 most relevant distinct memories among the items passed to the answer model. QS uses the official evaluator with gpt-5-mini. Per-question score summaries: <a href="docs/graphon-v1-deep-gpt-6-astra.json">GPT-6 Astra</a> / <a href="docs/graphon-v1-deep-deepseek-v4.1-flash.json">DeepSeek V4.1 Flash</a>; raw predictions: <a href="docs/graphon-v1/deep-gpt-6-astra/predictions.json">GPT-6 Astra</a> / <a href="docs/graphon-v1/deep-deepseek-v4.1-flash/predictions.json">DeepSeek V4.1 Flash</a>.
         </p>
         <p class="lb-legend" data-i18n-html="legend_sensemem">
-          <strong>&#182;</strong> SenseMem uses raw emails, images and videos with released source annotations and precomputed visual descriptions. The added descriptions have incomplete generation provenance; fixed enriched inputs are linked in the run details. DeepSeek V4.1 Flash answers the questions; gpt-5-mini scores open-ended answers. <a href="docs/sensemem-main.md">Run details</a> / <a href="docs/sensemem-main.json">per-question scores</a> / <a href="docs/sensemem/main/predictions.json">predictions</a>.
+          <strong>&#182;</strong> SenseMem combines raw media and released source annotations with DeepSeek V4.1 Flash visual descriptions. DeepSeek V4.1 Flash answers the questions; gpt-5-mini scores open-ended answers. <a href="docs/sensemem-main.md">Run details and inputs</a> / <a href="docs/sensemem-main.json">per-question scores</a> / <a href="docs/sensemem/main/predictions.json">predictions</a>.
         </p>
       </div>
 
@@ -1347,7 +1347,7 @@
 
     var translations = {
       en: {
-        legend_sensemem: '<strong>&#182;</strong> SenseMem uses raw emails, images and videos with released source annotations and precomputed visual descriptions. The added descriptions have incomplete generation provenance; fixed enriched inputs are linked in the run details. DeepSeek V4.1 Flash answers the questions; gpt-5-mini scores open-ended answers. <a href="docs/sensemem-main.md">Run details</a> / <a href="docs/sensemem-main.json">per-question scores</a> / <a href="docs/sensemem/main/predictions.json">predictions</a>.',
+        legend_sensemem: '<strong>&#182;</strong> SenseMem combines raw media and released source annotations with DeepSeek V4.1 Flash visual descriptions. DeepSeek V4.1 Flash answers the questions; gpt-5-mini scores open-ended answers. <a href="docs/sensemem-main.md">Run details and inputs</a> / <a href="docs/sensemem-main.json">per-question scores</a> / <a href="docs/sensemem/main/predictions.json">predictions</a>.',
         hero_kicker: "Leaderboard",
         hero_subtitle: "Unified results across oracle, agent, memory, and RAG systems",
         hero_summary: "Submitted results on ATM-Bench, ATM-Bench-Hard, and the NIAH long-context stress test. Use the tabs to switch boards, the chips to filter by system type, and click any column header to sort.",
@@ -1389,7 +1389,7 @@
         ack_text: 'This page was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page, licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative Commons Attribution-ShareAlike 4.0 International License</a>. Many thanks to the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a>.'
       },
       zh: {
-        legend_sensemem: '<strong>&#182;</strong> SenseMem 使用原始邮件、图片和视频，并结合官方来源注释及预先生成的视觉描述。附加描述的原始生成溯源记录不完整；运行说明提供固定的增强输入文件。DeepSeek V4.1 Flash 回答问题，gpt-5-mini 评判开放题。<a href="docs/sensemem-main.md">运行说明</a> / <a href="docs/sensemem-main.json">逐题得分</a> / <a href="docs/sensemem/main/predictions.json">预测答案</a>。',
+        legend_sensemem: '<strong>&#182;</strong> SenseMem 结合原始媒体、官方来源注释和 DeepSeek V4.1 Flash 生成的视觉描述。DeepSeek V4.1 Flash 回答问题，gpt-5-mini 评判开放题。<a href="docs/sensemem-main.md">运行说明与输入</a> / <a href="docs/sensemem-main.json">逐题得分</a> / <a href="docs/sensemem/main/predictions.json">预测答案</a>。',
         hero_kicker: "排行榜",
         hero_subtitle: "Oracle、智能体、记忆与 RAG 系统的统一结果",
         hero_summary: "在 ATM-Bench、ATM-Bench-Hard 以及 NIAH 长上下文压力测试上提交的结果。使用标签切换榜单，使用筛选条按系统类型筛选，点击任意列标题进行排序。",

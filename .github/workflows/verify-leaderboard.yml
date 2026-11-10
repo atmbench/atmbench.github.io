@@ -4,13 +4,15 @@ on:
   push:
     paths:
       - 'leaderboard.html'
-      - 'static/js/atm_hard_rows.js'
+      - 'index.html'
+      - 'static/js/**'
       - 'docs/memexa-v2-rejudge.json'
       - 'tools/verify_leaderboard.mjs'
   pull_request:
     paths:
       - 'leaderboard.html'
-      - 'static/js/atm_hard_rows.js'
+      - 'index.html'
+      - 'static/js/**'
       - 'docs/memexa-v2-rejudge.json'
       - 'tools/verify_leaderboard.mjs'
 

@@ -1,0 +1,605 @@
+{
+ "schema_version": 1,
+ "system": "Graphon V1",
+ "row": {
+  "harness": "Graphon V1",
+  "profile": "standard",
+  "answer_model": "GPT-6.1 Terra",
+  "memory_model": "Graphon V1",
+  "retriever": "Graphon V1"
+ },
+ "protocol": {
+  "system": "Graphon V1. Graphon uses a set of open source models as one part of a much larger closed source system. At ingest, Graphon processes the benchmark's raw emails, images and videos, and a VLM describes images and video frames; the benchmark's released processed-memory fields for images and videos (captions, OCR text, locations and tags) are kept as file metadata. The answer model below writes the answer from Graphon's retrieved context.",
+  "profile": "standard",
+  "execution_profile": "medium",
+  "execution_profile_note": "API name of the profile; low = fast, medium = standard, high = deep",
+  "memory_mode": "processed_memory",
+  "answer_model": "gpt-6.1-terra",
+  "answer_model_settings": {
+   "reasoning_effort": "high",
+   "thinking": "on"
+  },
+  "thinking_off_retries": 0,
+  "answer_source": "native",
+  "answer_contract": "atm_bench",
+  "context": "A bounded number of items is passed to the answer model; multi-step reasoning can add memories it picks, and internal pruning can pass fewer items when they are judged very irrelevant to the question.",
+  "answer_time_limit_seconds": 180,
+  "answer_time_limit_note": "raised for this run; multi-step reasoning needs more time per question",
+  "retrieved_top10": "the first 10 distinct memories in the order the answer model reads them. Before the answer is written, a selection step picks the memories it will use (it may run up to 3 follow-up searches); those come first, then the rest in reranker-score order. The order does not depend on the answer",
+  "recall_at_10_reranker_order": 52.57,
+  "recall_at_10_reranker_order_note": "diagnostic only: the same run scored on the reranker order before the selection step, rebuilt from the logged pre-selection order of all 31 questions",
+  "retrieval_cutoff": 10,
+  "retrieval_determinism": "The answer call does not drive retrieval. Before it, multi-step reasoning picks evidence and may run follow-up searches. The retriever is non-deterministic.",
+  "data_access": "Graphon received the raw emails, images and videos and the benchmark's released processed-memory fields for images and videos.",
+  "tuning": "Developed with root-cause analysis on multi-hop questions, including ATM-Bench-Hard: its questions, reference answers and evidence were inspected, and settings and answer rules were chosen from that analysis. Broad questions (lists and aggregates) have more gold memories, so they run a broader search. Some questions use relative dates such as \"yesterday\", so the run sets a reference date. Adds multi-step reasoning for questions that span many memories.",
+  "judge_model": "gpt-5-mini",
+  "judge_reasoning_effort": "minimal",
+  "evaluator": {
+   "repo": "https://github.com/JingbiaoMei/ATM-Bench",
+   "revision": "ef4e5dff1a47ec71213a06e359f02753defa8fb1",
+   "evaluate_qa_sha256": "0581963c1c6b9729398d8007f3d40664b2c026499c9cbf0436a92f77dcb1b66e"
+  },
+  "predictions_sha256": "a4e69f07b9b3fc56da1be61d2abdf5674fbbcc8fed2153c3c8006f9373b3c9f1",
+  "predictions_sha256_note": "sha256 of the JSONL file the evaluator scored; it also carries internal run metadata, so it is not published. predictions_json_sha256 is the published predictions.json, which holds the same id and answer for every question.",
+  "predictions_json_sha256": "c9c913a3e53373a687964c276e09f62dfe46260f12d0e4efe994be73551ec9d2",
+  "questions_sha256": "acd35f2a172a9741d970d2cf21184ff0af8d79a8bf59967fc8aa33d619f6af4a",
+  "questions_sha256_note": "sha256 of the published atm-bench-hard.json (Hugging Face Jingbiao/ATM-Bench, data/atm-bench/atm-bench-hard.json). The evaluator scored the same 31 questions, with identical id, question, answer, evidence_ids and qtype.",
+  "run_id": "1b6d4661-a5e1-4405-86cd-3eb43856f51d",
+  "deployed_commit": "12cb3edf1abd308cb3d76b8dd66368f32f2ae209",
+  "graph": "built 2026-11-06 by Graphon from the benchmark files and reused unchanged for every run",
+  "run_selection": "one run per row; settings fixed before the run",
+  "fill_run_id": null,
+  "refilled_questions": 0,
+  "refill_policy": "questions whose query failed with a server error in the main run were re-answered once, unchanged settings, in a separate graded run",
+  "answer_failures": 0,
+  "judge_status": "complete"
+ },
+ "splits": {
+  "hard": {
+   "questions": 31,
+   "qs_percent": 65.60871660492154,
+   "recall_at_1": 14.997741031896627,
+   "recall_at_5": 55.43978633637078,
+   "recall_at_10": 66.56933989476684,
+   "per_type": {
+    "list_recall": {
+     "questions": 12,
+     "qs_percent": 86.15585122938063
+    },
+    "number": {
+     "questions": 6,
+     "qs_percent": 33.333333333333336
+    },
+    "open_end": {
+     "questions": 13,
+     "qs_percent": 61.53846153846154
+    }
+   },
+   "scores": [
+    {
+     "id": "c53f6cbe-01f4-4870-8946-f761dcf1ceba",
+     "qtype": "list_recall",
+     "score": 0.7777777777777778,
+     "retrieved_top10": [
+      "20250223_130249",
+      "20250225_173637",
+      "20250225_184511",
+      "20250225_142539",
+      "20250225_141720",
+      "20250223_132602",
+      "20250225_150659",
+      "20250225_142658",
+      "20250225_141559",
+      "20250223_153033"
+     ]
+    },
+    {
+     "id": "20242c87-f8d7-4d10-a8d0-b0d7e525b64b",
+     "qtype": "number",
+     "score": 1.0,
+     "retrieved_top10": [
+      "20250310_202208",
+      "email202502200013",
+      "email202502110008",
+      "20250227_104108",
+      "20250224_174903",
+      "20250222_184136",
+      "20250224_171237",
+      "20250225_134500",
+      "20250223_100830",
+      "email202502190010"
+     ]
+    },
+    {
+     "id": "de07dd6e-ac2f-4517-a084-e193a3d93601",
+     "qtype": "open_end",
+     "score": 1.0,
+     "retrieved_top10": [
+      "20240131_155737",
+      "email202312190006",
+      "20231217_160723",
+      "20231230_131607",
+      "email202312310001",
+      "20231210_111815",
+      "20231211_170927",
+      "20231212_091152",
+      "20231213_171708",
+      "20231219_120757"
+     ]
+    },
+    {
+     "id": "778461cd-4755-498f-b77b-43cc791b42c2",
+     "qtype": "number",
+     "score": 0.0,
+     "retrieved_top10": [
+      "email202406100015",
+      "email202407110004",
+      "email202501270010",
+      "email202501270008",
+      "email202502110001",
+      "20240713_181353",
+      "20240713_192657",
+      "20240713_192700",
+      "20240708_215338",
+      "20240708_170032"
+     ]
+    },
+    {
+     "id": "c5eafc63-5b0b-43c8-b192-6381e5a8226e",
+     "qtype": "number",
+     "score": 0.0,
+     "retrieved_top10": [
+      "20250310_202208",
+      "email202502110008",
+      "email202502200013",
+      "email202502270010",
+      "20250224_174903",
+      "20250225_163903",
+      "20250227_104108",
+      "email202502280001",
+      "20250223_100830",
+      "email202502280002"
+     ]
+    },
+    {
+     "id": "580a4fee-8595-4453-8368-f52eec0a3954",
+     "qtype": "list_recall",
+     "score": 1.0,
+     "retrieved_top10": [
+      "20230401_115135",
+      "20230403_114911",
+      "20230403_114939",
+      "20230403_121513",
+      "20230401_120321",
+      "20230403_120626",
+      "20230401_200154",
+      "20230401_122824",
+      "20230401_174959",
+      "20230401_174935"
+     ]
+    },
+    {
+     "id": "53ea4267-419b-4769-817c-add406463462",
+     "qtype": "list_recall",
+     "score": 0.7142857142857143,
+     "retrieved_top10": [
+      "20231210_124201",
+      "20231210_123349",
+      "20231210_125339",
+      "20231210_131358",
+      "20231210_124255",
+      "20231210_125002",
+      "20231210_125556",
+      "20231210_125641",
+      "20231210_125807",
+      "20231210_125832"
+     ]
+    },
+    {
+     "id": "a294b202-3353-4fc4-be18-7abd2a36962c",
+     "qtype": "open_end",
+     "score": 1.0,
+     "retrieved_top10": [
+      "email202206120004",
+      "email202411160004",
+      "email202411180007",
+      "email202411240002",
+      "email202411280006",
+      "email202411160005",
+      "20241128_104504",
+      "20241124_180756",
+      "20241125_090416",
+      "20241127_173636"
+     ]
+    },
+    {
+     "id": "bb50a272-b5c8-4f0e-8fb5-530b16d73cd9",
+     "qtype": "open_end",
+     "score": 1.0,
+     "retrieved_top10": [
+      "20240131_155737",
+      "email202312310001",
+      "email202312190006",
+      "email202312050005",
+      "email202312040003",
+      "email202312080009",
+      "email202312090002",
+      "email202312050007",
+      "20231210_111815",
+      "email202312040005"
+     ]
+    },
+    {
+     "id": "afa4bf6a-c459-4173-9de9-2aac6183a4a7",
+     "qtype": "list_recall",
+     "score": 0.6428571428571429,
+     "retrieved_top10": [
+      "20250605_223744",
+      "20250509_232753",
+      "20250509_232737",
+      "20250509_232802",
+      "20250511_120224",
+      "20240715_125144",
+      "20240715_125140",
+      "20241117_115411",
+      "20241117_115422",
+      "20250119_000631"
+     ]
+    },
+    {
+     "id": "baec8204-c6ca-4c9a-bd82-7145e2126659",
+     "qtype": "list_recall",
+     "score": 1.0,
+     "retrieved_top10": [
+      "20230307_155858",
+      "20230307_155907",
+      "20230307_161006",
+      "20230307_161017",
+      "20230307_161038",
+      "20240812_185312",
+      "20240417_184254",
+      "20240818_153451",
+      "20240818_154013",
+      "20221211_225611"
+     ]
+    },
+    {
+     "id": "429b218c-086e-4f77-905e-2951ad92f5d8",
+     "qtype": "open_end",
+     "score": 1.0,
+     "retrieved_top10": [
+      "email202411240002",
+      "email202411180007",
+      "email202411160004",
+      "email202411280006",
+      "email202206120004",
+      "20241125_090416",
+      "20241128_104504",
+      "20241124_180756",
+      "20241127_173636",
+      "email202411160005"
+     ]
+    },
+    {
+     "id": "4028b70f-061e-4627-839e-9252ac387157",
+     "qtype": "number",
+     "score": 1.0,
+     "retrieved_top10": [
+      "20220906_134413",
+      "20220916_154434",
+      "20220924_194144",
+      "email202208270004",
+      "email202211090003",
+      "20241001_110034"
+     ]
+    },
+    {
+     "id": "ef912ea0-634f-4c1f-88d5-9e0543708258",
+     "qtype": "list_recall",
+     "score": 1.0,
+     "retrieved_top10": [
+      "20250221_133131",
+      "20250221_135227",
+      "20250221_142725",
+      "email202502110016",
+      "email202502190009",
+      "20230611_124801",
+      "20240523_195434",
+      "20230517_130400",
+      "20220625_130335",
+      "20240919_132842"
+     ]
+    },
+    {
+     "id": "888b4502-9c70-413a-8c06-69e7e97a16b2",
+     "qtype": "list_recall",
+     "score": 1.0,
+     "retrieved_top10": [
+      "20230327_205909",
+      "20230327_210005",
+      "20240819_205823",
+      "20240819_205827",
+      "20240819_210159",
+      "20230327_210237",
+      "20230327_124121",
+      "20240819_195336",
+      "20230327_210739",
+      "20230327_113139"
+     ]
+    },
+    {
+     "id": "30ad0a48-89ef-46c4-a388-a3c872bd16b8",
+     "qtype": "open_end",
+     "score": 0.0,
+     "retrieved_top10": [
+      "20250428_114126",
+      "20241127_193423",
+      "20241021_153837",
+      "20241021_153417",
+      "email202410070004",
+      "20241001_175310",
+      "20241002_171659",
+      "20240811_185109",
+      "20240812_195353",
+      "email202407110007"
+     ]
+    },
+    {
+     "id": "62e3fe3f-f301-47f1-9773-396920861220",
+     "qtype": "open_end",
+     "score": 1.0,
+     "retrieved_top10": [
+      "20220619_131011",
+      "20220619_131120",
+      "20220619_160839",
+      "20230903_175412",
+      "20230906_121023",
+      "20230905_130857",
+      "20230904_124507",
+      "email202309040001",
+      "20230904_145740",
+      "email202309030001"
+     ]
+    },
+    {
+     "id": "92e4edaa-5b26-44a5-80d2-91acf53b3b9c",
+     "qtype": "open_end",
+     "score": 1.0,
+     "retrieved_top10": [
+      "20250222_195034",
+      "20250227_194636",
+      "20250222_192936",
+      "20250224_144314",
+      "20250224_142901",
+      "20250225_150659",
+      "20241021_143007",
+      "20250224_142920",
+      "20250223_133355",
+      "20250225_142539"
+     ]
+    },
+    {
+     "id": "9a051aa3-a6b6-4e10-bb40-785cde684ad8",
+     "qtype": "number",
+     "score": 0.0,
+     "retrieved_top10": [
+      "20241021_001631",
+      "20241021_010743",
+      "20241021_004826",
+      "20241023_105515",
+      "20241022_103832",
+      "20241021_161431",
+      "20241022_162859",
+      "email202410240007",
+      "20241022_162146",
+      "20241021_152306"
+     ]
+    },
+    {
+     "id": "b6b46633-47a1-4fd6-88c4-42a7677d7fc5",
+     "qtype": "open_end",
+     "score": 1.0,
+     "retrieved_top10": [
+      "email202408060001",
+      "email202407260014",
+      "email202408020002",
+      "email202407260012",
+      "email202407260006",
+      "20240730_024914",
+      "20240731_102305",
+      "20240730_130951",
+      "20240730_131007",
+      "20240731_102902"
+     ]
+    },
+    {
+     "id": "7665e37d-29a0-4450-8d03-6539122a6b3f",
+     "qtype": "open_end",
+     "score": 1.0,
+     "retrieved_top10": [
+      "20240819_205823",
+      "20230327_210005",
+      "20230327_205909",
+      "20240819_210159",
+      "20240819_205827",
+      "20230327_210237",
+      "20230327_124121",
+      "20240819_153525",
+      "20230327_113139",
+      "20240819_153508"
+     ]
+    },
+    {
+     "id": "e44b102b-d7e2-4a4f-bdc6-464529910081",
+     "qtype": "list_recall",
+     "score": 0.8823529411764706,
+     "retrieved_top10": [
+      "20230416_114842",
+      "20230416_191938",
+      "20230416_191943",
+      "20230418_121232",
+      "20230418_184523",
+      "20230419_130151",
+      "20230419_130159",
+      "20230419_134456",
+      "20230419_195920",
+      "20230419_200149"
+     ]
+    },
+    {
+     "id": "2a976a38-20f4-4eaa-870b-03955fc612e8",
+     "qtype": "number",
+     "score": 0.0,
+     "retrieved_top10": [
+      "20241021_010743",
+      "20241021_161431",
+      "20241022_103832",
+      "20241022_162859",
+      "20241023_105515",
+      "email202410240007",
+      "email202410180002",
+      "20241021_153417",
+      "email202410100003",
+      "email202410250005"
+     ]
+    },
+    {
+     "id": "6c73ad56-d84c-48b7-a7d4-bbc2ffd80c79",
+     "qtype": "list_recall",
+     "score": 0.875,
+     "retrieved_top10": [
+      "20230418_135852",
+      "20230418_135850",
+      "20230418_135752",
+      "20230418_135743",
+      "20230418_195319",
+      "20230418_195315",
+      "20230418_195350",
+      "20230418_195309",
+      "20230420_123320",
+      "20220619_174236"
+     ]
+    },
+    {
+     "id": "7b24dbf3-dbe0-4382-9e9c-996cf614657e",
+     "qtype": "open_end",
+     "score": 0.0,
+     "retrieved_top10": [
+      "20241021_153837",
+      "20241003_184216",
+      "20250224_170329",
+      "20240713_162006",
+      "20250206_100505",
+      "20241128_105159",
+      "20240706_220205",
+      "20241021_194113",
+      "20241021_194520",
+      "20241021_130846"
+     ]
+    },
+    {
+     "id": "716095fa-6f76-4f19-95e4-3c8bf079fbdd",
+     "qtype": "list_recall",
+     "score": 1.0,
+     "retrieved_top10": [
+      "20230906_121206",
+      "20230905_152531",
+      "20230906_121455",
+      "20230906_155344",
+      "20230905_144627",
+      "20230905_152605",
+      "20230905_153627",
+      "20230905_153314",
+      "20220619_131011",
+      "20230906_142041"
+     ]
+    },
+    {
+     "id": "b8e85e9d-6701-4f66-885e-bdfabf03f7cd",
+     "qtype": "list_recall",
+     "score": 0.875,
+     "retrieved_top10": [
+      "20250428_114126",
+      "20250428_114056",
+      "20241021_153837",
+      "20241003_184216",
+      "20240930_132654",
+      "20240811_150248",
+      "20240701_120945",
+      "20231210_111815",
+      "20250430_163252",
+      "20240510_235442"
+     ]
+    },
+    {
+     "id": "0f7fcf11-8516-4756-b791-6e76e8065b14",
+     "qtype": "open_end",
+     "score": 0.0,
+     "retrieved_top10": [
+      "20250206_123849",
+      "20240713_144451",
+      "20240712_142736",
+      "20240712_205528",
+      "20240711_164606",
+      "20240708_215338",
+      "20240709_102814",
+      "20240713_192700",
+      "20240711_121848",
+      "20240710_210018"
+     ]
+    },
+    {
+     "id": "17b8b612-213a-4ab3-87f9-356b8cf0d7e5",
+     "qtype": "open_end",
+     "score": 0.0,
+     "retrieved_top10": [
+      "20240801_201540",
+      "20240802_182133",
+      "20240803_145832",
+      "20240730_130951",
+      "email202407260012",
+      "20240731_102305",
+      "20240802_193038",
+      "20240802_191913",
+      "20240802_191640",
+      "20240802_141723"
+     ]
+    },
+    {
+     "id": "361fef09-dbcc-4a68-aed2-187f9728b792",
+     "qtype": "open_end",
+     "score": 0.0,
+     "retrieved_top10": [
+      "20241001_170036",
+      "20241001_175310",
+      "20241001_181259",
+      "20241001_182544",
+      "20241003_184216",
+      "20240930_132654",
+      "20241002_174636",
+      "20241002_121211",
+      "20241002_114328",
+      "20241003_125350"
+     ]
+    },
+    {
+     "id": "30be4a0e-8708-42fe-9a21-c73254c78270",
+     "qtype": "list_recall",
+     "score": 0.5714285714285714,
+     "retrieved_top10": [
+      "20241017_140703",
+      "20241116_174018",
+      "20241116_174026",
+      "20240926_131909",
+      "20241129_200642",
+      "20240626_211727",
+      "20250404_111844",
+      "20230127_214916",
+      "20250401_223624",
+      "20230122_211749"
+     ]
+    }
+   ]
+  }
+ }
+}

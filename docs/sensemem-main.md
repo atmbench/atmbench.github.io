@@ -32,10 +32,90 @@ question IDs and answer strings. Both files describe the same complete run.
 - **Archive:** 11,034 source records and 4,292 original image/video assets.
   Inputs include emails, raw images and videos, released structured source
   annotations, and additional precomputed visual descriptions fused into the
-  caption field.
+  caption field. The [exact enriched visual inputs](#visual-description-inputs-and-provenance)
+  are available with their recorded hashes; the added-description generator's
+  original model, recipe and input-access boundary are not established.
 - **Store:** the run reuses the source archive and its canonical embeddings
   and rebuilds the search index. Index-building time is left unreported in
   the leaderboard.
+
+## Visual-description inputs and provenance
+
+The retained enriched inputs used by this run are available as a
+[fixed Release asset](https://github.com/thomas-yanxin/atmbench.github.io/releases/download/sensemem-main-enriched-inputs-2026-11-10/sensemem-atm-main-enriched-inputs.zip).
+The [input manifest](sensemem/main/enriched-inputs.json) pins the Release and
+asset IDs, ZIP checksum, file sizes and record counts. Both uncompressed file
+hashes match the hashes already recorded in the original submission, before
+this provenance update:
+
+- `image_batch_results.json` (3,759 records):
+  `57bb89d2eb1eeb13cb62e0888edc6d74ac8e63c4dd5826b6e0ba2111050d241f`
+- `video_batch_results.json` (533 records):
+  `7fe916356a3db5a60b87a110ba8eabc6cebca3cd5c855d0e6073f3d72ba0cb3b`
+
+The ZIP SHA-256 is
+`5dbb81caadf3d05d1c1cc1a5237efd4c21785c5352d9b07f0ae10564cf772933`.
+It contains only these two files, under `atm-bench/data/processed_memory/`.
+Use them with the remaining released inputs at dataset revision
+`78e826dc07e97466b2f54443831ef9a83ab8b27c`. No description, answer or judgment
+was regenerated for this release.
+
+### Caption fusion and reconstruction
+
+Against the pinned released annotations, **only `caption` differs**. Each of
+the 3,742 enriched image captions and 528 enriched video captions preserves the
+exact original caption and appends a description using this template:
+
+```text
+[Released SGM caption]
+<original caption>
+
+[MindBridge visual description of the same source item]
+<additional description>
+```
+
+The other 17 image captions and 5 video captions retain the released value.
+The surviving records do not establish why no description was appended to
+those 22 items. All non-caption fields remain unchanged. In particular,
+`model_used: vllm:Qwen/Qwen3-VL-2B-Instruct` identifies the **released SGM
+annotation stage**, not the model that produced the additional descriptions.
+
+Before the measured run, the enriched JSON was reconstructed after an older
+fused-input directory was lost. Reconstruction recovered each caption from
+the authoritative source store by source ID and the fixed SGM text boundaries,
+then replaced only `caption` in the released record. It made no model calls.
+The reconstructed SDK source text after normalization, metadata, timestamps,
+original asset bytes and canonical embeddings were checked against the retained
+store. The submitted run consumed these reconstructed inputs and recorded the
+file hashes above; this release preserves those bytes.
+
+### Generation records and data access
+
+The original added-description model and immutable model revision, exact
+prompts, sampling settings and repair history cannot be established from the
+retained generation records. `source_description_model: null` means **unknown
+for these additions**, not that there was no description stage. This is a
+historical provenance-record limitation. The example evaluation configuration
+consumes an already enriched corpus; it does not regenerate these descriptions.
+
+The information boundaries that can be established are:
+
+- **Original added-description generation:** its access to benchmark questions,
+  reference answers and gold evidence IDs is **unknown**. The retained materials
+  do not establish that this stage was question-blind or label-blind.
+- **Caption reconstruction:** released source annotations and caption text
+  recovered by source ID from the authoritative source store. Reconstruction
+  selects source records and does not use question, reference-answer or
+  gold-evidence fields to construct captions.
+- **Runtime ingestion:** source records, original media, source IDs and
+  timestamps. Questions, reference answers and gold evidence IDs are separate
+  evaluation inputs; references and gold IDs serve scoring and retrieval
+  diagnostics.
+
+The source-only reconstruction and runtime ingestion boundaries do not certify
+the earlier generation boundary. The released enriched inputs make the
+evaluated content inspectable without claiming an independently reproducible
+description-generation recipe.
 
 ## Evaluation
 

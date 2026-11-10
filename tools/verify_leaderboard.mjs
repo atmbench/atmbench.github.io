@@ -131,12 +131,20 @@ const sensememRow = row(main, 'SenseMem');
 const sensemem = JSON.parse(readFileSync(path.join(root, 'docs/sensemem-main.json'), 'utf8'));
 const sensememMain = sensemem.splits.main;
 const sensememEvidence = validateSplit('SenseMem Main', sensememMain, 1013);
+const enrichedInputs = JSON.parse(readFileSync(path.join(root, 'docs', sensemem.protocol.source_description_artifact), 'utf8'));
+assert(enrichedInputs.run_id === sensemem.protocol.run_id && enrichedInputs.dataset_revision === sensemem.protocol.dataset_revision, 'SenseMem enriched-input run identity mismatch');
+assert(enrichedInputs.files.length === 2, 'SenseMem enriched-input manifest must contain the image and video files');
+for (const file of enrichedInputs.files) {
+  assert(file.sha256 === sensemem.protocol.input_sha256[file.path], `SenseMem enriched-input hash mismatch: ${file.path}`);
+  assert(file.captions_with_additional_description + file.captions_unchanged_from_release === file.records, `SenseMem caption coverage mismatch: ${file.path}`);
+}
 assert(sensemem.protocol.judge_model === 'gpt-5-mini' && sensemem.protocol.judge_status === 'complete', 'SenseMem judge protocol mismatch');
 assert(sensememRow.answer_model === sensemem.row.answer_model, 'SenseMem answer model mismatch');
 assert(sensememRow.memory_model === sensemem.row.memory_model, 'SenseMem memory model mismatch');
 assert(sensememRow.retriever === sensemem.row.retriever, 'SenseMem retriever mismatch');
-assert(sensememRow.notes?.qs === '\u00a7', 'SenseMem input footnote missing');
-assert((html.match(/\blegend_sensemem:/g) || []).length === 2, 'SenseMem footnote must have English and Chinese translations');
+assert(sensememRow.notes?.qs === '\u00b6', 'SenseMem input footnote missing');
+assert(/data-i18n-html="legend_sensemem">\s*<strong>&#182;<\/strong>/.test(html), 'SenseMem static footnote marker mismatch');
+assert((html.match(/\blegend_sensemem: '<strong>&#182;<\/strong>/g) || []).length === 2, 'SenseMem footnote must have matching English and Chinese markers');
 close(sensememRow.qs, Number(sensememMain.qs_percent.toFixed(2)), 'SenseMem displayed QS');
 close(sensememRow.recall, Number(sensememMain.recall_at_10.toFixed(2)), 'SenseMem displayed Recall@10');
 const predictionBytes = readFileSync(path.join(root, 'docs', sensemem.protocol.predictions_json));

@@ -16,7 +16,15 @@
     "runner_version": "sensemem_eval_official_v26",
     "input": "Emails, raw images and videos, released structured source annotations, and additional precomputed visual descriptions fused into the caption field.",
     "source_description_model": null,
-    "data_access": "Reference answers and gold evidence IDs are used by the scoring harness. Memory ingestion uses source records and their original assets.",
+    "source_description_model_status": "Unknown for the retained added descriptions: original generation model/revision, prompts and settings were not retained. The released Qwen3-VL-2B model_used field describes the original SGM annotations only.",
+    "source_description_artifact": "sensemem/main/enriched-inputs.json",
+    "source_description_generation_data_access": {
+      "benchmark_questions": "unknown",
+      "reference_answers": "unknown",
+      "gold_evidence_ids": "unknown",
+      "limitation": "The original generation records do not establish which inputs were available. Source-only reconstruction and runtime ingestion do not establish question-blind or label-blind description generation."
+    },
+    "data_access": "Caption reconstruction uses released source annotations and caption text recovered by source ID from the authoritative source store. Runtime memory ingestion uses source records and original assets; benchmark questions, reference answers and gold evidence IDs are separate evaluation inputs. Original added-description generation access is unknown, as recorded separately.",
     "source_records": 11034,
     "assets": 4292,
     "store": "Reused source archive and canonical embeddings; the search index is rebuilt before the run.",

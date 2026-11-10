@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "run_id": "output-boundary-v1-ddb85e7e67fa-18/candidate-main1013",
+  "dataset_revision": "78e826dc07e97466b2f54443831ef9a83ab8b27c",
+  "release_url": "https://github.com/thomas-yanxin/atmbench.github.io/releases/tag/sensemem-main-enriched-inputs-2026-11-10",
+  "archive": {
+    "url": "https://github.com/thomas-yanxin/atmbench.github.io/releases/download/sensemem-main-enriched-inputs-2026-11-10/sensemem-atm-main-enriched-inputs.zip",
+    "github_release_id": 440403599,
+    "github_asset_id": 731553893,
+    "bytes": 5077081,
+    "sha256": "5dbb81caadf3d05d1c1cc1a5237efd4c21785c5352d9b07f0ae10564cf772933",
+    "contents": "Exactly the two enriched JSON files below; no raw media, emails, QA fixtures, stores or credentials."
+  },
+  "files": [
+    {
+      "path": "atm-bench/data/processed_memory/image_batch_results.json",
+      "bytes": 34091344,
+      "sha256": "57bb89d2eb1eeb13cb62e0888edc6d74ac8e63c4dd5826b6e0ba2111050d241f",
+      "records": 3759,
+      "captions_with_additional_description": 3742,
+      "captions_unchanged_from_release": 17
+    },
+    {
+      "path": "atm-bench/data/processed_memory/video_batch_results.json",
+      "bytes": 2799149,
+      "sha256": "7fe916356a3db5a60b87a110ba8eabc6cebca3cd5c855d0e6073f3d72ba0cb3b",
+      "records": 533,
+      "captions_with_additional_description": 528,
+      "captions_unchanged_from_release": 5
+    }
+  ],
+  "fusion": {
+    "changed_field": "caption",
+    "template": "[Released SGM caption]\n{original_caption}\n\n[MindBridge visual description of the same source item]\n{additional_description}",
+    "other_fields": "Every non-caption field and the exact original caption are retained from the pinned released annotations.",
+    "released_annotation_model": "vllm:Qwen/Qwen3-VL-2B-Instruct",
+    "released_model_field_scope": "The retained model_used field identifies the original released SGM annotation stage, not the additional-description generator."
+  },
+  "reconstruction": {
+    "method": "Before the measured run, recover each caption from the authoritative stored source text using the source ID and fixed SGM header/OCR/tag boundaries; replace only the released record's caption. No model calls.",
+    "verification": "Reconstructed source text after SDK normalization, metadata, timestamps, raw asset bytes and canonical embeddings matched the retained source store. The measured run recorded the reconstructed JSON hashes listed above.",
+    "generation_for_this_release": false
+  },
+  "original_description_generation": {
+    "model": null,
+    "model_revision": null,
+    "prompt": null,
+    "settings": null,
+    "benchmark_questions_access": "unknown",
+    "reference_answers_access": "unknown",
+    "gold_evidence_ids_access": "unknown",
+    "status": "Historical generation records are incomplete. The exact generation recipe and its input-access boundary cannot be established; the supplied inputs preserve the evaluated content for inspection.",
+    "limitation": "Source-only reconstruction and runtime ingestion do not establish that the earlier description generation was question-blind or label-blind."
+  }
+}

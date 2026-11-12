@@ -1028,7 +1028,13 @@
       if (type === 'percent') return v.toFixed(2) + '%';
       if (type === 'tokens_m') return v.toFixed(1) + 'M';
       if (type === 'usd') return '$' + v.toFixed(2);
-      if (type === 'hours') return v.toFixed(1) + ' hr';
+      if (type === 'hours') {
+        // Keep very short index times visible: a nonzero duration under 0.05 hr
+        // would otherwise render as "0.0 hr" (e.g. a ~10 s index). The value
+        // stays numeric, so sorting and best-value highlighting are unchanged.
+        if (v !== 0 && Math.abs(v) < 0.05) return v.toFixed(3) + ' hr';
+        return v.toFixed(1) + ' hr';
+      }
       if (type === 'ctx_k') return v.toFixed(1) + 'k';
       return String(v);
     }

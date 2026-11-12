@@ -126,6 +126,21 @@ const hardEvidence = validateSplit('Hard evidence', summary.splits?.hard, 31);
 close(summary.splits.main.qs_percent, 76.68170920885629, 'summary Main QS');
 close(summary.splits.hard.qs_percent, 63.56886840757808, 'summary Hard QS');
 
+const rmEvidencePath = path.join(root, 'docs', 'rolling-memory-local-plain.json');
+assert(existsSync(rmEvidencePath), 'Rolling-Memory evidence missing');
+const rmSummary = JSON.parse(readFileSync(rmEvidencePath, 'utf8'));
+assert(rmSummary.schema_version === 1, `unsupported Rolling-Memory evidence schema ${rmSummary.schema_version}`);
+assert(rmSummary.judge_model === 'gpt-5-mini', `Rolling-Memory judge model must be gpt-5-mini, got ${rmSummary.judge_model}`);
+assert(rmSummary.status === 'complete', `Rolling-Memory judge status must be complete, got ${rmSummary.status}`);
+validateSplit('Rolling-Memory Main evidence', rmSummary.splits?.main, 1013);
+validateSplit('Rolling-Memory Hard evidence', rmSummary.splits?.hard, 31);
+const mainRM = row(main, 'Rolling-Memory');
+const hardRM = row(hard, 'Rolling-Memory');
+close(mainRM.qs, 65.54, 'Main Rolling-Memory QS', 1e-9);
+close(mainRM.recall, 77.21, 'Main Rolling-Memory Recall@10', 1e-9);
+close(hardRM.qs, 27.38, 'Hard Rolling-Memory QS', 1e-9);
+close(hardRM.recall, 46.12, 'Hard Rolling-Memory Recall@10', 1e-9);
+
 console.log(JSON.stringify({
   ok: true,
   main_rows: main.rows.length,

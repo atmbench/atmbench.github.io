@@ -931,6 +931,8 @@
           { type: 'Memory', harness: 'MemoryOS',             index_time: 36.6, answer_model: 'Qwen3-VL-8B-Instruct', memory_model: 'Qwen3-VL-2B-Instruct', retriever: 'MiniLM-L6', qs: 47.20, recall: 59.20, link: 'https://github.com/BAI-LAB/MemoryOS' },
           { type: 'Memory', harness: 'MemPalace',            index_time:  0.5, answer_model: 'Qwen3-VL-8B-Instruct', memory_model: 'Qwen3-VL-2B-Instruct', retriever: 'MiniLM-L6', qs: 56.80, recall: 76.40, link: 'https://github.com/MemPalace/mempalace' },
           { type: 'Memory', harness: 'SimpleMem',            index_time: 16.0, answer_model: 'Qwen3-VL-8B-Instruct', memory_model: 'Qwen3-VL-2B-Instruct', retriever: 'MiniLM-L6', qs: 27.30, recall: 23.30, link: 'https://github.com/aiming-lab/SimpleMem' },
+          // Rolling-Memory v0.0.1 (local_plain): on-device 0-LLM, 0-Vector SQLite FTS5 + BM25 + self-information coherence RRF (exact QS 65.54401058960781%).
+          { type: 'Memory', harness: 'Rolling-Memory',       index_time: 0.003, answer_model: 'DeepSeek-V4.1-flash', memory_model: 'Qwen3-VL-2B-Instruct', retriever: 'SQLite FTS5 + Self-Info Coherence RRF (0-Vector)', qs: 65.54, recall: 77.21, link: 'https://github.com/rocareer/rolling-memory' },
 
           // Memexa v2: single full-set rescored result (exact QS 76.68170920885629%).
           { type: 'Memory', harness: 'Memexa v2', index_time: null, answer_model: 'DeepSeek V4.1', memory_model: 'DeepSeek V4.1', retriever: 'BGE-M3 + bge-reranker-v2-m3', qs: 76.68, recall: 92.32, link: 'https://github.com/labazhou2024/memexa', notes: { answer_model: '\u25c7' } },

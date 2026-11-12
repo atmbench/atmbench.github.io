@@ -1,0 +1,12 @@
+{
+  "harness": "Rolling-Memory",
+  "version": "v0.0.1",
+  "mode": "local_plain",
+  "type": "Memory",
+  "answer_model": "DeepSeek-V4.1-flash",
+  "memory_model": "None (0-LLM)",
+  "retriever": "SQLite FTS5 + Self-Info Coherence RRF (0-Vector)",
+  "organization": "Rocareer & Rolling & PsychologyLake.org.cn",
+  "code_available": true,
+  "repo": "https://github.com/rocareer/rolling-memory"
+}

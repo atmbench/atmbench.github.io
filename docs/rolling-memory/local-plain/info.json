@@ -1,0 +1,13 @@
+{
+  "harness": "Rolling-Memory",
+  "version": "v0.0.1",
+  "mode": "local_plain",
+  "type": "Memory",
+  "answer_model": "DeepSeek-V4.1-flash",
+  "memory_model": "Qwen3-VL-2B-Instruct",
+  "memory_model_note": "Memory input is the benchmark's fixed official Qwen3-VL-2B SGM captions/emails, used unmodified. Zero additional LLM calls at index time: no re-captioning, no card rewriting, no re-scanning of the raw images or videos.",
+  "retriever": "SQLite FTS5 + Self-Info Coherence RRF (0-Vector)",
+  "organization": "Rocareer & Rolling & PsychologyLake.org.cn",
+  "code_available": true,
+  "repo": "https://github.com/rocareer/rolling-memory"
+}

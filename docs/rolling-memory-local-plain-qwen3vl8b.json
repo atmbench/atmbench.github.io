@@ -45,9 +45,16 @@
    "answer_output_tokens": 9954,
    "total_tokens": 5159318,
    "total_tokens_millions": 5.159318,
-   "cost_usd": 0.414338,
+   "cost_usd": 0.932261,
    "local_cost_usd": 0.0,
-   "pricing_note": "Zero LLM tokens at index and retrieval ($0.00). Answer step over all 1,013 Main questions: 5,149,364 input + 9,954 output = 5,159,318 tokens (5.159318M); $0.00 on-device or $0.414338 at standard hosted Qwen3-VL-8B-Instruct API rates ($0.08 / 1M input, $0.24 / 1M output)."
+   "judge_calls": 514,
+   "judge_input_tokens": 267032,
+   "judge_output_tokens": 27550,
+   "judge_total_tokens": 294582,
+   "judge_cost_usd": 0.121858,
+   "total_tokens_including_judge": 5453900,
+   "total_cost_usd_including_judge": 1.054119,
+   "pricing_note": "System cost (excluding evaluator judge): 0 LLM tokens at index and retrieval ($0.00); 5,149,364 input + 9,954 output = 5,159,318 answer tokens (5.159318M); $0.00 on-device or $0.932261 at official Qwen3-VL-8B-Instruct list rates ($0.18 / 1M input, $0.54 / 1M output). Evaluator judge (gpt-5-mini, 514 open_end calls): 267,032 input + 27,550 output = 294,582 tokens at official OpenAI list rates ($0.25 / 1M input, $2.00 / 1M output) = $0.121858."
   },
   "hard_token_usage": {
    "index_llm_tokens": 0,
@@ -56,9 +63,16 @@
    "answer_output_tokens": 1595,
    "total_tokens": 198932,
    "total_tokens_millions": 0.198932,
-   "cost_usd": 0.016169,
+   "cost_usd": 0.036382,
    "local_cost_usd": 0.0,
-   "pricing_note": "Zero LLM tokens at index and retrieval ($0.00). Answer step over all 31 Hard questions: 197,337 input + 1,595 output = 198,932 tokens (0.198932M); $0.00 on-device or $0.016169 at standard hosted Qwen3-VL-8B-Instruct API rates ($0.08 / 1M input, $0.24 / 1M output)."
+   "judge_calls": 13,
+   "judge_input_tokens": 8372,
+   "judge_output_tokens": 861,
+   "judge_total_tokens": 9233,
+   "judge_cost_usd": 0.003815,
+   "total_tokens_including_judge": 208165,
+   "total_cost_usd_including_judge": 0.040197,
+   "pricing_note": "System cost (excluding evaluator judge): 0 LLM tokens at index and retrieval ($0.00); 197,337 input + 1,595 output = 198,932 answer tokens (0.198932M); $0.00 on-device or $0.036382 at official Qwen3-VL-8B-Instruct list rates ($0.18 / 1M input, $0.54 / 1M output). Evaluator judge (gpt-5-mini, 13 open_end calls): 8,372 input + 861 output = 9,233 tokens at official OpenAI list rates ($0.25 / 1M input, $2.00 / 1M output) = $0.003815."
   }
  },
  "splits": {

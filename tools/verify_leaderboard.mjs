@@ -161,13 +161,13 @@ close(mainRM.recall, 82.85, 'Main Rolling-Memory (DeepSeek) Recall@10', 1e-9);
 close(hardRM.qs, 31.33, 'Hard Rolling-Memory (DeepSeek) QS', 1e-9);
 close(hardRM.recall, 52.43, 'Hard Rolling-Memory (DeepSeek) Recall@10', 1e-9);
 close(hardRM.total_tokens, 0.461245, 'Hard Rolling-Memory (DeepSeek) Total Tokens (M)', 1e-9);
-close(hardRM.cost_usd, 0.064720, 'Hard Rolling-Memory (DeepSeek) Cost (USD)', 1e-9);
+close(hardRM.cost_usd, 0.129294, 'Hard Rolling-Memory (DeepSeek) Cost (USD)', 1e-9);
 close(mainRMQwen.qs, 58.35, 'Main Rolling-Memory (Qwen3-VL-8B) QS', 1e-9);
 close(mainRMQwen.recall, 82.85, 'Main Rolling-Memory (Qwen3-VL-8B) Recall@10', 1e-9);
 close(hardRMQwen.qs, 19.85, 'Hard Rolling-Memory (Qwen3-VL-8B) QS', 1e-9);
 close(hardRMQwen.recall, 52.43, 'Hard Rolling-Memory (Qwen3-VL-8B) Recall@10', 1e-9);
 close(hardRMQwen.total_tokens, 0.198932, 'Hard Rolling-Memory (Qwen3-VL-8B) Total Tokens (M)', 1e-9);
-close(hardRMQwen.cost_usd, 0.016169, 'Hard Rolling-Memory (Qwen3-VL-8B) Cost (USD)', 1e-9);
+close(hardRMQwen.cost_usd, 0.036382, 'Hard Rolling-Memory (Qwen3-VL-8B) Cost (USD)', 1e-9);
 
 console.log(JSON.stringify({
   ok: true,

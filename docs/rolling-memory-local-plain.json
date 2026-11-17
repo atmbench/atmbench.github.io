@@ -44,8 +44,15 @@
    "answer_output_tokens": 10084,
    "total_tokens": 8479730,
    "total_tokens_millions": 8.47973,
-   "cost_usd": 1.188574,
-   "pricing_note": "Zero LLM calls at index and retrieval ($0.00). Answer step token count over all 1,013 Main questions (0-64 smart adaptive window): 8,469,646 input tokens + 10,084 output tokens = 8,479,730 tokens (8.479730M), priced at standard DeepSeek API rates ($0.14 / 1M input, $0.28 / 1M output) = $1.188574."
+   "cost_usd": 2.375736,
+   "judge_calls": 514,
+   "judge_input_tokens": 267005,
+   "judge_output_tokens": 27447,
+   "judge_total_tokens": 294452,
+   "judge_cost_usd": 0.121645,
+   "total_tokens_including_judge": 8774182,
+   "total_cost_usd_including_judge": 2.497381,
+   "pricing_note": "System cost (excluding evaluator judge, matching leaderboard column convention): 0 LLM tokens at index and retrieval ($0.00); 8,469,646 input + 10,084 output = 8,479,730 answer tokens (8.479730M) across 1,013 Main questions, priced at official DeepSeek list rates ($0.28 / 1M input cache-miss, $0.42 / 1M output) = $2.375736. Evaluator judge (gpt-5-mini, 514 open_end calls): 267,005 input + 27,447 output = 294,452 tokens, priced at official OpenAI list rates ($0.25 / 1M input, $2.00 / 1M output) = $0.121645."
   },
   "hard_token_usage": {
    "index_llm_tokens": 0,
@@ -54,8 +61,15 @@
    "answer_output_tokens": 1041,
    "total_tokens": 461245,
    "total_tokens_millions": 0.461245,
-   "cost_usd": 0.06472,
-   "pricing_note": "Zero LLM calls at index and retrieval ($0.00). Answer step token count over all 31 Hard questions (0-64 smart adaptive window): 460,204 input tokens + 1,041 output tokens = 461,245 tokens (0.461245M), priced at standard DeepSeek API rates ($0.14 / 1M input, $0.28 / 1M output) = $0.064720."
+   "cost_usd": 0.129294,
+   "judge_calls": 13,
+   "judge_input_tokens": 7698,
+   "judge_output_tokens": 969,
+   "judge_total_tokens": 8667,
+   "judge_cost_usd": 0.003863,
+   "total_tokens_including_judge": 469912,
+   "total_cost_usd_including_judge": 0.133157,
+   "pricing_note": "System cost (excluding evaluator judge, matching leaderboard column convention): 0 LLM tokens at index and retrieval ($0.00); 460,204 input + 1,041 output = 461,245 answer tokens (0.461245M) across 31 Hard questions, priced at official DeepSeek list rates ($0.28 / 1M input cache-miss, $0.42 / 1M output) = $0.129294. Evaluator judge (gpt-5-mini, 13 open_end calls): 7,698 input + 969 output = 8,667 tokens, priced at official OpenAI list rates ($0.25 / 1M input, $2.00 / 1M output) = $0.003863."
   },
   "answer_failures": 0,
   "judge_failures": 0,

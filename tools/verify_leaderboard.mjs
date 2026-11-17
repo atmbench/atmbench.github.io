@@ -134,12 +134,14 @@ assert(rmSummary.judge_model === 'gpt-5-mini', `Rolling-Memory judge model must 
 assert(rmSummary.status === 'complete', `Rolling-Memory judge status must be complete, got ${rmSummary.status}`);
 validateSplit('Rolling-Memory Main evidence', rmSummary.splits?.main, 1013);
 validateSplit('Rolling-Memory Hard evidence', rmSummary.splits?.hard, 31);
+close(rmSummary.splits.main.qs_percent, 69.2498244324503, 'Rolling-Memory Main QS');
+close(rmSummary.splits.hard.qs_percent, 28.282280654197166, 'Rolling-Memory Hard QS');
 const mainRM = row(main, 'Rolling-Memory');
 const hardRM = row(hard, 'Rolling-Memory');
-close(mainRM.qs, 65.54, 'Main Rolling-Memory QS', 1e-9);
-close(mainRM.recall, 77.21, 'Main Rolling-Memory Recall@10', 1e-9);
-close(hardRM.qs, 27.38, 'Hard Rolling-Memory QS', 1e-9);
-close(hardRM.recall, 46.12, 'Hard Rolling-Memory Recall@10', 1e-9);
+close(mainRM.qs, 69.25, 'Main Rolling-Memory QS', 1e-9);
+close(mainRM.recall, 82.85, 'Main Rolling-Memory Recall@10', 1e-9);
+close(hardRM.qs, 28.28, 'Hard Rolling-Memory QS', 1e-9);
+close(hardRM.recall, 52.43, 'Hard Rolling-Memory Recall@10', 1e-9);
 
 console.log(JSON.stringify({
   ok: true,

@@ -38,6 +38,17 @@
   "answer_failures": 0,
   "judge_failures": 0,
   "reproduction_cli": "rmem eval --fetch atm --accept-upstream-license --fetch-only && rmem eval --suite atm --tier hard --pulse-mode local_plain --answerer none --judge off --top-k 50 && rmem eval --suite atm --tier 1013 --pulse-mode local_plain --answerer none --judge off --top-k 50",
+  "main_token_usage": {
+   "index_llm_tokens": 0,
+   "retrieval_llm_tokens": 0,
+   "answer_input_tokens": 5149364,
+   "answer_output_tokens": 9954,
+   "total_tokens": 5159318,
+   "total_tokens_millions": 5.159318,
+   "cost_usd": 0.414338,
+   "local_cost_usd": 0.0,
+   "pricing_note": "Zero LLM tokens at index and retrieval ($0.00). Answer step over all 1,013 Main questions: 5,149,364 input + 9,954 output = 5,159,318 tokens (5.159318M); $0.00 on-device or $0.414338 at standard hosted Qwen3-VL-8B-Instruct API rates ($0.08 / 1M input, $0.24 / 1M output)."
+  },
   "hard_token_usage": {
    "index_llm_tokens": 0,
    "retrieval_llm_tokens": 0,
@@ -45,7 +56,9 @@
    "answer_output_tokens": 1595,
    "total_tokens": 198932,
    "total_tokens_millions": 0.198932,
-   "pricing_note": "100% local on-device inference (0 LLM tokens at index and retrieval; 197,337 input + 1,595 output = 198,932 answer tokens across all 31 Hard questions)."
+   "cost_usd": 0.016169,
+   "local_cost_usd": 0.0,
+   "pricing_note": "Zero LLM tokens at index and retrieval ($0.00). Answer step over all 31 Hard questions: 197,337 input + 1,595 output = 198,932 tokens (0.198932M); $0.00 on-device or $0.016169 at standard hosted Qwen3-VL-8B-Instruct API rates ($0.08 / 1M input, $0.24 / 1M output)."
   }
  },
  "splits": {

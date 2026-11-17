@@ -37,6 +37,16 @@
   "corpus_sha256": "c9c4cc55dd3be147638121765b5dc7b8321a5e292b90909b68ae7fe8a57ee3a7",
   "main_predictions_json_sha256": "87221e229606b297d54d5006774b67cedeae759c76639d6a44a57ea0c49e00b1",
   "hard_predictions_json_sha256": "aebed937624c32683542c0ffab87c9dbab0527e07d8e1fe0ff5ec80b8eb230cd",
+  "main_token_usage": {
+   "index_llm_tokens": 0,
+   "retrieval_llm_tokens": 0,
+   "answer_input_tokens": 8469646,
+   "answer_output_tokens": 10084,
+   "total_tokens": 8479730,
+   "total_tokens_millions": 8.47973,
+   "cost_usd": 1.188574,
+   "pricing_note": "Zero LLM calls at index and retrieval ($0.00). Answer step token count over all 1,013 Main questions (0-64 smart adaptive window): 8,469,646 input tokens + 10,084 output tokens = 8,479,730 tokens (8.479730M), priced at standard DeepSeek API rates ($0.14 / 1M input, $0.28 / 1M output) = $1.188574."
+  },
   "hard_token_usage": {
    "index_llm_tokens": 0,
    "retrieval_llm_tokens": 0,

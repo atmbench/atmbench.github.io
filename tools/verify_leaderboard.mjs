@@ -167,6 +167,7 @@ close(mainRMQwen.recall, 82.85, 'Main Rolling-Memory (Qwen3-VL-8B) Recall@10', 1
 close(hardRMQwen.qs, 19.85, 'Hard Rolling-Memory (Qwen3-VL-8B) QS', 1e-9);
 close(hardRMQwen.recall, 52.43, 'Hard Rolling-Memory (Qwen3-VL-8B) Recall@10', 1e-9);
 close(hardRMQwen.total_tokens, 0.198932, 'Hard Rolling-Memory (Qwen3-VL-8B) Total Tokens (M)', 1e-9);
+close(hardRMQwen.cost_usd, 0.016169, 'Hard Rolling-Memory (Qwen3-VL-8B) Cost (USD)', 1e-9);
 
 console.log(JSON.stringify({
   ok: true,

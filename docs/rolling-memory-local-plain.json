@@ -9,10 +9,11 @@
   "profile": "local_plain",
   "answer_model": "DeepSeek-V4.1-flash",
   "memory_model": "Qwen3-VL-2B-Instruct (0-LLM local index)",
-  "retriever": "Local SQLite Vault + Self-Info Coherence & Event-Cluster Ranking (0-Vector)"
+  "retriever": "Adaptive Self-Information Ranking (0-Vector)"
  },
  "protocol": {
-  "pipeline": "Official SGM corpus (11,034 items) ingested into an isolated local SQLite vault with zero LLM calls and zero vector embeddings. Retrieval is deterministic and answer-model independent. Items in the default 0-64 smart adaptive delivery window (E(u_k) >= E(u_1)/e, bounded by a 64,000-character context budget, with no minimum floor) are passed to the answer model using the exact official MMRag item text formats and the exact official MMRAG SYSTEM and USER_TEXT prompts.",
+  "pipeline": "Official SGM corpus (11,034 items) ingested into an isolated local vault with zero LLM calls and zero vector embeddings. Retrieval uses our in-house deterministic Adaptive Self-Information Ranking engine (0-Vector, 0-LLM, no SQLite FTS5, no rank-index RRF) and is independent of the answer model. Items in the default 0-64 smart adaptive delivery window (E(u_k) >= E(u_1)/e, bounded by a 64,000-character context budget, with no minimum floor) are passed to the answer model using the exact official MMRag item text formats and the exact official MMRAG SYSTEM and USER_TEXT prompts.",
+  "run_selection": "Single uninterrupted cold run across all 31 Hard and 1,013 Main questions (0 cached answers, 0 cached judges); per-request server usage logs published in docs/rolling-memory/local-plain/requests-{hard-31,main-1013}.jsonl.",
   "memory_mode": "processed_memory (fixed official 2B SGM)",
   "answer_model": "deepseek-v4.1-flash",
   "answer_model_settings": {
@@ -35,41 +36,41 @@
    "config_sha1": "a7126e059ce6745e84453f1fc1dd183656479807"
   },
   "corpus_sha256": "c9c4cc55dd3be147638121765b5dc7b8321a5e292b90909b68ae7fe8a57ee3a7",
-  "main_predictions_json_sha256": "87221e229606b297d54d5006774b67cedeae759c76639d6a44a57ea0c49e00b1",
-  "hard_predictions_json_sha256": "aebed937624c32683542c0ffab87c9dbab0527e07d8e1fe0ff5ec80b8eb230cd",
+  "main_predictions_json_sha256": "7a01ffd5f5db8ca48c42d2d9dbe49fe9a5b47fd29915c9871554c6a5d0e23930",
+  "hard_predictions_json_sha256": "6872b84870edcb06f4507ee8c3dd70d5a77e2088cb22dbf9c8666dde56dbc5bc",
   "main_token_usage": {
    "index_llm_tokens": 0,
    "retrieval_llm_tokens": 0,
-   "answer_input_tokens": 8469646,
-   "answer_output_tokens": 10084,
-   "total_tokens": 8479730,
-   "total_tokens_millions": 8.47973,
-   "cost_usd": 2.375736,
+   "prompt_tokens": 8365657,
+   "cached_prompt_tokens": 8140672,
+   "uncached_prompt_tokens": 224985,
+   "completion_tokens": 765582,
+   "reasoning_tokens": 754795,
+   "total_tokens": 9131239,
+   "total_tokens_millions": 9.131239,
+   "cost_usd_uncached_list": 2.663928,
+   "cost_usd_with_cache": 0.612479,
    "judge_calls": 514,
-   "judge_input_tokens": 267005,
-   "judge_output_tokens": 27447,
    "judge_total_tokens": 294452,
    "judge_cost_usd": 0.121645,
-   "total_tokens_including_judge": 8774182,
-   "total_cost_usd_including_judge": 2.497381,
-   "pricing_note": "System cost (excluding evaluator judge, matching leaderboard column convention): 0 LLM tokens at index and retrieval ($0.00); 8,469,646 input + 10,084 output = 8,479,730 answer tokens (8.479730M) across 1,013 Main questions, priced at official DeepSeek list rates ($0.28 / 1M input cache-miss, $0.42 / 1M output) = $2.375736. Evaluator judge (gpt-5-mini, 514 open_end calls): 267,005 input + 27,447 output = 294,452 tokens, priced at official OpenAI list rates ($0.25 / 1M input, $2.00 / 1M output) = $0.121645."
+   "request_log": "docs/rolling-memory/local-plain/requests-main-1013.jsonl"
   },
   "hard_token_usage": {
    "index_llm_tokens": 0,
    "retrieval_llm_tokens": 0,
-   "answer_input_tokens": 460204,
-   "answer_output_tokens": 1041,
-   "total_tokens": 461245,
-   "total_tokens_millions": 0.461245,
-   "cost_usd": 0.129294,
+   "prompt_tokens": 451089,
+   "cached_prompt_tokens": 445824,
+   "uncached_prompt_tokens": 5265,
+   "completion_tokens": 77831,
+   "reasoning_tokens": 76697,
+   "total_tokens": 528920,
+   "total_tokens_millions": 0.52892,
+   "cost_usd_uncached_list": 0.158994,
+   "cost_usd_with_cache": 0.046646,
    "judge_calls": 13,
-   "judge_input_tokens": 7698,
-   "judge_output_tokens": 969,
    "judge_total_tokens": 8667,
    "judge_cost_usd": 0.003863,
-   "total_tokens_including_judge": 469912,
-   "total_cost_usd_including_judge": 0.133157,
-   "pricing_note": "System cost (excluding evaluator judge, matching leaderboard column convention): 0 LLM tokens at index and retrieval ($0.00); 460,204 input + 1,041 output = 461,245 answer tokens (0.461245M) across 31 Hard questions, priced at official DeepSeek list rates ($0.28 / 1M input cache-miss, $0.42 / 1M output) = $0.129294. Evaluator judge (gpt-5-mini, 13 open_end calls): 7,698 input + 969 output = 8,667 tokens, priced at official OpenAI list rates ($0.25 / 1M input, $2.00 / 1M output) = $0.003863."
+   "request_log": "docs/rolling-memory/local-plain/requests-hard-31.jsonl"
   },
   "answer_failures": 0,
   "judge_failures": 0,
@@ -78,7 +79,7 @@
  "splits": {
   "main": {
    "questions": 1013,
-   "qs_percent": 71.60794947073327,
+   "qs_percent": 72.79584022427062,
    "recall_at_1": 48.19,
    "recall_at_5": 73.61,
    "recall_at_10": 82.85,
@@ -88,20 +89,20 @@
    "all_hit_at_10": 80.16,
    "delivered_k_min": 1,
    "delivered_k_median": 13,
-   "delivered_k_mean": 16.73,
+   "delivered_k_mean": 16.51,
    "delivered_k_max": 64,
    "per_type": {
     "list_recall": {
      "questions": 139,
-     "qs_percent": 58.55289794138715
+     "qs_percent": 57.857454296303224
     },
     "number": {
      "questions": 360,
-     "qs_percent": 76.11111111111111
+     "qs_percent": 76.38888888888889
     },
     "open_end": {
      "questions": 514,
-     "qs_percent": 71.98443579766537
+     "qs_percent": 74.31906614785993
     }
    },
    "scores": [
@@ -109,7 +110,7 @@
      "id": "1defb7d5-aab4-4244-8b3c-971a36376b04",
      "qtype": "number",
      "score": 0.0,
-     "delivered_k": 37,
+     "delivered_k": 36,
      "retrieved_top10": [
       "email202212230003",
       "20241126_164827",
@@ -924,8 +925,8 @@
     {
      "id": "def045f1-23f5-496e-bee9-97bdf78ace83",
      "qtype": "open_end",
-     "score": 1.0,
-     "delivered_k": 30,
+     "score": 0.0,
+     "delivered_k": 22,
      "retrieved_top10": [
       "20240820_143934",
       "20230327_174506",
@@ -1333,7 +1334,7 @@
      "id": "23a4e35d-ec2f-479a-b269-46f9ae5fb5bf",
      "qtype": "open_end",
      "score": 1.0,
-     "delivered_k": 33,
+     "delivered_k": 32,
      "retrieved_top10": [
       "20230312_123750",
       "20250513_093402",
@@ -1605,7 +1606,7 @@
      "id": "ba3c77e1-a455-447f-b0c8-4053ae7604d7",
      "qtype": "number",
      "score": 1.0,
-     "delivered_k": 37,
+     "delivered_k": 36,
      "retrieved_top10": [
       "20230205_190740",
       "20221015_183250",
@@ -2421,7 +2422,7 @@
      "id": "b1171fa9-3a7e-4230-9ea9-4263fda30bf2",
      "qtype": "open_end",
      "score": 1.0,
-     "delivered_k": 33,
+     "delivered_k": 31,
      "retrieved_top10": [
       "20240814_150501",
       "20240816_140106",
@@ -2693,7 +2694,7 @@
      "id": "7acb0e2e-f0dc-41fa-9be4-0609fa4501a9",
      "qtype": "open_end",
      "score": 1.0,
-     "delivered_k": 28,
+     "delivered_k": 24,
      "retrieved_top10": [
       "20250117_174635",
       "20231218_173936",
@@ -4460,7 +4461,7 @@
     {
      "id": "03b5f724-cd73-4aaa-9105-11feebfd826d",
      "qtype": "open_end",
-     "score": 0.0,
+     "score": 1.0,
      "delivered_k": 33,
      "retrieved_top10": [
       "20231217_142934",
@@ -5004,8 +5005,8 @@
     {
      "id": "b79d1892-f6f8-47c1-b407-f39c91a6bd78",
      "qtype": "open_end",
-     "score": 1.0,
-     "delivered_k": 31,
+     "score": 0.0,
+     "delivered_k": 30,
      "retrieved_top10": [
       "20220623_133125",
       "20240625_142355",
@@ -5276,7 +5277,7 @@
     {
      "id": "f37d8c46-65c5-4f09-a376-77db8a48f0dd",
      "qtype": "number",
-     "score": 1.0,
+     "score": 0.0,
      "delivered_k": 8,
      "retrieved_top10": [
       "20221005_140309",
@@ -5685,7 +5686,7 @@
      "id": "26ad398f-84e8-4043-8f5a-04eeb7c89db0",
      "qtype": "number",
      "score": 1.0,
-     "delivered_k": 35,
+     "delivered_k": 34,
      "retrieved_top10": [
       "20240712_101712",
       "20240712_114613",
@@ -5820,7 +5821,7 @@
     {
      "id": "0b19fd81-f3da-4af0-b22c-50a5e2e2aa7d",
      "qtype": "number",
-     "score": 1.0,
+     "score": 0.0,
      "delivered_k": 40,
      "retrieved_top10": [
       "email202303270003",
@@ -6637,7 +6638,7 @@
      "id": "ad27afed-8fed-4132-9f69-7594cd73e166",
      "qtype": "number",
      "score": 1.0,
-     "delivered_k": 29,
+     "delivered_k": 28,
      "retrieved_top10": [
       "email202407260014",
       "email202407260006",
@@ -7181,7 +7182,7 @@
      "id": "066697d5-986c-4be5-a23c-50853ac22230",
      "qtype": "number",
      "score": 1.0,
-     "delivered_k": 40,
+     "delivered_k": 37,
      "retrieved_top10": [
       "20230119_135025",
       "20250430_132314",
@@ -8405,7 +8406,7 @@
      "id": "41dd6ad2-467f-4147-99d8-dc29765febc1",
      "qtype": "open_end",
      "score": 1.0,
-     "delivered_k": 45,
+     "delivered_k": 39,
      "retrieved_top10": [
       "20240217_193750",
       "20240217_193747",
@@ -9881,10 +9882,10 @@
       "email202202030002",
       "email202310300003",
       "20221017_185932",
-      "email202210300002",
       "email202310180005",
       "email202310300004",
       "email202404140002",
+      "email202210300002",
       "email202210270003",
       "email202410150004",
       "email202209300001",
@@ -9901,7 +9902,7 @@
      "id": "9606c6d3-8662-4ee0-97e7-a476a9814acc",
      "qtype": "number",
      "score": 0.0,
-     "delivered_k": 38,
+     "delivered_k": 35,
      "retrieved_top10": [
       "20240806_184819",
       "20240806_175151(0)",
@@ -12484,7 +12485,7 @@
     {
      "id": "71d882e5-f1d1-4a45-a74b-bee2920c812c",
      "qtype": "open_end",
-     "score": 0.0,
+     "score": 1.0,
      "delivered_k": 56,
      "retrieved_top10": [
       "email202310050007",
@@ -12893,7 +12894,7 @@
      "id": "d2f0f8cf-88d9-44e0-b54e-95f489d63076",
      "qtype": "number",
      "score": 0.0,
-     "delivered_k": 28,
+     "delivered_k": 26,
      "retrieved_top10": [
       "20240812_190355",
       "20240811_145110",
@@ -13028,7 +13029,7 @@
     {
      "id": "32080898-3548-4ec7-88a2-006d6c1d9f35",
      "qtype": "open_end",
-     "score": 1.0,
+     "score": 0.0,
      "delivered_k": 36,
      "retrieved_top10": [
       "email202208060001",
@@ -13981,7 +13982,7 @@
      "id": "71b0a71c-873c-4576-b432-2dd270937320",
      "qtype": "number",
      "score": 1.0,
-     "delivered_k": 29,
+     "delivered_k": 22,
      "retrieved_top10": [
       "20240820_143934",
       "20230327_174506",
@@ -14117,7 +14118,7 @@
      "id": "4e4680db-9c46-4ab5-be09-f3d010414372",
      "qtype": "list_recall",
      "score": 1.0,
-     "delivered_k": 26,
+     "delivered_k": 24,
      "retrieved_top10": [
       "20240806_092844",
       "20240806_093456",
@@ -14932,7 +14933,7 @@
     {
      "id": "2995e608-1a8a-41ec-8d60-1ed4e2fbc381",
      "qtype": "open_end",
-     "score": 1.0,
+     "score": 0.0,
      "delivered_k": 1,
      "retrieved_top10": [
       "email202202180002",
@@ -16869,8 +16870,8 @@
       "email202309220003",
       "email202402010009",
       "email202503060006",
-      "email202311300004",
       "email202404120002",
+      "email202311300004",
       "email202504070003",
       "email202503030007",
       "email202402280006",
@@ -16921,8 +16922,8 @@
       "email202309220003",
       "email202402010009",
       "email202503060006",
-      "email202311300004",
       "email202404120002",
+      "email202311300004",
       "email202504070003",
       "email202503030007",
       "email202402280006",
@@ -17653,7 +17654,7 @@
      "id": "949de2f0-7a6e-465e-b873-51488ad1b776",
      "qtype": "open_end",
      "score": 0.0,
-     "delivered_k": 51,
+     "delivered_k": 49,
      "retrieved_top10": [
       "email202405180002",
       "20240805_193244",
@@ -18060,7 +18061,7 @@
     {
      "id": "45dfb2ec-172c-40b2-a1d5-4c563d7675bc",
      "qtype": "open_end",
-     "score": 0.0,
+     "score": 1.0,
      "delivered_k": 2,
      "retrieved_top10": [
       "email202206270001",
@@ -18089,8 +18090,8 @@
       "email202402020013",
       "email202411130009",
       "email202505230007",
-      "email202301080004",
       "email202411190006",
+      "email202301080004",
       "email202202040007",
       "email202206210004",
       "email202302220003",
@@ -18141,8 +18142,8 @@
       "email202402020013",
       "email202411130009",
       "email202505230007",
-      "email202301080004",
       "email202411190006",
+      "email202301080004",
       "email202202040007",
       "email202206210004",
       "email202302220003",
@@ -18450,8 +18451,8 @@
       "email202203290005",
       "email202203310004",
       "20241128_213456",
-      "email202406100015",
       "email202406300003",
+      "email202406100015",
       "email202507120002",
       "20240729_114327",
       "email202303240002",
@@ -18469,7 +18470,7 @@
      "id": "7d9d59ea-d6b1-45cd-9332-5ecd61185532",
      "qtype": "open_end",
      "score": 1.0,
-     "delivered_k": 18,
+     "delivered_k": 17,
      "retrieved_top10": [
       "20240802_092642",
       "20240730_151911",
@@ -18777,8 +18778,8 @@
       "email202303200005",
       "email202205260007",
       "20241129_184426",
-      "email202410030001",
       "email202208310003",
+      "email202410030001",
       "20231212_085647",
       "20241002_121211",
       "email202311030008",
@@ -18829,8 +18830,8 @@
       "email202303200005",
       "email202205260007",
       "20241129_184426",
-      "email202410030001",
       "email202208310003",
+      "email202410030001",
       "20231212_085647",
       "20241002_121211",
       "email202311030008",
@@ -18876,7 +18877,7 @@
     {
      "id": "a7caaf05-ff22-4d91-a694-68b7208cc4f0",
      "qtype": "open_end",
-     "score": 0.0,
+     "score": 1.0,
      "delivered_k": 17,
      "retrieved_top10": [
       "20241021_203643",
@@ -19012,7 +19013,7 @@
     {
      "id": "55af87fd-dd94-46df-8743-96b47666926b",
      "qtype": "number",
-     "score": 1.0,
+     "score": 0.0,
      "delivered_k": 26,
      "retrieved_top10": [
       "20250501_134129",
@@ -19284,7 +19285,7 @@
     {
      "id": "f0a58ca8-0f90-4923-92c3-932556ec2cc7",
      "qtype": "open_end",
-     "score": 1.0,
+     "score": 0.0,
      "delivered_k": 1,
      "retrieved_top10": [
       "email202507040002",
@@ -19421,7 +19422,7 @@
      "id": "b65b2ed5-3d39-4437-af05-2dbe38a19168",
      "qtype": "list_recall",
      "score": 1.0,
-     "delivered_k": 41,
+     "delivered_k": 39,
      "retrieved_top10": [
       "email202410210001",
       "20230923_182413",
@@ -19829,7 +19830,7 @@
      "id": "22ecba76-6dcc-48ca-b148-c57bd2c07cd8",
      "qtype": "open_end",
      "score": 1.0,
-     "delivered_k": 33,
+     "delivered_k": 32,
      "retrieved_top10": [
       "20241021_201854",
       "20241021_143202",
@@ -20236,7 +20237,7 @@
     {
      "id": "6d97017a-5efa-46e2-b89e-b97b2c547e08",
      "qtype": "open_end",
-     "score": 0.0,
+     "score": 1.0,
      "delivered_k": 28,
      "retrieved_top10": [
       "20241022_132103",
@@ -20644,7 +20645,7 @@
     {
      "id": "e8f5bc6e-5758-4bd0-873b-e556a7e3c37f",
      "qtype": "number",
-     "score": 0.0,
+     "score": 1.0,
      "delivered_k": 16,
      "retrieved_top10": [
       "20230503_180159",
@@ -20917,7 +20918,7 @@
      "id": "fd8add98-3a3f-4477-8c8b-561abd494dff",
      "qtype": "list_recall",
      "score": 1.0,
-     "delivered_k": 26,
+     "delivered_k": 24,
      "retrieved_top10": [
       "20230420_101925",
       "20240815_171709",
@@ -22685,7 +22686,7 @@
      "id": "6731d2c8-f6dc-4993-b8ea-656745c27dfe",
      "qtype": "number",
      "score": 0.0,
-     "delivered_k": 30,
+     "delivered_k": 27,
      "retrieved_top10": [
       "20240816_140801",
       "20240812_132533",
@@ -22820,7 +22821,7 @@
     {
      "id": "ebea8b3b-f2dc-468a-8ce6-7a9dbf1a7754",
      "qtype": "list_recall",
-     "score": 0.2,
+     "score": 0.0,
      "delivered_k": 12,
      "retrieved_top10": [
       "20221226_115855",
@@ -23397,8 +23398,8 @@
       "email202210220001",
       "email202207060002",
       "email202208150008",
-      "email202208140003",
       "email202408130008",
+      "email202208140003",
       "email202312050001",
       "email202207060004",
       "email202312040001",
@@ -23412,8 +23413,8 @@
       "email202212040003",
       "email202407260011",
       "email202208210002",
-      "email202208140002",
       "20240731_102252",
+      "email202208140002",
       "email202211240008",
       "email202212130001",
       "email202207130003",
@@ -23449,8 +23450,8 @@
       "email202210220001",
       "email202207060002",
       "email202208150008",
-      "email202208140003",
       "email202408130008",
+      "email202208140003",
       "email202312050001",
       "email202207060004",
       "email202312040001",
@@ -23464,8 +23465,8 @@
       "email202212040003",
       "email202407260011",
       "email202208210002",
-      "email202208140002",
       "20240731_102252",
+      "email202208140002",
       "email202211240008",
       "email202212130001",
       "email202207130003",
@@ -24044,7 +24045,7 @@
     {
      "id": "cc7ac922-e059-4bf7-b789-fcda05cdfa7e",
      "qtype": "open_end",
-     "score": 0.0,
+     "score": 1.0,
      "delivered_k": 3,
      "retrieved_top10": [
       "20240627_165751",
@@ -25268,7 +25269,7 @@
     {
      "id": "6d5dde88-0e86-453a-9a35-467426b121f3",
      "qtype": "list_recall",
-     "score": 0.0,
+     "score": 1.0,
      "delivered_k": 12,
      "retrieved_top10": [
       "20220620_131646",
@@ -25541,7 +25542,7 @@
      "id": "7b706c69-a649-4c2a-83ac-08a51ceb3e46",
      "qtype": "number",
      "score": 0.0,
-     "delivered_k": 25,
+     "delivered_k": 24,
      "retrieved_top10": [
       "20240730_152132",
       "email202407260008",
@@ -26085,7 +26086,7 @@
      "id": "1c909632-fa91-488f-b531-6b4c8e5c6123",
      "qtype": "number",
      "score": 0.0,
-     "delivered_k": 25,
+     "delivered_k": 24,
      "retrieved_top10": [
       "20240816_162110",
       "20240816_160756",
@@ -26356,7 +26357,7 @@
     {
      "id": "7edea36b-f564-4f2b-9c53-5b92b68e93fc",
      "qtype": "open_end",
-     "score": 0.0,
+     "score": 1.0,
      "delivered_k": 3,
      "retrieved_top10": [
       "20230401_120321",
@@ -26522,8 +26523,8 @@
       "email202207070004",
       "email202207040001",
       "email202207240002",
-      "email202207130005",
       "email202207060003",
+      "email202207130005",
       "email202207060002",
       "email202307120007",
       "email202407290004",
@@ -26574,8 +26575,8 @@
       "email202207070004",
       "email202207040001",
       "email202207240002",
-      "email202207130005",
       "email202207060003",
+      "email202207130005",
       "email202207060002",
       "email202307120007",
       "email202407290004",
@@ -26764,7 +26765,7 @@
     {
      "id": "503fa788-e01d-4888-acb0-6c450ad2066c",
      "qtype": "list_recall",
-     "score": 0.5,
+     "score": 1.0,
      "delivered_k": 22,
      "retrieved_top10": [
       "20220619_125645",
@@ -28669,7 +28670,7 @@
      "id": "18ffd5d6-93f4-49e8-87db-fd64ed8d2282",
      "qtype": "open_end",
      "score": 1.0,
-     "delivered_k": 37,
+     "delivered_k": 35,
      "retrieved_top10": [
       "20220917_134113",
       "20221030_150505",
@@ -30572,7 +30573,7 @@
     {
      "id": "ae38cdc3-37ae-4e5e-9ac4-79e7e5c03d46",
      "qtype": "open_end",
-     "score": 1.0,
+     "score": 0.0,
      "delivered_k": 27,
      "retrieved_top10": [
       "email202404260004",
@@ -31661,7 +31662,7 @@
      "id": "01eec76c-462f-4579-9a7b-974da414a888",
      "qtype": "list_recall",
      "score": 0.0,
-     "delivered_k": 27,
+     "delivered_k": 26,
      "retrieved_top10": [
       "20220703_210013",
       "20220703_210018",
@@ -32185,8 +32186,8 @@
       "email202202150001",
       "email202202040006",
       "email202210060010",
-      "email202210180011",
       "email202410170003",
+      "email202210180011",
       "email202410140002",
       "email202302170004",
       "email202304250003",
@@ -32205,7 +32206,7 @@
      "id": "55c1b61b-34d6-4db4-96d5-9e891f64a8bc",
      "qtype": "open_end",
      "score": 1.0,
-     "delivered_k": 33,
+     "delivered_k": 31,
      "retrieved_top10": [
       "20240720_161501",
       "20240720_161215",
@@ -33217,8 +33218,8 @@
       "email202411190006",
       "20241124_152320",
       "email202311150005",
-      "20241128_213456",
       "email202411180007",
+      "20241128_213456",
       "email202311070001",
       "email202411010009"
      ],
@@ -33269,8 +33270,8 @@
       "email202411190006",
       "20241124_152320",
       "email202311150005",
-      "20241128_213456",
       "email202411180007",
+      "20241128_213456",
       "email202311070001",
       "email202411010009",
       "email202405080002",
@@ -33292,7 +33293,7 @@
     {
      "id": "5b62ca59-d348-4137-8e3d-ce6cf8ea9417",
      "qtype": "open_end",
-     "score": 1.0,
+     "score": 0.0,
      "delivered_k": 9,
      "retrieved_top10": [
       "20240525_234355",
@@ -34653,7 +34654,7 @@
      "id": "4901e1a7-ff9d-47a3-bc2c-e4a80f3f1f9d",
      "qtype": "open_end",
      "score": 1.0,
-     "delivered_k": 42,
+     "delivered_k": 39,
      "retrieved_top10": [
       "20230319_110704",
       "20230319_110412",
@@ -35060,7 +35061,7 @@
     {
      "id": "5293f3c1-dc18-4285-98ea-54a3bca7a92c",
      "qtype": "open_end",
-     "score": 0.0,
+     "score": 1.0,
      "delivered_k": 3,
      "retrieved_top10": [
       "20231222_104603",
@@ -35740,7 +35741,7 @@
     {
      "id": "1b996345-8351-40ef-8a2f-6810cc55554d",
      "qtype": "open_end",
-     "score": 0.0,
+     "score": 1.0,
      "delivered_k": 24,
      "retrieved_top10": [
       "20250501_133337",
@@ -36149,7 +36150,7 @@
      "id": "f9255a21-dee0-4752-99c5-081fa6a76ba8",
      "qtype": "open_end",
      "score": 1.0,
-     "delivered_k": 35,
+     "delivered_k": 34,
      "retrieved_top10": [
       "20230522_193242",
       "20220513_144153",
@@ -37101,7 +37102,7 @@
      "id": "74455ca5-e246-480e-b84c-92bc7c564d09",
      "qtype": "open_end",
      "score": 0.0,
-     "delivered_k": 42,
+     "delivered_k": 41,
      "retrieved_top10": [
       "20240818_151629",
       "20240818_153451",
@@ -37825,9 +37826,9 @@
       "email202406260005",
       "email202406110007",
       "email202405200010",
-      "20240630_165802",
       "email202406260007",
       "email202306070007",
+      "20240630_165802",
       "20240730_145035",
       "20241003_181404",
       "20240730_153357",
@@ -37877,9 +37878,9 @@
       "email202406260005",
       "email202406110007",
       "email202405200010",
-      "20240630_165802",
       "email202406260007",
       "email202306070007",
+      "20240630_165802",
       "20240730_145035",
       "20241003_181404",
       "20240730_153357",
@@ -38053,7 +38054,7 @@
      "id": "d8bdb4d6-91d6-474e-9fce-dc0bdd2724b1",
      "qtype": "number",
      "score": 1.0,
-     "delivered_k": 36,
+     "delivered_k": 35,
      "retrieved_top10": [
       "email202307050002",
       "email202201200003",
@@ -39005,7 +39006,7 @@
      "id": "762ed7c8-131c-4765-ac1c-2e38befb0164",
      "qtype": "number",
      "score": 1.0,
-     "delivered_k": 27,
+     "delivered_k": 23,
      "retrieved_top10": [
       "20240816_140944",
       "20240816_140801",
@@ -40365,7 +40366,7 @@
      "id": "30e061d1-7432-4e38-8e2d-505e0216f8ca",
      "qtype": "open_end",
      "score": 1.0,
-     "delivered_k": 22,
+     "delivered_k": 20,
      "retrieved_top10": [
       "20250225_155748",
       "20241003_125350",
@@ -40636,7 +40637,7 @@
     {
      "id": "fb25c3bb-ebf5-47a9-8adf-24b57722df0f",
      "qtype": "open_end",
-     "score": 0.0,
+     "score": 1.0,
      "delivered_k": 2,
      "retrieved_top10": [
       "20230317_075123",
@@ -41316,8 +41317,8 @@
     {
      "id": "2b3e9785-b32d-47b7-81fe-060e44ac14ae",
      "qtype": "open_end",
-     "score": 0.0,
-     "delivered_k": 28,
+     "score": 1.0,
+     "delivered_k": 27,
      "retrieved_top10": [
       "20240730_011201",
       "20230316_203428",
@@ -41452,7 +41453,7 @@
     {
      "id": "42de3970-ccd5-4d39-ade2-ce7af84ffdf0",
      "qtype": "number",
-     "score": 1.0,
+     "score": 0.0,
      "delivered_k": 28,
      "retrieved_top10": [
       "email202401230002",
@@ -41996,7 +41997,7 @@
     {
      "id": "ae25652a-780b-47b0-9f82-3851054f9664",
      "qtype": "list_recall",
-     "score": 1.0,
+     "score": 0.0,
      "delivered_k": 16,
      "retrieved_top10": [
       "20230905_164827",
@@ -42268,7 +42269,7 @@
     {
      "id": "3c3b7f0c-bc03-4f9c-88bd-231267a1b7f7",
      "qtype": "number",
-     "score": 0.0,
+     "score": 1.0,
      "delivered_k": 17,
      "retrieved_top10": [
       "20241001_182544",
@@ -44173,7 +44174,7 @@
      "id": "b191ff34-7dbf-4460-8734-3f3dcd495c85",
      "qtype": "number",
      "score": 0.0,
-     "delivered_k": 25,
+     "delivered_k": 24,
      "retrieved_top10": [
       "20241128_105155",
       "20241126_165135",
@@ -44445,7 +44446,7 @@
      "id": "04b5eb8a-f963-4cfb-8d21-aa823db83988",
      "qtype": "open_end",
      "score": 1.0,
-     "delivered_k": 34,
+     "delivered_k": 33,
      "retrieved_top10": [
       "20240221_154757",
       "20230405_093924",
@@ -44988,7 +44989,7 @@
     {
      "id": "2e5e73f1-764f-4b8b-85c2-50f645de52cf",
      "qtype": "list_recall",
-     "score": 0.2,
+     "score": 0.25,
      "delivered_k": 36,
      "retrieved_top10": [
       "20230131_152709",
@@ -45668,7 +45669,7 @@
     {
      "id": "d6f821ef-683c-49ed-b5c7-365327e3e904",
      "qtype": "open_end",
-     "score": 0.0,
+     "score": 1.0,
      "delivered_k": 7,
      "retrieved_top10": [
       "20240526_205226",
@@ -46484,7 +46485,7 @@
     {
      "id": "19828683-3038-42a3-ae55-b03a2322b1f2",
      "qtype": "open_end",
-     "score": 1.0,
+     "score": 0.0,
      "delivered_k": 19,
      "retrieved_top10": [
       "20240219_085027",
@@ -47029,7 +47030,7 @@
      "id": "406315cf-7edb-496b-b0fe-6bce1366da78",
      "qtype": "number",
      "score": 1.0,
-     "delivered_k": 32,
+     "delivered_k": 30,
      "retrieved_top10": [
       "20240720_161501",
       "20240609_115908",
@@ -47336,8 +47337,8 @@
       "20250429_114953",
       "email202208160003",
       "email202403110015",
-      "email202306260006",
       "email202212200006",
+      "email202306260006",
       "20250404_111042",
       "email202305170002",
       "email202505210007",
@@ -47388,8 +47389,8 @@
       "20250429_114953",
       "email202208160003",
       "email202403110015",
-      "email202306260006",
       "email202212200006",
+      "email202306260006",
       "20250404_111042",
       "email202305170002",
       "email202505210007",
@@ -49476,7 +49477,7 @@
     {
      "id": "1549c95e-6cfe-484a-96e2-535835bc38b1",
      "qtype": "open_end",
-     "score": 0.0,
+     "score": 1.0,
      "delivered_k": 50,
      "retrieved_top10": [
       "20231211_170926",
@@ -49885,7 +49886,7 @@
      "id": "f5338b02-45a5-4e31-bc4b-8a5ff27b1ed3",
      "qtype": "number",
      "score": 0.0,
-     "delivered_k": 43,
+     "delivered_k": 42,
      "retrieved_top10": [
       "email202410250006",
       "email202410230009",
@@ -50292,7 +50293,7 @@
     {
      "id": "46335cb8-ba58-4f98-9a92-aa970b0ee3c5",
      "qtype": "number",
-     "score": 1.0,
+     "score": 0.0,
      "delivered_k": 60,
      "retrieved_top10": [
       "20231231_232903",
@@ -50972,7 +50973,7 @@
     {
      "id": "56fa9ad4-7e66-44e3-8f1e-3dd8f8887c56",
      "qtype": "open_end",
-     "score": 0.0,
+     "score": 1.0,
      "delivered_k": 2,
      "retrieved_top10": [
       "20230127_194458",
@@ -51245,7 +51246,7 @@
      "id": "7448ada9-bc30-405f-b9db-64bd9dc892dc",
      "qtype": "open_end",
      "score": 0.0,
-     "delivered_k": 24,
+     "delivered_k": 23,
      "retrieved_top10": [
       "20220619_130513",
       "20220619_131011",
@@ -52196,7 +52197,7 @@
     {
      "id": "dd6f1b67-aaa6-4f1a-b7a3-122793fb439e",
      "qtype": "list_recall",
-     "score": 1.0,
+     "score": 0.6666666666666666,
      "delivered_k": 6,
      "retrieved_top10": [
       "20240818_110212",
@@ -53557,7 +53558,7 @@
      "id": "5ea687e8-89b0-4356-a625-6dac9f6dedea",
      "qtype": "open_end",
      "score": 1.0,
-     "delivered_k": 24,
+     "delivered_k": 22,
      "retrieved_top10": [
       "20240730_150531",
       "20220623_133212",
@@ -55234,10 +55235,10 @@
       "email202501240005",
       "email202412170003",
       "email202212200002",
-      "email202501140008",
       "20250129_142348",
       "email202501240001",
       "email202501100005",
+      "email202501140008",
       "20250129_142730",
       "email202501160002",
       "email202501200008",
@@ -55286,10 +55287,10 @@
       "email202501240005",
       "email202412170003",
       "email202212200002",
-      "email202501140008",
       "20250129_142348",
       "email202501240001",
       "email202501100005",
+      "email202501140008",
       "20250129_142730",
       "email202501160002",
       "email202501200008",
@@ -55597,7 +55598,7 @@
      "id": "0375b593-1e1a-437f-8810-8de002e4710f",
      "qtype": "number",
      "score": 0.0,
-     "delivered_k": 38,
+     "delivered_k": 34,
      "retrieved_top10": [
       "20240810_205437",
       "20240810_202415",
@@ -55868,7 +55869,7 @@
     {
      "id": "2312ccea-1fc6-4d77-9352-b5ff964c0649",
      "qtype": "list_recall",
-     "score": 0.6666666666666666,
+     "score": 0.3333333333333333,
      "delivered_k": 50,
      "retrieved_top10": [
       "20230416_134633",
@@ -56412,7 +56413,7 @@
     {
      "id": "a5be6410-a028-4134-963e-9c58adedba12",
      "qtype": "open_end",
-     "score": 1.0,
+     "score": 0.0,
      "delivered_k": 32,
      "retrieved_top10": [
       "20220619_175604",
@@ -56943,8 +56944,8 @@
       "email202210010001",
       "email202209300001",
       "20241003_130139",
-      "email202210300002",
       "email202203240005",
+      "email202210300002",
       "email202211230012",
       "email202209240001",
       "email202211230013",
@@ -57228,7 +57229,7 @@
     {
      "id": "e86634b8-cb23-4fcf-b62d-1e922778c678",
      "qtype": "list_recall",
-     "score": 1.0,
+     "score": 0.5,
      "delivered_k": 21,
      "retrieved_top10": [
       "20240811_144206",
@@ -57501,7 +57502,7 @@
      "id": "b77c4ac3-f933-44ce-92a1-10939d313b86",
      "qtype": "list_recall",
      "score": 1.0,
-     "delivered_k": 60,
+     "delivered_k": 58,
      "retrieved_top10": [
       "20220706_185634",
       "email202405180002",
@@ -59269,7 +59270,7 @@
      "id": "e1fb0f9f-54f3-4bb6-9c79-676b5250a03d",
      "qtype": "number",
      "score": 1.0,
-     "delivered_k": 45,
+     "delivered_k": 39,
      "retrieved_top10": [
       "20240220_071755",
       "20240220_075101",
@@ -60085,7 +60086,7 @@
      "id": "3175b011-3edf-470e-ac70-f173ebf0d960",
      "qtype": "list_recall",
      "score": 1.0,
-     "delivered_k": 34,
+     "delivered_k": 28,
      "retrieved_top10": [
       "20230327_193630",
       "20240820_160855",
@@ -60765,7 +60766,7 @@
      "id": "116437e3-9d3d-4455-888e-90bef5f2cc41",
      "qtype": "open_end",
      "score": 1.0,
-     "delivered_k": 43,
+     "delivered_k": 37,
      "retrieved_top10": [
       "20240730_152220",
       "20240804_192238",
@@ -60901,7 +60902,7 @@
      "id": "3ec7a4f8-f40d-4ef1-b59d-ebe5fd8cded6",
      "qtype": "open_end",
      "score": 0.0,
-     "delivered_k": 30,
+     "delivered_k": 21,
      "retrieved_top10": [
       "20230327_113139",
       "20230327_113014",
@@ -61580,7 +61581,7 @@
     {
      "id": "e736bee8-630f-49f5-b7ad-4fc18a95ef49",
      "qtype": "open_end",
-     "score": 1.0,
+     "score": 0.0,
      "delivered_k": 5,
      "retrieved_top10": [
       "email202204100003",
@@ -62125,7 +62126,7 @@
      "id": "959ce2ad-bfdb-43bf-89be-98d370641a84",
      "qtype": "open_end",
      "score": 1.0,
-     "delivered_k": 34,
+     "delivered_k": 30,
      "retrieved_top10": [
       "20240210_122058",
       "20240221_111515",
@@ -62668,7 +62669,7 @@
     {
      "id": "d2480d4d-93ee-4b0c-b411-eeaab58b5a35",
      "qtype": "number",
-     "score": 0.0,
+     "score": 1.0,
      "delivered_k": 33,
      "retrieved_top10": [
       "20220507_135200",
@@ -63621,7 +63622,7 @@
      "id": "2608e6b0-685a-42c0-bf5d-1879c31f856d",
      "qtype": "list_recall",
      "score": 0.0,
-     "delivered_k": 36,
+     "delivered_k": 33,
      "retrieved_top10": [
       "email202406300003",
       "email202407260008",
@@ -63757,7 +63758,7 @@
      "id": "58bb5779-4a8e-4af9-859f-7520fe2b517a",
      "qtype": "open_end",
      "score": 1.0,
-     "delivered_k": 35,
+     "delivered_k": 32,
      "retrieved_top10": [
       "email202403140011",
       "20240730_210323",
@@ -64845,7 +64846,7 @@
      "id": "23c264a9-72c3-4bc5-b112-3a84e9fc3dbb",
      "qtype": "number",
      "score": 0.0,
-     "delivered_k": 28,
+     "delivered_k": 27,
      "retrieved_top10": [
       "20231218_141231",
       "20231212_085315",
@@ -66749,7 +66750,7 @@
      "id": "0a6ebbee-5a0b-4fa1-9506-a18039a1a9e5",
      "qtype": "open_end",
      "score": 1.0,
-     "delivered_k": 34,
+     "delivered_k": 31,
      "retrieved_top10": [
       "20240806_192737",
       "20220705_150641",
@@ -67021,7 +67022,7 @@
      "id": "93945260-86f0-41c2-966f-8cc5b03e4ad7",
      "qtype": "open_end",
      "score": 1.0,
-     "delivered_k": 27,
+     "delivered_k": 26,
      "retrieved_top10": [
       "20230122_211745(0)",
       "20250429_133249",
@@ -67157,7 +67158,7 @@
      "id": "83abfb8e-792b-4648-98f6-3ebc7d38c9cb",
      "qtype": "list_recall",
      "score": 0.0,
-     "delivered_k": 18,
+     "delivered_k": 17,
      "retrieved_top10": [
       "20240815_171709",
       "20221226_161130",
@@ -69877,7 +69878,7 @@
      "id": "2a22220b-0819-4379-8eba-1a83be788fa5",
      "qtype": "number",
      "score": 0.0,
-     "delivered_k": 32,
+     "delivered_k": 31,
      "retrieved_top10": [
       "20241125_102733",
       "email202405180002",
@@ -70693,7 +70694,7 @@
      "id": "5260db22-54e0-443d-bd30-878535b6d41e",
      "qtype": "open_end",
      "score": 0.0,
-     "delivered_k": 28,
+     "delivered_k": 27,
      "retrieved_top10": [
       "20240730_203550",
       "20240730_204703",
@@ -71908,8 +71909,8 @@
       "email202403110005",
       "email202203170003",
       "email202212050002",
-      "20220506_173404",
       "email202303160006",
+      "20220506_173404",
       "20240521_210517"
      ]
     },
@@ -72324,7 +72325,7 @@
     {
      "id": "885525ee-e6f6-49cd-a368-ddacefc6e8bc",
      "qtype": "open_end",
-     "score": 0.0,
+     "score": 1.0,
      "delivered_k": 41,
      "retrieved_top10": [
       "20220619_201857",
@@ -73956,7 +73957,7 @@
     {
      "id": "172f0fc0-7efd-4712-b346-17530cb7df6c",
      "qtype": "open_end",
-     "score": 1.0,
+     "score": 0.0,
      "delivered_k": 11,
      "retrieved_top10": [
       "20240609_173543",
@@ -74773,7 +74774,7 @@
      "id": "230bf920-cc9f-46c9-a77a-f0ce976e5bb7",
      "qtype": "open_end",
      "score": 1.0,
-     "delivered_k": 63,
+     "delivered_k": 59,
      "retrieved_top10": [
       "20230317_075123",
       "email202203040012",
@@ -76133,7 +76134,7 @@
      "id": "45955fdd-da78-4f66-8164-456184386a94",
      "qtype": "open_end",
      "score": 0.0,
-     "delivered_k": 33,
+     "delivered_k": 32,
      "retrieved_top10": [
       "email202304280005",
       "20221122_155458",
@@ -76541,7 +76542,7 @@
      "id": "141dfbe6-aca1-4578-afaa-bad4afbbb5dd",
      "qtype": "list_recall",
      "score": 1.0,
-     "delivered_k": 35,
+     "delivered_k": 33,
      "retrieved_top10": [
       "20240802_100739",
       "email202407260007",
@@ -77084,7 +77085,7 @@
     {
      "id": "bd1f8b3d-f54b-4286-b786-db48323eee28",
      "qtype": "open_end",
-     "score": 0.0,
+     "score": 1.0,
      "delivered_k": 29,
      "retrieved_top10": [
       "20240809_093619",
@@ -77478,10 +77479,10 @@
       "email202302190004",
       "20241109_170840",
       "email202402090001",
-      "email202404240010",
       "email202304090001",
       "20240414_183018",
       "email202404150001",
+      "email202404240010",
       "email202402070008",
       "email202204040004",
       "20240413_160647",
@@ -77492,7 +77493,7 @@
     {
      "id": "a21206a3-f8dd-4373-8166-5be1a3926ad5",
      "qtype": "open_end",
-     "score": 0.0,
+     "score": 1.0,
      "delivered_k": 20,
      "retrieved_top10": [
       "20231213_194928",
@@ -78037,7 +78038,7 @@
      "id": "917f5906-ec01-4c17-9a7f-9460a2904580",
      "qtype": "open_end",
      "score": 1.0,
-     "delivered_k": 28,
+     "delivered_k": 27,
      "retrieved_top10": [
       "20240731_155548",
       "20240731_210028",
@@ -79038,8 +79039,8 @@
       "email202204210011",
       "email202404220005",
       "email202402260006",
-      "email202404220014",
       "email202404260007",
+      "email202404220014",
       "email202404240009",
       "email202504280009",
       "email202412180001",
@@ -79090,8 +79091,8 @@
       "email202204210011",
       "email202404220005",
       "email202402260006",
-      "email202404220014",
       "email202404260007",
+      "email202404220014",
       "email202404240009",
       "email202504280009",
       "email202412180001",
@@ -80757,7 +80758,7 @@
      "id": "892e0e11-23dc-48a4-bb3e-ff1856d1450f",
      "qtype": "number",
      "score": 0.0,
-     "delivered_k": 26,
+     "delivered_k": 23,
      "retrieved_top10": [
       "20240811_142621",
       "20240810_202411",
@@ -80893,7 +80894,7 @@
      "id": "e2c25f36-cc1c-4d39-9055-dc8bcb0c46d1",
      "qtype": "open_end",
      "score": 1.0,
-     "delivered_k": 41,
+     "delivered_k": 37,
      "retrieved_top10": [
       "20240218_155231",
       "20240220_085841",
@@ -83205,7 +83206,7 @@
      "id": "c4429687-01c6-4b22-8df1-63e602344761",
      "qtype": "list_recall",
      "score": 0.0,
-     "delivered_k": 42,
+     "delivered_k": 41,
      "retrieved_top10": [
       "20240217_112011",
       "20230407_152131",
@@ -83748,8 +83749,8 @@
     {
      "id": "f10e0f3e-bdb9-4111-b571-7d02536eb211",
      "qtype": "open_end",
-     "score": 0.0,
-     "delivered_k": 19,
+     "score": 1.0,
+     "delivered_k": 18,
      "retrieved_top10": [
       "email202503260011",
       "20231212_090354",
@@ -85789,7 +85790,7 @@
      "id": "ef651ed4-aeb5-4528-9003-ac8be603e263",
      "qtype": "open_end",
      "score": 1.0,
-     "delivered_k": 31,
+     "delivered_k": 28,
      "retrieved_top10": [
       "20240730_162634",
       "20240730_163045",
@@ -87557,7 +87558,7 @@
      "id": "43c54918-2f6e-49ca-aa01-98a98992b53a",
      "qtype": "open_end",
      "score": 1.0,
-     "delivered_k": 32,
+     "delivered_k": 31,
      "retrieved_top10": [
       "20240802_081852",
       "20240802_191640",
@@ -87829,7 +87830,7 @@
      "id": "a23f04f0-7a5d-4661-a7c3-8eab33c8fa12",
      "qtype": "number",
      "score": 0.0,
-     "delivered_k": 26,
+     "delivered_k": 24,
      "retrieved_top10": [
       "20230129_170107",
       "20240730_153418",
@@ -88100,8 +88101,8 @@
     {
      "id": "1a08edf8-1762-43c2-888f-a32df0850c9a",
      "qtype": "open_end",
-     "score": 0.0,
-     "delivered_k": 53,
+     "score": 1.0,
+     "delivered_k": 52,
      "retrieved_top10": [
       "email202407260010",
       "20240702_200314",
@@ -88236,7 +88237,7 @@
     {
      "id": "b3c44210-4824-45fc-9d06-8f0ebf65f0d3",
      "qtype": "number",
-     "score": 0.0,
+     "score": 1.0,
      "delivered_k": 7,
      "retrieved_top10": [
       "email202204080006",
@@ -89461,7 +89462,7 @@
      "id": "6f3dbe9a-472e-45fb-9ce0-a34adc27a66b",
      "qtype": "open_end",
      "score": 0.0,
-     "delivered_k": 44,
+     "delivered_k": 43,
      "retrieved_top10": [
       "email202208140001",
       "20221115_212132",
@@ -89869,7 +89870,7 @@
      "id": "525a8391-8ea7-45fe-b8d7-b587d68b1ab1",
      "qtype": "number",
      "score": 1.0,
-     "delivered_k": 37,
+     "delivered_k": 35,
      "retrieved_top10": [
       "20240609_120940",
       "20220624_123141",
@@ -90413,7 +90414,7 @@
      "id": "2ca32c9f-61b4-4077-9b70-829001d2455b",
      "qtype": "open_end",
      "score": 1.0,
-     "delivered_k": 33,
+     "delivered_k": 32,
      "retrieved_top10": [
       "20220513_154507",
       "20240812_190357",
@@ -91500,7 +91501,7 @@
     {
      "id": "afc75d33-e3ea-4b12-b0d2-5805be3d0d80",
      "qtype": "open_end",
-     "score": 1.0,
+     "score": 0.0,
      "delivered_k": 6,
      "retrieved_top10": [
       "20240510_234834",
@@ -91636,8 +91637,8 @@
     {
      "id": "8f1df1d0-aae9-447d-a18d-b12ad401d7d5",
      "qtype": "open_end",
-     "score": 0.0,
-     "delivered_k": 35,
+     "score": 1.0,
+     "delivered_k": 34,
      "retrieved_top10": [
       "20250223_133506",
       "20250224_142920",
@@ -91908,7 +91909,7 @@
     {
      "id": "35371f86-190e-4a94-a0f1-0abca1dec22e",
      "qtype": "open_end",
-     "score": 0.0,
+     "score": 1.0,
      "delivered_k": 1,
      "retrieved_top10": [
       "email202307230001",
@@ -92317,7 +92318,7 @@
      "id": "171315b3-d61b-4ad7-9d0d-ecaf0a55262d",
      "qtype": "number",
      "score": 0.0,
-     "delivered_k": 36,
+     "delivered_k": 34,
      "retrieved_top10": [
       "20221210_181749",
       "20221210_175231",
@@ -92452,7 +92453,7 @@
     {
      "id": "da0c2d9e-6b2c-44ce-a4d6-f7ffdfe62326",
      "qtype": "open_end",
-     "score": 1.0,
+     "score": 0.0,
      "delivered_k": 1,
      "retrieved_top10": [
       "20231214_184254",
@@ -92652,7 +92653,7 @@
       "email202204240002",
       "email202204110003",
       "email202204260002",
-      "email202503300003"
+      "20230405_191734"
      ],
      "retrieved_top64": [
       "email202204040006",
@@ -92704,8 +92705,8 @@
       "email202204240002",
       "email202204110003",
       "email202204260002",
-      "email202503300003",
       "20230405_191734",
+      "email202503300003",
       "email202209010006",
       "email202204100001",
       "email202204190010",
@@ -93541,7 +93542,7 @@
      "id": "0e67d708-caec-4271-81d9-b10a5471511a",
      "qtype": "open_end",
      "score": 0.0,
-     "delivered_k": 23,
+     "delivered_k": 22,
      "retrieved_top10": [
       "20240505_150528",
       "20240505_150717",
@@ -94357,7 +94358,7 @@
      "id": "9673a5a9-67f1-42fc-bd22-f9f4b4b9824e",
      "qtype": "number",
      "score": 0.0,
-     "delivered_k": 41,
+     "delivered_k": 36,
      "retrieved_top10": [
       "20240820_143934",
       "20221212_200859",
@@ -94813,8 +94814,8 @@
       "email202309080006",
       "20241004_213143",
       "email202209080004",
-      "email202209300011",
       "email202408190002",
+      "email202209300011",
       "email202409300002",
       "20240606_103945",
       "20230905_190549",
@@ -94865,8 +94866,8 @@
       "email202309080006",
       "20241004_213143",
       "email202209080004",
-      "email202209300011",
       "email202408190002",
+      "email202209300011",
       "email202409300002",
       "20240606_103945",
       "20230905_190549",
@@ -95444,7 +95445,7 @@
     {
      "id": "2f75e1c9-5be6-41b9-b04e-41edac3047d2",
      "qtype": "list_recall",
-     "score": 1.0,
+     "score": 0.0,
      "delivered_k": 23,
      "retrieved_top10": [
       "20220620_144719",
@@ -96669,7 +96670,7 @@
      "id": "9c743de2-1a56-4469-934f-5c22ed735af5",
      "qtype": "open_end",
      "score": 0.0,
-     "delivered_k": 34,
+     "delivered_k": 33,
      "retrieved_top10": [
       "20240812_190357",
       "20240812_190405",
@@ -97485,7 +97486,7 @@
      "id": "7262e72b-332d-47e6-8ce4-d9ac827a5518",
      "qtype": "open_end",
      "score": 1.0,
-     "delivered_k": 16,
+     "delivered_k": 15,
      "retrieved_top10": [
       "email202309110003",
       "20231210_125556",
@@ -97621,7 +97622,7 @@
      "id": "17d618a2-35fc-4b0d-a10d-138ad3f40c28",
      "qtype": "number",
      "score": 0.0,
-     "delivered_k": 29,
+     "delivered_k": 28,
      "retrieved_top10": [
       "20220621_113820",
       "email202201250002",
@@ -98437,7 +98438,7 @@
      "id": "0eb38553-7862-4165-9927-06a1016a5016",
      "qtype": "number",
      "score": 1.0,
-     "delivered_k": 27,
+     "delivered_k": 25,
      "retrieved_top10": [
       "20240806_091549",
       "20240802_135230",
@@ -101021,7 +101022,7 @@
      "id": "bfe15c10-8ee3-41ed-87a8-c134dbd196ec",
      "qtype": "open_end",
      "score": 1.0,
-     "delivered_k": 31,
+     "delivered_k": 28,
      "retrieved_top10": [
       "20230503_182813",
       "20230503_182959",
@@ -102244,7 +102245,7 @@
     {
      "id": "8219c170-221b-47cd-8a8b-7ba2431e305a",
      "qtype": "open_end",
-     "score": 0.0,
+     "score": 1.0,
      "delivered_k": 14,
      "retrieved_top10": [
       "20220622_182427",
@@ -102788,8 +102789,8 @@
     {
      "id": "2fd48b42-bc3a-435e-9d0d-9dc04eed85b6",
      "qtype": "open_end",
-     "score": 0.0,
-     "delivered_k": 30,
+     "score": 1.0,
+     "delivered_k": 25,
      "retrieved_top10": [
       "20240819_190502",
       "20240819_200150",
@@ -103196,7 +103197,7 @@
     {
      "id": "7800ac77-92c6-40c7-a0e9-7293e976b8f7",
      "qtype": "open_end",
-     "score": 1.0,
+     "score": 0.0,
      "delivered_k": 16,
      "retrieved_top10": [
       "email202303140005",
@@ -103332,7 +103333,7 @@
     {
      "id": "09325332-67e4-49cb-b7df-43c75c2328d5",
      "qtype": "open_end",
-     "score": 0.0,
+     "score": 1.0,
      "delivered_k": 7,
      "retrieved_top10": [
       "20240611_191700",
@@ -103469,7 +103470,7 @@
      "id": "8ac9782c-1063-4260-ae67-1bb7d80bba83",
      "qtype": "open_end",
      "score": 0.0,
-     "delivered_k": 28,
+     "delivered_k": 25,
      "retrieved_top10": [
       "20230115_125237",
       "20230115_131010",
@@ -108148,8 +108149,8 @@
       "20221016_183635",
       "20221027_184949",
       "email202210140005",
-      "email202210300001",
       "email202210110010",
+      "email202210300001",
       "20221023_140103",
       "email202210070002",
       "20250429_132535",
@@ -108200,8 +108201,8 @@
       "20221016_183635",
       "20221027_184949",
       "email202210140005",
-      "email202210300001",
       "email202210110010",
+      "email202210300001",
       "20221023_140103",
       "email202210070002",
       "20250429_132535",
@@ -108229,7 +108230,7 @@
      "id": "cc0ab91f-86c9-4c3e-ad84-5d63f0e45f9e",
      "qtype": "open_end",
      "score": 1.0,
-     "delivered_k": 28,
+     "delivered_k": 27,
      "retrieved_top10": [
       "20241021_001631",
       "20241020_191605",
@@ -108500,7 +108501,7 @@
     {
      "id": "bdd2e038-41bd-4f4c-9769-c4d02b091cd5",
      "qtype": "open_end",
-     "score": 1.0,
+     "score": 0.0,
      "delivered_k": 29,
      "retrieved_top10": [
       "email202410210013",
@@ -109316,8 +109317,8 @@
     {
      "id": "50b8de58-4dd1-4e7e-8771-6f522d682c0c",
      "qtype": "open_end",
-     "score": 1.0,
-     "delivered_k": 13,
+     "score": 0.0,
+     "delivered_k": 12,
      "retrieved_top10": [
       "20241003_124541",
       "20231211_133838",
@@ -109724,7 +109725,7 @@
     {
      "id": "6877e24a-d40b-4c03-8c5c-49d842abe25e",
      "qtype": "open_end",
-     "score": 0.0,
+     "score": 1.0,
      "delivered_k": 6,
      "retrieved_top10": [
       "20221026_173325",
@@ -110676,7 +110677,7 @@
     {
      "id": "880f7e15-9b8d-4c7b-842c-e62ad78a7fff",
      "qtype": "open_end",
-     "score": 0.0,
+     "score": 1.0,
      "delivered_k": 22,
      "retrieved_top10": [
       "20250401_221814",
@@ -110812,7 +110813,7 @@
     {
      "id": "b64dba39-b4fe-44a5-95c6-1984f8c3918e",
      "qtype": "open_end",
-     "score": 0.0,
+     "score": 1.0,
      "delivered_k": 10,
      "retrieved_top10": [
       "email202407080002",
@@ -112853,7 +112854,7 @@
      "id": "c4f8a140-c452-421b-b4f9-6b2149ef943c",
      "qtype": "number",
      "score": 0.0,
-     "delivered_k": 34,
+     "delivered_k": 32,
      "retrieved_top10": [
       "20240819_103841",
       "20230326_192312",
@@ -114349,7 +114350,7 @@
      "id": "fadf2286-8319-4a22-bd20-724a3471afa2",
      "qtype": "open_end",
      "score": 1.0,
-     "delivered_k": 41,
+     "delivered_k": 39,
      "retrieved_top10": [
       "20240807_143037",
       "20240807_144851",
@@ -115573,7 +115574,7 @@
      "id": "f8f2f637-f8d3-459d-9df1-7c7db9e2709b",
      "qtype": "open_end",
      "score": 0.0,
-     "delivered_k": 29,
+     "delivered_k": 28,
      "retrieved_top10": [
       "20240819_110231",
       "20230906_144717",
@@ -116252,7 +116253,7 @@
     {
      "id": "3b3f4633-a495-4e63-b698-947fe6d7de41",
      "qtype": "list_recall",
-     "score": 0.0,
+     "score": 1.0,
      "delivered_k": 26,
      "retrieved_top10": [
       "20241126_164827",
@@ -116524,7 +116525,7 @@
     {
      "id": "d2beb429-0a4e-4f20-a3f9-2047937630fe",
      "qtype": "number",
-     "score": 0.0,
+     "score": 1.0,
      "delivered_k": 42,
      "retrieved_top10": [
       "20240818_192717",
@@ -116933,7 +116934,7 @@
      "id": "2d3ba0a9-988f-4190-98e7-a7083f6b3817",
      "qtype": "list_recall",
      "score": 0.0,
-     "delivered_k": 41,
+     "delivered_k": 39,
      "retrieved_top10": [
       "20240218_110330",
       "20240218_095750",
@@ -117477,7 +117478,7 @@
      "id": "5c1e4bab-919a-426d-824d-8dab34068c75",
      "qtype": "list_recall",
      "score": 1.0,
-     "delivered_k": 38,
+     "delivered_k": 37,
      "retrieved_top10": [
       "20240815_171709",
       "20240927_125356",
@@ -120196,7 +120197,7 @@
     {
      "id": "758e2410-769d-4d6c-a20a-16774008bb11",
      "qtype": "open_end",
-     "score": 0.0,
+     "score": 1.0,
      "delivered_k": 5,
      "retrieved_top10": [
       "20240812_132652",
@@ -120877,7 +120878,7 @@
      "id": "ff58e953-7e07-4b70-bd8d-335cdb268001",
      "qtype": "open_end",
      "score": 1.0,
-     "delivered_k": 39,
+     "delivered_k": 37,
      "retrieved_top10": [
       "20240801_090857",
       "20240731_193002",
@@ -121012,8 +121013,8 @@
     {
      "id": "c7f8f4d3-3c13-4e47-8fb5-363efb363866",
      "qtype": "list_recall",
-     "score": 1.0,
-     "delivered_k": 23,
+     "score": 0.0,
+     "delivered_k": 20,
      "retrieved_top10": [
       "20240730_145507",
       "20240730_120547",
@@ -121421,7 +121422,7 @@
      "id": "f98ca920-74d6-4eef-805a-65ca4c9c2d47",
      "qtype": "open_end",
      "score": 0.0,
-     "delivered_k": 32,
+     "delivered_k": 31,
      "retrieved_top10": [
       "20240626_193416",
       "20240626_194031",
@@ -121693,7 +121694,7 @@
      "id": "cb3761eb-0d8b-43c4-9d12-f6474ef53650",
      "qtype": "open_end",
      "score": 0.0,
-     "delivered_k": 32,
+     "delivered_k": 25,
      "retrieved_top10": [
       "20230327_174459",
       "20230327_174506",
@@ -122645,7 +122646,7 @@
      "id": "dd385f75-d8e6-4b5b-94de-1b38669a87ca",
      "qtype": "list_recall",
      "score": 1.0,
-     "delivered_k": 40,
+     "delivered_k": 39,
      "retrieved_top10": [
       "20240731_193002",
       "20240731_193010",
@@ -123733,7 +123734,7 @@
      "id": "dfe00e9e-29b8-4d5f-b64c-420c7576e884",
      "qtype": "open_end",
      "score": 1.0,
-     "delivered_k": 35,
+     "delivered_k": 34,
      "retrieved_top10": [
       "20240706_203930",
       "20240706_212753",
@@ -125092,7 +125093,7 @@
     {
      "id": "fcdb1de2-192f-44fb-8c0e-0f778f7a7ccf",
      "qtype": "open_end",
-     "score": 1.0,
+     "score": 0.0,
      "delivered_k": 13,
      "retrieved_top10": [
       "20231212_084425",
@@ -127132,7 +127133,7 @@
     {
      "id": "efc997df-abf5-45e5-afa1-896665ddaef1",
      "qtype": "open_end",
-     "score": 1.0,
+     "score": 0.0,
      "delivered_k": 28,
      "retrieved_top10": [
       "20230625_212405",
@@ -127269,7 +127270,7 @@
      "id": "f1265e6e-90e0-4ae5-921b-de059c4d0db2",
      "qtype": "open_end",
      "score": 0.0,
-     "delivered_k": 64,
+     "delivered_k": 62,
      "retrieved_top10": [
       "email202503270005",
       "email202303070003",
@@ -128221,7 +128222,7 @@
      "id": "79ab440a-5da6-4cb8-900e-368234df9c36",
      "qtype": "open_end",
      "score": 0.0,
-     "delivered_k": 44,
+     "delivered_k": 42,
      "retrieved_top10": [
       "email202410230009",
       "email202411220006",
@@ -129309,7 +129310,7 @@
      "id": "ebfdee4b-ff68-44f5-b06a-54fce020d938",
      "qtype": "number",
      "score": 1.0,
-     "delivered_k": 35,
+     "delivered_k": 31,
      "retrieved_top10": [
       "20220730_134908",
       "20240218_110330",
@@ -131213,7 +131214,7 @@
      "id": "05de7c18-17cf-4552-8c02-ebcdff97ec70",
      "qtype": "number",
      "score": 0.0,
-     "delivered_k": 41,
+     "delivered_k": 40,
      "retrieved_top10": [
       "20240609_115908",
       "20240710_102717",
@@ -131348,7 +131349,7 @@
     {
      "id": "ea30ad37-d627-4ad2-870b-688c7e34927f",
      "qtype": "number",
-     "score": 0.0,
+     "score": 1.0,
      "delivered_k": 37,
      "retrieved_top10": [
       "20230420_102305",
@@ -132845,7 +132846,7 @@
      "id": "ff7eb7fd-fee6-4c3f-b046-35d24fd9fd67",
      "qtype": "number",
      "score": 1.0,
-     "delivered_k": 26,
+     "delivered_k": 23,
      "retrieved_top10": [
       "20240813_200317",
       "20240813_200310",
@@ -134333,14 +134334,14 @@
       "email202303140007",
       "20230316_120441",
       "20230329_164746",
-      "email202303200003",
-      "email202303130001"
+      "email202303130001",
+      "email202303200003"
      ]
     },
     {
      "id": "772a6e3c-0a9b-4def-ab97-551b51d41456",
      "qtype": "list_recall",
-     "score": 0.75,
+     "score": 0.6,
      "delivered_k": 15,
      "retrieved_top10": [
       "20230329_164647",
@@ -134536,8 +134537,8 @@
       "email202202080006",
       "email202504280002",
       "email202202180005",
-      "20220619_130516",
       "email202202160002",
+      "20220619_130516",
       "email202506100003",
       "email202410030009",
       "email202502060008"
@@ -134588,8 +134589,8 @@
       "email202202080006",
       "email202504280002",
       "email202202180005",
-      "20220619_130516",
       "email202202160002",
+      "20220619_130516",
       "email202506100003",
       "email202410030009",
       "email202502060008",
@@ -135020,7 +135021,7 @@
     {
      "id": "f3a57df4-11a2-46b9-bd34-f44470445910",
      "qtype": "open_end",
-     "score": 0.0,
+     "score": 1.0,
      "delivered_k": 40,
      "retrieved_top10": [
       "20230127_220222",
@@ -135972,7 +135973,7 @@
     {
      "id": "f2b7f207-b3e3-4f37-be12-2dc00e23c967",
      "qtype": "open_end",
-     "score": 0.0,
+     "score": 1.0,
      "delivered_k": 1,
      "retrieved_top10": [
       "20230317_013952",
@@ -136108,7 +136109,7 @@
     {
      "id": "8f7717e3-fef1-40a5-9185-5e7ab198151e",
      "qtype": "list_recall",
-     "score": 0.0,
+     "score": 1.0,
      "delivered_k": 32,
      "retrieved_top10": [
       "20250224_142920",
@@ -137877,7 +137878,7 @@
   },
   "hard": {
    "questions": 31,
-   "qs_percent": 31.3332429746092,
+   "qs_percent": 29.209587060630703,
    "recall_at_1": 9.95,
    "recall_at_5": 38.72,
    "recall_at_10": 52.43,
@@ -137886,13 +137887,13 @@
    "any_hit_at_10": 80.65,
    "all_hit_at_10": 29.03,
    "delivered_k_min": 2,
-   "delivered_k_median": 30,
-   "delivered_k_mean": 26.94,
+   "delivered_k_median": 28,
+   "delivered_k_mean": 26.48,
    "delivered_k_max": 46,
    "per_type": {
     "list_recall": {
      "questions": 12,
-     "qs_percent": 47.6108776844071
+     "qs_percent": 42.124766573295986
     },
     "number": {
      "questions": 6,
@@ -137907,7 +137908,7 @@
     {
      "id": "c53f6cbe-01f4-4870-8946-f761dcf1ceba",
      "qtype": "list_recall",
-     "score": 0.7,
+     "score": 0.3333333333333333,
      "delivered_k": 30,
      "retrieved_top10": [
       "20250225_141720",
@@ -139811,8 +139812,8 @@
     {
      "id": "888b4502-9c70-413a-8c06-69e7e97a16b2",
      "qtype": "list_recall",
-     "score": 0.625,
-     "delivered_k": 31,
+     "score": 0.3333333333333333,
+     "delivered_k": 22,
      "retrieved_top10": [
       "20240819_205823",
       "20240819_210159",
@@ -140492,7 +140493,7 @@
      "id": "b6b46633-47a1-4fd6-88c4-42a7677d7fc5",
      "qtype": "open_end",
      "score": 0.0,
-     "delivered_k": 31,
+     "delivered_k": 28,
      "retrieved_top10": [
       "email202407260006",
       "20240730_180353",
@@ -140628,7 +140629,7 @@
      "id": "7665e37d-29a0-4450-8d03-6539122a6b3f",
      "qtype": "open_end",
      "score": 0.0,
-     "delivered_k": 25,
+     "delivered_k": 23,
      "retrieved_top10": [
       "20240819_205823",
       "20240819_210159",

@@ -9,10 +9,10 @@
   "profile": "local_plain",
   "answer_model": "Qwen3-VL-8B-Instruct",
   "memory_model": "Qwen3-VL-2B-Instruct (0-LLM local index)",
-  "retriever": "Local SQLite Vault + Self-Info Coherence & Event-Cluster Ranking (0-Vector)"
+  "retriever": "Adaptive Self-Information Ranking (0-Vector)"
  },
  "protocol": {
-  "pipeline": "Official SGM corpus (11,034 items) ingested into an isolated local SQLite vault with zero LLM calls and zero vector embeddings. Retrieval is deterministic and answer-model independent; top-10 ranked items are passed to the answer model using the exact official MMRAG SYSTEM and USER_TEXT prompts.",
+  "pipeline": "Official SGM corpus (11,034 items) ingested into an isolated local vault with zero LLM calls and zero vector embeddings. Retrieval uses our in-house deterministic Adaptive Self-Information Ranking engine (0-Vector, 0-LLM, no SQLite FTS5, no rank-index RRF). Top-10 ranked items are passed to the local Qwen3-VL-8B-Instruct answer model using the exact official MMRag item text formats and the exact official MMRAG SYSTEM and USER_TEXT prompts.",
   "memory_mode": "processed_memory (fixed official 2B SGM)",
   "answer_model": "Qwen/Qwen3-VL-8B-Instruct (local Q8_0 GGUF via llama.cpp)",
   "answer_model_settings": {
@@ -41,39 +41,32 @@
   "main_token_usage": {
    "index_llm_tokens": 0,
    "retrieval_llm_tokens": 0,
-   "answer_input_tokens": 5149364,
-   "answer_output_tokens": 9954,
-   "total_tokens": 5159318,
-   "total_tokens_millions": 5.159318,
-   "cost_usd": 0.932261,
+   "prompt_tokens": 5528895,
+   "completion_tokens": 15303,
+   "total_tokens": 5544198,
+   "total_tokens_millions": 5.544198,
+   "cost_usd_api_equivalent": 1.003465,
    "local_cost_usd": 0.0,
    "judge_calls": 514,
-   "judge_input_tokens": 267032,
-   "judge_output_tokens": 27550,
    "judge_total_tokens": 294582,
    "judge_cost_usd": 0.121858,
-   "total_tokens_including_judge": 5453900,
-   "total_cost_usd_including_judge": 1.054119,
-   "pricing_note": "System cost (excluding evaluator judge): 0 LLM tokens at index and retrieval ($0.00); 5,149,364 input + 9,954 output = 5,159,318 answer tokens (5.159318M); $0.00 on-device or $0.932261 at official Qwen3-VL-8B-Instruct list rates ($0.18 / 1M input, $0.54 / 1M output). Evaluator judge (gpt-5-mini, 514 open_end calls): 267,032 input + 27,550 output = 294,582 tokens at official OpenAI list rates ($0.25 / 1M input, $2.00 / 1M output) = $0.121858."
+   "request_log": "docs/rolling-memory/local-plain-qwen3vl8b/llama-server-timing-log.txt"
   },
   "hard_token_usage": {
    "index_llm_tokens": 0,
    "retrieval_llm_tokens": 0,
-   "answer_input_tokens": 197337,
-   "answer_output_tokens": 1595,
-   "total_tokens": 198932,
-   "total_tokens_millions": 0.198932,
-   "cost_usd": 0.036382,
+   "prompt_tokens": 205969,
+   "completion_tokens": 2280,
+   "total_tokens": 208249,
+   "total_tokens_millions": 0.208249,
+   "cost_usd_api_equivalent": 0.038306,
    "local_cost_usd": 0.0,
    "judge_calls": 13,
-   "judge_input_tokens": 8372,
-   "judge_output_tokens": 861,
    "judge_total_tokens": 9233,
    "judge_cost_usd": 0.003815,
-   "total_tokens_including_judge": 208165,
-   "total_cost_usd_including_judge": 0.040197,
-   "pricing_note": "System cost (excluding evaluator judge): 0 LLM tokens at index and retrieval ($0.00); 197,337 input + 1,595 output = 198,932 answer tokens (0.198932M); $0.00 on-device or $0.036382 at official Qwen3-VL-8B-Instruct list rates ($0.18 / 1M input, $0.54 / 1M output). Evaluator judge (gpt-5-mini, 13 open_end calls): 8,372 input + 861 output = 9,233 tokens at official OpenAI list rates ($0.25 / 1M input, $2.00 / 1M output) = $0.003815."
-  }
+   "request_log": "docs/rolling-memory/local-plain-qwen3vl8b/llama-server-timing-log.txt"
+  },
+  "run_selection": "Single uninterrupted cold run across all 31 Hard and 1,013 Main questions on local llama.cpp server; per-request hardware timing and token counters published in docs/rolling-memory/local-plain-qwen3vl8b/llama-server-timing-log.txt."
  },
  "splits": {
   "main": {

@@ -1,0 +1,96 @@
+--- hard-31 CLI run log ---
+[atm-eval] suite=atm pulse_mode=local_plain tier=hard questions=31 sgm_items=11034 raw_limit=64 answerer=llm judge=off
+[atm-eval] 20/31 R@10=0.333 R@50=1.000
+[atm-eval] 31/31 R@10=0.000 R@50=1.000
+评测完成：suite=atm tier=hard 题数=31 臂=atm-hard-sdk-local-plain-llm
+  r_at_10              0.5243
+  r_at_25              0.6014
+  r_at_50              0.7062
+  qs_score             0.3364
+  qs_score_all_denominator 0.1953
+  scored_count         18
+  unscored_count       13
+  evidence_hit         0.8065
+  answer_in_context    0
+  f1                   0.4123
+  judge_rate           0.3364
+  judge_correct        0.3333
+  judge_scored         18
+  avg_context_chars    55036.5
+  elapsed_seconds      66.2
+  transport            ramesdk.local_plain.offline-v1
+  scope                u10-mem-eval-atmbench-local-plain-20261117t223521z-0cf3
+结果目录：<RUN_DIR>/out-hard
+
+--- main-1013 CLI run log ---
+[atm-eval] suite=atm pulse_mode=local_plain tier=1013 questions=1013 sgm_items=11034 raw_limit=64 answerer=llm judge=off
+[atm-eval] 20/1013 R@10=1.000 R@50=1.000
+[atm-eval] 40/1013 R@10=1.000 R@50=1.000
+[atm-eval] 60/1013 R@10=1.000 R@50=1.000
+[atm-eval] 80/1013 R@10=1.000 R@50=1.000
+[atm-eval] 100/1013 R@10=1.000 R@50=1.000
+[atm-eval] 120/1013 R@10=1.000 R@50=1.000
+[atm-eval] 140/1013 R@10=1.000 R@50=1.000
+[atm-eval] 160/1013 R@10=1.000 R@50=1.000
+[atm-eval] 180/1013 R@10=1.000 R@50=1.000
+[atm-eval] 200/1013 R@10=0.000 R@50=0.000
+[atm-eval] 220/1013 R@10=1.000 R@50=1.000
+[atm-eval] 240/1013 R@10=1.000 R@50=1.000
+[atm-eval] 260/1013 R@10=0.000 R@50=0.000
+[atm-eval] 280/1013 R@10=1.000 R@50=1.000
+[atm-eval] 300/1013 R@10=1.000 R@50=1.000
+[atm-eval] 320/1013 R@10=1.000 R@50=1.000
+[atm-eval] 340/1013 R@10=1.000 R@50=1.000
+[atm-eval] 360/1013 R@10=0.000 R@50=0.000
+[atm-eval] 380/1013 R@10=1.000 R@50=1.000
+[atm-eval] 400/1013 R@10=1.000 R@50=1.000
+[atm-eval] 420/1013 R@10=1.000 R@50=1.000
+[atm-eval] 440/1013 R@10=0.500 R@50=1.000
+[atm-eval] 460/1013 R@10=1.000 R@50=1.000
+[atm-eval] 480/1013 R@10=1.000 R@50=1.000
+[atm-eval] 500/1013 R@10=1.000 R@50=1.000
+[atm-eval] 520/1013 R@10=0.000 R@50=1.000
+[atm-eval] 540/1013 R@10=1.000 R@50=1.000
+[atm-eval] 560/1013 R@10=1.000 R@50=1.000
+[atm-eval] 580/1013 R@10=1.000 R@50=1.000
+[atm-eval] 600/1013 R@10=1.000 R@50=1.000
+[atm-eval] 620/1013 R@10=1.000 R@50=1.000
+[atm-eval] 640/1013 R@10=1.000 R@50=1.000
+[atm-eval] 660/1013 R@10=1.000 R@50=1.000
+[atm-eval] 680/1013 R@10=1.000 R@50=1.000
+[atm-eval] 700/1013 R@10=1.000 R@50=1.000
+[atm-eval] 720/1013 R@10=1.000 R@50=1.000
+[atm-eval] 740/1013 R@10=1.000 R@50=1.000
+[atm-eval] 760/1013 R@10=1.000 R@50=1.000
+[atm-eval] 780/1013 R@10=1.000 R@50=1.000
+[atm-eval] 800/1013 R@10=0.000 R@50=0.000
+[atm-eval] 820/1013 R@10=0.000 R@50=0.000
+[atm-eval] 840/1013 R@10=0.000 R@50=0.000
+[atm-eval] 860/1013 R@10=0.000 R@50=0.000
+[atm-eval] 880/1013 R@10=1.000 R@50=1.000
+[atm-eval] 900/1013 R@10=1.000 R@50=1.000
+[atm-eval] 920/1013 R@10=1.000 R@50=1.000
+[atm-eval] 940/1013 R@10=1.000 R@50=1.000
+[atm-eval] 960/1013 R@10=1.000 R@50=1.000
+[atm-eval] 980/1013 R@10=0.250 R@50=0.500
+[atm-eval] 1000/1013 R@10=1.000 R@50=1.000
+[atm-eval] 1013/1013 R@10=0.500 R@50=0.500
+评测完成：suite=atm tier=1013 题数=1013 臂=atm-1013-sdk-local-plain-llm
+  r_at_10              0.8285
+  r_at_25              0.8651
+  r_at_50              0.9011
+  qs_score             0.7123
+  qs_score_all_denominator 0.3509
+  scored_count         499
+  unscored_count       514
+  evidence_hit         0.8539
+  answer_in_context    0.3731
+  f1                   0.6007
+  judge_rate           0.7123
+  judge_correct        0.7174
+  judge_scored         499
+  avg_context_chars    31762.7
+  elapsed_seconds      398
+  transport            ramesdk.local_plain.offline-v1
+  scope                u10-mem-eval-atmbench-local-plain-20261117t223521z-0cf3
+结果目录：<RUN_DIR>/out-1013

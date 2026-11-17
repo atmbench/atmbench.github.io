@@ -33,8 +33,8 @@
    "config_sha1": "a7126e059ce6745e84453f1fc1dd183656479807"
   },
   "corpus_sha256": "c9c4cc55dd3be147638121765b5dc7b8321a5e292b90909b68ae7fe8a57ee3a7",
-  "main_predictions_json_sha256": "c625193bcb2b54c86449c50db63e01a771a0f63c4357e672a21ef308b2089664",
-  "hard_predictions_json_sha256": "bd572789f22f533b38f07005433cd003febec7ab43a98671e03d34d336fcd0b3",
+  "main_predictions_json_sha256": "7ea6a968d1ef01b78bf25bac52c9b2cb3813a380e04fd8b7894e730d1d54fd5b",
+  "hard_predictions_json_sha256": "942f3fb92921f52a6390a0ad809fbd2d509cc822c0abb7e37f1990a07dfc0bf4",
   "answer_failures": 0,
   "judge_failures": 0,
   "reproduction_cli": "rmem eval --fetch atm --accept-upstream-license --fetch-only && rmem eval --suite atm --tier hard --pulse-mode local_plain --answerer none --judge off --top-k 50 && rmem eval --suite atm --tier 1013 --pulse-mode local_plain --answerer none --judge off --top-k 50"
@@ -42,7 +42,7 @@
  "splits": {
   "main": {
    "questions": 1013,
-   "qs_percent": 69.2498244324503,
+   "qs_percent": 70.13141925530869,
    "recall_at_1": 48.19,
    "recall_at_5": 73.61,
    "recall_at_10": 82.85,
@@ -52,15 +52,15 @@
    "per_type": {
     "list_recall": {
      "questions": 139,
-     "qs_percent": 54.31706582785719
+     "qs_percent": 55.705954716746085
     },
     "number": {
      "questions": 360,
-     "qs_percent": 74.72222222222223
+     "qs_percent": 74.44444444444444
     },
     "open_end": {
      "questions": 514,
-     "qs_percent": 69.45525291828794
+     "qs_percent": 71.01167315175097
     }
    },
    "scores": [
@@ -619,7 +619,7 @@
     {
      "id": "4ede1703-60c0-4a9f-9733-09664b82f7ae",
      "qtype": "open_end",
-     "score": 0.0,
+     "score": 1.0,
      "retrieved_top10": [
       "20230206_192632",
       "20230127_214916",
@@ -2275,7 +2275,7 @@
     {
      "id": "03b5f724-cd73-4aaa-9105-11feebfd826d",
      "qtype": "open_end",
-     "score": 0.0,
+     "score": 1.0,
      "retrieved_top10": [
       "20231217_142934",
       "20240814_150501",
@@ -2965,7 +2965,7 @@
     {
      "id": "0b19fd81-f3da-4af0-b22c-50a5e2e2aa7d",
      "qtype": "number",
-     "score": 0.0,
+     "score": 1.0,
      "retrieved_top10": [
       "email202303270003",
       "email202504030004",
@@ -3931,7 +3931,7 @@
     {
      "id": "7b237e19-f4cc-4763-b5d3-6e370388793c",
      "qtype": "open_end",
-     "score": 0.0,
+     "score": 1.0,
      "retrieved_top10": [
       "email202303130008",
       "email202303140004",
@@ -5725,7 +5725,7 @@
     {
      "id": "8b731d51-53cf-4f86-a68f-f430728be568",
      "qtype": "list_recall",
-     "score": 0.3333333333333333,
+     "score": 1.0,
      "retrieved_top10": [
       "20240222_092308",
       "20240222_092257",
@@ -6622,7 +6622,7 @@
     {
      "id": "32080898-3548-4ec7-88a2-006d6c1d9f35",
      "qtype": "open_end",
-     "score": 0.0,
+     "score": 1.0,
      "retrieved_top10": [
       "email202208060001",
       "20240713_192742",
@@ -7864,7 +7864,7 @@
     {
      "id": "7fbd6bb2-6538-477a-ac20-b996598cc215",
      "qtype": "number",
-     "score": 0.0,
+     "score": 1.0,
      "retrieved_top10": [
       "email202505020004",
       "email202505030001",
@@ -8968,7 +8968,7 @@
     {
      "id": "949de2f0-7a6e-465e-b873-51488ad1b776",
      "qtype": "open_end",
-     "score": 1.0,
+     "score": 0.0,
      "retrieved_top10": [
       "email202405180002",
       "20240805_193244",
@@ -9175,7 +9175,7 @@
     {
      "id": "45dfb2ec-172c-40b2-a1d5-4c563d7675bc",
      "qtype": "open_end",
-     "score": 0.0,
+     "score": 1.0,
      "retrieved_top10": [
       "email202206270001",
       "email202505140001",
@@ -10486,7 +10486,7 @@
     {
      "id": "e8f5bc6e-5758-4bd0-873b-e556a7e3c37f",
      "qtype": "number",
-     "score": 1.0,
+     "score": 0.0,
      "retrieved_top10": [
       "20230503_180159",
       "20240527_203130",
@@ -13591,7 +13591,7 @@
     {
      "id": "503fa788-e01d-4888-acb0-6c450ad2066c",
      "qtype": "list_recall",
-     "score": 1.0,
+     "score": 0.5,
      "retrieved_top10": [
       "20220619_125645",
       "20220619_125643",
@@ -16006,7 +16006,7 @@
     {
      "id": "77b8c96d-6524-489f-b707-204f7e063eae",
      "qtype": "open_end",
-     "score": 1.0,
+     "score": 0.0,
      "retrieved_top10": [
       "20230329_140049",
       "20230329_140207",
@@ -16972,7 +16972,7 @@
     {
      "id": "71f6ac4e-5534-4315-8d88-4fdf32fc4821",
      "qtype": "open_end",
-     "score": 1.0,
+     "score": 0.0,
      "retrieved_top10": [
       "email202201130002",
       "email202201130001",
@@ -17386,7 +17386,7 @@
     {
      "id": "8779bf76-bdfe-424e-b41c-0f8f3ed645ab",
      "qtype": "open_end",
-     "score": 0.0,
+     "score": 1.0,
      "retrieved_top10": [
       "email202303090001",
       "email202403060008",
@@ -17800,7 +17800,7 @@
     {
      "id": "5293f3c1-dc18-4285-98ea-54a3bca7a92c",
      "qtype": "open_end",
-     "score": 1.0,
+     "score": 0.0,
      "retrieved_top10": [
       "20231222_104603",
       "20231222_104555",
@@ -18145,7 +18145,7 @@
     {
      "id": "1b996345-8351-40ef-8a2f-6810cc55554d",
      "qtype": "open_end",
-     "score": 1.0,
+     "score": 0.0,
      "retrieved_top10": [
       "20250501_133337",
       "20250429_110642",
@@ -18628,7 +18628,7 @@
     {
      "id": "aac5d481-de6d-4224-8b8c-d68fa5abb9c0",
      "qtype": "number",
-     "score": 1.0,
+     "score": 0.0,
      "retrieved_top10": [
       "20221210_175231",
       "20221210_181749",
@@ -18697,7 +18697,7 @@
     {
      "id": "76dd1a86-56c0-46c7-b2ff-2d6d950df601",
      "qtype": "open_end",
-     "score": 1.0,
+     "score": 0.0,
      "retrieved_top10": [
       "20230717_172410",
       "20230717_183804",
@@ -20974,7 +20974,7 @@
     {
      "id": "2b3e9785-b32d-47b7-81fe-060e44ac14ae",
      "qtype": "open_end",
-     "score": 1.0,
+     "score": 0.0,
      "retrieved_top10": [
       "20240730_011201",
       "20230316_203428",
@@ -21319,7 +21319,7 @@
     {
      "id": "ae25652a-780b-47b0-9f82-3851054f9664",
      "qtype": "list_recall",
-     "score": 0.0,
+     "score": 1.0,
      "retrieved_top10": [
       "20230905_164827",
       "20220619_194946",
@@ -22837,7 +22837,7 @@
     {
      "id": "2e5e73f1-764f-4b8b-85c2-50f645de52cf",
      "qtype": "list_recall",
-     "score": 1.0,
+     "score": 0.25,
      "retrieved_top10": [
       "20230131_152709",
       "20240617_222800",
@@ -26287,7 +26287,7 @@
     {
      "id": "3b61d9d0-9b8c-4386-8a9f-d8591c1c3bc7",
      "qtype": "open_end",
-     "score": 0.0,
+     "score": 1.0,
      "retrieved_top10": [
       "email202407030002",
       "email202312080004",
@@ -26839,7 +26839,7 @@
     {
      "id": "446de282-9fe3-43e6-826f-d26d31e9f9f7",
      "qtype": "number",
-     "score": 0.0,
+     "score": 1.0,
      "retrieved_top10": [
       "email202201310005",
       "email202202040007",
@@ -27805,7 +27805,7 @@
     {
      "id": "87e472c3-fa05-428e-9972-bbd0fe23b4a9",
      "qtype": "open_end",
-     "score": 0.0,
+     "score": 1.0,
      "retrieved_top10": [
       "email202311130012",
       "20231212_122256",
@@ -29047,7 +29047,7 @@
     {
      "id": "e86634b8-cb23-4fcf-b62d-1e922778c678",
      "qtype": "list_recall",
-     "score": 0.5,
+     "score": 1.0,
      "retrieved_top10": [
       "20240811_144206",
       "20240712_150349",
@@ -29116,7 +29116,7 @@
     {
      "id": "46024501-fb00-49bd-be9e-70d9ee9b5968",
      "qtype": "number",
-     "score": 0.0,
+     "score": 1.0,
      "retrieved_top10": [
       "20221122_155458",
       "20221122_152610",
@@ -29599,7 +29599,7 @@
     {
      "id": "c144724e-8771-4eb9-b4eb-9e5c91305aef",
      "qtype": "open_end",
-     "score": 1.0,
+     "score": 0.0,
      "retrieved_top10": [
       "email202404050003",
       "email202404050004",
@@ -30013,7 +30013,7 @@
     {
      "id": "f51e6ba6-5c05-4e3a-b48b-87d5058db583",
      "qtype": "open_end",
-     "score": 1.0,
+     "score": 0.0,
      "retrieved_top10": [
       "20240730_180353",
       "20220506_203556",
@@ -33118,7 +33118,7 @@
     {
      "id": "5994feb3-379a-48aa-9c42-9faef1f11586",
      "qtype": "open_end",
-     "score": 0.0,
+     "score": 1.0,
      "retrieved_top10": [
       "20220705_202014",
       "20220705_201812",
@@ -35326,7 +35326,7 @@
     {
      "id": "39585008-4341-4b6a-95b0-7294fee0b6e6",
      "qtype": "open_end",
-     "score": 0.0,
+     "score": 1.0,
      "retrieved_top10": [
       "20250429_132211",
       "20250429_131539",
@@ -38224,7 +38224,7 @@
     {
      "id": "9d350e79-9ce0-4065-96ad-33ded7432e51",
      "qtype": "number",
-     "score": 1.0,
+     "score": 0.0,
      "retrieved_top10": [
       "20230401_123017",
       "20230401_123046",
@@ -44779,7 +44779,7 @@
     {
      "id": "b3c44210-4824-45fc-9d06-8f0ebf65f0d3",
      "qtype": "number",
-     "score": 1.0,
+     "score": 0.0,
      "retrieved_top10": [
       "email202204080006",
       "email202204080005",
@@ -46435,7 +46435,7 @@
     {
      "id": "afc75d33-e3ea-4b12-b0d2-5805be3d0d80",
      "qtype": "open_end",
-     "score": 0.0,
+     "score": 1.0,
      "retrieved_top10": [
       "20240510_234834",
       "20240510_233458",
@@ -51127,7 +51127,7 @@
     {
      "id": "1e847371-9767-431c-9bb9-d7130ba00697",
      "qtype": "open_end",
-     "score": 1.0,
+     "score": 0.0,
      "retrieved_top10": [
       "email202307160001",
       "email202307120014",
@@ -51403,7 +51403,7 @@
     {
      "id": "ec09cd9c-42ba-4fcc-92d9-4a98e5421094",
      "qtype": "number",
-     "score": 0.0,
+     "score": 1.0,
      "retrieved_top10": [
       "email202503310001",
       "email202504010004",
@@ -51817,7 +51817,7 @@
     {
      "id": "7aed35be-eb40-4d82-836c-da226e1486a4",
      "qtype": "list_recall",
-     "score": 0.1111111111111111,
+     "score": 0.125,
      "retrieved_top10": [
       "20230225_223313",
       "20230624_220854",
@@ -52369,7 +52369,7 @@
     {
      "id": "7800ac77-92c6-40c7-a0e9-7293e976b8f7",
      "qtype": "open_end",
-     "score": 0.0,
+     "score": 1.0,
      "retrieved_top10": [
       "email202303140005",
       "email202504150007",
@@ -52438,7 +52438,7 @@
     {
      "id": "09325332-67e4-49cb-b7df-43c75c2328d5",
      "qtype": "open_end",
-     "score": 0.0,
+     "score": 1.0,
      "retrieved_top10": [
       "20240611_191700",
       "20240611_191703",
@@ -53059,7 +53059,7 @@
     {
      "id": "09cb1732-7205-4236-b878-17a804b5a014",
      "qtype": "open_end",
-     "score": 0.0,
+     "score": 1.0,
      "retrieved_top10": [
       "20230322_161504",
       "20230322_180629",
@@ -53611,7 +53611,7 @@
     {
      "id": "26740b66-cbd6-4072-b9ce-9004f5e8ec64",
      "qtype": "open_end",
-     "score": 0.0,
+     "score": 1.0,
      "retrieved_top10": [
       "20240819_191949",
       "20240219_093007",
@@ -55060,7 +55060,7 @@
     {
      "id": "bdd2e038-41bd-4f4c-9769-c4d02b091cd5",
      "qtype": "open_end",
-     "score": 0.0,
+     "score": 1.0,
      "retrieved_top10": [
       "email202410210013",
       "20241021_155623",
@@ -57958,7 +57958,7 @@
     {
      "id": "32d365b0-c794-4953-a89f-85d2846b4be2",
      "qtype": "open_end",
-     "score": 0.0,
+     "score": 1.0,
      "retrieved_top10": [
       "20240713_192742",
       "20240713_192657",
@@ -59131,7 +59131,7 @@
     {
      "id": "d2beb429-0a4e-4f20-a3f9-2047937630fe",
      "qtype": "number",
-     "score": 1.0,
+     "score": 0.0,
      "retrieved_top10": [
       "20240818_192717",
       "20240818_192713",
@@ -59407,7 +59407,7 @@
     {
      "id": "53474a37-9e33-4c83-a5f6-f2cdd4af8799",
      "qtype": "open_end",
-     "score": 1.0,
+     "score": 0.0,
      "retrieved_top10": [
       "20240131_155737",
       "20231209_122612",
@@ -61408,7 +61408,7 @@
     {
      "id": "c7f8f4d3-3c13-4e47-8fb5-363efb363866",
      "qtype": "list_recall",
-     "score": 0.0,
+     "score": 1.0,
      "retrieved_top10": [
       "20240730_145507",
       "20240730_120547",
@@ -62167,7 +62167,7 @@
     {
      "id": "0b1b9e49-d92f-4234-9cb6-16c31ff149cf",
      "qtype": "open_end",
-     "score": 0.0,
+     "score": 1.0,
      "retrieved_top10": [
       "email202210140001",
       "email202210180006",
@@ -66652,7 +66652,7 @@
     {
      "id": "ea30ad37-d627-4ad2-870b-688c7e34927f",
      "qtype": "number",
-     "score": 1.0,
+     "score": 0.0,
      "retrieved_top10": [
       "20230420_102305",
       "20230420_101646",
@@ -68377,7 +68377,7 @@
     {
      "id": "83d598ca-d572-41fd-bfe4-44e9a143ee11",
      "qtype": "open_end",
-     "score": 0.0,
+     "score": 1.0,
      "retrieved_top10": [
       "20221227_141611",
       "20221227_141602",
@@ -69965,7 +69965,7 @@
   },
   "hard": {
    "questions": 31,
-   "qs_percent": 28.282280654197166,
+   "qs_percent": 25.056474202584262,
    "recall_at_1": 9.95,
    "recall_at_5": 38.72,
    "recall_at_10": 52.43,
@@ -69983,7 +69983,7 @@
     },
     "open_end": {
      "questions": 13,
-     "qs_percent": 23.076923076923077
+     "qs_percent": 15.384615384615385
     }
    },
    "scores": [
@@ -71163,7 +71163,7 @@
     {
      "id": "92e4edaa-5b26-44a5-80d2-91acf53b3b9c",
      "qtype": "open_end",
-     "score": 1.0,
+     "score": 0.0,
      "retrieved_top10": [
       "20250222_195034",
       "20250224_142901",

@@ -351,8 +351,8 @@ var ATM_HARD_ROWS = [
   { type: 'Memory', harness: 'MemoryOS',  model: 'Qwen3-VL-8B-Instruct', qs: 13.70, recall: 32.70, total_tokens: null, link: 'https://github.com/BAI-LAB/MemoryOS' },
   { type: 'Memory', harness: 'MemPalace', model: 'Qwen3-VL-8B-Instruct', qs:  9.70, recall: 28.30, total_tokens: null, link: 'https://github.com/MemPalace/mempalace' },
   { type: 'Memory', harness: 'SimpleMem', model: 'Qwen3-VL-8B-Instruct', qs:  3.20, recall:  7.00, total_tokens: null, link: 'https://github.com/aiming-lab/SimpleMem' },
-  // Rolling-Memory v0.0.1 (local_plain): full Hard31 result on fixed 2B SGM (exact QS 28.282280654197166%, R@10 52.43%).
-  { type: 'Memory', harness: 'Rolling-Memory', model: 'DeepSeek-V4.1-flash', qs: 28.28, recall: 52.43, total_tokens: null, link: 'https://github.com/rocareer/rolling-memory' },
+  // Rolling-Memory v0.0.1 (local_plain): full Hard31 result on fixed 2B SGM (exact QS 25.056474202584262%, R@10 52.43%).
+  { type: 'Memory', harness: 'Rolling-Memory', model: 'DeepSeek-V4.1-flash', qs: 25.06, recall: 52.43, total_tokens: null, link: 'https://github.com/rocareer/rolling-memory' },
 
   // Memexa v2: full Hard31 rescored result (exact QS 63.56886840757808%).
   { type: 'Memory', harness: 'Memexa v2', model: 'DeepSeek V4.1', qs: 63.57, recall: 63.05, total_tokens: 30.157385, cost_usd: 8.077242108, link: 'https://github.com/labazhou2024/memexa', notes: { model: '\u25c7' } },

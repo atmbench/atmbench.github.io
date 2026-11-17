@@ -1,7 +1,5 @@
 {
  "harness": "Rolling-Memory",
- "version": "v0.0.1",
- "mode": "local_plain",
  "type": "Memory",
  "answer_model": "Qwen3-VL-8B-Instruct",
  "memory_model": "Qwen3-VL-2B-Instruct",
@@ -9,5 +7,6 @@
  "retriever": "Adaptive Self-Information Ranking (0-Vector)",
  "organization": "Rocareer & Rolling & PsychologyLake.org.cn",
  "code_available": true,
- "repo": "https://github.com/rocareer/rolling-memory"
+ "repo": "https://github.com/rocareer/rolling-memory",
+ "engine_codename": "zhao"
 }

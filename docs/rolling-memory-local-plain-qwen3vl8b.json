@@ -1,15 +1,15 @@
 {
  "schema_version": 1,
- "system": "Rolling-Memory",
+ "system": "Rolling-Memory (zhao)",
  "judge_model": "gpt-5-mini",
  "status": "complete",
  "judge_calls": 527,
  "row": {
   "harness": "Rolling-Memory",
-  "profile": "local_plain",
   "answer_model": "Qwen3-VL-8B-Instruct",
   "memory_model": "Qwen3-VL-2B-Instruct (0-LLM local index)",
-  "retriever": "Adaptive Self-Information Ranking (0-Vector)"
+  "retriever": "Adaptive Self-Information Ranking (0-Vector)",
+  "engine_codename": "zhao"
  },
  "protocol": {
   "pipeline": "Official SGM corpus (11,034 items) ingested into an isolated local vault with zero LLM calls and zero vector embeddings. Retrieval uses our in-house deterministic Adaptive Self-Information Ranking engine (0-Vector, 0-LLM, no SQLite FTS5, no rank-index RRF). Top-10 ranked items are passed to the local Qwen3-VL-8B-Instruct answer model using the exact official MMRag item text formats and the exact official MMRAG SYSTEM and USER_TEXT prompts.",

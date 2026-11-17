@@ -1,12 +1,12 @@
 {
  "schema_version": 1,
- "system": "Rolling-Memory",
+ "system": "Rolling-Memory (zhao)",
  "judge_model": "gpt-5-mini",
  "status": "complete",
  "judge_calls": 527,
  "row": {
   "harness": "Rolling-Memory",
-  "profile": "local_plain",
+  "engine_codename": "zhao",
   "answer_model": "DeepSeek-V4.1-flash",
   "memory_model": "Qwen3-VL-2B-Instruct (0-LLM local index)",
   "retriever": "Adaptive Self-Information Ranking (0-Vector)"

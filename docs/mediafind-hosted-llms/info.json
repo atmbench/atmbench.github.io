@@ -1,0 +1,13 @@
+{
+  "harness": "MediaFind + hosted LLMs",
+  "type": "Memory",
+  "model": "GPT-5.4 mini (OpenRouter) + DeepSeek V4.1 Flash map (number questions: Claude Haiku 5.5 map)",
+  "memory_model": "DeepSeek V4.1 Flash cards + DeepSeek V4 Flash Vision descriptions",
+  "retriever": "bge-m3 + BM25 + bge-reranker-v2-m3 + LLM query rewrite (list and number questions: + Qwen3-Embedding-4B)",
+  "organization": "MediaFind",
+  "code_available": true,
+  "code": "https://github.com/neurallab-dev/atmbench-mediafind/tree/rerun-2026-11-17",
+  "run": "frozen re-run of 2026-11-15 to 2026-11-17, judged once",
+  "evaluator": "JingbiaoMei/ATM-Bench@ef4e5dff1a47ec71213a06e359f02753defa8fb1 memqa/utils/evaluator/evaluate_qa.py --metrics em atm --judge-provider openai --judge-model openai/gpt-5-mini --judge-reasoning-effort minimal",
+  "dataset": "Jingbiao/ATM-Bench@78e826dc07e97466b2f54443831ef9a83ab8b27c"
+}

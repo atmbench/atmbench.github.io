@@ -931,6 +931,9 @@
           { type: 'Memory', harness: 'MemoryOS',             index_time: 36.6, answer_model: 'Qwen3-VL-8B-Instruct', memory_model: 'Qwen3-VL-2B-Instruct', retriever: 'MiniLM-L6', qs: 47.20, recall: 59.20, link: 'https://github.com/BAI-LAB/MemoryOS' },
           { type: 'Memory', harness: 'MemPalace',            index_time:  0.5, answer_model: 'Qwen3-VL-8B-Instruct', memory_model: 'Qwen3-VL-2B-Instruct', retriever: 'MiniLM-L6', qs: 56.80, recall: 76.40, link: 'https://github.com/MemPalace/mempalace' },
           { type: 'Memory', harness: 'SimpleMem',            index_time: 16.0, answer_model: 'Qwen3-VL-8B-Instruct', memory_model: 'Qwen3-VL-2B-Instruct', retriever: 'MiniLM-L6', qs: 27.30, recall: 23.30, link: 'https://github.com/aiming-lab/SimpleMem' },
+          // Rolling-Memory (zhao): on-device 0-LLM, 0-Vector Adaptive Self-Information Ranking (single uninterrupted runs: DeepSeek-V4.1-flash 0-64 smart adaptive delivery QS 72.78122502702958%; Qwen3-VL-8B-Instruct homogeneous baseline QS 57.68171775575527%).
+          { type: 'Memory', harness: 'Rolling-Memory',       index_time: 0.004, answer_model: 'DeepSeek-V4.1-flash',  memory_model: 'Qwen3-VL-2B-Instruct', retriever: 'Adaptive Self-Information Ranking (0-Vector)', qs: 72.78, recall: 82.77, link: 'https://github.com/rocareer/rolling-memory' },
+          { type: 'Memory', harness: 'Rolling-Memory',       index_time: 0.004, answer_model: 'Qwen3-VL-8B-Instruct', memory_model: 'Qwen3-VL-2B-Instruct', retriever: 'Adaptive Self-Information Ranking (0-Vector)', qs: 57.68, recall: 82.77, link: 'https://github.com/rocareer/rolling-memory' },
 
           // Memexa v2: single full-set rescored result (exact QS 76.68170920885629%).
           { type: 'Memory', harness: 'Memexa v2', index_time: null, answer_model: 'DeepSeek V4.1', memory_model: 'DeepSeek V4.1', retriever: 'BGE-M3 + bge-reranker-v2-m3', qs: 76.68, recall: 92.32, link: 'https://github.com/labazhou2024/memexa', notes: { answer_model: '\u25c7' } },
@@ -1026,7 +1029,13 @@
       if (type === 'percent') return v.toFixed(2) + '%';
       if (type === 'tokens_m') return v.toFixed(1) + 'M';
       if (type === 'usd') return '$' + v.toFixed(2);
-      if (type === 'hours') return v.toFixed(1) + ' hr';
+      if (type === 'hours') {
+        // Keep very short index times visible: a nonzero duration under 0.05 hr
+        // would otherwise render as "0.0 hr" (e.g. a ~10 s index). The value
+        // stays numeric, so sorting and best-value highlighting are unchanged.
+        if (v !== 0 && Math.abs(v) < 0.05) return v.toFixed(3) + ' hr';
+        return v.toFixed(1) + ' hr';
+      }
       if (type === 'ctx_k') return v.toFixed(1) + 'k';
       return String(v);
     }

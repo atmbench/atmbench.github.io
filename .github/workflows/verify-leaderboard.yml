@@ -6,12 +6,24 @@ on:
       - 'leaderboard.html'
       - 'static/js/atm_hard_rows.js'
       - 'docs/memexa-v2-rejudge.json'
+      - 'docs/rolling-memory-zhao.json'
+      - 'docs/rolling-memory-zhao-qwen3vl8b.json'
+      - 'docs/rolling-memory/zhao/judge-requests-main-1013.jsonl'
+      - 'docs/rolling-memory/zhao/judge-requests-hard-31.jsonl'
+      - 'docs/rolling-memory/zhao-qwen3vl8b/judge-requests-main-1013.jsonl'
+      - 'docs/rolling-memory/zhao-qwen3vl8b/judge-requests-hard-31.jsonl'
       - 'tools/verify_leaderboard.mjs'
   pull_request:
     paths:
       - 'leaderboard.html'
       - 'static/js/atm_hard_rows.js'
       - 'docs/memexa-v2-rejudge.json'
+      - 'docs/rolling-memory-zhao.json'
+      - 'docs/rolling-memory-zhao-qwen3vl8b.json'
+      - 'docs/rolling-memory/zhao/judge-requests-main-1013.jsonl'
+      - 'docs/rolling-memory/zhao/judge-requests-hard-31.jsonl'
+      - 'docs/rolling-memory/zhao-qwen3vl8b/judge-requests-main-1013.jsonl'
+      - 'docs/rolling-memory/zhao-qwen3vl8b/judge-requests-hard-31.jsonl'
       - 'tools/verify_leaderboard.mjs'
 
 jobs:

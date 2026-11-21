@@ -351,6 +351,9 @@ var ATM_HARD_ROWS = [
   { type: 'Memory', harness: 'MemoryOS',  model: 'Qwen3-VL-8B-Instruct', qs: 13.70, recall: 32.70, total_tokens: null, link: 'https://github.com/BAI-LAB/MemoryOS' },
   { type: 'Memory', harness: 'MemPalace', model: 'Qwen3-VL-8B-Instruct', qs:  9.70, recall: 28.30, total_tokens: null, link: 'https://github.com/MemPalace/mempalace' },
   { type: 'Memory', harness: 'SimpleMem', model: 'Qwen3-VL-8B-Instruct', qs:  3.20, recall:  7.00, total_tokens: null, link: 'https://github.com/aiming-lab/SimpleMem' },
+  // Rolling-Memory (zhao): single uninterrupted Hard31 runs on fixed 2B SGM (0 LLM calls at index & retrieval; DeepSeek-V4.1-flash 0-64 smart adaptive delivery QS 35.52295111593025%, 1.014455M server-logged system tokens, $0.044023 at DeepSeek official cache-hit/miss rates [$0.028/$0.28/$0.42 per 1M, off-peak $0.0220; uncached ceiling $0.2891]; Qwen3-VL-8B-Instruct homogeneous baseline QS 16.62826420890937%, 0.205480M full tokenized system tokens [204,167 prompt + 1,313 completion], $0.037459 at official Qwen list rates [$0.18/$0.54 per 1M] / $0.00 local; R@10 52.43%).
+  { type: 'Memory', harness: 'Rolling-Memory', model: 'DeepSeek-V4.1-flash',  qs: 35.52, recall: 52.43, total_tokens: 1.014455, cost_usd: 0.044023, link: 'https://github.com/rocareer/rolling-memory' },
+  { type: 'Memory', harness: 'Rolling-Memory', model: 'Qwen3-VL-8B-Instruct', qs: 16.63, recall: 52.43, total_tokens: 0.205480, cost_usd: 0.037459, link: 'https://github.com/rocareer/rolling-memory' },
 
   // Memexa v2: full Hard31 rescored result (exact QS 63.56886840757808%).
   { type: 'Memory', harness: 'Memexa v2', model: 'DeepSeek V4.1', qs: 63.57, recall: 63.05, total_tokens: 30.157385, cost_usd: 8.077242108, link: 'https://github.com/labazhou2024/memexa', notes: { model: '\u25c7' } },

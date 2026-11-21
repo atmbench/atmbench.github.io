@@ -1,0 +1,52 @@
+--- hard-31 CLI run log ---
+[eval] resume local vault: 11034/11034 documents already present, ingesting 0
+[eval] local ingest complete (local_plain): suite=atm scope=u10-mem-eval-atmbench-local-plain-20261121t041727z-0231 documents=11034
+[atm-eval] suite=atm pulse_mode=local_plain tier=hard questions=31 sgm_items=11034 raw_limit=10 answerer=llm judge=off
+[atm-eval] 20/31 R@10=0.250 R@50=0.250
+[atm-eval] 31/31 R@10=0.000 R@50=0.000
+评测完成：suite=atm tier=hard 题数=31 臂=atm-hard-sdk-local-plain-llm
+  r_at_10              0.5243
+  r_at_25              0.5243
+  r_at_50              0.5243
+  qs_score             0.2864
+  qs_score_all_denominator 0.1663
+  scored_count         18
+  unscored_count       13
+  evidence_hit         0.8065
+  answer_in_context    0.0323
+  f1                   0.3138
+  judge_rate           0.2864
+  judge_correct        0.3333
+  judge_scored         18
+  avg_context_chars    22850.8
+  elapsed_seconds      919.1
+  transport            ramesdk.local_plain.offline-v1
+  scope                u10-mem-eval-atmbench-local-plain-20261121t041727z-0231
+结果目录：<RUN_DIR>/out-hard
+
+--- main-1013 CLI run log ---
+[atm-eval] 920/1013 R@10=1.000 R@50=1.000
+[atm-eval] 940/1013 R@10=0.000 R@50=0.000
+[atm-eval] 960/1013 R@10=1.000 R@50=1.000
+[atm-eval] 980/1013 R@10=1.000 R@50=1.000
+[atm-eval] 1000/1013 R@10=1.000 R@50=1.000
+[atm-eval] 1013/1013 R@10=1.000 R@50=1.000
+评测完成：suite=atm tier=1013 题数=1013 臂=atm-1013-sdk-local-plain-llm
+  r_at_10              0.8277
+  r_at_25              0.8277
+  r_at_50              0.8277
+  qs_score             0.6078
+  qs_score_all_denominator 0.2994
+  scored_count         499
+  unscored_count       514
+  evidence_hit         0.8529
+  answer_in_context    0.3741
+  f1                   0.4858
+  judge_rate           0.6078
+  judge_correct        0.6132
+  judge_scored         499
+  avg_context_chars    16067.9
+  elapsed_seconds      13774.1
+  transport            ramesdk.local_plain.offline-v1
+  scope                u10-mem-eval-atmbench-local-plain-20261121t041727z-0231
+结果目录：<RUN_DIR>/out-1013

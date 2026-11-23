@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "run_id": "output-boundary-v1-ddb85e7e67fa-18/candidate-main1013",
+  "export_date": "2026-11-23",
+  "export_kind": "official_evaluator_replay_with_retained_judgments",
+  "original_record_format": "SenseMem samples.jsonl",
+  "source_samples_sha256": "a6a95527d2abf17dc77337abff854ab022baf1021451d6518d3547c7b31b0257",
+  "source_results_sha256": "ea4a73d3b72cda2af675d021c0796ba0ea6d4bd2d53f44a5f20620a68868f2ba",
+  "source_commit": "ddb85e7e67fa86a41e34e2b763d783e51426704c",
+  "dataset_revision": "78e826dc07e97466b2f54443831ef9a83ab8b27c",
+  "questions_sha256": "ab6eaa9df62fb4162e0f5eecd98768a7e3ae721e32d2db2cf227ff41e3295762",
+  "predictions_json_sha256": "33e6ff919309593feaaa72a3414c328ff0390f24392f574b4fd5f1a4553294b6",
+  "official_evaluator_revision": "ef4e5dff1a47ec71213a06e359f02753defa8fb1",
+  "official_evaluator_files_sha256": {
+    "memqa/global_config.py": "5c242793620a94bed2bd90dd06791607c7991f1277c291c19f21d4e5a1dafa77",
+    "memqa/utils/evaluator/config.py": "2a72ab0c4b18a31570bcfe014d877dac3be648de85393d67f0b09d3e6b9fc179",
+    "memqa/utils/evaluator/evaluate_qa.py": "0581963c1c6b9729398d8007f3d40664b2c026499c9cbf0436a92f77dcb1b66e",
+    "memqa/utils/evaluator/normalizer.py": "1980cce4fbd572d11d2317725cb955d99cf55cf20e8645cd4ba6908fbdcf0e3d",
+    "memqa/utils/evaluator/qtype_utils.py": "9186fe0f409b99384a0d78c988d1dbdfd66a74546f254ce1f1ed46e3cc115518"
+  },
+  "judge_model": "gpt-5-mini",
+  "judge_reasoning_effort": "minimal",
+  "original_judge_calls": 514,
+  "retained_judgments_reused_for_export": 514,
+  "new_judge_calls": 0,
+  "deterministic_scores_recomputed": 499,
+  "input_whitespace_preparation": {
+    "method": "SenseMem strips surrounding whitespace from validated question and reference-answer strings. The export preserves the strings used in the original run.",
+    "reference_answers_trimmed": 46,
+    "questions_trimmed": 64
+  },
+  "method": {
+    "judgments": "Each original judge_response is a JSON array containing one response string. That string is preserved verbatim as raw_response; accuracy and explanation are parsed from it.",
+    "atm": "The pinned official run_atm function recomputed number/list scores and reused all 514 retained judgments as its LLM cache.",
+    "llm_summary": "The pinned official run_llm_judge function summarized the 514 open-ended questions using the retained cache.",
+    "historical_format": "The original run stored judgments in SenseMem JSONL, not an evaluate_qa.py --output-dir. These files are a later export and offline replay, not original CLI output files."
+  },
+  "files": {
+    "atm_gpt-5-mini.json": {
+      "sha256": "e3179a24a4b97048ab681fe69e5ec5dfdc0532a98c241c86d583223aec68c25a",
+      "bytes": 710663
+    },
+    "atm_gpt-5-mini_summary.json": {
+      "sha256": "fb971bcf68363f618ed5578a5c6f4a49e239fb36bb4a7713ce2f9a4ea4172b41",
+      "bytes": 437
+    },
+    "llm_judge_gpt-5-mini.json": {
+      "sha256": "a517d388e6104b68a8af1bd11d031ee3cbc2118e02d749ec2653f27a105b045e",
+      "bytes": 463978
+    },
+    "llm_judge_gpt-5-mini_summary.json": {
+      "sha256": "d9ca2fc5557545b6e3b17834c65e98a95595a866af645da8a2897fc7e4cc77bb",
+      "bytes": 368
+    }
+  },
+  "verification": {
+    "question_count": 1013,
+    "open_ended_count": 514,
+    "open_ended_correct": 404,
+    "open_ended_incorrect": 110,
+    "prediction_mismatches": 0,
+    "score_mismatches": 0,
+    "judge_verdict_mismatches": 0,
+    "raw_response_mismatches": 0,
+    "source_samples_hash_matches_original_result": true
+  }
+}

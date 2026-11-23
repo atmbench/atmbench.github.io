@@ -106,12 +106,33 @@ It completed with zero answer or ingestion failures. The public score summary
 records the dataset revision, input hashes, code revision, model settings,
 and prediction-file SHA-256.
 
+### Published judge records
+
+The [judge directory](sensemem/main/judge/README.md) contains the complete
+[ATM results](sensemem/main/judge/atm_gpt-5-mini.json),
+[514 open-ended judgments](sensemem/main/judge/llm_judge_gpt-5-mini.json),
+and both summaries. Every open-ended judgment includes the prediction,
+boolean verdict, explanation, and original judge response text. All 514
+verdicts match the submitted scores: **404 correct**, **110 incorrect**.
+
+The original run retained these records in SenseMem's `samples.jsonl`.
+On 2026-11-23, they were exported into the official evaluator's file layout.
+The pinned official evaluator recomputed all 499 number/list scores and
+reused the 514 retained judgments to produce the published results and
+summaries, with **zero new model calls**. These are an offline replay and
+export of the original records, rather than the original CLI output directory.
+The [provenance manifest](sensemem/main/judge/provenance.json) records the
+source hashes, evaluator revision, export procedure, and artifact checksums.
+
 ## Verification
 
 The submission was checked against the complete question set. All 499
 deterministic number/list scores were recalculated, and retrieval recall
 was recomputed from the ranked original source IDs. The evaluated code
 matches the recorded hashes of 189 source and dependency files.
+
+The site's verifier also checks each published judge verdict and raw response
+against its explanation, the submitted prediction and score, and both summaries.
 
 Run the site's checks with:
 

@@ -164,6 +164,56 @@ for (const cutoff of [1, 5, 10]) {
   close(sensememMain[key], sensememMain.scores.reduce((total, entry) => total + entry[key], 0) / sensememMain.questions * 100, `SenseMem aggregate ${key}`);
 }
 
+const judgeManifestPath = path.join(root, 'docs', sensemem.protocol.judge_artifacts);
+const judgeManifest = JSON.parse(readFileSync(judgeManifestPath, 'utf8'));
+assert(judgeManifest.run_id === sensemem.protocol.run_id && judgeManifest.source_commit === sensemem.protocol.source_commit, 'SenseMem judge run identity mismatch');
+assert(judgeManifest.dataset_revision === sensemem.protocol.dataset_revision && judgeManifest.questions_sha256 === sensemem.protocol.questions_sha256, 'SenseMem judge dataset mismatch');
+assert(judgeManifest.predictions_json_sha256 === sensemem.protocol.predictions_json_sha256, 'SenseMem judge prediction provenance mismatch');
+assert(judgeManifest.judge_model === 'gpt-5-mini' && judgeManifest.judge_reasoning_effort === 'minimal', 'SenseMem judge model mismatch');
+assert(judgeManifest.official_evaluator_revision === sensemem.protocol.evaluator.revision, 'SenseMem judge evaluator revision mismatch');
+assert(judgeManifest.new_judge_calls === 0 && judgeManifest.retained_judgments_reused_for_export === 514 && judgeManifest.deterministic_scores_recomputed === 499, 'SenseMem judge export procedure mismatch');
+const judgeFiles = ['atm_gpt-5-mini.json', 'atm_gpt-5-mini_summary.json', 'llm_judge_gpt-5-mini.json', 'llm_judge_gpt-5-mini_summary.json'];
+assert(JSON.stringify(Object.keys(judgeManifest.files).sort()) === JSON.stringify([...judgeFiles].sort()), 'SenseMem judge artifact files mismatch');
+const judgeArtifacts = Object.fromEntries(judgeFiles.map(name => {
+  const bytes = readFileSync(path.join(path.dirname(judgeManifestPath), name));
+  assert(bytes.length === judgeManifest.files[name].bytes && createHash('sha256').update(bytes).digest('hex') === judgeManifest.files[name].sha256, `SenseMem judge artifact hash mismatch: ${name}`);
+  return [name, JSON.parse(bytes.toString('utf8'))];
+}));
+const atmJudgments = judgeArtifacts['atm_gpt-5-mini.json'];
+const llmJudgments = judgeArtifacts['llm_judge_gpt-5-mini.json'];
+assert(atmJudgments.length === sensememMain.questions && llmJudgments.length === sensememMain.per_type.open_end.questions, 'SenseMem judge coverage mismatch');
+const llmById = new Map(llmJudgments.map(entry => [entry.id, entry]));
+assert(llmById.size === llmJudgments.length, 'SenseMem duplicate judge question ID');
+for (const [index, score] of sensememMain.scores.entries()) {
+  const entry = atmJudgments[index];
+  assert(entry.id === score.id && entry.qtype === score.qtype, `SenseMem ATM judge question mismatch at ${index}`);
+  assert(entry.prediction === predictions[index].answer, `SenseMem ATM judge prediction mismatch at ${index}`);
+  assert(entry.metric === ({ number: 'em', list_recall: 'jaccard', open_end: 'llm' })[score.qtype], `SenseMem ATM scoring method mismatch at ${index}`);
+  assert(typeof entry.accuracy === (score.qtype === 'list_recall' ? 'number' : 'boolean'), `SenseMem ATM verdict type mismatch at ${index}`);
+  close(Number(entry.accuracy), score.score, `SenseMem ATM judge score at ${index}`);
+  if (score.qtype !== 'open_end') continue;
+  const judge = llmById.get(score.id);
+  assert(judge, `SenseMem missing open-ended judgment: ${score.id}`);
+  for (const key of ['question', 'ground_truth', 'prediction', 'qtype', 'accuracy', 'explanation', 'raw_response', 'judge_model']) assert(judge[key] === entry[key], `SenseMem open-ended ${key} mismatch: ${score.id}`);
+  assert(judge.judge_model === 'gpt-5-mini' && typeof judge.explanation === 'string' && judge.explanation.trim().length > 0, `SenseMem incomplete judgment: ${score.id}`);
+  const raw = JSON.parse(judge.raw_response);
+  assert(typeof raw.accuracy === 'boolean' && raw.accuracy === judge.accuracy && raw.explanation === judge.explanation, `SenseMem raw judge response mismatch: ${score.id}`);
+}
+for (const [name, entries] of [['atm', atmJudgments], ['llm_judge', llmJudgments]]) {
+  const report = judgeArtifacts[`${name}_gpt-5-mini_summary.json`];
+  assert(report.count === entries.length, `SenseMem ${name} summary count mismatch`);
+  const total = entries.reduce((sum, entry) => sum + Number(entry.accuracy), 0);
+  close(report.correct, total, `SenseMem ${name} summary score`);
+  close(report.accuracy, total / entries.length, `SenseMem ${name} summary accuracy`);
+  for (const qtype of ['number', 'list_recall', 'open_end']) {
+    const subset = entries.filter(entry => entry.qtype === qtype);
+    const sum = subset.reduce((value, entry) => value + Number(entry.accuracy), 0);
+    assert(report.by_qtype[qtype].count === subset.length, `SenseMem ${name}/${qtype} summary count mismatch`);
+    close(report.by_qtype[qtype].correct, sum, `SenseMem ${name}/${qtype} summary score`);
+    close(report.by_qtype[qtype].accuracy, subset.length ? sum / subset.length : 0, `SenseMem ${name}/${qtype} summary accuracy`);
+  }
+}
+
 console.log(JSON.stringify({
   ok: true,
   main_rows: main.rows.length,
@@ -172,6 +222,6 @@ console.log(JSON.stringify({
   judge_model: summary.judge_model,
   rejudged_qs: { main: mainMemexa.qs, hard: hardMemexa.qs },
   official_recall: recall.recall,
-  sensemem: { questions: sensememEvidence.questions, qs: sensememRow.qs, recall_at_10: sensememRow.recall },
+  sensemem: { questions: sensememEvidence.questions, qs: sensememRow.qs, recall_at_10: sensememRow.recall, published_judgments: llmJudgments.length },
   legacy_disclosures: { main: mainLegacy.length, hard: hardLegacy.length }
 }, null, 2));

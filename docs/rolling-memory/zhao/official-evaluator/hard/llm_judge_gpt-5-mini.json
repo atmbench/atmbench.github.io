@@ -1,0 +1,145 @@
+[
+  {
+    "id": "de07dd6e-ac2f-4517-a084-e193a3d93601",
+    "question": "During my NeurIPS 2023 North America trip (prior to returning home), list all cities I visited along with the specific dates associated with each location, and provide the total number of cities visited.",
+    "ground_truth": "During your NeurIPS 2023 North America trip (before returning home on 2024-01-01), you visited 5 cities in total: Houston (layovers on 2023-12-09 and 2023-12-15), New Orleans (2023-12-09 to 2023-12-15), Boston (2023-12-15 to 2023-12-19), Cambridge, MA (2023-12-15 to 2023-12-19), and Toronto (2023-12-19 to 2023-12-31).",
+    "prediction": "Houston (Dec 9, 2023), New Orleans (Dec 9–15, 2023), Denver (Dec 15–16, 2023); total 3 cities.",
+    "qtype": "open_end",
+    "accuracy": false,
+    "explanation": "The prediction does not match the ground truth. The ground truth lists five cities with exact dates (Houston layovers on Dec 9 and Dec 15; New Orleans Dec 9–15; Boston and Cambridge Dec 15–19; Toronto Dec 19–31). The prediction lists only three cities (Houston, New Orleans, Denver) with different dates and omits Boston, Cambridge, and Toronto, and incorrectly adds Denver. Therefore accuracy is false.",
+    "raw_response": "{\"choices\":[{\"finish_reason\":\"stop\",\"index\":0,\"logprobs\":null,\"message\":{\"annotations\":[],\"content\":\"{\\\"explanation\\\":\\\"The prediction does not match the ground truth. The ground truth lists five cities with exact dates (Houston layovers on Dec 9 and Dec 15; New Orleans Dec 9–15; Boston and Cambridge Dec 15–19; Toronto Dec 19–31). The prediction lists only three cities (Houston, New Orleans, Denver) with different dates and omits Boston, Cambridge, and Toronto, and incorrectly adds Denver. Therefore accuracy is false.\\\",\\\"accuracy\\\":\\\"false\\\"}\",\"refusal\":null,\"role\":\"assistant\"}}],\"created\":1795301766,\"id\":\"chatcmpl-EmoI2fjUGst0EkVlQJzJG8UKqVuJJ\",\"model\":\"gpt-5-mini-2025-08-07\",\"object\":\"chat.completion\",\"routing\":{\"serving_pipereplica\":\"d20261108143526-82bc2c39-default-r0-dp0-default\"},\"service_tier\":\"default\",\"system_fingerprint\":null,\"usage\":{\"completion_tokens\":109,\"completion_tokens_details\":{\"accepted_prediction_tokens\":0,\"audio_tokens\":0,\"reasoning_tokens\":0,\"rejected_prediction_tokens\":0},\"latency_checkpoint\":{\"engine_tbt_ms\":6,\"engine_ttft_ms\":32,\"engine_ttlt_ms\":770,\"pre_inference_ms\":77,\"service_tbt_ms\":6,\"service_ttft_ms\":416,\"service_ttlt_ms\":1150,\"user_visible_ttft_ms\":339},\"prompt_tokens\":687,\"prompt_tokens_details\":{\"audio_tokens\":0,\"cached_tokens\":0},\"total_tokens\":796}}\n",
+    "judge_model": "gpt-5-mini"
+  },
+  {
+    "id": "a294b202-3353-4fc4-be18-7abd2a36962c",
+    "question": "How many nights have I stayed in Glasgow during my visits, and in which specific years did those stays occur?",
+    "ground_truth": "6 nights in total. 1 night in 2022, 5 nights in 2024.",
+    "prediction": "6 nights total — 1 night in 2022 and 5 nights in 2024.",
+    "qtype": "open_end",
+    "accuracy": true,
+    "explanation": "The prediction directly answers the question and exactly matches the ground truth: total nights (6) and the breakdown by year (1 in 2022, 5 in 2024). Therefore accuracy is true.",
+    "raw_response": "{\"choices\":[{\"finish_reason\":\"stop\",\"index\":0,\"logprobs\":null,\"message\":{\"annotations\":[],\"content\":\"{\\\"explanation\\\":\\\"The prediction directly answers the question and exactly matches the ground truth: total nights (6) and the breakdown by year (1 in 2022, 5 in 2024). Therefore accuracy is true.\\\",\\\"accuracy\\\":\\\"true\\\"}\",\"refusal\":null,\"role\":\"assistant\"}}],\"created\":1795301767,\"id\":\"chatcmpl-EmoI3MpGR9qdaAmVoEtmilhMPtUJG\",\"model\":\"gpt-5-mini-2025-08-07\",\"object\":\"chat.completion\",\"routing\":{\"serving_pipereplica\":\"d20261108064603-a07db6e4-default-r1-dp0-default\"},\"service_tier\":\"default\",\"system_fingerprint\":null,\"usage\":{\"completion_tokens\":59,\"completion_tokens_details\":{\"accepted_prediction_tokens\":0,\"audio_tokens\":0,\"reasoning_tokens\":0,\"rejected_prediction_tokens\":0},\"latency_checkpoint\":{\"engine_tbt_ms\":7,\"engine_ttft_ms\":35,\"engine_ttlt_ms\":504,\"pre_inference_ms\":64,\"service_tbt_ms\":7,\"service_ttft_ms\":192,\"service_ttlt_ms\":655,\"user_visible_ttft_ms\":127},\"prompt_tokens\":546,\"prompt_tokens_details\":{\"audio_tokens\":0,\"cached_tokens\":0},\"total_tokens\":605}}\n",
+    "judge_model": "gpt-5-mini"
+  },
+  {
+    "id": "bb50a272-b5c8-4f0e-8fb5-530b16d73cd9",
+    "question": "During my NeurIPS 2023 trip, I travelled for a period of time. What were the start and end dates of the trip, and what was the total duration from departure until returning home?",
+    "ground_truth": "You departed on 9 December 2023 and returned on 1 January 2024, making the total duration of your NeurIPS 2023 trip 24 days (inclusive).",
+    "prediction": "December 9–16, 2023; 7 days.",
+    "qtype": "open_end",
+    "accuracy": false,
+    "explanation": "The prediction does not match the ground truth. The ground truth states departure 9 Dec 2023 and return 1 Jan 2024 (24 days inclusive). The prediction gives dates Dec 9–16, 2023 and duration 7 days, which conflicts with the ground truth numbers, so accuracy is false.",
+    "raw_response": "{\"choices\":[{\"finish_reason\":\"stop\",\"index\":0,\"logprobs\":null,\"message\":{\"annotations\":[],\"content\":\"{\\\"explanation\\\":\\\"The prediction does not match the ground truth. The ground truth states departure 9 Dec 2023 and return 1 Jan 2024 (24 days inclusive). The prediction gives dates Dec 9–16, 2023 and duration 7 days, which conflicts with the ground truth numbers, so accuracy is false.\\\",\\\"accuracy\\\":\\\"false\\\"}\",\"refusal\":null,\"role\":\"assistant\"}}],\"created\":1795301766,\"id\":\"chatcmpl-EmoI2DrytrD2Gx0NX4AeDoTtu3a3e\",\"model\":\"gpt-5-mini-2025-08-07\",\"object\":\"chat.completion\",\"routing\":{\"serving_pipereplica\":\"d20261103052242-fefcf881-default-r2-dp0-default\"},\"service_tier\":\"default\",\"system_fingerprint\":null,\"usage\":{\"completion_tokens\":82,\"completion_tokens_details\":{\"accepted_prediction_tokens\":0,\"audio_tokens\":0,\"reasoning_tokens\":0,\"rejected_prediction_tokens\":0},\"latency_checkpoint\":{\"engine_tbt_ms\":6,\"engine_ttft_ms\":29,\"engine_ttlt_ms\":580,\"pre_inference_ms\":67,\"service_tbt_ms\":6,\"service_ttft_ms\":382,\"service_ttlt_ms\":929,\"user_visible_ttft_ms\":315},\"prompt_tokens\":574,\"prompt_tokens_details\":{\"audio_tokens\":0,\"cached_tokens\":0},\"total_tokens\":656}}\n",
+    "judge_model": "gpt-5-mini"
+  },
+  {
+    "id": "429b218c-086e-4f77-905e-2951ad92f5d8",
+    "question": "Which hotels have I stayed at in Glasgow, and on what dates?",
+    "ground_truth": "Z Hotel Glasgow: June 23–24, 2022\n\nDoubleTree by Hilton Glasgow Central: November 23–24, 2024\n\nHilton Glasgow: November 24–28, 2024",
+    "prediction": "Hilton Glasgow: November 24–28, 2024; DoubleTree by Hilton Glasgow Central: November 23–24, 2024; The Z Hotel Glasgow: June 23–24, 2022.",
+    "qtype": "open_end",
+    "accuracy": true,
+    "explanation": "The prediction lists the same three hotels with identical dates as the ground truth, matching each hotel and date exactly. Therefore it fully matches.",
+    "raw_response": "{\"choices\":[{\"finish_reason\":\"stop\",\"index\":0,\"logprobs\":null,\"message\":{\"annotations\":[],\"content\":\"{\\\"explanation\\\":\\\"The prediction lists the same three hotels with identical dates as the ground truth, matching each hotel and date exactly. Therefore it fully matches.\\\",\\\"accuracy\\\":\\\"true\\\"}\",\"refusal\":null,\"role\":\"assistant\"}}],\"created\":1795301766,\"id\":\"chatcmpl-EmoI2WgHZ1iaT7ZqYpJSS5VetzPnK\",\"model\":\"gpt-5-mini-2025-08-07\",\"object\":\"chat.completion\",\"routing\":{\"serving_pipereplica\":\"d20261108163921-2ec15c77-default-r2-dp0-default\"},\"service_tier\":\"default\",\"system_fingerprint\":null,\"usage\":{\"completion_tokens\":44,\"completion_tokens_details\":{\"accepted_prediction_tokens\":0,\"audio_tokens\":0,\"reasoning_tokens\":0,\"rejected_prediction_tokens\":0},\"latency_checkpoint\":{\"engine_tbt_ms\":6,\"engine_ttft_ms\":28,\"engine_ttlt_ms\":345,\"pre_inference_ms\":74,\"service_tbt_ms\":6,\"service_ttft_ms\":411,\"service_ttlt_ms\":723,\"user_visible_ttft_ms\":337},\"prompt_tokens\":584,\"prompt_tokens_details\":{\"audio_tokens\":0,\"cached_tokens\":0},\"total_tokens\":628}}\n",
+    "judge_model": "gpt-5-mini"
+  },
+  {
+    "id": "30ad0a48-89ef-46c4-a388-a3c872bd16b8",
+    "question": "Today is July, 1 2025, Help me recall all the acadamic conference I went to in the past two years. (Leave out one-day seminars/workshops)",
+    "ground_truth": "NeurIPS 2023, UKIS 2024, ACL 2024, ECCV 2024, ECAI 2024, BMVC 2024, ROBOVIS 2025, WWW 2025",
+    "prediction": "1,2,3,4,6,7,9,11,12,14,15,17,20,24,28,29,30,32,33,36,37,41,49,52,53,54,58,60,62,64",
+    "qtype": "open_end",
+    "accuracy": false,
+    "explanation": "The prediction is just a list of numbers and does not name any conferences, so it fails to answer the question. It therefore cannot be compared to the ground truth list; accuracy is false.",
+    "raw_response": "{\"choices\":[{\"finish_reason\":\"stop\",\"index\":0,\"logprobs\":null,\"message\":{\"annotations\":[],\"content\":\"{\\n  \\\"explanation\\\": \\\"The prediction is just a list of numbers and does not name any conferences, so it fails to answer the question. It therefore cannot be compared to the ground truth list; accuracy is false.\\\",\\n  \\\"accuracy\\\": \\\"false\\\"\\n}\",\"refusal\":null,\"role\":\"assistant\"}}],\"created\":1795301767,\"id\":\"chatcmpl-EmoI38kizAuSPnvFBbYGMfwxQxZCx\",\"model\":\"gpt-5-mini-2025-08-07\",\"object\":\"chat.completion\",\"routing\":{\"serving_pipereplica\":\"d20261108064603-a07db6e4-default-r1-dp0-default\"},\"service_tier\":\"default\",\"system_fingerprint\":null,\"usage\":{\"completion_tokens\":62,\"completion_tokens_details\":{\"accepted_prediction_tokens\":0,\"audio_tokens\":0,\"reasoning_tokens\":0,\"rejected_prediction_tokens\":0},\"latency_checkpoint\":{\"engine_tbt_ms\":7,\"engine_ttft_ms\":32,\"engine_ttlt_ms\":536,\"pre_inference_ms\":108,\"service_tbt_ms\":7,\"service_ttft_ms\":246,\"service_ttlt_ms\":745,\"user_visible_ttft_ms\":138},\"prompt_tokens\":625,\"prompt_tokens_details\":{\"audio_tokens\":0,\"cached_tokens\":0},\"total_tokens\":687}}\n",
+    "judge_model": "gpt-5-mini"
+  },
+  {
+    "id": "62e3fe3f-f301-47f1-9773-396920861220",
+    "question": "How many times have I visited Newcastle?",
+    "ground_truth": "Only one time.",
+    "prediction": "2",
+    "qtype": "open_end",
+    "accuracy": false,
+    "explanation": "The prediction directly answers the question but contradicts the ground truth. Ground truth says only one time; prediction says 2. Under the rules, accuracy is false when prediction conflicts with ground truth.",
+    "raw_response": "{\"choices\":[{\"finish_reason\":\"stop\",\"index\":0,\"logprobs\":null,\"message\":{\"annotations\":[],\"content\":\"{\\\"explanation\\\":\\\"The prediction directly answers the question but contradicts the ground truth. Ground truth says only one time; prediction says 2. Under the rules, accuracy is false when prediction conflicts with ground truth.\\\",\\\"accuracy\\\":\\\"false\\\"}\",\"refusal\":null,\"role\":\"assistant\"}}],\"created\":1795301767,\"id\":\"chatcmpl-EmoI3cUhP5GFCpkeHPUwvjl3IpMVq\",\"model\":\"gpt-5-mini-2025-08-07\",\"object\":\"chat.completion\",\"routing\":{\"serving_pipereplica\":\"d20261108064603-a07db6e4-default-r1-dp0-default\"},\"service_tier\":\"default\",\"system_fingerprint\":null,\"usage\":{\"completion_tokens\":56,\"completion_tokens_details\":{\"accepted_prediction_tokens\":0,\"audio_tokens\":0,\"reasoning_tokens\":0,\"rejected_prediction_tokens\":0},\"latency_checkpoint\":{\"engine_tbt_ms\":7,\"engine_ttft_ms\":36,\"engine_ttlt_ms\":504,\"pre_inference_ms\":136,\"service_tbt_ms\":7,\"service_ttft_ms\":262,\"service_ttlt_ms\":725,\"user_visible_ttft_ms\":126},\"prompt_tokens\":495,\"prompt_tokens_details\":{\"audio_tokens\":0,\"cached_tokens\":0},\"total_tokens\":551}}\n",
+    "judge_model": "gpt-5-mini"
+  },
+  {
+    "id": "92e4edaa-5b26-44a5-80d2-91acf53b3b9c",
+    "question": "Which Portuguese restaurant did I really like during my visit, and why?",
+    "ground_truth": "Abadia do Porto, you went there twice during your visit.",
+    "prediction": "Abadia do Porto — because it offered a warm, convivial traditional Portuguese meal (stewed beans and rice, red wine, charcuterie/bread, and later caldo verde, clams, rice, and vegetables), and the evidence shows multiple visits there.",
+    "qtype": "open_end",
+    "accuracy": true,
+    "explanation": "The prediction directly names Abadia do Porto and gives the reason (warm, convivial traditional meals) and notes multiple visits, matching the ground truth that you went there twice. Details align and do not contradict the ground truth.",
+    "raw_response": "{\"choices\":[{\"finish_reason\":\"stop\",\"index\":0,\"logprobs\":null,\"message\":{\"annotations\":[],\"content\":\"{\\\"explanation\\\":\\\"The prediction directly names Abadia do Porto and gives the reason (warm, convivial traditional meals) and notes multiple visits, matching the ground truth that you went there twice. Details align and do not contradict the ground truth.\\\",\\\"accuracy\\\":\\\"true\\\"}\",\"refusal\":null,\"role\":\"assistant\"}}],\"created\":1795301767,\"id\":\"chatcmpl-EmoI3ysudl3BYoZn66JkQyAqqHM0s\",\"model\":\"gpt-5-mini-2025-08-07\",\"object\":\"chat.completion\",\"routing\":{\"serving_pipereplica\":\"d20261106051851-c3c11312-default-r2-dp0-default\"},\"service_tier\":\"default\",\"system_fingerprint\":null,\"usage\":{\"completion_tokens\":61,\"completion_tokens_details\":{\"accepted_prediction_tokens\":0,\"audio_tokens\":0,\"reasoning_tokens\":0,\"rejected_prediction_tokens\":0},\"latency_checkpoint\":{\"engine_tbt_ms\":5,\"engine_ttft_ms\":29,\"engine_ttlt_ms\":412,\"pre_inference_ms\":120,\"service_tbt_ms\":5,\"service_ttft_ms\":193,\"service_ttlt_ms\":571,\"user_visible_ttft_ms\":74},\"prompt_tokens\":561,\"prompt_tokens_details\":{\"audio_tokens\":0,\"cached_tokens\":0},\"total_tokens\":622}}\n",
+    "judge_model": "gpt-5-mini"
+  },
+  {
+    "id": "b6b46633-47a1-4fd6-88c4-42a7677d7fc5",
+    "question": "Which hotels did I stay at in Greater Cairo during my most recent visit?",
+    "ground_truth": "Novotel Cairo Airport, Conrad Cairo and Hilton Pyramids Golf",
+    "prediction": "Novotel Cairo Airport, Conrad Cairo, Sofitel Cairo, Hilton Pyramids Golf",
+    "qtype": "open_end",
+    "accuracy": false,
+    "explanation": "Prediction lists four hotels including three from ground truth but adds Sofitel Cairo which is not in ground truth. Because the ground truth lists exactly three hotels, the extra incorrect hotel makes the prediction not match, so accuracy is false.",
+    "raw_response": "{\"choices\":[{\"finish_reason\":\"stop\",\"index\":0,\"logprobs\":null,\"message\":{\"annotations\":[],\"content\":\"{\\\"explanation\\\":\\\"Prediction lists four hotels including three from ground truth but adds Sofitel Cairo which is not in ground truth. Because the ground truth lists exactly three hotels, the extra incorrect hotel makes the prediction not match, so accuracy is false.\\\",\\\"accuracy\\\":\\\"false\\\"}\",\"refusal\":null,\"role\":\"assistant\"}}],\"created\":1795301766,\"id\":\"chatcmpl-EmoI2ceAL9L36WytAgb6MQz0DY4Ru\",\"model\":\"gpt-5-mini-2025-08-07\",\"object\":\"chat.completion\",\"routing\":{\"serving_pipereplica\":\"d20261106051851-c3c11312-default-r2-dp0-default\"},\"service_tier\":\"default\",\"system_fingerprint\":null,\"usage\":{\"completion_tokens\":62,\"completion_tokens_details\":{\"accepted_prediction_tokens\":0,\"audio_tokens\":0,\"reasoning_tokens\":0,\"rejected_prediction_tokens\":0},\"latency_checkpoint\":{\"engine_tbt_ms\":6,\"engine_ttft_ms\":29,\"engine_ttlt_ms\":422,\"pre_inference_ms\":77,\"service_tbt_ms\":6,\"service_ttft_ms\":223,\"service_ttlt_ms\":611,\"user_visible_ttft_ms\":146},\"prompt_tokens\":526,\"prompt_tokens_details\":{\"audio_tokens\":0,\"cached_tokens\":0},\"total_tokens\":588}}\n",
+    "judge_model": "gpt-5-mini"
+  },
+  {
+    "id": "7665e37d-29a0-4450-8d03-6539122a6b3f",
+    "question": "I recall visiting a dessert shop in Guangzhou on multiple occasions. The shop had an extensive menu, with several hundred items available. On what exact dates did I last visit this dessert shop? What is the name of the shop?",
+    "ground_truth": "The dessert shop is 百花传统甜品店.\nThe most recent visit dates were 27 March 2023 and 19 August 2024.",
+    "prediction": "2023-03-27 and 2024-08-19; Baihua Traditional Dessert Shop",
+    "qtype": "open_end",
+    "accuracy": true,
+    "explanation": "The prediction directly answers both parts: it gives the two exact dates matching the ground truth (27 March 2023 and 19 August 2024) and the shop name translated as 'Baihua Traditional Dessert Shop,' which corresponds to 百花传统甜品店. Therefore it matches the ground truth.",
+    "raw_response": "{\"choices\":[{\"finish_reason\":\"stop\",\"index\":0,\"logprobs\":null,\"message\":{\"annotations\":[],\"content\":\"{\\\"explanation\\\":\\\"The prediction directly answers both parts: it gives the two exact dates matching the ground truth (27 March 2023 and 19 August 2024) and the shop name translated as 'Baihua Traditional Dessert Shop,' which corresponds to 百花传统甜品店. Therefore it matches the ground truth.\\\",\\\"accuracy\\\":\\\"true\\\"}\",\"refusal\":null,\"role\":\"assistant\"}}],\"created\":1795301767,\"id\":\"chatcmpl-EmoI3eq6oa7HQds9zOqQJL4Bj83nI\",\"model\":\"gpt-5-mini-2025-08-07\",\"object\":\"chat.completion\",\"routing\":{\"serving_pipereplica\":\"d20261108064603-a07db6e4-default-r1-dp0-default\"},\"service_tier\":\"default\",\"system_fingerprint\":null,\"usage\":{\"completion_tokens\":79,\"completion_tokens_details\":{\"accepted_prediction_tokens\":0,\"audio_tokens\":0,\"reasoning_tokens\":0,\"rejected_prediction_tokens\":0},\"latency_checkpoint\":{\"engine_tbt_ms\":7,\"engine_ttft_ms\":34,\"engine_ttlt_ms\":641,\"pre_inference_ms\":86,\"service_tbt_ms\":7,\"service_ttft_ms\":222,\"service_ttlt_ms\":823,\"user_visible_ttft_ms\":136},\"prompt_tokens\":578,\"prompt_tokens_details\":{\"audio_tokens\":0,\"cached_tokens\":0},\"total_tokens\":657}}\n",
+    "judge_model": "gpt-5-mini"
+  },
+  {
+    "id": "7b24dbf3-dbe0-4382-9e9c-996cf614657e",
+    "question": "Which European countries have I visted?",
+    "ground_truth": "United Kingdom, Spain, Portugal, Hungary, France, Italy.",
+    "prediction": "United Kingdom, Spain, Italy",
+    "qtype": "open_end",
+    "accuracy": false,
+    "explanation": "The prediction partially answers the question by listing some visited European countries but omits Portugal, Hungary, and France from the ground truth. Because several ground-truth items are missing, the prediction does not match fully.",
+    "raw_response": "{\"choices\":[{\"finish_reason\":\"stop\",\"index\":0,\"logprobs\":null,\"message\":{\"annotations\":[],\"content\":\"{\\\"explanation\\\":\\\"The prediction partially answers the question by listing some visited European countries but omits Portugal, Hungary, and France from the ground truth. Because several ground-truth items are missing, the prediction does not match fully.\\\",\\\"accuracy\\\":\\\"false\\\"}\",\"refusal\":null,\"role\":\"assistant\"}}],\"created\":1795301767,\"id\":\"chatcmpl-EmoI3QOUhZ0VSrwHqSKbWcXPrfx9g\",\"model\":\"gpt-5-mini-2025-08-07\",\"object\":\"chat.completion\",\"routing\":{\"serving_pipereplica\":\"d20261108064603-a07db6e4-default-r1-dp0-default\"},\"service_tier\":\"default\",\"system_fingerprint\":null,\"usage\":{\"completion_tokens\":59,\"completion_tokens_details\":{\"accepted_prediction_tokens\":0,\"audio_tokens\":0,\"reasoning_tokens\":0,\"rejected_prediction_tokens\":0},\"latency_checkpoint\":{\"engine_tbt_ms\":7,\"engine_ttft_ms\":31,\"engine_ttlt_ms\":504,\"pre_inference_ms\":76,\"service_tbt_ms\":7,\"service_ttft_ms\":189,\"service_ttlt_ms\":657,\"user_visible_ttft_ms\":113},\"prompt_tokens\":508,\"prompt_tokens_details\":{\"audio_tokens\":0,\"cached_tokens\":0},\"total_tokens\":567}}\n",
+    "judge_model": "gpt-5-mini"
+  },
+  {
+    "id": "0f7fcf11-8516-4756-b791-6e76e8065b14",
+    "question": "Which cities have I visited in France?",
+    "ground_truth": "Marseille, Apt, Pertuis, La Seyne-sur-Mer, Cassis, Toulon, Aubagne, Marignane, Istres, Paris",
+    "prediction": "Bonnieux, Cassis, Moustiers-Sainte-Marie, Pertuis, Aubagne, Lourmarin, Brignoles, Gordes, Puyvert, Goult, Marignane, Paris",
+    "qtype": "open_end",
+    "accuracy": false,
+    "explanation": "The prediction lists some French cities but does not match the ground truth list. It includes only Cassis, Pertuis, Aubagne, Marignane, and Paris from the ground truth (5/10). It also adds many cities not in the ground truth. Because several ground-truth cities are missing and extra ones are present, the prediction does not match the ground truth.",
+    "raw_response": "{\"choices\":[{\"finish_reason\":\"stop\",\"index\":0,\"logprobs\":null,\"message\":{\"annotations\":[],\"content\":\"{\\\"explanation\\\":\\\"The prediction lists some French cities but does not match the ground truth list. It includes only Cassis, Pertuis, Aubagne, Marignane, and Paris from the ground truth (5/10). It also adds many cities not in the ground truth. Because several ground-truth cities are missing and extra ones are present, the prediction does not match the ground truth.\\\",\\\"accuracy\\\":\\\"false\\\"}\",\"refusal\":null,\"role\":\"assistant\"}}],\"created\":1795301771,\"id\":\"chatcmpl-EmoI76CpMJeCoCiSoctniZNQspZhB\",\"model\":\"gpt-5-mini-2025-08-07\",\"object\":\"chat.completion\",\"routing\":{\"serving_pipereplica\":\"d20261103052242-fefcf881-default-r2-dp0-default\"},\"service_tier\":\"default\",\"system_fingerprint\":null,\"usage\":{\"completion_tokens\":93,\"completion_tokens_details\":{\"accepted_prediction_tokens\":0,\"audio_tokens\":0,\"reasoning_tokens\":0,\"rejected_prediction_tokens\":0},\"latency_checkpoint\":{\"engine_tbt_ms\":6,\"engine_ttft_ms\":21,\"engine_ttlt_ms\":603,\"pre_inference_ms\":74,\"service_tbt_ms\":6,\"service_ttft_ms\":409,\"service_ttlt_ms\":983,\"user_visible_ttft_ms\":335},\"prompt_tokens\":562,\"prompt_tokens_details\":{\"audio_tokens\":0,\"cached_tokens\":0},\"total_tokens\":655}}\n",
+    "judge_model": "gpt-5-mini"
+  },
+  {
+    "id": "17b8b612-213a-4ab3-87f9-356b8cf0d7e5",
+    "question": "During my recent trip to Egypt, I remember staying at some Sofitel-branded hotels and having a very good experience. Could you remind me which hotels these were?\nI also recall taking a nice timelapse at one of the hotels, could you help me identify which hotel it was taken at and the ID of that timelapse?",
+    "ground_truth": "The Sofitel hotels you stayed at were Sofitel Winter Palace Luxor and Sofitel Legend Old Cataract Aswan.\nThe timelapse was taken at Sofitel Winter Palace Luxor, and the ID of the timelapse is 20240801_201540.",
+    "prediction": "Hotels: Sofitel Cairo; Sofitel Legend Old Cataract Aswan Hotel; Sofitel Legend Winter Palace Hotel.  \nTimelapse: Sofitel Legend Winter Palace Hotel — ID 20240801_201540.",
+    "qtype": "open_end",
+    "accuracy": false,
+    "explanation": "The prediction lists three hotels including 'Sofitel Cairo' which conflicts with the ground truth (the correct hotels are Sofitel Winter Palace Luxor and Sofitel Legend Old Cataract Aswan). It does correctly identify the timelapse hotel and ID, but because the hotel list does not match the ground truth exactly, accuracy is false.",
+    "raw_response": "{\"choices\":[{\"finish_reason\":\"stop\",\"index\":0,\"logprobs\":null,\"message\":{\"annotations\":[],\"content\":\"{\\\"explanation\\\":\\\"The prediction lists three hotels including 'Sofitel Cairo' which conflicts with the ground truth (the correct hotels are Sofitel Winter Palace Luxor and Sofitel Legend Old Cataract Aswan). It does correctly identify the timelapse hotel and ID, but because the hotel list does not match the ground truth exactly, accuracy is false.\\\",\\\"accuracy\\\":\\\"false\\\"}\",\"refusal\":null,\"role\":\"assistant\"}}],\"created\":1795301772,\"id\":\"chatcmpl-EmoI8HlcV5Tdw5Rxj4eI6wEt4vPxs\",\"model\":\"gpt-5-mini-2025-08-07\",\"object\":\"chat.completion\",\"routing\":{\"serving_pipereplica\":\"d20261106051851-1e0b9c95-default-r2-dp0-default\"},\"service_tier\":\"default\",\"system_fingerprint\":null,\"usage\":{\"completion_tokens\":85,\"completion_tokens_details\":{\"accepted_prediction_tokens\":0,\"audio_tokens\":0,\"reasoning_tokens\":0,\"rejected_prediction_tokens\":0},\"latency_checkpoint\":{\"engine_tbt_ms\":6,\"engine_ttft_ms\":40,\"engine_ttlt_ms\":580,\"pre_inference_ms\":88,\"service_tbt_ms\":6,\"service_ttft_ms\":243,\"service_ttlt_ms\":766,\"user_visible_ttft_ms\":155},\"prompt_tokens\":648,\"prompt_tokens_details\":{\"audio_tokens\":0,\"cached_tokens\":0},\"total_tokens\":733}}\n",
+    "judge_model": "gpt-5-mini"
+  },
+  {
+    "id": "361fef09-dbcc-4a68-aed2-187f9728b792",
+    "question": "I just returned from the first day of ECCV 2024. Help me gather all the interesting papers I discovered today and list their titles.",
+    "ground_truth": "Safe-CLIP removing NSFW Concepts from VLM,  Towards Surprising Video Comprehension, Learning Anomalies with Normality Prior for Unsupervised Video Anomaly Detection, 3x2: 3D Object Part Segmentation by 2D Semantic Correspondences, Camera Calibration using a Collimator System, DSMix: Distortion-Induced Sensitivity Map Based Pre-training for No-Reference Image Quality Assessment, EA-VTR: Event-Aware Video-Text Retrieval, PosterLlama: Bridging Design Ability of Language Model to Contents-Aware Layout Generation, CTRLorALTer: Conditional LoRAdapter for Efficient 0-Shot Control & Altering of T2I Models, PreciseControl: Enhancing Text-To-Image Diffusion Models with Fine-Grained Attribute Control, Efficient Pre-Training for Localized Instruction Generation of Videos, Commonly Interesting Images",
+    "prediction": "Commonly Interesting Images; DSmix: Distortion-Induced Sensitivity Map Based Pre-training for No-Reference Image Quality Assessment; Learning Anomalies with Normality Prior for Unsupervised Video Anomaly Detection; EA-VTR: Event-Aware Video-Text Retrieval; PosterLlama: Bridging Design Ability of Language Model to Contents-Aware Layout Generation; CTRLorAlter: Conditional LoRA Adapter for Efficient 0-Shot Control & Altering of T2I Models; Safe-CLIP: Removing NSFW Concepts from Vision-and-Language Models; Efficient Pre-Training For Localized Instruction Generation Of Videos; 3x2: 3D Object Part Segmentation by 2D Semantic Correspondences; Camera Calibration using a Collimator System; PreciseControl: Enhancing Text-to-Image Diffusion Models with Fine-Grained Attribute Control; Towards Surprising Video Comprehension",
+    "qtype": "open_end",
+    "accuracy": true,
+    "explanation": "The prediction lists all 13 titles from the ground truth, with matching wording (small casing/format differences only). All ground-truth papers are present and no extra unrelated entries were added, so it matches.",
+    "raw_response": "{\"choices\":[{\"finish_reason\":\"stop\",\"index\":0,\"logprobs\":null,\"message\":{\"annotations\":[],\"content\":\"{\\\"explanation\\\":\\\"The prediction lists all 13 titles from the ground truth, with matching wording (small casing/format differences only). All ground-truth papers are present and no extra unrelated entries were added, so it matches.\\\",\\\"accuracy\\\":\\\"true\\\"}\",\"refusal\":null,\"role\":\"assistant\"}}],\"created\":1795301771,\"id\":\"chatcmpl-EmoI7lb1LRK3GKcyhSUqqdAE267XQ\",\"model\":\"gpt-5-mini-2025-08-07\",\"object\":\"chat.completion\",\"routing\":{\"serving_pipereplica\":\"d20261106051851-c3c11312-default-r2-dp0-default\"},\"service_tier\":\"default\",\"system_fingerprint\":null,\"usage\":{\"completion_tokens\":59,\"completion_tokens_details\":{\"accepted_prediction_tokens\":0,\"audio_tokens\":0,\"reasoning_tokens\":0,\"rejected_prediction_tokens\":0},\"latency_checkpoint\":{\"engine_tbt_ms\":6,\"engine_ttft_ms\":28,\"engine_ttlt_ms\":405,\"pre_inference_ms\":70,\"service_tbt_ms\":6,\"service_ttft_ms\":212,\"service_ttlt_ms\":585,\"user_visible_ttft_ms\":143},\"prompt_tokens\":869,\"prompt_tokens_details\":{\"audio_tokens\":0,\"cached_tokens\":0},\"total_tokens\":928}}\n",
+    "judge_model": "gpt-5-mini"
+  }
+]

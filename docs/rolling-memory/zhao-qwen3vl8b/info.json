@@ -1,0 +1,15 @@
+{
+  "harness": "Rolling-Memory",
+  "type": "Memory",
+  "answer_model": "Qwen3-VL-8B-Instruct",
+  "memory_model": "Qwen3-VL-2B-Instruct",
+  "memory_model_note": "Memory input is the benchmark's fixed official Qwen3-VL-2B SGM captions/emails, used unmodified. Zero additional LLM calls at index time: no re-captioning, no card rewriting, no re-scanning of the raw images or videos.",
+  "retriever": "Adaptive Self-Information Ranking (0-Vector)",
+  "organization": "Rocareer & Rolling & PsychologyLake.org.cn",
+  "code_available": true,
+  "repo": "https://github.com/rocareer/rolling-memory",
+  "engine_codename": "zhao",
+  "model_sha256": "0d264b3941185d00a74f75c4245521dae088ff1efc90ab8d1754e83f5844adb0",
+  "model_quantization": "Q8_0",
+  "server": "llama.cpp"
+}

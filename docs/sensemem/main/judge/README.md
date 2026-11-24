@@ -19,8 +19,10 @@ alongside its question ID, question, reference answer, prediction, and score.
 Its `judge_response` field contains a JSON array with one original model
 response string. That string is preserved verbatim here as `raw_response`;
 `accuracy` and `explanation` are parsed from it. The original judge was
-`gpt-5-mini` with minimal reasoning effort. All 514 original judgments were
-fresh, successful calls.
+`gpt-5-mini` with minimal reasoning effort. SenseMem sets a strict JSON Schema
+in the Responses API's `text.format`, requiring a string `explanation` and a
+boolean `accuracy`. The official evaluator leaves `text.format` unset. All 514
+original judgments were fresh, successful calls.
 
 These files were exported on **2026-11-23**. They are an offline replay and
 export of the original SDK records, not a retained original

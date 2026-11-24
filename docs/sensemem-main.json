@@ -77,6 +77,7 @@
     },
     "judge_model": "gpt-5-mini",
     "judge_reasoning_effort": "minimal",
+    "judge_output_format": "SenseMem sets a strict JSON Schema in the Responses API text.format, requiring a string explanation and a boolean accuracy. The official evaluator leaves text.format unset.",
     "judge_status": "complete",
     "judge_artifacts": "sensemem/main/judge/provenance.json",
     "dataset_repository": "Jingbiao/ATM-Bench",

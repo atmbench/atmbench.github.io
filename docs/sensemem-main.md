@@ -95,7 +95,9 @@ QS uses the official ATM-Bench scorer at
 [`ef4e5dff1a47`](https://github.com/JingbiaoMei/ATM-Bench/tree/ef4e5dff1a47ec71213a06e359f02753defa8fb1):
 deterministic normalization for number questions, list Jaccard scoring for
 list questions, and `gpt-5-mini` with minimal reasoning effort for open-ended
-questions.
+questions. SenseMem sets a strict JSON Schema in the Responses API's
+`text.format`, requiring a string `explanation` and a boolean `accuracy`.
+The official evaluator leaves `text.format` unset.
 
 Recall@10 averages each question's gold-source coverage among the first
 10 distinct source IDs in SenseMem's ranked retrieval list. Recall@1, @5,

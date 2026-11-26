@@ -1,0 +1,9 @@
+{
+ "system": "RE-call",
+ "repository": "https://github.com/GiulioDER/RE-call",
+ "recall_commit": "d308c3fe574c7f0935f04e5f9eb8769dc53cb4e7",
+ "retrieval_run": "AMB (vectorize-io/agent-memory-benchmark @ 01bd83f) atm-bench-retrieval, run final-vr-luna",
+ "reproduction_package": "https://github.com/GiulioDER/RE-call/releases/tag/amb-results-20261125",
+ "answer_harness": "RE-call benchmarks/atm_full_run.py generate_answer and _evidence_text, unchanged prompts",
+ "judge": "ATM-Bench memqa/utils/evaluator/evaluate_qa.py --metrics llm atm, judge openai/gpt-5-mini via OpenRouter, fallback openai/gpt-4o-mini"
+}

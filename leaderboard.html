@@ -955,6 +955,10 @@
           { type: 'Memory', harness: 'MediaFind + hosted LLMs', index_time: null, answer_model: 'GPT-5.4 mini (OpenRouter)', memory_model: 'DeepSeek V4.1 Flash cards + V4 Flash Vision descriptions', retriever: 'bge-m3 + BM25 + bge-reranker-v2-m3', qs: 77.85, recall: 90.51, link: 'https://mediafind.io', notes: { qs: '\u00a7' } },
           // RE-call full ATM-Bench run, 1,013 questions.
           { type: 'RAG', harness: 'RE-call',  index_time: null, answer_model: 'DeepSeek V4 Pro (OpenRouter)', memory_model: 'Qwen3-VL-2B-Instruct', retriever: 'Voyage-4-large + Voyage rerank-2.5', qs: 68.43, recall: 90.10, link: 'https://github.com/GiulioDER/RE-call' },
+          // RE-call vision re-rank, 1,013 questions: the top 10 of AMB run final-vr-luna (Recall@10 by the official evaluator),
+          // answered with the August harness and judged by the official evaluator through OpenRouter (5 of 514 open-ended by the gpt-4o-mini fallback).
+          // Evidence: docs/re-call-vision-rerank.json, docs/re-call/vision-rerank/; package: github.com/GiulioDER/RE-call/releases/tag/amb-results-20261125
+          { type: 'RAG', harness: 'RE-call',  index_time: null, answer_model: 'DeepSeek V4 Pro (OpenRouter)', memory_model: 'Qwen3-VL-2B-Instruct', retriever: 'Voyage-4-large + voyage-multimodal-3.5 + Voyage rerank-2.5 + GPT-6 Luna re-rank', qs: 70.95, recall: 94.05, link: 'https://github.com/GiulioDER/RE-call' },
           { type: 'Memory', harness: 'Graphon V1', index_time: null, answer_model: 'GPT-6 Astra', memory_model: 'Graphon V1', retriever: 'Graphon V1', qs: 81.71, recall: 89.78, link: 'https://graphon.ai', notes: { qs: '\u2021' } },
           { type: 'Memory', harness: 'Graphon V1', index_time: null, answer_model: 'DeepSeek V4.1 Flash', memory_model: 'Graphon V1', retriever: 'Graphon V1', qs: 79.18, recall: 89.97, link: 'https://graphon.ai', notes: { qs: '\u2021' } },
           { type: 'Memory', harness: 'SenseMem', index_time: null, answer_model: 'DeepSeek V4.1 Flash', memory_model: null, retriever: 'WeMM-Embedding-9B + Qwen3-VL-Rerank-8B', qs: 79.63, recall: 90.45, link: 'https://github.com/SenseMem/SenseMem', notes: { qs: '\u00b6' } }

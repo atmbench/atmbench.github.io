@@ -355,6 +355,26 @@ for (const [name, entries] of [['atm', atmJudgments], ['llm_judge', llmJudgments
   }
 }
 
+const recallVR = main.rows.find(r => r.harness === 'RE-call' && String(r.retriever).includes('GPT-6 Luna re-rank'));
+assert(recallVR, 'RE-call vision re-rank row missing');
+const recallVREvidence = JSON.parse(readFileSync(path.join(root, 'docs/re-call-vision-rerank.json'), 'utf8'));
+const recallVRMain = recallVREvidence.splits.main;
+validateSplit('RE-call vision re-rank Main evidence', recallVRMain, 1013);
+close(recallVR.qs, Number(recallVRMain.qs_percent.toFixed(2)), 'RE-call vision re-rank displayed QS');
+close(recallVR.recall, Number(recallVRMain.recall_at_10.toFixed(2)), 'RE-call vision re-rank displayed Recall@10');
+const recallVRDir = path.join(root, 'docs/re-call/vision-rerank');
+const recallVRSummary = JSON.parse(readFileSync(path.join(recallVRDir, 'official-evaluator/main/atm_openai_gpt-5-mini_summary.json'), 'utf8'));
+close(recallVRMain.qs_percent, recallVRSummary.accuracy * 100, 'RE-call vision re-rank QS against the official evaluator summary', 1e-4);
+const recallVRJudged = JSON.parse(readFileSync(path.join(recallVRDir, 'official-evaluator/main/atm_openai_gpt-5-mini.json'), 'utf8'));
+const recallVRById = new Map(recallVRJudged.map(entry => [entry.id, entry]));
+assert(recallVRById.size === 1013, 'RE-call vision re-rank official evaluator coverage mismatch');
+for (const entry of recallVRMain.scores) {
+  const judged = recallVRById.get(entry.id);
+  assert(judged && judged.qtype === entry.qtype && Number(judged.accuracy) === entry.score, `RE-call vision re-rank score mismatch: ${entry.id}`);
+}
+const recallVRPredictions = readFileSync(path.join(recallVRDir, 'main-predictions.jsonl'), 'utf8').split(/\r?\n/).filter(Boolean).map(line => JSON.parse(line).id);
+assert(recallVRPredictions.length === 1013 && recallVRPredictions.every(id => recallVRById.has(id)) && new Set(recallVRPredictions).size === 1013, 'RE-call vision re-rank prediction coverage mismatch');
+
 console.log(JSON.stringify({
   ok: true,
   main_rows: main.rows.length,

@@ -15,6 +15,9 @@ on:
       - 'docs/rolling-memory/zhao-qwen3vl8b/judge-requests-hard-31.jsonl'
       - 'docs/rolling-memory/zhao/**'
       - 'docs/rolling-memory/zhao-qwen3vl8b/**'
+      - 'docs/sensemem-main.json'
+      - 'docs/sensemem-main.md'
+      - 'docs/sensemem/**'
       - 'tools/verify_leaderboard.mjs'
   pull_request:
     paths:
@@ -30,6 +33,9 @@ on:
       - 'docs/rolling-memory/zhao-qwen3vl8b/judge-requests-hard-31.jsonl'
       - 'docs/rolling-memory/zhao/**'
       - 'docs/rolling-memory/zhao-qwen3vl8b/**'
+      - 'docs/sensemem-main.json'
+      - 'docs/sensemem-main.md'
+      - 'docs/sensemem/**'
       - 'tools/verify_leaderboard.mjs'
 
 jobs:

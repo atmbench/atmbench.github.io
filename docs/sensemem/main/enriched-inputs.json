@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "run_id": "output-boundary-v1-ddb85e7e67fa-18/candidate-main1013",
+  "dataset_revision": "78e826dc07e97466b2f54443831ef9a83ab8b27c",
+  "release_url": "https://github.com/thomas-yanxin/atmbench.github.io/releases/tag/sensemem-main-enriched-inputs-2026-11-10",
+  "archive": {
+    "url": "https://github.com/thomas-yanxin/atmbench.github.io/releases/download/sensemem-main-enriched-inputs-2026-11-10/sensemem-atm-main-enriched-inputs.zip",
+    "github_release_id": 440403599,
+    "github_asset_id": 731553893,
+    "bytes": 5077081,
+    "sha256": "5dbb81caadf3d05d1c1cc1a5237efd4c21785c5352d9b07f0ae10564cf772933",
+    "contents": "The two enriched image/video JSON files listed below."
+  },
+  "files": [
+    {
+      "path": "atm-bench/data/processed_memory/image_batch_results.json",
+      "bytes": 34091344,
+      "sha256": "57bb89d2eb1eeb13cb62e0888edc6d74ac8e63c4dd5826b6e0ba2111050d241f",
+      "records": 3759,
+      "captions_with_additional_description": 3742,
+      "captions_unchanged_from_release": 17
+    },
+    {
+      "path": "atm-bench/data/processed_memory/video_batch_results.json",
+      "bytes": 2799149,
+      "sha256": "7fe916356a3db5a60b87a110ba8eabc6cebca3cd5c855d0e6073f3d72ba0cb3b",
+      "records": 533,
+      "captions_with_additional_description": 528,
+      "captions_unchanged_from_release": 5
+    }
+  ],
+  "fusion": {
+    "changed_field": "caption",
+    "template": "[Released SGM caption]\n{original_caption}\n\n[MindBridge visual description of the same source item]\n{additional_description}",
+    "other_fields": "Every non-caption field and the exact original caption are retained from the pinned released annotations.",
+    "released_annotation_model": "vllm:Qwen/Qwen3-VL-2B-Instruct",
+    "released_model_field_scope": "The retained model_used field identifies the original released SGM annotation stage, not the additional-description generator."
+  },
+  "original_description_generation": {
+    "model": "deepseek-v4.1-flash",
+    "upstream_model": "deepseek-v4-1-flash-261017",
+    "prompt": "https://github.com/SenseMem/SenseMem/blob/aadbe36f9566d985d9f78b3fe5dfd9f0fc9a00e0/src/mindbridge/models/openai_sdk.py#L320-L369",
+    "settings": {
+      "temperature": 0,
+      "seed": 0,
+      "max_tokens": 32768,
+      "thinking": "disabled",
+      "response_format": "json_schema",
+      "image_max_pixels": 4194304,
+      "video_frames": 32,
+      "batch_size": 1,
+      "concurrency": 16
+    },
+    "inputs": "Original source media and capture metadata; images processed individually and videos supplied as 32 ordered frames.",
+    "benchmark_questions_supplied": false,
+    "reference_answers_supplied": false,
+    "gold_evidence_ids_supplied": false,
+    "regenerated_in_evaluated_run": false
+  }
+}

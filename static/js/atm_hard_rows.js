@@ -351,6 +351,9 @@ var ATM_HARD_ROWS = [
   { type: 'Memory', harness: 'MemoryOS',  model: 'Qwen3-VL-8B-Instruct', qs: 13.70, recall: 32.70, total_tokens: null, link: 'https://github.com/BAI-LAB/MemoryOS' },
   { type: 'Memory', harness: 'MemPalace', model: 'Qwen3-VL-8B-Instruct', qs:  9.70, recall: 28.30, total_tokens: null, link: 'https://github.com/MemPalace/mempalace' },
   { type: 'Memory', harness: 'SimpleMem', model: 'Qwen3-VL-8B-Instruct', qs:  3.20, recall:  7.00, total_tokens: null, link: 'https://github.com/aiming-lab/SimpleMem' },
+  // Rolling-Memory (zhao): single uninterrupted Hard31 runs on fixed 2B SGM (0 LLM calls at index & retrieval; DeepSeek V4.1 Flash 0-64 smart adaptive delivery QS 39.46304328182886%, 1.006764M server-logged system tokens, $0.040793 at DeepSeek official cache-hit/miss rates [$0.028/$0.28/$0.42 per 1M, off-peak $0.020397; uncached ceiling $0.285841]; Qwen3-VL-8B-Instruct homogeneous answer row with retrieval cap 10 + adaptive 1-10 delivery, not the official K=10 baseline, QS 16.62826420890937%, 0.206849M llama.cpp server system tokens [204,571 prompt-eval + 2,278 generated], $0.038053 at official Qwen list rates [$0.18/$0.54 per 1M] / $0.00 local; R@10 52.43%).
+  { type: 'Memory', harness: 'Rolling-Memory', model: 'DeepSeek V4.1 Flash',  qs: 39.46, recall: 52.43, total_tokens: 1.006764, cost_usd: 0.040793, link: 'https://github.com/rocareer/rolling-memory', notes: { qs: '\u00a4', total_tokens: '\u00a4', cost_usd: '\u00a4' } },
+  { type: 'Memory', harness: 'Rolling-Memory', model: 'Qwen3-VL-8B-Instruct', qs: 16.63, recall: 52.43, total_tokens: 0.206849, cost_usd: 0.038053, link: 'https://github.com/rocareer/rolling-memory', notes: { qs: '\u00a4', total_tokens: '\u00a4', cost_usd: '\u00a4' } },
 
   // Memexa v2: full Hard31 rescored result (exact QS 63.56886840757808%).
   { type: 'Memory', harness: 'Memexa v2', model: 'DeepSeek V4.1', qs: 63.57, recall: 63.05, total_tokens: 30.157385, cost_usd: 8.077242108, link: 'https://github.com/labazhou2024/memexa', notes: { model: '\u25c7' } },
@@ -363,5 +366,6 @@ var ATM_HARD_ROWS = [
   // --- RAG (one row per system) ---
   { type: 'RAG', harness: 'HippoRAG2', model: 'Qwen3-VL-8B-Instruct', qs:  9.40, recall: 31.90, total_tokens: null, link: 'https://github.com/OSU-NLP-Group/HippoRAG' },
   { type: 'RAG', harness: 'ATM-RAG',   model: 'Qwen3-VL-8B-Instruct', qs: 13.80, recall: 30.40, total_tokens: null, link: 'https://github.com/JingbiaoMei/ATM-Bench' },
-  { type: 'RAG', harness: 'HippoRAG2', model: 'DeepSeek-V4-flash (mem+ans)', qs: 12.27, recall: 32.16, total_tokens: null, link: 'https://github.com/OSU-NLP-Group/HippoRAG', notes: { qs: '*' } }
+  { type: 'RAG', harness: 'HippoRAG2', model: 'DeepSeek-V4-flash (mem+ans)', qs: 12.27, recall: 32.16, total_tokens: null, link: 'https://github.com/OSU-NLP-Group/HippoRAG', notes: { qs: '*' } },
+  { type: 'Memory', harness: 'Graphon V1', model: 'GPT-6.1 Terra', qs: 65.61, recall: 66.57, total_tokens: null, link: 'https://graphon.ai', notes: { model: '\u2021' } }
 ];

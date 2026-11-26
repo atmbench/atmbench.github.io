@@ -1,4 +1,4 @@
-﻿import { readFileSync, existsSync } from 'node:fs';
+﻿import { readFileSync, existsSync, readdirSync } from 'node:fs';
 import vm from 'node:vm';
 import { createHash } from 'node:crypto';
 import path from 'node:path';
@@ -8,6 +8,33 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const html = readFileSync(path.join(root, 'leaderboard.html'), 'utf8');
 const hardSrc = readFileSync(path.join(root, 'static/js/atm_hard_rows.js'), 'utf8');
 
+// Every script the pages run must at least parse. One syntax error in an inline
+// <script> stops the whole block, so every table renders empty. The checks below
+// evaluate only the row arrays, so they cannot see an error elsewhere in the block.
+function compileOrThrow(source, label, firstLine = 1) {
+  try {
+    new vm.Script(source, { filename: label });
+  } catch (err) {
+    const line = Number((err.stack.match(new RegExp(`${label.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}:(\\d+)`)) || [])[1] || 0);
+    const where = line ? ` at line ${firstLine + line - 1}` : '';
+    throw new Error(`${label}: ${err.name}: ${err.message}${where}`);
+  }
+}
+for (const page of ['leaderboard.html', 'index.html']) {
+  const source = readFileSync(path.join(root, page), 'utf8');
+  const inline = /<script(?![^>]*\bsrc=)[^>]*>([\s\S]*?)<\/script>/g;
+  let match, count = 0;
+  while ((match = inline.exec(source))) {
+    count++;
+    const firstLine = source.slice(0, match.index + match[0].indexOf('>') + 1).split('\n').length;
+    compileOrThrow(match[1], `${page} inline script ${count}`, firstLine);
+  }
+}
+for (const file of readdirSync(path.join(root, 'static/js'))) {
+  if (file.endsWith('.js') && !file.endsWith('.min.js')) {
+    compileOrThrow(readFileSync(path.join(root, 'static/js', file), 'utf8'), `static/js/${file}`);
+  }
+}
 function extractArray(source, marker) {
   const start = source.indexOf(marker);
   if (start < 0) throw new Error(`missing ${marker}`);
@@ -84,7 +111,67 @@ function validateSplit(name, split, expectedQuestions) {
     assert(summary.questions === expected.count, `${name}/${type}: question count mismatch`);
     close(summary.qs_percent, (expected.total / expected.count) * 100, `${name}/${type}: QS`);
   }
+  for (const [metric, field, depth] of [['recall_at_10', 'retrieved_top10', 10], ['recall_at_50', 'retrieved_top50', 50], ['recall_at_64', 'retrieved_top64', 64]]) {
+    if (typeof split[metric] !== 'number') continue;
+    for (const entry of split.scores) {
+      const ids = entry[field];
+      assert(Array.isArray(ids) && ids.length >= depth, `${name}: ${metric} is reported but ${field} has fewer than ${depth} ids (${entry.id})`);
+    }
+  }
   return { questions: expectedQuestions, mean: split.qs_percent, by_type: Object.fromEntries(byType) };
+}
+
+function validateDeliveryStats(name, split) {
+  const declared = ['delivered_k_min', 'delivered_k_max', 'delivered_k_median', 'delivered_k_mean'];
+  if (!declared.some(key => typeof split[key] === 'number')) return;
+  const delivered = split.scores.map((entry, index) => {
+    assert(typeof entry.delivered_k === 'number' && Number.isFinite(entry.delivered_k), `${name}: score ${index} missing delivered_k`);
+    return entry.delivered_k;
+  });
+  const sorted = [...delivered].sort((a, b) => a - b);
+  const middle = Math.floor(sorted.length / 2);
+  const median = sorted.length % 2 ? sorted[middle] : (sorted[middle - 1] + sorted[middle]) / 2;
+  const mean = delivered.reduce((sum, k) => sum + k, 0) / delivered.length;
+  close(split.delivered_k_min, sorted[0], `${name}: delivered_k_min`);
+  close(split.delivered_k_max, sorted[sorted.length - 1], `${name}: delivered_k_max`);
+  close(split.delivered_k_median, median, `${name}: delivered_k_median`);
+  close(split.delivered_k_mean, mean, `${name}: delivered_k_mean`, 0.005);
+}
+
+function validateJudgeUsage(name, block) {
+  if (!block.judge_usage_log) return;
+  const logPath = path.join(root, block.judge_usage_log);
+  assert(existsSync(logPath), `${name}: judge usage log missing`);
+  let prompt = 0, cached = 0, completion = 0;
+  const loggedIds = new Set();
+  for (const line of readFileSync(logPath, 'utf8').split('\n')) {
+    if (!line.trim()) continue;
+    const record = JSON.parse(line);
+    const usage = record.usage;
+    prompt += usage.prompt_tokens;
+    cached += usage.prompt_tokens_details.cached_tokens;
+    completion += usage.completion_tokens;
+    if (record.id) {
+      assert(!loggedIds.has(record.id), `${name}: duplicate judge call for ${record.id}`);
+      loggedIds.add(record.id);
+    }
+  }
+  close(block.judge_input_tokens, prompt, `${name}: judge input tokens`);
+  close(block.judge_cached_input_tokens, cached, `${name}: judge cached input tokens`);
+  close(block.judge_output_tokens, completion, `${name}: judge output tokens`);
+  close(block.judge_total_tokens, prompt + completion, `${name}: judge total tokens`);
+  close(block.judge_cost_usd, (cached * 0.025 + (prompt - cached) * 0.25 + completion * 2.00) / 1e6, `${name}: judge cost usd`, 5e-7);
+  const verdictPath = logPath.replace(/judge-requests-/, 'official-judge-verdicts-');
+  assert(existsSync(verdictPath), `${name}: published verdicts missing`);
+  const verdictIds = new Set();
+  for (const line of readFileSync(verdictPath, 'utf8').split('\n')) {
+    if (!line.trim()) continue;
+    verdictIds.add(JSON.parse(line).id);
+  }
+  for (const id of verdictIds) assert(loggedIds.has(id), `${name}: verdict ${id} has no logged judge call`);
+  for (const id of loggedIds) assert(verdictIds.has(id), `${name}: judge call ${id} has no published verdict`);
+  assert(block.judge_calls === loggedIds.size, `${name}: judge_calls ${block.judge_calls} != logged calls ${loggedIds.size}`);
+  assert(block.judge_calls === verdictIds.size, `${name}: judge_calls ${block.judge_calls} != verdicts ${verdictIds.size}`);
 }
 
 const mainMemexa = row(main, 'Memexa v2');
@@ -127,6 +214,60 @@ const hardEvidence = validateSplit('Hard evidence', summary.splits?.hard, 31);
 close(summary.splits.main.qs_percent, 76.68170920885629, 'summary Main QS');
 close(summary.splits.hard.qs_percent, 63.56886840757808, 'summary Hard QS');
 
+const rmEvidencePath = path.join(root, 'docs', 'rolling-memory-zhao.json');
+assert(existsSync(rmEvidencePath), 'Rolling-Memory evidence missing');
+const rmSummary = JSON.parse(readFileSync(rmEvidencePath, 'utf8'));
+assert(rmSummary.schema_version === 1, `unsupported Rolling-Memory evidence schema ${rmSummary.schema_version}`);
+assert(rmSummary.judge_model === 'gpt-5-mini', `Rolling-Memory judge model must be gpt-5-mini, got ${rmSummary.judge_model}`);
+assert(rmSummary.status === 'complete', `Rolling-Memory judge status must be complete, got ${rmSummary.status}`);
+validateSplit('Rolling-Memory Main evidence', rmSummary.splits?.main, 1013);
+validateSplit('Rolling-Memory Hard evidence', rmSummary.splits?.hard, 31);
+validateDeliveryStats('Rolling-Memory Main evidence', rmSummary.splits.main);
+validateDeliveryStats('Rolling-Memory Hard evidence', rmSummary.splits.hard);
+validateJudgeUsage('Rolling-Memory Main evidence', rmSummary.protocol.main_token_usage);
+validateJudgeUsage('Rolling-Memory Hard evidence', rmSummary.protocol.hard_token_usage);
+close(rmSummary.splits.main.qs_percent, 73.54627932120529, 'Rolling-Memory Main QS');
+close(rmSummary.splits.hard.qs_percent, 39.46304328182886, 'Rolling-Memory Hard QS');
+
+const rmQwenEvidencePath = path.join(root, 'docs', 'rolling-memory-zhao-qwen3vl8b.json');
+assert(existsSync(rmQwenEvidencePath), 'Rolling-Memory Qwen3-VL-8B evidence missing');
+const rmQwenSummary = JSON.parse(readFileSync(rmQwenEvidencePath, 'utf8'));
+assert(rmQwenSummary.schema_version === 1, `unsupported Rolling-Memory Qwen evidence schema ${rmQwenSummary.schema_version}`);
+assert(rmQwenSummary.judge_model === 'gpt-5-mini', `Rolling-Memory Qwen judge model must be gpt-5-mini, got ${rmQwenSummary.judge_model}`);
+assert(rmQwenSummary.status === 'complete', `Rolling-Memory Qwen judge status must be complete, got ${rmQwenSummary.status}`);
+validateSplit('Rolling-Memory Qwen Main evidence', rmQwenSummary.splits?.main, 1013);
+validateSplit('Rolling-Memory Qwen Hard evidence', rmQwenSummary.splits?.hard, 31);
+validateDeliveryStats('Rolling-Memory Qwen Main evidence', rmQwenSummary.splits.main);
+validateDeliveryStats('Rolling-Memory Qwen Hard evidence', rmQwenSummary.splits.hard);
+validateJudgeUsage('Rolling-Memory Qwen Main evidence', rmQwenSummary.protocol.main_token_usage);
+validateJudgeUsage('Rolling-Memory Qwen Hard evidence', rmQwenSummary.protocol.hard_token_usage);
+close(rmQwenSummary.splits.main.qs_percent, 58.29047063499186, 'Rolling-Memory Qwen Main QS');
+close(rmQwenSummary.splits.hard.qs_percent, 16.62826420890937, 'Rolling-Memory Qwen Hard QS');
+
+const mainRMRows = main.rows.filter(r => r.harness === 'Rolling-Memory');
+const hardRMRows = hard.rows.filter(r => r.harness === 'Rolling-Memory');
+assert(mainRMRows.length === 2 && hardRMRows.length === 2, 'Expected two Rolling-Memory rows (DeepSeek V4.1 Flash and Qwen3-VL-8B-Instruct)');
+const mainRM = mainRMRows.find(r => r.answer_model === 'DeepSeek V4.1 Flash');
+const hardRM = hardRMRows.find(r => r.model === 'DeepSeek V4.1 Flash');
+const mainRMQwen = mainRMRows.find(r => r.answer_model === 'Qwen3-VL-8B-Instruct');
+const hardRMQwen = hardRMRows.find(r => r.model === 'Qwen3-VL-8B-Instruct');
+assert(mainRM && hardRM && mainRMQwen && hardRMQwen, 'Rolling-Memory rows by answer model missing');
+close(mainRM.qs, 73.55, 'Main Rolling-Memory (DeepSeek) QS', 1e-9);
+close(mainRM.recall, 82.77, 'Main Rolling-Memory (DeepSeek) Recall@10', 1e-9);
+close(hardRM.qs, 39.46, 'Hard Rolling-Memory (DeepSeek) QS', 1e-9);
+close(hardRM.recall, 52.43, 'Hard Rolling-Memory (DeepSeek) Recall@10', 1e-9);
+close(hardRM.total_tokens, 1.006764, 'Hard Rolling-Memory (DeepSeek) Total Tokens (M)', 1e-9);
+close(hardRM.cost_usd, 0.040793, 'Hard Rolling-Memory (DeepSeek) Cost (USD)', 1e-9);
+close(mainRMQwen.qs, 58.29, 'Main Rolling-Memory (Qwen3-VL-8B) QS', 1e-9);
+close(mainRMQwen.recall, 82.77, 'Main Rolling-Memory (Qwen3-VL-8B) Recall@10', 1e-9);
+close(hardRMQwen.qs, 16.63, 'Hard Rolling-Memory (Qwen3-VL-8B) QS', 1e-9);
+close(hardRMQwen.recall, 52.43, 'Hard Rolling-Memory (Qwen3-VL-8B) Recall@10', 1e-9);
+close(hardRMQwen.total_tokens, 0.206849, 'Hard Rolling-Memory (Qwen3-VL-8B) Total Tokens (M)', 1e-9);
+close(hardRMQwen.cost_usd, 0.038053, 'Hard Rolling-Memory (Qwen3-VL-8B) Cost (USD)', 1e-9);
+assert(mainRM.notes?.qs === '\u00a4' && mainRMQwen.notes?.qs === '\u00a4', 'Main Rolling-Memory footnote marker missing');
+assert(hardRM.notes?.qs === '\u00a4' && hardRM.notes?.cost_usd === '\u00a4', 'Hard Rolling-Memory footnote marker missing');
+assert(html.includes('Rolling-Memory rows') || html.includes('Rolling-Memory 两行说明'), 'Rolling-Memory footnote text missing');
+assert(html.includes('docs/rolling-memory-zhao.json') && html.includes('docs/rolling-memory-zhao-qwen3vl8b.json'), 'Rolling-Memory evidence links missing');
 const sensememRow = row(main, 'SenseMem');
 const sensemem = JSON.parse(readFileSync(path.join(root, 'docs/sensemem-main.json'), 'utf8'));
 const sensememMain = sensemem.splits.main;

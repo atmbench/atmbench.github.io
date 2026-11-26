@@ -1,0 +1,12 @@
+{
+  "count": 13,
+  "correct": 5,
+  "accuracy": 0.38461538461538464,
+  "by_qtype": {
+    "open_end": {
+      "count": 13,
+      "correct": 5,
+      "accuracy": 0.38461538461538464
+    }
+  }
+}

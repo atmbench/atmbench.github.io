@@ -1,22 +1,22 @@
 {
   "count": 1013,
-  "correct": 716,
-  "accuracy": 0.7068114511352419,
+  "correct": 709,
+  "accuracy": 0.6999012833168805,
   "by_qtype": {
     "number": {
       "count": 360,
-      "correct": 267.0,
-      "accuracy": 0.7416666666666667
+      "correct": 266.0,
+      "accuracy": 0.7388888888888889
     },
     "list_recall": {
       "count": 139,
-      "correct": 94.0,
-      "accuracy": 0.6762589928057554
+      "correct": 91.0,
+      "accuracy": 0.6546762589928058
     },
     "open_end": {
       "count": 514,
-      "correct": 355.0,
-      "accuracy": 0.6906614785992218
+      "correct": 352.0,
+      "accuracy": 0.6848249027237354
     }
   }
 }

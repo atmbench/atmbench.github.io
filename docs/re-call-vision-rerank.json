@@ -13,20 +13,22 @@
    "total_tokens": 3790377
   },
   "judge_model": "gpt-5-mini",
-  "judge_transport": "OpenRouter (openai/gpt-5-mini), same disclosed route as RE-call's August row",
-  "judge_fallback": {
-   "model": "openai/gpt-4o-mini",
-   "open_end_questions": 5,
-   "reason": "three empty gpt-5-mini responses each"
-  },
+  "judge_reasoning_effort": "minimal",
+  "judge_transport": "OpenRouter (openai/gpt-5-mini), the same disclosed route as RE-call's August row",
+  "judge_models_used_open_end": [
+   "openai/gpt-5-mini"
+  ],
   "judged_open_end_questions": 514,
+  "judge_failures": 0,
+  "judge_parse_fallbacks": 1,
+  "judge_parse_fallbacks_note": "each is a complete reply that ends with an explicit verdict equal to the score; it failed JSON parsing only because of unescaped quotes in the explanation",
   "answer_failures": 0,
-  "judge_failures": 0
+  "tuning": "Benchmark-tuned: the retrieval configuration was tuned on the 300 questions with the smallest SHA-256 of the question id and frozen before one full run; an earlier RE-call run's errors on all 1,013 questions informed which mechanisms were tried."
  },
  "splits": {
   "main": {
    "questions": 1013,
-   "qs_percent": 70.94706763018708,
+   "qs_percent": 70.84835094706763,
    "recall_at_10": 94.0547,
    "recall_at_1": 69.3317,
    "recall_at_5": 91.2974,
@@ -41,8 +43,13 @@
     },
     "open_end": {
      "questions": 514,
-     "qs_percent": 68.67704280155642
+     "qs_percent": 68.48249027237354
     }
+   },
+   "heldout_713": {
+    "questions": 713,
+    "qs_percent": 70.26471891829536,
+    "recall_at_10": 93.91872036332065
    },
    "scores": [
     {
@@ -150,7 +157,7 @@
     {
      "id": "def045f1-23f5-496e-bee9-97bdf78ace83",
      "qtype": "open_end",
-     "score": 0.0,
+     "score": 1.0,
      "retrieved_top10": [
       "20240820_143934",
       "20230327_174506",
@@ -337,7 +344,7 @@
     {
      "id": "b1171fa9-3a7e-4230-9ea9-4263fda30bf2",
      "qtype": "open_end",
-     "score": 0.0,
+     "score": 1.0,
      "retrieved_top10": [
       "20240813_191013",
       "20240813_190237",
@@ -1153,7 +1160,7 @@
     {
      "id": "c2d11022-ba77-4078-ab6c-7744b61312e0",
      "qtype": "open_end",
-     "score": 0.0,
+     "score": 1.0,
      "retrieved_top10": [
       "20231210_125002",
       "20231210_123349",
@@ -1408,7 +1415,7 @@
     {
      "id": "4d0ff63b-8cb2-4df5-a274-2cb42da9cd1c",
      "qtype": "open_end",
-     "score": 1.0,
+     "score": 0.0,
      "retrieved_top10": [
       "20220510_141733",
       "20220510_141327",
@@ -1833,7 +1840,7 @@
     {
      "id": "a41b4d13-c160-4059-86b2-03baafd133c3",
      "qtype": "open_end",
-     "score": 1.0,
+     "score": 0.0,
      "retrieved_top10": [
       "20231217_144440",
       "20231217_144500",
@@ -2598,7 +2605,7 @@
     {
      "id": "f1241732-10fe-4665-832e-d911352b0e2b",
      "qtype": "open_end",
-     "score": 1.0,
+     "score": 0.0,
      "retrieved_top10": [
       "20250429_133249",
       "20250429_133914",
@@ -3040,7 +3047,7 @@
     {
      "id": "cc7ac922-e059-4bf7-b789-fcda05cdfa7e",
      "qtype": "open_end",
-     "score": 1.0,
+     "score": 0.0,
      "retrieved_top10": [
       "20240627_165751",
       "20240627_165756",
@@ -3329,7 +3336,7 @@
     {
      "id": "7edea36b-f564-4f2b-9c53-5b92b68e93fc",
      "qtype": "open_end",
-     "score": 0.0,
+     "score": 1.0,
      "retrieved_top10": [
       "20230401_120321",
       "20230401_120348",
@@ -3856,7 +3863,7 @@
     {
      "id": "ae38cdc3-37ae-4e5e-9ac4-79e7e5c03d46",
      "qtype": "open_end",
-     "score": 1.0,
+     "score": 0.0,
      "retrieved_top10": [
       "email202404300004",
       "email202407070005",
@@ -4145,7 +4152,7 @@
     {
      "id": "640c084d-6698-4650-aae6-d714d8af7b76",
      "qtype": "open_end",
-     "score": 0.0,
+     "score": 1.0,
      "retrieved_top10": [
       "20240712_142807",
       "20240712_142736",
@@ -5573,7 +5580,7 @@
     {
      "id": "34500f55-b48c-426b-ab81-3da374cb5660",
      "qtype": "open_end",
-     "score": 1.0,
+     "score": 0.0,
      "retrieved_top10": [
       "20230129_171134",
       "20230129_171122",
@@ -5794,7 +5801,7 @@
     {
      "id": "0d511b05-363a-4820-8889-7aacb02169fb",
      "qtype": "open_end",
-     "score": 0.0,
+     "score": 1.0,
      "retrieved_top10": [
       "20241023_202917",
       "email202410180012",
@@ -7426,7 +7433,7 @@
     {
      "id": "f51e6ba6-5c05-4e3a-b48b-87d5058db583",
      "qtype": "open_end",
-     "score": 1.0,
+     "score": 0.0,
      "retrieved_top10": [
       "20220506_203556",
       "20220506_203559",
@@ -8191,7 +8198,7 @@
     {
      "id": "5994feb3-379a-48aa-9c42-9faef1f11586",
      "qtype": "open_end",
-     "score": 0.0,
+     "score": 1.0,
      "retrieved_top10": [
       "20220705_201812",
       "20220705_201806",
@@ -8820,7 +8827,7 @@
     {
      "id": "45ead9db-77d2-4f0e-a3e2-1b114a96867c",
      "qtype": "open_end",
-     "score": 0.0,
+     "score": 1.0,
      "retrieved_top10": [
       "email202202010006",
       "email202202140002",
@@ -9653,7 +9660,7 @@
     {
      "id": "1f4e4b81-0819-47b4-8087-e0c45e67003e",
      "qtype": "open_end",
-     "score": 1.0,
+     "score": 0.0,
      "retrieved_top10": [
       "email202502110008",
       "email202502200013",
@@ -9670,7 +9677,7 @@
     {
      "id": "bd1f8b3d-f54b-4286-b786-db48323eee28",
      "qtype": "open_end",
-     "score": 1.0,
+     "score": 0.0,
      "retrieved_top10": [
       "20240809_143513",
       "20240809_093535",
@@ -10282,7 +10289,7 @@
     {
      "id": "fa11beae-6e3d-4bed-8ba3-f257e20e04da",
      "qtype": "open_end",
-     "score": 0.0,
+     "score": 1.0,
      "retrieved_top10": [
       "20230906_133415",
       "20230906_133748",
@@ -10945,7 +10952,7 @@
     {
      "id": "12e84dc3-0e28-4f49-82a1-5b82ffa4bbe6",
      "qtype": "open_end",
-     "score": 0.0,
+     "score": 1.0,
      "retrieved_top10": [
       "20231212_091240",
       "20231212_085905",
@@ -11404,7 +11411,7 @@
     {
      "id": "e1d7f193-68d7-4bdb-996b-094b9b01dcea",
      "qtype": "open_end",
-     "score": 0.0,
+     "score": 1.0,
      "retrieved_top10": [
       "20240406_182817",
       "20240406_182753",
@@ -11472,7 +11479,7 @@
     {
      "id": "afc75d33-e3ea-4b12-b0d2-5805be3d0d80",
      "qtype": "open_end",
-     "score": 1.0,
+     "score": 0.0,
      "retrieved_top10": [
       "20240510_233458",
       "20240510_234834",
@@ -11523,7 +11530,7 @@
     {
      "id": "35371f86-190e-4a94-a0f1-0abca1dec22e",
      "qtype": "open_end",
-     "score": 0.0,
+     "score": 1.0,
      "retrieved_top10": [
       "email202307230001",
       "20240301_061048",
@@ -11591,7 +11598,7 @@
     {
      "id": "da0c2d9e-6b2c-44ce-a4d6-f7ffdfe62326",
      "qtype": "open_end",
-     "score": 0.0,
+     "score": 1.0,
      "retrieved_top10": [
       "20231214_184254",
       "20240406_182817",
@@ -11863,7 +11870,7 @@
     {
      "id": "184bbfa7-42c1-43af-afee-5455e7cef625",
      "qtype": "open_end",
-     "score": 1.0,
+     "score": 0.0,
      "retrieved_top10": [
       "email202310270001",
       "20230124_115017",
@@ -12186,7 +12193,7 @@
     {
      "id": "724824f3-4dee-4a5d-912b-e244c876f7b5",
      "qtype": "open_end",
-     "score": 1.0,
+     "score": 0.0,
      "retrieved_top10": [
       "20220619_150126",
       "20220619_150134",
@@ -12203,7 +12210,7 @@
     {
      "id": "07751b78-9e03-45c3-ba80-a9f14287dcac",
      "qtype": "open_end",
-     "score": 1.0,
+     "score": 0.0,
      "retrieved_top10": [
       "20250429_133249",
       "20250429_133914",
@@ -12424,7 +12431,7 @@
     {
      "id": "a15b2686-a200-4f4b-b76b-5560cd40d3bb",
      "qtype": "open_end",
-     "score": 1.0,
+     "score": 0.0,
      "retrieved_top10": [
       "20240325_191736",
       "20240325_202332",
@@ -13104,7 +13111,7 @@
     {
      "id": "09cb1732-7205-4236-b878-17a804b5a014",
      "qtype": "open_end",
-     "score": 1.0,
+     "score": 0.0,
      "retrieved_top10": [
       "20230322_180629",
       "20230322_161504",
@@ -13342,7 +13349,7 @@
     {
      "id": "cc1669c4-3598-4ea5-b6dd-31d96ecddc12",
      "qtype": "open_end",
-     "score": 0.0,
+     "score": 1.0,
      "retrieved_top10": [
       "email202204080006",
       "email202204080005",
@@ -13631,7 +13638,7 @@
     {
      "id": "788c9949-a762-4a31-bcd4-33fadbc4f090",
      "qtype": "open_end",
-     "score": 1.0,
+     "score": 0.0,
      "retrieved_top10": [
       "20250206_142225",
       "20250206_141930",
@@ -14430,7 +14437,7 @@
     {
      "id": "4e057a57-6ece-488c-88d1-70730594e71f",
      "qtype": "open_end",
-     "score": 0.0,
+     "score": 1.0,
      "retrieved_top10": [
       "20231213_110733",
       "20231214_174750",
@@ -15280,7 +15287,7 @@
     {
      "id": "be03ff36-3ce5-4ce5-98e4-0f60dc5a5849",
      "qtype": "open_end",
-     "score": 1.0,
+     "score": 0.0,
      "retrieved_top10": [
       "20231212_122256",
       "20231212_122223",
@@ -15807,7 +15814,7 @@
     {
      "id": "79074c1f-2ae2-4a4c-bf6e-2df7df4103a3",
      "qtype": "open_end",
-     "score": 1.0,
+     "score": 0.0,
      "retrieved_top10": [
       "email202204250007",
       "email202202010006",
@@ -15875,7 +15882,7 @@
     {
      "id": "8915d16e-6c8c-45a7-bced-2590e18e117a",
      "qtype": "open_end",
-     "score": 0.0,
+     "score": 1.0,
      "retrieved_top10": [
       "20231216_134512",
       "20231216_134514",
@@ -17014,7 +17021,7 @@
     {
      "id": "bf7efec6-46a7-4d75-bd97-5d4711adf106",
      "qtype": "open_end",
-     "score": 0.0,
+     "score": 1.0,
      "retrieved_top10": [
       "email202205020001",
       "20240811_185037",

@@ -355,6 +355,68 @@ for (const [name, entries] of [['atm', atmJudgments], ['llm_judge', llmJudgments
   }
 }
 
+const recallVR = main.rows.find(r => r.harness === 'RE-call' && String(r.retriever).includes('GPT-6 Luna re-rank'));
+assert(recallVR, 'RE-call vision re-rank row missing');
+const recallVREvidence = JSON.parse(readFileSync(path.join(root, 'docs/re-call-vision-rerank.json'), 'utf8'));
+const recallVRMain = recallVREvidence.splits.main;
+validateSplit('RE-call vision re-rank Main evidence', recallVRMain, 1013);
+close(recallVR.qs, Number(recallVRMain.qs_percent.toFixed(2)), 'RE-call vision re-rank displayed QS');
+close(recallVR.recall, Number(recallVRMain.recall_at_10.toFixed(2)), 'RE-call vision re-rank displayed Recall@10');
+const recallVRDir = path.join(root, 'docs/re-call/vision-rerank');
+const recallVRSummary = JSON.parse(readFileSync(path.join(recallVRDir, 'official-evaluator/main/atm_openai_gpt-5-mini_summary.json'), 'utf8'));
+close(recallVRMain.qs_percent, recallVRSummary.accuracy * 100, 'RE-call vision re-rank QS against the official evaluator summary', 1e-4);
+const recallVRJudged = JSON.parse(readFileSync(path.join(recallVRDir, 'official-evaluator/main/atm_openai_gpt-5-mini.json'), 'utf8'));
+const recallVRById = new Map(recallVRJudged.map(entry => [entry.id, entry]));
+assert(recallVRById.size === 1013, 'RE-call vision re-rank official evaluator coverage mismatch');
+for (const entry of recallVRMain.scores) {
+  const judged = recallVRById.get(entry.id);
+  assert(judged && judged.qtype === entry.qtype && Number(judged.accuracy) === entry.score, `RE-call vision re-rank score mismatch: ${entry.id}`);
+}
+const recallVRPredictions = readFileSync(path.join(recallVRDir, 'main-predictions.jsonl'), 'utf8').split(/\r?\n/).filter(Boolean).map(line => JSON.parse(line).id);
+assert(recallVRPredictions.length === 1013 && recallVRPredictions.every(id => recallVRById.has(id)) && new Set(recallVRPredictions).size === 1013, 'RE-call vision re-rank prediction coverage mismatch');
+// Every open-ended verdict must be a complete judgment. A failed row is scored 0 after its retries. A
+// parse-fallback row is scored by keyword search, so it counts only when the reply is whole and ends with an
+// explicit verdict equal to its score; a truncated reply does not. Counted from the evaluator's own rows.
+function openEndHealth(name, judged) {
+  const open = judged.filter(entry => entry.qtype === 'open_end');
+  const failed = open.filter(entry => entry.failed).length;
+  const parsed = open.filter(entry => entry.parse_fallback);
+  const unverified = parsed.filter(entry => {
+    const m = String(entry.raw_response).match(/"accuracy"\s*:\s*"?(true|false)"?\s*}\s*$/);
+    return !m || (m[1] === 'true') !== Boolean(entry.accuracy);
+  }).length;
+  assert(open.length === 514 && failed === 0 && unverified === 0,
+    `${name} open-ended verdicts incomplete: ${failed} failed, ${unverified} truncated or mismatched parse fallbacks of ${open.length}`);
+  return { failed, parsed: parsed.length };
+}
+const recallVRHealth = openEndHealth('RE-call vision re-rank', recallVRJudged);
+assert(recallVREvidence.protocol.judge_failures === recallVRHealth.failed && recallVREvidence.protocol.judge_parse_fallbacks === recallVRHealth.parsed,
+  'RE-call vision re-rank evidence judge counts disagree with the evaluator rows');
+// The August RE-call row, re-judged the same way: its QS against its own evaluator output.
+const recallAugDir = path.join(root, 'docs/re-call/august-2026');
+const recallAugJudged = JSON.parse(readFileSync(path.join(recallAugDir, 'official-evaluator/main/atm_openai_gpt-5-mini.json'), 'utf8'));
+openEndHealth('RE-call August', recallAugJudged);
+const recallAugSummary = JSON.parse(readFileSync(path.join(recallAugDir, 'official-evaluator/main/atm_openai_gpt-5-mini_summary.json'), 'utf8'));
+assert(recallAugJudged.length === 1013 && recallAugSummary.count === 1013, 'RE-call August evaluator coverage mismatch');
+close(recall.qs, Number((recallAugSummary.accuracy * 100).toFixed(2)), 'RE-call August displayed QS against its evaluator summary');
+assert(recallVREvidence.protocol.judge_reasoning_effort === 'minimal', 'RE-call vision re-rank judge must use reasoning effort minimal');
+// The benchmark-tuned footnote: its marker on the row, the paragraph in both languages, and the held-out numbers it states.
+const recallVRHeld = recallVRMain.heldout_713;
+assert(recallVRHeld && recallVRHeld.questions === 713, 'RE-call vision re-rank held-out split missing');
+assert(recallVR.notes?.qs === '※', 'RE-call vision re-rank footnote marker missing');
+assert(/data-i18n-html="legend_recall_vr">\s*<strong>&#8251;<\/strong>/.test(html), 'RE-call vision re-rank static footnote marker mismatch');
+const recallVRLegends = html.match(/legend_recall_vr: '<strong>&#8251;<\/strong>[^']*'/g) || [];
+assert(recallVRLegends.length === 2, 'RE-call vision re-rank footnote must have matching English and Chinese entries');
+assert(recallVRLegends[0].includes('<strong>Benchmark-tuned:</strong>') && recallVRLegends[1].includes('<strong>针对基准调优：</strong>'),
+  'RE-call vision re-rank footnote must carry the benchmark-tuned label in both languages');
+for (const legend of recallVRLegends) {
+  assert(legend.includes(recallVRHeld.qs_percent.toFixed(2)) && legend.includes(recallVRHeld.recall_at_10.toFixed(2)),
+    'RE-call vision re-rank footnote held-out numbers disagree with the evidence');
+}
+const recallVRStatic = (html.match(/data-i18n-html="legend_recall_vr">\s*([\s\S]*?)\s*<\/p>/) || [])[1];
+assert(recallVRStatic === recallVRLegends[0].slice("legend_recall_vr: '".length, -1),
+  'RE-call vision re-rank static footnote differs from its English entry');
+
 console.log(JSON.stringify({
   ok: true,
   main_rows: main.rows.length,
